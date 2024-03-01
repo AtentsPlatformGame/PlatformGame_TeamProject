@@ -7,6 +7,7 @@ public class PlayerMove : BattleSystem
     public float moveSpeed = 2.0f;
     public float rotSpeed = 1.0f;
     public float jumpForce = 2.0f;
+    public float jumpCharge = 1.0f;
     public Vector2 rotYRange = new Vector2(0.0f, 180.0f);
     public LayerMask groundMask;
     float curRotY;
@@ -53,7 +54,7 @@ public class PlayerMove : BattleSystem
 
     void IsGround()
     {
-        isGround = Physics.Raycast(transform.position + new Vector3(0,1,0), Vector3.down, 2.0f, groundMask);
+        isGround = Physics.Raycast(transform.position + new Vector3(0,1,0), Vector3.down, 1.0f, groundMask);
         myAnim.SetBool("IsGround", isGround);
         if (isGround)
         {
@@ -63,7 +64,12 @@ public class PlayerMove : BattleSystem
 
     void TryJump()
     {
-        if(isGround && Input.GetKeyDown(KeyCode.Space))
+        if(isGround && Input.GetKey(KeyCode.Space))
+        {
+            jumpCharge += Time.deltaTime;
+        }
+
+        if (isGround && Input.GetKeyUp(KeyCode.Space))
         {
             Jump();
             myAnim.SetTrigger("Jumping");
@@ -72,6 +78,8 @@ public class PlayerMove : BattleSystem
 
     void Jump()
     {
-        rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        if (jumpCharge >= 2.0f) jumpCharge = 2.0f;
+        rigid.AddForce(transform.up * jumpForce * jumpCharge, ForceMode.Impulse);
+        jumpCharge = 1.0f;
     }
 }
