@@ -82,6 +82,7 @@ public class PlayerController : BattleSystem
             Jump();
             myAnim.SetTrigger("Jumping");
         }
+        UnityEngine.Debug.Log(isGround);
     }
 
     void Jump()
