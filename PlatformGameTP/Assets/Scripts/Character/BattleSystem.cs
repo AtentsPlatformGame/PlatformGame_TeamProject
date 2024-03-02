@@ -6,16 +6,16 @@ using UnityEngine.Events;
 [System.Serializable]
 public struct BattleStat
 {
-    public float AP;
-    public float MaxHp;
-    public float AttackRange;
-    public float AttackDelay;
-    public float MoveSpeed;
+    public int AP; // 공격력
+    public int MaxHp; // 최대 체력
+    public float AttackRange; // 공격 사거리
+    public float AttackDelay; // 공격 속도
+    public float ProjectileSpeed; // 투사체 속도
 }
 
 public interface IDamamge
 {
-    void TakeDamage(float _dmg);
+    void TakeDamage(int _dmg);
 }
 
 public class BattleSystem : CharacterProperty, IDamamge
@@ -43,6 +43,22 @@ public class BattleSystem : CharacterProperty, IDamamge
             }
         }
     }
+    #region get,set
+    public int GetAp()
+    {
+        return this.battleStat.AP;
+    }
+
+    public float GetAttackRange()
+    {
+        return this.battleStat.AttackRange;
+    }
+
+    public float GetProjectileSpeed()
+    {
+        return this.battleStat.ProjectileSpeed;
+    }
+    #endregion
 
     private void TargetDead()
     {
@@ -54,7 +70,8 @@ public class BattleSystem : CharacterProperty, IDamamge
     {
         curHp = battleStat.MaxHp;
     }
-    public void TakeDamage(float _dmg)
+    
+    public void TakeDamage(int _dmg)
     {
         curHp -= _dmg;
         if (curHp <= 0.0f)
@@ -85,6 +102,7 @@ public class BattleSystem : CharacterProperty, IDamamge
         GetComponent<Collider>().enabled = false;
 
     }
+
 
     public bool isAlive()
     {
