@@ -84,12 +84,10 @@ public class PlayerController : BattleSystem
 
     void IsGround()
     {
-<<<<<<< Updated upstream
+
         isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.1f, groundMask);
         Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
-=======
-        isGround = Physics.Raycast(transform.position + new Vector3(0, 1, 0), Vector3.down, 1.1f, groundMask);
->>>>>>> Stashed changes
+
         myAnim.SetBool("IsGround", isGround);
         if (isGround)
         {
