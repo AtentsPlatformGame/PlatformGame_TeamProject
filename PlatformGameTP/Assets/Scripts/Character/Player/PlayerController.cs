@@ -84,7 +84,8 @@ public class PlayerController : BattleSystem
 
     void IsGround()
     {
-        isGround = Physics.Raycast(transform.position + new Vector3(0, 1, 0), Vector3.down, 1.0f, groundMask);
+        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.1f, groundMask);
+        Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
         myAnim.SetBool("IsGround", isGround);
         if (isGround)
         {
@@ -94,9 +95,9 @@ public class PlayerController : BattleSystem
 
     void TryJump()
     {
-        if (isGround && Input.GetKey(KeyCode.Space))
+        /*if (isGround && Input.GetKey(KeyCode.Space))
         {
-            jumpCharge += Time.deltaTime;
+          jumpCharge += Time.deltaTime;
         }
 
         if (isGround && Input.GetKeyUp(KeyCode.Space))
@@ -104,14 +105,20 @@ public class PlayerController : BattleSystem
             Jump();
             myAnim.SetTrigger("Jumping");
         }
-        UnityEngine.Debug.Log(isGround);
+        UnityEngine.Debug.Log(isGround);*/
+        if (isGround && Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+            myAnim.SetTrigger("Jumping");
+        }
     }
 
     void Jump()
     {
-        if (jumpCharge >= 2.0f) jumpCharge = 2.0f;
+        /*if (jumpCharge >= 2.0f) jumpCharge = 2.0f;
         rigid.AddForce(transform.up * jumpForce * jumpCharge, ForceMode.Impulse);
-        jumpCharge = 1.0f;
+        jumpCharge = 1.0f;*/
+        rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
     protected void Attack() // 공격 함수, 정면을 정확히 바라볼때만 공격 가능
@@ -120,7 +127,7 @@ public class PlayerController : BattleSystem
         float angle_B = Vector3.Angle(transform.forward, Vector3.back); // -> 방향을 볼때 0, 반대는 180
         Debug.Log(angle_F);
         Debug.Log(angle_B);
-        if (Mathf.Approximately(angle_F,0.0f) || Mathf.Approximately(angle_F, 180.0f))
+        if (Mathf.Approximately(angle_F, 0.0f) || Mathf.Approximately(angle_F, 180.0f))
             myAnim.SetTrigger("Attack");
         /*
         Debug.Log(Camera.main.ScreenPointToRay(Input.mousePosition));*/
