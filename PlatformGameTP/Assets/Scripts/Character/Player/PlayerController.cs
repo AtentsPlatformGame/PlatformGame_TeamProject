@@ -34,8 +34,8 @@ public class PlayerController : BattleSystem
         IsGround();
         TryJump();
         Rotate();
-        //Move(); // 회전과 동시에 움직이기
-        if (canMove) Move(); // 회전이 끝나면 움직이기
+        Move(); // 회전과 동시에 움직이기
+        //if (canMove) Move(); // 회전이 끝나면 움직이기
     }
 
 
@@ -58,17 +58,18 @@ public class PlayerController : BattleSystem
         */
         if (Input.GetKey(KeyCode.D)) // 오른쪽으로 회전, +
         {
-            curRotY -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
-                                                                                //curRotY = 0.0f; // 곧바로 방향 전환
+            //curRotY -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
+            curRotY = 0.0f; // 곧바로 방향 전환
         }
         if (Input.GetKey(KeyCode.A)) // 왼쪽으로 회전, -
         {
-            curRotY += -1 * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
-                                                                                     //curRotY = 180.0f; // 곧바로 방향 전환
+            //curRotY += -1 * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
+            curRotY = 180.0f; // 곧바로 방향 전환
         }
         curRotY = Mathf.Clamp(curRotY, rotYRange.x, rotYRange.y); // rotYRange안에 값으로 제한됨
         transform.localRotation = Quaternion.Euler(0, curRotY, 0);
 
+        /*
         // 아래 조건은 한쪽 방향으로 회전이 끝났을때 움직일수 있도록 만든 조건문
         if (Mathf.Approximately(curRotY, rotYRange.x) || Mathf.Approximately(curRotY, rotYRange.y))
         {
@@ -78,6 +79,7 @@ public class PlayerController : BattleSystem
         {
             canMove = false;
         }
+        */
     }
 
     void IsGround()
