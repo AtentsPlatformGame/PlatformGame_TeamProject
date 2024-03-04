@@ -15,6 +15,7 @@ public class PlayerController : BattleSystem
     public LayerMask groundMask;
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
+    public UnityEvent<int> switchTrackedOffset;
     float curRotY;
     int ap;
     bool isGround;
@@ -60,11 +61,13 @@ public class PlayerController : BattleSystem
         {
             //curRotY -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
             curRotY = 0.0f; // 곧바로 방향 전환
+            switchTrackedOffset?.Invoke(1); // 
         }
         if (Input.GetKey(KeyCode.A)) // 왼쪽으로 회전, -
         {
             //curRotY += -1 * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
             curRotY = 180.0f; // 곧바로 방향 전환
+            switchTrackedOffset?.Invoke(-1);
         }
         curRotY = Mathf.Clamp(curRotY, rotYRange.x, rotYRange.y); // rotYRange안에 값으로 제한됨
         transform.localRotation = Quaternion.Euler(0, curRotY, 0);
