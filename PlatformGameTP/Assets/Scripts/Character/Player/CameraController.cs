@@ -56,4 +56,10 @@ public class CameraController : MonoBehaviour
             playerCam.Follow = orgPos;
         }
     }
+
+    public void SetTrackOX(int _dir)
+    {
+        Debug.Log(playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset);
+        playerCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_TrackedObjectOffset = new Vector3(_dir * 5.0f, 4.0f, 0f);
+    }
 }
