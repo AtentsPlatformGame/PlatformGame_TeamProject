@@ -27,6 +27,7 @@ public class PlayerController : BattleSystem
     {
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
+        Initialize();
     }
 
     // Update is called once per frame
@@ -69,13 +70,13 @@ public class PlayerController : BattleSystem
         2. 회전 안보여주기. : 곧바로 방향 전환 라인 열어놓고 아래 긴 조건문 닫고 Update에서 적절한 Move사용
         3. 회전 후 이동하기 : 회전하는걸 보여줌 < 라인 열어놓고 조건문 열고 Update에서 적절한 Move사용
         */
-        if (Input.GetKey(KeyCode.D)) // 오른쪽으로 회전, +
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // 오른쪽으로 회전, +
         {
             //curRotY -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
             curRotY = 0.0f; // 곧바로 방향 전환
             switchTrackedOffset?.Invoke(1); // 
         }
-        if (Input.GetKey(KeyCode.A)) // 왼쪽으로 회전, -
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // 왼쪽으로 회전, -
         {
             //curRotY += -1 * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
             curRotY = 180.0f; // 곧바로 방향 전환
