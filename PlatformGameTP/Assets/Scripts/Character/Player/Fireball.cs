@@ -45,7 +45,7 @@ public class Fireball : MonoBehaviour
         }
         oldPos = transform.position;
         gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed);
-
+        transform.Translate(transform.forward * projectileSpeed * Time.deltaTime, Space.World);
         // 사거리를 벗어나면 사라지게
         Vector3 dir = transform.position - spawnPos;
         float dist = dir.magnitude;

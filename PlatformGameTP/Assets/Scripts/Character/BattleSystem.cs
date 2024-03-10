@@ -74,7 +74,8 @@ public class BattleSystem : CharacterProperty, IDamamge
     public void TakeDamage(int _dmg)
     {
         curHp -= _dmg;
-        if (curHp <= 0.0f)
+        Debug.Log(curHp);
+        if (curHp <= 0)
         {
             // 체력이 다 해 쓰러짐
             OnDead();
@@ -100,7 +101,7 @@ public class BattleSystem : CharacterProperty, IDamamge
     {
         deathAlarm?.Invoke();
         GetComponent<Collider>().enabled = false;
-
+        GetComponent<Rigidbody>().useGravity = false;
     }
 
 
