@@ -151,9 +151,9 @@ public class PlayerController : BattleSystem
     // 이 아래부턴 나중에 스크립트 분리할 수도 있음
     protected void Attack() // 공격 함수, 정면을 정확히 바라볼때만 공격 가능
     {
-        if(Mathf.Approximately(attackDeltaTime, 0.0f)) // 쿨타임 계산, 마음에 안드는데 일단 후순위
+        if (Mathf.Approximately(attackDeltaTime, 0.0f)) // 쿨타임 계산, 마음에 안드는데 일단 후순위
         {
-            if(attackDelay != null)
+            if (attackDelay != null)
             {
                 StopCoroutine(attackDelay);
             }
@@ -170,8 +170,8 @@ public class PlayerController : BattleSystem
         Debug.Log(angle_B);
         if (Mathf.Approximately(angle_F, 0.0f) || Mathf.Approximately(angle_F, 180.0f))
             myAnim.SetTrigger("Attack");
-        /*
-        Debug.Log(Camera.main.ScreenPointToRay(Input.mousePosition));*/
+
+        Debug.Log(Camera.main.ScreenPointToRay(Input.mousePosition));
     }
 
     public new void OnAttack()
@@ -188,8 +188,8 @@ public class PlayerController : BattleSystem
 
     IEnumerator CoolingAttack()
     {
-        
-        while(!Mathf.Approximately(battleStat.AttackDelay, attackDeltaTime))
+
+        while (!Mathf.Approximately(battleStat.AttackDelay, attackDeltaTime))
         {
             attackDeltaTime += 1f;
             yield return new WaitForSeconds(1f);
