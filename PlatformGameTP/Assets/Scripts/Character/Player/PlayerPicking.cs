@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class PlayerPicking : MonoBehaviour
 {
     public UnityEvent attackAct;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -22,4 +23,6 @@ public class PlayerPicking : MonoBehaviour
             Debug.Log("Click");
         }
     }
+
+   
 }
