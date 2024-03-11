@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Monster : MonoBehaviour
+public class Monster : BattleSystem
 {
     public int maxHP = 5;
     public int currentHP;
     public int attackDamage = 1;
 
-    public UnityEvent OnTakeDamage;
+    
     // Start is called before the first frame update
     void Start()
     {
         currentHP = maxHP;
+        Initialize();
     }
 
-    public void TakeDamage(int damage)
+    public new void TakeDamage(int damage)
     {
         currentHP -= damage;
-
-        OnTakeDamage.Invoke();
 
         if(currentHP <= 0)
         {
             Die();
         }
+        Debug.Log("TakeDamage");
     }
 
     void Die()
