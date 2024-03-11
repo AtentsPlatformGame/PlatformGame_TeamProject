@@ -16,28 +16,37 @@ public class PlayerController : BattleSystem
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
+    public bool isSpellReady = false;
     float curRotY;
     int ap;
     bool isGround;
-    bool canMove;
+    float attackDeltaTime = 0.0f;
     Rigidbody rigid;
     Fireball fireBall;
+    Coroutine attackDelay;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Initialize();
+    }
     void Start()
     {
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
-        Initialize();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        IsGround();
-        TryJump();
-        Rotate();
-        Move(); // 회전과 동시에 움직이기
-        //if (canMove) Move(); // 회전이 끝나면 움직이기
+        if (isAlive())
+        {
+            IsGround();
+            TryJump();
+            Rotate();
+            Move(); // 회전과 동시에 움직이기
+                    //if (canMove) Move(); // 회전이 끝나면 움직이기
+        }
     }
 
 
@@ -139,8 +148,22 @@ public class PlayerController : BattleSystem
         rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
+    // 이 아래부턴 나중에 스크립트 분리할 수도 있음
     protected void Attack() // 공격 함수, 정면을 정확히 바라볼때만 공격 가능
     {
+        if(Mathf.Approximately(attackDeltaTime, 0.0f)) // 쿨타임 계산, 마음에 안드는데 일단 후순위
+        {
+            if(attackDelay != null)
+            {
+                StopCoroutine(attackDelay);
+            }
+            attackDelay = StartCoroutine(CoolingAttack());
+        }
+        else
+        {
+            return;
+        }
+
         float angle_F = Vector3.Angle(transform.forward, Vector3.forward); // -> 방향을 볼때 0, 반대는 180
         float angle_B = Vector3.Angle(transform.forward, Vector3.back); // -> 방향을 볼때 0, 반대는 180
         Debug.Log(angle_F);
@@ -161,5 +184,32 @@ public class PlayerController : BattleSystem
         obj.GetComponent<Fireball>().SetFireBallAP(ap); // 파이어볼 공격력 설정
         obj.GetComponent<Fireball>().SetAttackRange(GetAttackRange()); // 파이어볼 공격 사거리 결정
         obj.GetComponent<Fireball>().SetProjectileSpeed(GetProjectileSpeed()); // 파이어볼 투사체 속도 결정
+    }
+
+    IEnumerator CoolingAttack()
+    {
+        
+        while(!Mathf.Approximately(battleStat.AttackDelay, attackDeltaTime))
+        {
+            attackDeltaTime += 1f;
+            yield return new WaitForSeconds(1f);
+        }
+        attackDeltaTime = 0f;
+    }
+
+    public void ReadyToUseSpell(bool isReady)
+    {
+        isSpellReady = isReady;
+        myAnim.SetBool("IsSpellReady", isReady);
+    }
+
+    public void UsingSpell()
+    {
+        myAnim.SetTrigger("UseSpell");
+    }
+
+    public void ResetSpellTrigger()
+    {
+        myAnim.ResetTrigger("UseSpell");
     }
 }

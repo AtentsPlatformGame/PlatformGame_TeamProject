@@ -84,6 +84,20 @@ public class BattleSystem : CharacterProperty, IDamamge
         else
         {
             myAnim.SetTrigger("Damage");
+            StartCoroutine(DamagingEffect(Color.red));
+        }
+    }
+
+    IEnumerator DamagingEffect(Color effColor)
+    {
+        foreach(Renderer renderer in allRenderer)
+        {
+            renderer.material.color = effColor;
+        }
+        yield return new WaitForSeconds(0.3f);
+        foreach (Renderer renderer in allRenderer)
+        {
+            renderer.material.color = Color.white;
         }
     }
 

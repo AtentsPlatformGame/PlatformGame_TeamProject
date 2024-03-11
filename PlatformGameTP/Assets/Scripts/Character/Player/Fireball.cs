@@ -7,7 +7,8 @@ public class Fireball : MonoBehaviour
 {
     //public GameObject orgEffect;
     public LayerMask crashMask;
-    public float projectileSpeed = 10.0f;
+    public float projectileSpeed = 10.0f; // 투사체 속도
+    public float acceleration = 2.0f; // 가속도
     public UnityEvent getApAct;
     bool isFire = false;
     int dmg = 1;
@@ -44,7 +45,7 @@ public class Fireball : MonoBehaviour
 
         }
         oldPos = transform.position;
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * projectileSpeed);
+        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * acceleration);
         transform.Translate(transform.forward * projectileSpeed * Time.deltaTime, Space.World);
         // 사거리를 벗어나면 사라지게
         Vector3 dir = transform.position - spawnPos;

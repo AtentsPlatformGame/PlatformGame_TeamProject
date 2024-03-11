@@ -20,4 +20,18 @@ public class CharacterProperty : MonoBehaviour
             return _anim;
         }
     }
+
+    Renderer[] _allRenderer;
+
+    public Renderer[] allRenderer
+    {
+        get
+        {
+            if (_allRenderer == null)
+            {
+                _allRenderer = GetComponentsInChildren<Renderer>();
+            }
+            return _allRenderer;
+        }
+    }
 }
