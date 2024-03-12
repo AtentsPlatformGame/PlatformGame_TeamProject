@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerPicking : MonoBehaviour
 {
-    [Header("스펠 사용 VFX")]
-    public Canvas spellCanvas;
-    public Image spellRange;
-    public float spellMaxRange = 6.0f;
+    
+    [Header("스펠 사용 오브젝트")]
+    [Header("스펠 사용 위치 이미지 ")]public Transform spellPointImg;
+    [Header("스펠 사용 사정거리 이미지")]public Transform spellRangeImg;
+    [Header("실제 스펠 사용 사정거리")]public float spellMaxRange = 6.0f;
 
     public LayerMask layermask;
     public UnityEvent attackAct; // PlayerController Attack()
@@ -26,8 +27,8 @@ public class PlayerPicking : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
 
-        spellCanvas.enabled = false;
-        spellRange.enabled = false;
+        spellPointImg.gameObject.SetActive(false);
+        spellRangeImg.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,40 +51,47 @@ public class PlayerPicking : MonoBehaviour
                 Debug.Log("스펠 사용 준비");
                 spellReadyAct?.Invoke(true);
                 // 이때부터 사정거리를 표시해야함
-                SpellCanvasEnabled(true);
+                //SpellCanvasEnabled(true);
+                SpellObjectEnabled(true);
             }
         }
         else // 스펠 사용 준비 후
         {
 
-            DrawSpellPoint();
+            //DrawSpellPoint();
+            DrawSpell();
 
             if (Input.GetMouseButtonDown(0)) // 스펠 사용
             {
                 useSpellAct?.Invoke();
-                spellReadyAct?.Invoke(false);
+                
                 Debug.Log("스펠 사용");
-                SpellCanvasEnabled(false);
+                //SpellCanvasEnabled(false);
                 //playerController.ResetSpellTrigger();
+                SpellObjectEnabled(false);
+                spellReadyAct?.Invoke(false);
             }
             else if (Input.GetMouseButtonDown(1)) // 스펠 사용 취소
             {
                 Debug.Log("스펠 사용 취소");
                 spellReadyAct?.Invoke(false);
-                SpellCanvasEnabled(false);
+                //SpellCanvasEnabled(false);
+                SpellObjectEnabled(false);
             }
             
         }
         
     }
 
-    void SpellCanvasEnabled(bool state)
+    
+    void SpellObjectEnabled(bool state)
     {
-        spellCanvas.enabled = state;
-        spellRange.enabled = state;
+        spellPointImg.gameObject.SetActive(state);
+        spellRangeImg.gameObject.SetActive(state);
     }
 
-    void DrawSpellPoint()
+
+    void DrawSpell()
     {
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layermask))
         {
@@ -96,10 +104,7 @@ public class PlayerPicking : MonoBehaviour
         distance = Mathf.Min(distance, spellMaxRange);
 
         Vector3 newHitPoint = transform.position + hitDir * distance;
-        spellCanvas.transform.position = new Vector3(0,newHitPoint.y, newHitPoint.z);
-
-
-
+        spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
     }
 
    

@@ -11,19 +11,24 @@ public class PlayerController : BattleSystem
     [SerializeField] float jumpForce = 2.0f;
     [SerializeField] float jumpCharge = 1.0f;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
+
     public GameObject orgFireball;
     public LayerMask groundMask;
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
     public bool isSpellReady = false;
+
     float curRotY;
     int ap;
     bool isGround;
     float attackDeltaTime = 0.0f;
+    float teleportDeltaTime = 0.0f;
+
     Rigidbody rigid;
     Fireball fireBall;
     Coroutine attackDelay;
+    Coroutine teleportDelay;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -33,7 +38,7 @@ public class PlayerController : BattleSystem
     {
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
-        
+
     }
 
     // Update is called once per frame
@@ -55,8 +60,9 @@ public class PlayerController : BattleSystem
         float x = Input.GetAxis("Horizontal");
         Vector3 deltaPos = transform.forward * x * Time.deltaTime * moveSpeed;
 
-        if (!Mathf.Approximately(x,0.0f) && Input.GetKeyDown(KeyCode.LeftShift)) // 텔레포트, 추후 쿨타임 추가 예정
+        if (!Mathf.Approximately(x, 0.0f) && Input.GetKeyDown(KeyCode.LeftShift) && Mathf.Approximately(teleportDeltaTime, 0.0f)) // 텔레포트, 추후 쿨타임 추가 예정
         {
+            teleportDelay = StartCoroutine(CoolingTelePort());
             deltaPos += deltaPos.normalized * 1.5f;
             if (Physics.Raycast(new Ray(transform.position + new Vector3(0.0f, 0.5f, 0.0f), transform.forward), out RaycastHit hit,
                 1.5f, groundMask))
@@ -65,6 +71,7 @@ public class PlayerController : BattleSystem
                 deltaPos = deltaPos.normalized * hit.distance;
             }
         }
+
         transform.Translate(deltaPos); // 앞뒤 이동.
         transform.position = new Vector3(0, transform.position.y, transform.position.z);
         myAnim.SetFloat("Speed", Mathf.Abs(x));
@@ -142,9 +149,7 @@ public class PlayerController : BattleSystem
 
     void Jump()
     {
-        /*if (jumpCharge >= 2.0f) jumpCharge = 2.0f;
-        rigid.AddForce(transform.up * jumpForce * jumpCharge, ForceMode.Impulse);
-        jumpCharge = 1.0f;*/
+
         rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
@@ -157,6 +162,7 @@ public class PlayerController : BattleSystem
             {
                 StopCoroutine(attackDelay);
             }
+            //attackDelay = StartCoroutine(CoolingTime(battleStat.AttackDelay, attackDeltaTime));
             attackDelay = StartCoroutine(CoolingAttack());
         }
         else
@@ -186,6 +192,7 @@ public class PlayerController : BattleSystem
         obj.GetComponent<Fireball>().SetProjectileSpeed(GetProjectileSpeed()); // 파이어볼 투사체 속도 결정
     }
 
+    // 아래로 중복코드, 수정 필요함
     IEnumerator CoolingAttack()
     {
 
@@ -196,6 +203,18 @@ public class PlayerController : BattleSystem
         }
         attackDeltaTime = 0f;
     }
+
+    IEnumerator CoolingTelePort()
+    {
+
+        while (!Mathf.Approximately(3.0f, teleportDeltaTime))
+        {
+            teleportDeltaTime += 1f;
+            yield return new WaitForSeconds(1f);
+        }
+        teleportDeltaTime = 0f;
+    }
+
 
     public void ReadyToUseSpell(bool isReady)
     {
