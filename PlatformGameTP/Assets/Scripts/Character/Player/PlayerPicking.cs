@@ -15,12 +15,13 @@ public class PlayerPicking : MonoBehaviour
     public LayerMask layermask;
     public UnityEvent attackAct; // PlayerController Attack()
     public UnityEvent<bool> spellReadyAct; // ½ºÆç »ç¿ë ÁØºñ 
-    public UnityEvent useSpellAct; // ½ºÆç »ç¿ë
+    public UnityEvent<Vector3> useSpellAct; // ½ºÆç »ç¿ë
     PlayerController playerController;
 
     Vector3 pos;
     Ray ray;
     RaycastHit hit;
+    Vector3 newHitPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +64,7 @@ public class PlayerPicking : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0)) // ½ºÆç »ç¿ë
             {
-                useSpellAct?.Invoke();
+                useSpellAct?.Invoke(newHitPoint);
                 
                 Debug.Log("½ºÆç »ç¿ë");
                 //SpellCanvasEnabled(false);
@@ -103,7 +104,7 @@ public class PlayerPicking : MonoBehaviour
 
         distance = Mathf.Min(distance, spellMaxRange);
 
-        Vector3 newHitPoint = transform.position + hitDir * distance;
+        newHitPoint = transform.position + hitDir * distance;
         spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
     }
 

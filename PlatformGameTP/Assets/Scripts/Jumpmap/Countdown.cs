@@ -11,6 +11,8 @@ public class Countdown : MonoBehaviour
     [SerializeField] TMPro.TMP_Text countdownText;
     string minutesS = "";
     string secondsS = "";
+    int minute;
+    float second;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +27,13 @@ public class Countdown : MonoBehaviour
         else if (setTime <= 0)
             Time.timeScale = 0.0f;
 
-        countdownText.text = Mathf.Round(setTime).ToString();
+        //countdownText.text = Mathf.Round(setTime).ToString();
+        minute = (int)(setTime / 60.0f);
+        second = setTime % 60.0f;
 
+        minutesS = minute.ToString();
+        secondsS = Mathf.Round(second).ToString();
+        countdownText.text = minutesS + " : " + secondsS;
     }
 }
 

@@ -11,6 +11,7 @@ public class PlayerController : BattleSystem
     [SerializeField] float jumpForce = 2.0f;
     [SerializeField] float jumpCharge = 1.0f;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
+    [SerializeField] GameObject spellObject;
 
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -222,9 +223,10 @@ public class PlayerController : BattleSystem
         myAnim.SetBool("IsSpellReady", isReady);
     }
 
-    public void UsingSpell()
+    public void UsingSpell(Vector3 spellPoint)
     {
         myAnim.SetTrigger("UseSpell");
+        Instantiate(spellObject, new Vector3(0, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
     }
 
     public void ResetSpellTrigger()
