@@ -10,6 +10,7 @@ public class Fireball : MonoBehaviour
     public float projectileSpeed = 10.0f; // 투사체 속도
     public float acceleration = 2.0f; // 가속도
     public UnityEvent getApAct;
+    public GameObject explosionVFX;
     bool isFire = false;
     int dmg = 1;
     float attackRange;
@@ -32,6 +33,7 @@ public class Fireball : MonoBehaviour
         Ray ray = new Ray(oldPos, (transform.position - oldPos).normalized);
         if (Physics.Raycast(ray, out RaycastHit hit, (transform.position - oldPos).magnitude, crashMask))// 맞았다.
         {
+            Instantiate(explosionVFX, hit.point, Quaternion.identity);
             Destroy(gameObject);
             //Effect
             //Instantiate(orgEffect, hit.point, Quaternion.identity);
