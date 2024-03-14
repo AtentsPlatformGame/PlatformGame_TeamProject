@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Monster : PlayerController
+public class Monster : BattleSystem
 {
     private enum MonsterState
     {
@@ -15,14 +15,22 @@ public class Monster : PlayerController
 
     private MonsterState currentState;
     private Transform PlayerTransfrom;
+    [SerializeField] Vector3 leftLimitPos;
+    [SerializeField] Vector3 rightLimitPos;
+    Vector3 limitPos;
     private float RoamingRange = 3.0f;//로밍 반경
     private float BattleRange = 1.0f;//배틀 반경
     
     // Start is called before the first frame update
     void Start()
     {
-
+        ChangeState(MonsterState.Dead);
         StartCoroutine(MonsterStateMachine());
+    }
+
+    void ChangeState(MonsterState s)
+    {
+
     }
 
     IEnumerator MonsterStateMachine()
