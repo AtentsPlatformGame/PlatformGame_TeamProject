@@ -11,6 +11,7 @@ public struct BattleStat
     public float AttackRange; // 공격 사거리
     public float AttackDelay; // 공격 속도
     public float ProjectileSpeed; // 투사체 속도
+   
 }
 
 public interface IDamamge

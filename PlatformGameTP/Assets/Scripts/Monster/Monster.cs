@@ -7,75 +7,129 @@ public class Monster : BattleSystem
 {
     private enum MonsterState
     {
-        Idle,
-        Roaming,
-        Battle,
-        Dead
+        Create, // 생성
+        Idle, // 노말
+        Battle, // 배틀
+        Dead // 죽음
     }
-
-    private MonsterState currentState;
+    
+    public int AP; // 공격력
+    public int MaxHp; // 최대 체력
+    public float AttackRange; // 공격 사거리
+    public float AttackDelay; // 공격 속도
+    public float ProjectileSpeed; // 투사체 속도
+    
+    private MonsterState myState = MonsterState.Create;
     private Transform PlayerTransfrom;
+    public LayerMask groundMask;
     [SerializeField] Vector3 leftLimitPos;
     [SerializeField] Vector3 rightLimitPos;
+    [SerializeField] public float MoveSpeed = 3.0f;
     Vector3 limitPos;
-    private float RoamingRange = 3.0f;//로밍 반경
-    private float BattleRange = 1.0f;//배틀 반경
-    
+    protected Vector3 dir;
+    protected float myPlayTime;
+
+
     // Start is called before the first frame update
     void Start()
     {
+       
+    }
+
+    protected override void OnDead()
+    {
         ChangeState(MonsterState.Dead);
-        StartCoroutine(MonsterStateMachine());
+        StartCoroutine(DisApearing(2.0f));
+    }
+    IEnumerator DisApearing(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Color color = allRenderer[0].material.color;
+        while (color.a > 0.0f)
+        {
+            color.a -= Time.deltaTime;
+            allRenderer[0].material.color = color;
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     void ChangeState(MonsterState s)
     {
-
-    }
-
-    IEnumerator MonsterStateMachine()
-    {
-        while (true)
+        if (myState == s) return;
+        myState = s;
+        switch (myState)
         {
-            switch (currentState)
-            {
-                case MonsterState.Idle: //몬스터 생성 상태
-                    currentState = MonsterState.Roaming;
-                    break;
-                case MonsterState.Roaming: //몬스터 로밍 상태
-                    yield return new WaitForSeconds(3f);
-                    currentState = MonsterState.Battle;
-                    break;
-                case MonsterState.Battle: //몬스터 배틀 상태
-                    yield return new WaitForSeconds(5f);
-                    currentState = MonsterState.Dead;
-                    break;
-                case MonsterState.Dead: // 몬스터 죽음 상태 이후 상태 변화 없음
-                    yield return null;
-                    break;
-                default:
-                    yield return null;
-                    break;
-            }
+            case MonsterState.Idle:
+                RaycastHit hit; 
+                if (Random.Range(0, 4) == 0)
+                {
+                    dir = Vector3.left;
+                    limitPos = leftLimitPos;
+                }
+                else
+                {
+                    dir = Vector3.right;
+                    limitPos = rightLimitPos;
+                }
+
+                break;
+            case MonsterState.Battle:
+                myPlayTime = 0.0f;
+                break;
         }
     }
 
-    void Roam()
+     void StateProcess()
     {
-        // 로밍 동작
-    }
+        switch (myState)
+        {
+            case MonsterState.Idle:
+                float dist = Mathf.Abs(transform.position.z - limitPos.z);
+                if (dist < Time.deltaTime * MoveSpeed)
+                {
+                    dir = -dir;
+                    if(dir.z> 0.0f)
+                    {
+                        limitPos = rightLimitPos;
+                    }
+                    else if (dir.z < 0.0f)
+                    {
+                        limitPos = leftLimitPos;
+                    }
+                }
+                break;
+            case MonsterState.Battle:
+                if (!myAnim.GetBool("IsAttacking")) myPlayTime += Time.deltaTime;
+                float temp = myTarget.position.z - transform.position.z;
+                if(temp > 0.0f) 
+                {
+                    dir = Vector3.right;
+                }
+                else if(temp < 0.0f)
+                {
+                    dir = Vector3.left;
+                }
+                else
+                {
+                    dir = Vector3.zero;
+                }
+                if (Mathf.Abs(temp) <= AttackRange)
+                {
+                    dir = Vector2.zero;
+                    if (myPlayTime >= AttackDelay)
+                    {
+                        base.OnAttack();
+                    }
+                }
+                break;
+           
 
-    void CheckDistance()
-    {
-        if (Vector3.Distance(transform.position, PlayerTransfrom.position) > RoamingRange)
-        {
-            currentState = MonsterState.Idle;
-        }
-        else if(Vector3.Distance(transform.position, PlayerTransfrom.position)> BattleRange)
-        {
-            currentState = MonsterState.Battle;
         }
     }
+   
+
+    
 
     // Update is called once per frame
     void Update()
