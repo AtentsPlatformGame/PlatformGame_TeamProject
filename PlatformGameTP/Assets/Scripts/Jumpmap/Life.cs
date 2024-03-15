@@ -5,7 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Life : MonoBehaviour
+
+public class Life : CharacterProperty
 {
     public int playerLife = 2;
     public GameDirector gameDirector;
@@ -24,18 +25,24 @@ public class Life : MonoBehaviour
         {
             playerLife--;
             this.gameDirector.Init(this.playerLife);
-            Dead();
+
+            GameStop();
+            myAnim.SetTrigger("Dead");
         }
     }
 
-    public void Dead()
+    public void GameStop()
     {
         StopAllCoroutines();
     }
-
     public void TakeLife()
     {
-
+        if(playerLife == 1)
+            myAnim.SetTrigger("Dead");
+        if(playerLife == 0)
+        {
+            
+        }
     }
 
 }
