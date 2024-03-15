@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public struct BattleStat
 {
     public int AP; // 공격력
-    public int MaxHp; // 최대 체력
+    public float MaxHp; // 최대 체력
     public float AttackRange; // 공격 사거리
     public float AttackDelay; // 공격 속도
     public float ProjectileSpeed; // 투사체 속도
@@ -15,7 +15,7 @@ public struct BattleStat
 
 public interface IDamamge
 {
-    void TakeDamage(int _dmg);
+    void TakeDamage(float _dmg);
 }
 
 public class BattleSystem : CharacterProperty, IDamamge
@@ -71,11 +71,11 @@ public class BattleSystem : CharacterProperty, IDamamge
         curHp = battleStat.MaxHp;
     }
     
-    public void TakeDamage(int _dmg)
+    public void TakeDamage(float _dmg)
     {
         curHp -= _dmg;
         Debug.Log(curHp);
-        if (curHp <= 0)
+        if (curHp <= 0.0f)
         {
             // 체력이 다 해 쓰러짐
             OnDead();

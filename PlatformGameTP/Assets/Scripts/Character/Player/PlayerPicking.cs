@@ -8,7 +8,8 @@ public class PlayerPicking : MonoBehaviour
 {
     
     [Header("스펠 사용 오브젝트")]
-    [Header("스펠 사용 위치 이미지 ")]public Transform spellPointImg;
+    [Header("공격 스펠 사용 위치 이미지 ")]public Transform attackSpellPointImg;
+    [Header("버프 스펠 사용 위치 이미지")] public Transform buffSpellPoinImg;
     [Header("스펠 사용 사정거리 이미지")]public Transform spellRangeImg;
     [Header("실제 스펠 사용 사정거리")]public float spellMaxRange = 6.0f;
 
@@ -28,7 +29,8 @@ public class PlayerPicking : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
 
-        spellPointImg.gameObject.SetActive(false);
+        attackSpellPointImg.gameObject.SetActive(false);
+        buffSpellPoinImg.gameObject.SetActive(false);
         spellRangeImg.gameObject.SetActive(false);
     }
 
@@ -52,24 +54,41 @@ public class PlayerPicking : MonoBehaviour
                 Debug.Log("스펠 사용 준비");
                 spellReadyAct?.Invoke(true);
                 // 이때부터 사정거리를 표시해야함
-                //SpellCanvasEnabled(true);
-                SpellObjectEnabled(true);
+                if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때
+                {
+                    SpellObjectEnabled(attackSpellPointImg, spellRangeImg, true);
+                }
+                else // 사용하고자하는 스펠이 Buff일 때
+                {
+                    SpellObjectEnabled(buffSpellPoinImg, spellRangeImg, true);
+                }
+                
             }
         }
         else // 스펠 사용 준비 후
         {
 
             //DrawSpellPoint();
-            DrawSpell();
+            DrawSpell(attackSpellPointImg);
 
             if (Input.GetMouseButtonDown(0)) // 스펠 사용
             {
-                useSpellAct?.Invoke(newHitPoint);
+                
                 
                 Debug.Log("스펠 사용");
                 //SpellCanvasEnabled(false);
                 //playerController.ResetSpellTrigger();
-                SpellObjectEnabled(false);
+                //SpellObjectEnabled(spellPointImg, spellRangeImg, false);
+                if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때
+                {
+                    SpellObjectEnabled(attackSpellPointImg, spellRangeImg, false);
+                }
+                else // 사용하고자하는 스펠이 Buff일 때
+                {
+                    SpellObjectEnabled(buffSpellPoinImg, spellRangeImg, false);
+                }
+
+                useSpellAct?.Invoke(newHitPoint);
                 spellReadyAct?.Invoke(false);
             }
             else if (Input.GetMouseButtonDown(1)) // 스펠 사용 취소
@@ -77,7 +96,15 @@ public class PlayerPicking : MonoBehaviour
                 Debug.Log("스펠 사용 취소");
                 spellReadyAct?.Invoke(false);
                 //SpellCanvasEnabled(false);
-                SpellObjectEnabled(false);
+                //SpellObjectEnabled(spellPointImg, spellRangeImg, false);
+                if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때
+                {
+                    SpellObjectEnabled(attackSpellPointImg, spellRangeImg, false);
+                }
+                else // 사용하고자하는 스펠이 Buff일 때
+                {
+                    SpellObjectEnabled(buffSpellPoinImg, spellRangeImg, false);
+                }
             }
             
         }
@@ -85,14 +112,14 @@ public class PlayerPicking : MonoBehaviour
     }
 
     
-    void SpellObjectEnabled(bool state)
+    void SpellObjectEnabled(Transform _spellPointImg,Transform _spellRangeImg,bool state)
     {
-        spellPointImg.gameObject.SetActive(state);
-        spellRangeImg.gameObject.SetActive(state);
+        _spellPointImg.gameObject.SetActive(state);
+        _spellRangeImg.gameObject.SetActive(state);
     }
 
 
-    void DrawSpell()
+    void DrawSpell(Transform _spellPointImg)
     {
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layermask))
         {
@@ -105,7 +132,7 @@ public class PlayerPicking : MonoBehaviour
         distance = Mathf.Min(distance, spellMaxRange);
 
         newHitPoint = transform.position + hitDir * distance;
-        spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
+        _spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
     }
 
    

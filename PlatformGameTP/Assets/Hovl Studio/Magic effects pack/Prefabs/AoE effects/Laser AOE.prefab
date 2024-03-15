@@ -39250,6 +39250,7 @@ GameObject:
   - component: {fileID: 7090751941697215515}
   - component: {fileID: 1718055161921247735}
   - component: {fileID: 8584785056472904893}
+  - component: {fileID: 2441072118745384937}
   m_Layer: 0
   m_Name: Shoot
   m_TagString: Untagged
@@ -43086,14 +43087,14 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 0.0001
+    radiusScale: 1
     collidesWith:
       serializedVersion: 2
       m_Bits: 4294967295
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -44127,6 +44128,22 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2441072118745384937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6961581215706943724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2b4e6ee20bc7a4295a868bd968afe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellMask:
+    serializedVersion: 2
+    m_Bits: 524288
+  spellDmg: 5
 --- !u!1 &7478731271839673279
 GameObject:
   m_ObjectHideFlags: 0
@@ -44141,7 +44158,7 @@ GameObject:
   - component: {fileID: 3603459165372389175}
   m_Layer: 0
   m_Name: Laser AOE
-  m_TagString: Untagged
+  m_TagString: AttackSpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47824,7 +47841,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     type: 1
     collisionMode: 0
@@ -47997,11 +48014,11 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 786432
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
