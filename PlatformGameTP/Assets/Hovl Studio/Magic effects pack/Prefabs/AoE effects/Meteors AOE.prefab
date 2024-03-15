@@ -34388,11 +34388,12 @@ GameObject:
   m_Component:
   - component: {fileID: 898328576160968675}
   - component: {fileID: 2431706144405957975}
+  - component: {fileID: 1435922357588209618}
   - component: {fileID: 8176230078092200170}
   - component: {fileID: 8636462576248347671}
   m_Layer: 0
   m_Name: Meteors AOE
-  m_TagString: Untagged
+  m_TagString: AttackSpell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34432,6 +34433,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 5
+--- !u!114 &1435922357588209618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957833072274404953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2b4e6ee20bc7a4295a868bd968afe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellMask:
+    serializedVersion: 2
+    m_Bits: 524288
+  spellDmg: 0.5
 --- !u!198 &8176230078092200170
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -35150,7 +35167,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 2
+      value: 3
       mode: 0
       spread: 0
       speed:
@@ -38249,11 +38266,11 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 786432
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:

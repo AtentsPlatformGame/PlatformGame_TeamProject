@@ -11,7 +11,7 @@ public class PlayerController : BattleSystem
     [SerializeField] float jumpForce = 2.0f;
     [SerializeField] float jumpCharge = 1.0f;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
-    [SerializeField] GameObject spellObject;
+    [SerializeField] Transform[] spellObject;
 
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -223,14 +223,44 @@ public class PlayerController : BattleSystem
         myAnim.SetBool("IsSpellReady", isReady);
     }
 
-    public void UsingSpell(Vector3 spellPoint)
+    public void UsingSpell(Vector3 spellPoint) // 여기서 스펠을 사용한다.
     {
-        myAnim.SetTrigger("UseSpell");
-        Instantiate(spellObject, new Vector3(0, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
+        if (spellObject[0] != null)
+        {
+            myAnim.SetTrigger("UseSpell");
+            if (spellObject[0].gameObject.tag == "AttackSpell")Instantiate(spellObject[0], new Vector3(0, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
+            else Instantiate(spellObject[0],this.transform);
+            spellObject[0] = null;
+
+            if (spellObject[1] != null)
+            {
+                spellObject[0] = spellObject[1];
+                spellObject[1] = null;
+            }
+            
+        }
+        
     }
 
     public void ResetSpellTrigger()
     {
         myAnim.ResetTrigger("UseSpell");
     }
+
+    public Transform GetCurrentSpell()
+    {
+        return this.spellObject[0];
+    }
+
+    public void HealBuff()
+    {
+
+    }
+
+    public void SpeedBuff()
+    {
+
+    }
+
+
 }
