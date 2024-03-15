@@ -23,7 +23,7 @@ public class Aiperception : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if((1 << collision.gameObject.layer & enemyMask) != 0)
+        if ((1 << collision.gameObject.layer & enemyMask) != 0)
         {
             if (myTarget == null)
             {
@@ -44,3 +44,4 @@ public class Aiperception : MonoBehaviour
             }
         }
     }
+}
