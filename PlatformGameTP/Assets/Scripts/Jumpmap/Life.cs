@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -11,6 +12,11 @@ public class Life : CharacterProperty
     public int playerLife = 2;
     public GameDirector gameDirector;
     public Transform transform;
+    private int maxlife = 2;
+    public Vector3 respawnPoint;
+    public Vector3 endPoint;
+    public GameObject ReStart;
+    public GameObject Spawn;
 
     // Start is called before the first frame update
     void Start()
@@ -25,24 +31,30 @@ public class Life : CharacterProperty
         {
             playerLife--;
             this.gameDirector.Init(this.playerLife);
-
-            GameStop();
-            myAnim.SetTrigger("Dead");
+            RestartPlayer();
         }
-    }
-
-    public void GameStop()
-    {
-        StopAllCoroutines();
-    }
-    public void TakeLife()
-    {
-        if(playerLife == 1)
-            myAnim.SetTrigger("Dead");
         if(playerLife == 0)
         {
-            
+            this.gameDirector.Init(this.playerLife);
+            End();
         }
+    }
+
+    public void TimeAttack()
+    {
+        if (playerLife <= 0)
+        {
+            StopAllCoroutines();
+        }
+    }
+    void RestartPlayer()
+    {
+        ReStart.transform.position = respawnPoint;
+    }
+
+    void End()
+    {
+        Spawn.transform.position = endPoint;
     }
 
 }
