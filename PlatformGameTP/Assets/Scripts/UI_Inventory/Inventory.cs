@@ -16,6 +16,10 @@ public class Inventory : MonoBehaviour
         {
             checkInventory = false;
             MyInventory.gameObject.SetActive(false);
+ 
+        }
+        if (MyOptions != null)
+        {
             checkOptions = false;
             MyOptions.gameObject.SetActive(false);
         }
@@ -40,7 +44,7 @@ public class Inventory : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (checkOptions == false && checkOptions == false)
+            if (checkOptions == false && checkInventory == false)
             {
                 PopUp(MyOptions);
                 checkOptions= true;
