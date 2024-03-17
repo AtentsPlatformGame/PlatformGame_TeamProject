@@ -8,6 +8,7 @@ public class Tp : MonoBehaviour
     [SerializeField] Transform tp;
     [SerializeField] GameObject Player;
     [SerializeField] GameObject countDown;
+    [SerializeField] GameObject countDown2;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +25,7 @@ public class Tp : MonoBehaviour
         // 카운트 다운 시작
         if(countDown != null)
             countDown.SetActive(true);
+        countDown2.SetActive(false);
     }
 }
 

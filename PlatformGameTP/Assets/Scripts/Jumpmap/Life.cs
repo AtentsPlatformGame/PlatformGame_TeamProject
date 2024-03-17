@@ -17,10 +17,12 @@ public class Life : CharacterProperty
     public Vector3 endPoint;
     public GameObject ReStart;
     public GameObject Spawn;
+    public int Currentlife;
 
     // Start is called before the first frame update
     void Start()
     {
+        Currentlife = playerLife;
         this.gameDirector.Init(this.playerLife);
     }
 
@@ -33,10 +35,9 @@ public class Life : CharacterProperty
             this.gameDirector.Init(this.playerLife);
             RestartPlayer();
         }
-        if(playerLife == 0)
+        if(Currentlife <= 0)
         {
-            this.gameDirector.Init(this.playerLife);
-            End();
+            Currentlife = 0;
         }
     }
 
