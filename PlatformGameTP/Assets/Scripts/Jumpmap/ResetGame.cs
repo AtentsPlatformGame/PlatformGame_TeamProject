@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class ResetGame : MonoBehaviour
 {
     public GameObject objectToReset;
+    [SerializeField] GameObject countDown;
+    [SerializeField] GameObject countDown2;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class ResetGame : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             ResetObject();
+            ResetCountdown();
         }
     }
 
@@ -25,6 +28,13 @@ public class ResetGame : MonoBehaviour
     {
         objectToReset.SetActive(false);
         objectToReset.SetActive(true);
+    }
+
+    void ResetCountdown()
+    {
+        if (countDown != false)
+            countDown.SetActive(false);
+        countDown2.SetActive(true);
     }
 
 }
