@@ -1,17 +1,24 @@
+using InventorySystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory :ItemProperty
 {
     [SerializeField] Transform MyInventory;
     [SerializeField] Transform MyOptions;
+    public Transform MyExplanation;
     public bool checkInventory;
     public bool checkOptions;
+    
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        
         if (MyInventory != null)
         {
             checkInventory = false;
@@ -22,6 +29,12 @@ public class Inventory : MonoBehaviour
         {
             checkOptions = false;
             MyOptions.gameObject.SetActive(false);
+        }
+
+        if (MyExplanation != null)
+        {
+           
+            MyExplanation.gameObject.SetActive(false);
         }
     }
 
@@ -39,6 +52,7 @@ public class Inventory : MonoBehaviour
             {
                 PopDown(MyInventory);
                 checkInventory= false;
+                MyExplanation.gameObject.SetActive(false);
             }
         }
 
@@ -66,6 +80,7 @@ public class Inventory : MonoBehaviour
     public void PopDown(Transform popup)
     {
         popup.gameObject.SetActive(false);
+
     }
 
 }
