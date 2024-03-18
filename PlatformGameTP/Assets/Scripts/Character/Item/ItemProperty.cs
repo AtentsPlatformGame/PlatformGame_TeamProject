@@ -30,7 +30,7 @@ public class ItemProperty : MonoBehaviour
 {
     [SerializeField] protected ItemStat itemStat;
 
-    #region GEt함수
+    #region GEt함수 아래 함수들을 이용해 필요한 정보들을 얻어갑니다.
     public Image GetItemIcon()
     {
         return this.itemStat.itemIcon;
