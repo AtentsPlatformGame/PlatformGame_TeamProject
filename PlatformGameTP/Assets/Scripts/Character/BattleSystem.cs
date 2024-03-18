@@ -133,5 +133,11 @@ public class BattleSystem : CharacterProperty, IDamamge
 
         Initialize();
     }
+
+    public void UpdatePlayerStat(ItemStat _itemStat)
+    {
+        if (_itemStat.Ap != 0) this.battleStat.AP = _itemStat.Ap;
+        Initialize();
+    }
 }
 

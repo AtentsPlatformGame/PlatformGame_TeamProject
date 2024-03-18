@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Shop_LNH : MonoBehaviour
 {
-    public UnityEvent<int, float, float> updateStatAct; // 나중에 플레이어 정보를 갱신하기 위해 만든 unityevent, 추후 수정할거임
+    public UnityEvent<ItemStat> updateStatAct; // 나중에 플레이어 정보를 갱신하기 위해 만든 unityevent
     GameObject itemToBuy;
     /*
      장비 이미지(버튼)를 눌렀을 때, 그 정보(어떤 것을 눌렀는지)를 저장하기 위해 만든 GameObject 변수
@@ -50,8 +50,9 @@ public class Shop_LNH : MonoBehaviour
         ShopItem_LNH shopItme = itemToBuy.GetComponent<ShopItem_LNH>(); // 선택한 아이템이 가지고 있는 스크립트
         if (shopItme != null) // 만약 그 스크립트가 존재한다면
         {
-            //updateStatAct?.Invoke();
-            Debug.Log($"{shopItme.GetItemType()} 타입, 공격력 {shopItme.GetAp()}, 추가 체력 {shopItme.GetPlusHeart()}, 이속 {shopItme.GetPlusSpeed()}");
+            ItemStat buyItemStat = shopItme.GetItemStat();
+            updateStatAct?.Invoke(buyItemStat);
+            Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}");
         } // 위에서 어떠한 처리를 하면 되겠습니다. 현재는 단순히 정보 출력만 합니다.
         
        

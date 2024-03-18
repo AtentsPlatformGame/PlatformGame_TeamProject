@@ -6,9 +6,13 @@ using UnityEngine.UI;
 // 스텟에 직접적으로 영향을 주는 무기,방어구,장신구의 정보 저장 스크립트
 public enum ITEMTYPE
 {
+    NONE, // 아이템이 아님
     WEAPON, // 무기
     ARMOR, // 방어구
-    ACCE // 장신구(악세)
+    ACCE, // 장신구(악세)
+    SPELL, // 스펠
+    PASSIVE, // 패시브 아이템
+    CURSEDACCE // 저주받은 장신구
 }
 
 [System.Serializable]
@@ -31,7 +35,12 @@ public class ItemProperty : MonoBehaviour
     [SerializeField] protected ItemStat itemStat;
 
     #region GEt함수 아래 함수들을 이용해 필요한 정보들을 얻어갑니다.
-    public Image GetItemIcon()
+
+    public ItemStat GetItemStat()
+    {
+        return this.itemStat;
+    }
+    /*public Image GetItemIcon()
     {
         return this.itemStat.itemIcon;
     }
@@ -52,6 +61,6 @@ public class ItemProperty : MonoBehaviour
     public float GetPlusSpeed()
     {
         return itemStat.PlusSpeed;
-    }
+    }*/
     #endregion
 }
