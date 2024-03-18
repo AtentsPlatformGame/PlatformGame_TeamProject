@@ -18,10 +18,15 @@ public class Monster : BattleSystem
     public float AttackRange; // 공격 사거리
     public float AttackDelay; // 공격 속도
     public float ProjectileSpeed; // 투사체 속도
-    
-    private MonsterState myState = MonsterState.Create;
-    private Transform PlayerTransfrom;
+
+    public float raycastDistance = 1f;
     public LayerMask groundMask;
+
+    private MonsterState myState = MonsterState.Create;
+    private Transform target;
+    private RaycastHit2D hitLeft;
+    private RaycastHit2D hitRight;
+    
     [SerializeField] Vector3 leftLimitPos;
     [SerializeField] Vector3 rightLimitPos;
     [SerializeField] public float MoveSpeed = 3.0f;
@@ -61,7 +66,6 @@ public class Monster : BattleSystem
         switch (myState)
         {
             case MonsterState.Idle:
-                RaycastHit hit; 
                 if (Random.Range(0, 4) == 0)
                 {
                     dir = Vector3.left;
