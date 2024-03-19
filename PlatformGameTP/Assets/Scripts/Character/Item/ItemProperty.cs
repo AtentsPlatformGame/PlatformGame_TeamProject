@@ -20,6 +20,8 @@ public struct ItemStat
 {
     [Header("아이템의 아이콘")]
     [Tooltip("아이템 이미지를 바인딩해주세요")] public Image itemIcon;
+    [Header("아이템 설명 이미지")]
+    [Tooltip("아이템 설명 이미지를 바인딩해주세요")] public Image itemDescriptionImage;
     [Header("아이템의 타입")]
     [Tooltip("아이템의 타입을 결정합니다.")]public ITEMTYPE ItemType; // 아이템 타입
     [Header("아이템(무기)의 공격력")] 
