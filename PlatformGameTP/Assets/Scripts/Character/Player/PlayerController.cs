@@ -261,6 +261,30 @@ public class PlayerController : BattleSystem
     {
 
     }
-
+    public void UpdatePlayerStat(ItemStat _itemStat)
+    {
+        if (_itemStat.ItemType == ITEMTYPE.NONE) return;
+        switch (_itemStat.ItemType)
+        {
+            case ITEMTYPE.WEAPON:
+                if (_itemStat.Ap != 0) this.battleStat.AP = _itemStat.Ap; // 공격력 증가
+                break;
+            case ITEMTYPE.ARMOR:
+                if(!Mathf.Approximately(_itemStat.PlusHeart,0.0f)) this.battleStat.MaxHp = _itemStat.PlusHeart; // 최대 체력 증가
+                break;
+            case ITEMTYPE.ACCE:
+                if (!Mathf.Approximately(_itemStat.PlusSpeed, 0.0f)) this.battleStat.MoveSpeed = _itemStat.PlusSpeed; // 이속 증가
+                break;
+            case ITEMTYPE.PASSIVE:
+                break;
+            case ITEMTYPE.CURSEDACCE:
+                break;
+            case ITEMTYPE.SPELL:
+                break;
+            default:
+                break;
+        }
+        Initialize();
+    }
 
 }

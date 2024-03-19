@@ -125,19 +125,5 @@ public class BattleSystem : CharacterProperty, IDamamge
         return curHp > 0.0f;
     }
 
-    public void UpdatePlayerStat(int _Ap, float _MaxHp, float _MoveSpeed)
-    {
-        if(_Ap != 0)this.battleStat.AP = _Ap;
-        if(!Mathf.Approximately(_MaxHp,0.0f)) this.battleStat.MaxHp = _MaxHp;
-        if (!Mathf.Approximately(_MaxHp, 0.0f)) this.battleStat.MoveSpeed = _MoveSpeed;
-
-        Initialize();
-    }
-
-    public void UpdatePlayerStat(ItemStat _itemStat)
-    {
-        if (_itemStat.Ap != 0) this.battleStat.AP = _itemStat.Ap;
-        Initialize();
-    }
 }
 

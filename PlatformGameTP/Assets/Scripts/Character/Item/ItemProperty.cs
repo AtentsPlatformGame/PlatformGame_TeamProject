@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 스텟에 직접적으로 영향을 주는 무기,방어구,장신구의 정보 저장 스크립트
+// 인벤토리 정보창에 들어갈 아이템 정보 저장 스크립트
 public enum ITEMTYPE
 {
     NONE, // 아이템이 아님
@@ -63,4 +63,10 @@ public class ItemProperty : MonoBehaviour
         return itemStat.PlusSpeed;
     }*/
     #endregion
+
+    #region Set
+    
+
+    #endregion
+
 }

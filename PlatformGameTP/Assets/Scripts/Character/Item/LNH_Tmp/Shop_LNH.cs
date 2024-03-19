@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 
 public class Shop_LNH : MonoBehaviour
 {
-    public UnityEvent<ItemStat> updateStatAct; // 나중에 플레이어 정보를 갱신하기 위해 만든 unityevent
+    public UnityEvent<ItemStat> updateInventoryAct; // 인벤토리 정보를 수정하는 이벤트함수
+
     GameObject itemToBuy;
     /*
      장비 이미지(버튼)를 눌렀을 때, 그 정보(어떤 것을 눌렀는지)를 저장하기 위해 만든 GameObject 변수
@@ -22,7 +23,7 @@ public class Shop_LNH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /*
@@ -39,7 +40,7 @@ public class Shop_LNH : MonoBehaviour
 
     단계별로 수정하기 위해서 2가지 방법이 생각나는데,
     1 : 버튼을 모두 미리 만들어놓고 차례차례 setactive를 true에서 false, false에서 true로 바꿔나가는겁니다
-    
+
     2 : 버튼을 클릭해 구매가 성공했을 시 미리 저장한 단계별 정보들을 가져와 하나의 버튼에 차례차례 갱신해나가는 겁니다.
 
     2중 하나의 방법을 이용해 구매하는 아이템 정보를 수정하면 될 것 같습니다.
@@ -50,11 +51,15 @@ public class Shop_LNH : MonoBehaviour
         ShopItem_LNH shopItme = itemToBuy.GetComponent<ShopItem_LNH>(); // 선택한 아이템이 가지고 있는 스크립트
         if (shopItme != null) // 만약 그 스크립트가 존재한다면
         {
-            ItemStat buyItemStat = shopItme.GetItemStat();
-            updateStatAct?.Invoke(buyItemStat);
-            Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}");
+            ItemStat buyItemStat = shopItme.GetItemStat(); // 아이템스텟을 가져와요
+            updateInventoryAct?.Invoke(buyItemStat); // 인벤토리에 들어있는 아이템을 갱신하는 함수
+            Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}"); // 단순 디버그
+            /*
+             
+             */
         } // 위에서 어떠한 처리를 하면 되겠습니다. 현재는 단순히 정보 출력만 합니다.
-        
-       
+
+
     }
 }
+
