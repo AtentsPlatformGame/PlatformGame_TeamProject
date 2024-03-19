@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class Inventory :ItemProperty
+public class Inventory :MonoBehaviour
 {
     [SerializeField] Transform MyInventory;
     [SerializeField] Transform MyOptions;
-    public Transform MyExplanation;
+    public GameObject MyExplanation;
     public bool checkInventory;
     public bool checkOptions;
     

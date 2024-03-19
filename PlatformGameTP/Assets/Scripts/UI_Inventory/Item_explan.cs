@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+//using UnityEngine.UIElements;
+using UnityEngine.UI;
+
 public class Item_explan : Inventory, IPointerEnterHandler, IPointerExitHandler
 {
     
     public Vector3 MousePos;
+    public Vector3 Vect;
     public bool MouseOverCheck;
     
     public void OnPointerEnter(PointerEventData eventData)
     {
         
         MyExplanation.gameObject.SetActive(true);
-        MyExplanation.position = MousePos;
+        MyExplanation.transform.position = gameObject.transform.position + Vect;
+        MyExplanation.GetComponent<Image>().sprite = this.GetComponent<InventorySlot_LNH>().GetItemStat().itemDescriptionImage;
+
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -22,7 +28,7 @@ public class Item_explan : Inventory, IPointerEnterHandler, IPointerExitHandler
     void Start()
     {
         MouseOverCheck = false;
-        
+        Vect = new Vector3(2, -160 , 0);
        // MyExplanation.gameObject.SetActive(false);
     }
 

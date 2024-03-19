@@ -31,7 +31,7 @@ public class InventorySlot_LNH : ItemProperty
 
     void SetInventorySlot() // 아이템 슬롯의 이미지를 바꿉니다.
     {
-        myImg.sprite = this.itemStat.itemIcon.sprite;
+        myImg.sprite = this.itemStat.itemIcon;
     }
 
     /*
