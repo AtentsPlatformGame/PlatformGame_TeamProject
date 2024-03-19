@@ -40,33 +40,7 @@ public class ItemProperty : MonoBehaviour
     {
         return this.itemStat;
     }
-    /*public Image GetItemIcon()
-    {
-        return this.itemStat.itemIcon;
-    }
-    public ITEMTYPE GetItemType()
-    {
-        return itemStat.ItemType;
-    }
-    public int GetAp()
-    {
-        return itemStat.Ap;
-    }
-
-    public float GetPlusHeart()
-    {
-        return itemStat.PlusHeart;
-    }
-
-    public float GetPlusSpeed()
-    {
-        return itemStat.PlusSpeed;
-    }*/
-    #endregion
-
-    #region Set
-    
-
+   
     #endregion
 
 }
