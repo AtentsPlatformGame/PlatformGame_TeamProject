@@ -15,9 +15,11 @@ public class Life : CharacterProperty
     private int maxlife = 2;
     public Vector3 respawnPoint;
     public Vector3 endPoint;
+    public Vector3 EndObject;
     public GameObject ReStart;
     public GameObject Spawn;
     public int Currentlife;
+    public GameObject End;
 
     // Start is called before the first frame update
     void Start()
@@ -34,28 +36,32 @@ public class Life : CharacterProperty
             playerLife--;
             this.gameDirector.Init(this.playerLife);
             RestartPlayer();
+            Currentlife = playerLife;
         }
-        if(Currentlife <= 0)
+        if(playerLife <= 0)
         {
-            Currentlife = 0;
+            playerLife = 0;
+            Currentlife = playerLife;
+            EndPlayer();
         }
     }
 
-    public void TimeAttack()
+    /*public void TimeAttack()
     {
         if (playerLife <= 0)
         {
             StopAllCoroutines();
         }
     }
+    */
     void RestartPlayer()
     {
         ReStart.transform.position = respawnPoint;
     }
 
-    void End()
+    void EndPlayer()
     {
-        Spawn.transform.position = endPoint;
+        End.transform.position = EndObject;
     }
 
 }
