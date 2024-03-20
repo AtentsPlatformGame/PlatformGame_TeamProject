@@ -6,12 +6,14 @@ using UnityEngine.Events;
 public class PlayerController : BattleSystem
 {
 
-    [SerializeField] float moveSpeed = 4.0f;
-    [SerializeField] float rotSpeed = 1.0f;
-    [SerializeField] float jumpForce = 2.0f;
-    [SerializeField] float jumpCharge = 1.0f;
+    [SerializeField][Header("플레이어 이동 속도")] float moveSpeed = 4.0f;
+    [SerializeField][Header("플레이어 회전 속도")] float rotSpeed = 1.0f;
+    [SerializeField][Header("플레이어 점프 세기")] float jumpForce = 2.0f;
+    [SerializeField][Header("플레이어 스펠 목록")] Transform[] spellObject; // 스펠 어짜피 1개 들고 다니니깐 이거 배열이 아니라 그냥 한개로 수정해야함
+    [SerializeField]
+    [Header("플레이어 2D 이동 방식 토글")] bool controll2D = true;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
-    [SerializeField] Transform[] spellObject;
+    
 
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -47,17 +49,44 @@ public class PlayerController : BattleSystem
     {
         if (isAlive())
         {
-            IsGround();
-            TryJump();
-            Rotate();
-            Move(); // 회전과 동시에 움직이기
-                    //if (canMove) Move(); // 회전이 끝나면 움직이기
+            if (controll2D) // 앞뒤 2방향으로 움직이고 점프하는 코드
+            {
+                IsGround();
+                TryJump();
+                Rotate();
+                Move(); // 회전과 동시에 움직이기
+                        //if (canMove) Move(); // 회전이 끝나면 움직이기
+            }
+            else // 앞뒤, 양옆 4방향으로 움직이는 코드, 점프는 안만듬
+            {
+                //Rotate3D();
+                Move3D();
+            }
         }
     }
+    #region ControllChange
+    public void SwitchControllType2D(bool _type)
+    {
+        controll2D = _type;
+    }
 
+    void Constraints2D()
+    {
+        rigid.constraints = RigidbodyConstraints.None;
+        rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    }
 
+    void Constraints3D()
+    {
+        rigid.constraints = RigidbodyConstraints.None;
+        rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+    }
+    #endregion
+
+    #region MoveOn2D
     void Move()
     {
+        Constraints2D();
         float x = Input.GetAxis("Horizontal");
         Vector3 deltaPos = transform.forward * x * Time.deltaTime * moveSpeed;
 
@@ -81,38 +110,20 @@ public class PlayerController : BattleSystem
 
     void Rotate()
     {
-        /*
-        1. 회전과 동시에 움직이게 하기 : 회전하는걸 보여주는 라인 열어놓고 아래 긴 조건문 닫기
-                                  -> Update에서 적절한 Move사용
-        2. 회전 안보여주기. : 곧바로 방향 전환 라인 열어놓고 아래 긴 조건문 닫고 Update에서 적절한 Move사용
-        3. 회전 후 이동하기 : 회전하는걸 보여줌 < 라인 열어놓고 조건문 열고 Update에서 적절한 Move사용
-        */
+        
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // 오른쪽으로 회전, +
         {
-            //curRotY -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
             curRotY = 0.0f; // 곧바로 방향 전환
             switchTrackedOffset?.Invoke(1); // 
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // 왼쪽으로 회전, -
         {
-            //curRotY += -1 * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime; // 회전하는걸 보여줌
             curRotY = 180.0f; // 곧바로 방향 전환
             switchTrackedOffset?.Invoke(-1);
         }
         curRotY = Mathf.Clamp(curRotY, rotYRange.x, rotYRange.y); // rotYRange안에 값으로 제한됨
         transform.localRotation = Quaternion.Euler(0, curRotY, 0);
 
-        /*
-        // 아래 조건은 한쪽 방향으로 회전이 끝났을때 움직일수 있도록 만든 조건문
-        if (Mathf.Approximately(curRotY, rotYRange.x) || Mathf.Approximately(curRotY, rotYRange.y))
-        {
-            canMove = true;
-        }
-        else
-        {
-            canMove = false;
-        }
-        */
     }
 
     void IsGround()
@@ -153,6 +164,65 @@ public class PlayerController : BattleSystem
 
         rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+    #endregion
+
+    #region MoveOn3D
+    void Move3D()
+    {
+        Constraints3D();
+        float x = Input.GetAxis("Vertical");
+        float y = Input.GetAxis("Horizontal");
+        Vector3 deltaXPos = Vector3.forward * x * Time.deltaTime * moveSpeed;
+        Vector3 deltaYPos = Vector3.right * y * Time.deltaTime * moveSpeed;
+
+        if ((!Mathf.Approximately(x, 0.0f) || !Mathf.Approximately(y, 0.0f)) &&
+            Input.GetKeyDown(KeyCode.LeftShift) && Mathf.Approximately(teleportDeltaTime, 0.0f)) // 텔레포트, 추후 쿨타임 추가 예정
+        {
+            teleportDelay = StartCoroutine(CoolingTelePort());
+            deltaXPos += deltaXPos.normalized * 1.5f;
+            deltaYPos += deltaYPos.normalized * 1.5f;
+            if (Physics.Raycast(new Ray(transform.position + new Vector3(0.0f, 0.5f, 0.0f), transform.forward), out RaycastHit hit,
+                1.5f, groundMask))
+            {
+                Debug.Log("벽에 막힘");
+                deltaXPos = deltaXPos.normalized * hit.distance;
+                deltaYPos = deltaYPos.normalized * hit.distance;
+            }
+        }
+
+        transform.Translate(deltaXPos + deltaYPos); // 앞뒤 이동.
+        myAnim.SetFloat("Speed", Mathf.Abs(x));
+
+    }
+
+    void Rotate3D()
+    { // 월드 기준으로 회전한다.
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) // 월드 상 앞을 본다
+        {
+
+        }
+
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))// 월드 상 뒤를 본다
+        {
+
+        }
+
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // 월드 상 오른쪽을 본다
+        {
+            curRotY -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+            
+        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // 월드 상 왼쪽을 본다
+        {
+            curRotY += -1 * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+            
+        }
+        //curRotY = Mathf.Clamp(curRotY, rotYRange.x, rotYRange.y); // rotYRange안에 값으로 제한됨
+        transform.localRotation = Quaternion.Euler(0, curRotY, 0);
+
+        
+    }
+    #endregion
 
     // 이 아래부턴 나중에 스크립트 분리할 수도 있음
     protected void Attack() // 공격 함수, 정면을 정확히 바라볼때만 공격 가능
