@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory :MonoBehaviour
 {
     [SerializeField] Transform MyInventory;
     [SerializeField] Transform MyOptions;
+
     public GameObject MyExplanation;
     public bool checkInventory;
     public bool checkOptions;
@@ -70,6 +72,7 @@ public class Inventory :MonoBehaviour
             }
         }
 
+     
 
     }
 
@@ -82,6 +85,7 @@ public class Inventory :MonoBehaviour
         popup.gameObject.SetActive(false);
 
     }
+
 
 }
 
