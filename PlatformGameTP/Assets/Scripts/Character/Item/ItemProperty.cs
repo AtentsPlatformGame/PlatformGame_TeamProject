@@ -25,7 +25,7 @@ public struct ItemStat
     [Header("아이템의 타입")]
     [Tooltip("아이템의 타입을 결정합니다.")]public ITEMTYPE ItemType; // 아이템 타입
     [Header("아이템(무기)의 공격력")] 
-    [Tooltip("무기의 공격력을 결정합니다.")] public int Ap; // 공격력(무기)
+    [Tooltip("무기의 공격력을 결정합니다.")] public float Ap; // 공격력(무기)
     [Header("아이템(방어구)의 추가 체력")] 
     [Tooltip("방어구 추가 체력 개수를 결정합니다.")] public float PlusHeart; // 추가 체력(방어구)
     [Header("아이템(장신구)의 추가 이속")] 

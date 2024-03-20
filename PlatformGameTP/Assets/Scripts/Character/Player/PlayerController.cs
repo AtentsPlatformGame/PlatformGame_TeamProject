@@ -23,7 +23,7 @@ public class PlayerController : BattleSystem
     public bool isSpellReady = false;
 
     float curRotY;
-    int ap;
+    float ap;
     bool isGround;
     float attackDeltaTime = 0.0f;
     float teleportDeltaTime = 0.0f;

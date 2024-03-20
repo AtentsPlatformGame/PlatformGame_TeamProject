@@ -6,7 +6,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public struct BattleStat
 {
-    public int AP; // 공격력
+    public float AP; // 공격력
     public float MaxHp; // 최대 체력
     public float AttackRange; // 공격 사거리
     public float AttackDelay; // 공격 속도
@@ -16,7 +16,7 @@ public struct BattleStat
 
 public interface IDamamge
 {
-    void TakeDamage(int _dmg);
+    void TakeDamage(float _dmg);
 }
 
 public class BattleSystem : CharacterProperty, IDamamge
@@ -45,7 +45,7 @@ public class BattleSystem : CharacterProperty, IDamamge
         }
     }
     #region get,set
-    public int GetAp()
+    public float GetAp()
     {
         return this.battleStat.AP;
     }
@@ -72,7 +72,7 @@ public class BattleSystem : CharacterProperty, IDamamge
         curHp = battleStat.MaxHp;
     }
     
-    public void TakeDamage(int _dmg)
+    public void TakeDamage(float _dmg)
     {
         curHp -= _dmg;
         Debug.Log(curHp);

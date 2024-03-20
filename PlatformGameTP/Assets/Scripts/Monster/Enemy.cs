@@ -74,7 +74,7 @@ public class Enemy : BattleSystem
         lastAttackTime = Time.time;
         
     }
-    public new void TakeDamage(int dmg)
+    public new void TakeDamage(float dmg)
     {
         
         base.TakeDamage(dmg);

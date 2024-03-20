@@ -12,7 +12,7 @@ public class Fireball : MonoBehaviour
     public UnityEvent getApAct;
     public GameObject explosionVFX;
     bool isFire = false;
-    int dmg = 1;
+    float dmg = 0.5f;
     float attackRange;
     
     Vector3 oldPos;
@@ -59,7 +59,7 @@ public class Fireball : MonoBehaviour
         }
     }
     #region get, set
-    public void SetFireBallAP(int _dmg)
+    public void SetFireBallAP(float _dmg)
     {
         this.dmg = _dmg;
     }
