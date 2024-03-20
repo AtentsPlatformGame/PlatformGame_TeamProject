@@ -105,7 +105,7 @@ public class PlayerController : BattleSystem
 
         transform.Translate(deltaPos); // 앞뒤 이동.
         transform.position = new Vector3(0, transform.position.y, transform.position.z);
-        myAnim.SetFloat("Speed", Mathf.Abs(x));
+        myAnim.SetFloat("SpeedX", Mathf.Abs(x));
 
     }
 
@@ -192,13 +192,13 @@ public class PlayerController : BattleSystem
         }
 
         transform.Translate(deltaXPos + deltaYPos, Space.World); // 앞뒤 이동.
-        myAnim.SetFloat("Speed", Mathf.Abs(x));
-
+        myAnim.SetFloat("SpeedX", Mathf.Abs(x));
+        myAnim.SetFloat("SpeedY", Mathf.Abs(y));
     }
 
     void Rotate3D()
     { // 월드 기준으로 회전한다.
-
+        /*
         #region 노가다 형식의 8방향 회전
         Vector3 dir = Vector3.zero;
         // 아래 임시 회전 코드, 나중에 싹다 갈아 엎을거임
@@ -257,8 +257,12 @@ public class PlayerController : BattleSystem
             rotating = StartCoroutine(Rotating(dir));
         }
         #endregion
+        */
+        float x = Input.GetAxis("Vertical");
+        float y = Input.GetAxis("Horizontal");
 
-
+        Vector3 rotDir = new Vector3(y, 0, x);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * rotSpeed);
     }
 
     IEnumerator Rotating(Vector3 dir)
