@@ -11,13 +11,29 @@ namespace LGH
     {
         public UnityEvent<ItemStat> updateStatAct;
         GameObject itemToBuy;
+
+        public GameObject shopUI;
+
+        private void Start()
+        {
+            if (shopUI != null)
+            {
+                shopUI.SetActive(false);
+            }
+        }
+
+        void BuyItem()
+        {
+
+        }
+
         public void OnPurchase()
         {
             itemToBuy = EventSystem.current.currentSelectedGameObject; // 선택한 아이템 정보
-            ShopItem_LNH shopItme = itemToBuy.GetComponent<ShopItem_LNH>(); // 선택한 아이템이 가지고 있는 스크립트
-            if (shopItme != null) // 만약 그 스크립트가 존재한다면
+            ShopItem_LNH shopItem = itemToBuy.GetComponent<ShopItem_LNH>(); // 선택한 아이템이 가지고 있는 스크립트
+            if (shopItem != null) // 만약 그 스크립트가 존재한다면
             {
-                ItemStat buyItemStat = shopItme.GetItemStat();
+                ItemStat buyItemStat = shopItem.GetItemStat();
                 updateStatAct?.Invoke(buyItemStat);
                 Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}");
             } // 위에서 어떠한 처리를 하면 되겠습니다. 현재는 단순히 정보 출력만 합니다.
