@@ -32,6 +32,7 @@ public class PlayerController : BattleSystem
     Fireball fireBall;
     Coroutine attackDelay;
     Coroutine teleportDelay;
+    Coroutine rotating;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -59,7 +60,7 @@ public class PlayerController : BattleSystem
             }
             else // 앞뒤, 양옆 4방향으로 움직이는 코드, 점프는 안만듬
             {
-                //Rotate3D();
+                Rotate3D();
                 Move3D();
             }
         }
@@ -73,7 +74,7 @@ public class PlayerController : BattleSystem
     void Constraints2D()
     {
         rigid.constraints = RigidbodyConstraints.None;
-        rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rigid.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
     void Constraints3D()
@@ -190,37 +191,96 @@ public class PlayerController : BattleSystem
             }
         }
 
-        transform.Translate(deltaXPos + deltaYPos); // 앞뒤 이동.
+        transform.Translate(deltaXPos + deltaYPos, Space.World); // 앞뒤 이동.
         myAnim.SetFloat("Speed", Mathf.Abs(x));
 
     }
 
     void Rotate3D()
     { // 월드 기준으로 회전한다.
+
+        #region 노가다 형식의 8방향 회전
+        Vector3 dir = Vector3.zero;
+        // 아래 임시 회전 코드, 나중에 싹다 갈아 엎을거임
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) // 월드 상 앞을 본다
         {
-
+            dir = Vector3.forward;
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))// 월드 상 뒤를 본다
         {
-
+            dir = Vector3.back;
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // 월드 상 오른쪽을 본다
         {
-            curRotY -= Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
-            
+            dir = Vector3.right;
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // 월드 상 왼쪽을 본다
         {
-            curRotY += -1 * Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
-            
+            dir = Vector3.left;
         }
-        //curRotY = Mathf.Clamp(curRotY, rotYRange.x, rotYRange.y); // rotYRange안에 값으로 제한됨
-        transform.localRotation = Quaternion.Euler(0, curRotY, 0);
 
-        
+        if((Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)) ||
+            (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))) // 월드상 좌측 앞을 본다
+        {
+            dir = Vector3.forward + Vector3.left;
+        }
+
+        if ((Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)) ||
+            (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))) // 월드상 우측 앞을 본다
+        {
+            dir = Vector3.forward + Vector3.right;
+        }
+
+        if ((Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A)) ||
+            (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))) // 월드상 좌측 뒤를 본다
+        {
+            dir = Vector3.back + Vector3.left;
+        }
+
+        if ((Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)) ||
+            (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))) // 월드상 좌측 뒤를 본다
+        {
+            dir = Vector3.back + Vector3.right;
+        }
+
+
+
+        if (rotating != null)
+        {
+            StopCoroutine(rotating);
+            rotating = null;
+        }
+        else
+        {
+            rotating = StartCoroutine(Rotating(dir));
+        }
+        #endregion
+
+
+    }
+
+    IEnumerator Rotating(Vector3 dir)
+    {
+        float angle = Vector3.Angle(transform.forward, dir);
+        float rotDir = 1.0f;
+        if (Vector3.Dot(transform.right, dir) < 0.0f)
+        {
+            rotDir = -1.0f;
+        }
+
+        while (!Mathf.Approximately(angle, 0.0f))
+        {
+            float delta = rotSpeed * Time.deltaTime;
+            if (delta > angle)
+            {
+                delta = angle;
+            }
+            angle -= delta;
+            transform.Rotate(Vector3.up * rotDir * delta);
+            yield return null;
+        }
     }
     #endregion
 
@@ -240,15 +300,16 @@ public class PlayerController : BattleSystem
         {
             return;
         }
-
-        float angle_F = Vector3.Angle(transform.forward, Vector3.forward); // -> 방향을 볼때 0, 반대는 180
-        float angle_B = Vector3.Angle(transform.forward, Vector3.back); // -> 방향을 볼때 0, 반대는 180
-        Debug.Log(angle_F);
-        Debug.Log(angle_B);
-        if (Mathf.Approximately(angle_F, 0.0f) || Mathf.Approximately(angle_F, 180.0f))
+        if (controll2D)
+        {
+            float angle_F = Vector3.Angle(transform.forward, Vector3.forward); // -> 방향을 볼때 0, 반대는 180
+            if (Mathf.Approximately(angle_F, 0.0f) || Mathf.Approximately(angle_F, 180.0f))
+                myAnim.SetTrigger("Attack");
+        }
+        else
+        {
             myAnim.SetTrigger("Attack");
-
-        Debug.Log(Camera.main.ScreenPointToRay(Input.mousePosition));
+        }
     }
 
     public new void OnAttack()
