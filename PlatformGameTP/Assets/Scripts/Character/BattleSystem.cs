@@ -16,7 +16,7 @@ public struct BattleStat
 
 public interface IDamamge
 {
-    void TakeDamage(float _dmg);
+    void TakeDamage(int _dmg);
 }
 
 public class BattleSystem : CharacterProperty, IDamamge
@@ -72,7 +72,7 @@ public class BattleSystem : CharacterProperty, IDamamge
         curHp = battleStat.MaxHp;
     }
     
-    public void TakeDamage(float _dmg)
+    public void TakeDamage(int _dmg)
     {
         curHp -= _dmg;
         Debug.Log(curHp);

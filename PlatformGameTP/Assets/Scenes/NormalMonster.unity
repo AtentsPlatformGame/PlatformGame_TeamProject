@@ -199,6 +199,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.0000011920929
       objectReference: {fileID: 0}
+    - target: {fileID: 9073689830263766897, guid: e71b47825a53d3c4f8dbdf89e5904821, type: 3}
+      propertyPath: orgPos
+      value: 
+      objectReference: {fileID: 1843360879}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -216,7 +220,7 @@ GameObject:
   - component: {fileID: 136617182}
   - component: {fileID: 136617185}
   - component: {fileID: 136617180}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,10 +240,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleStat:
-    AP: 0
-    MaxHp: 0
-    AttackRange: 0
-    AttackDelay: 0
+    AP: 1
+    MaxHp: 1
+    AttackRange: 2
+    AttackDelay: 2
     ProjectileSpeed: 0
     MoveSpeed: 0
   player: {fileID: 1843360879}
@@ -249,11 +253,12 @@ MonoBehaviour:
   attackRange: 2
   returnSpeed: 2
   deathDelay: 2
-  MonsterHP: 5
+  MonsterHP: 10
   myanim: {fileID: 566724777}
   groundLayer:
     serializedVersion: 2
     m_Bits: 262144
+  curtHP: -0.18
 --- !u!135 &136617182
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -274,7 +279,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 1.32, z: 0}
 --- !u!4 &136617183
 Transform:
   m_ObjectHideFlags: 0
@@ -284,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 136617179}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.022677422, y: 0.92, z: -6.89}
+  m_LocalPosition: {x: -0.022677422, y: -0.03, z: -4.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -419,7 +424,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0.37}
-  m_LocalScale: {x: 20, y: 1, z: 3}
+  m_LocalScale: {x: 50, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

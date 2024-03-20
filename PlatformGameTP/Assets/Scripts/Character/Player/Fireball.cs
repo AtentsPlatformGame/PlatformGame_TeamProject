@@ -38,7 +38,7 @@ public class Fireball : MonoBehaviour
             //Effect
             //Instantiate(orgEffect, hit.point, Quaternion.identity);
             //hit.point;
-            BattleSystem bs = hit.transform.GetComponent<BattleSystem>();
+            Enemy bs = hit.transform.GetComponent<Enemy>();
             if(bs != null)
             {
                 //float dmg = getApAct?.Invoke();

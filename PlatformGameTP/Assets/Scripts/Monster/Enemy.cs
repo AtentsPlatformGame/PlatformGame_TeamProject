@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class Enemy : BattleSystem
 {
     public enum State
     {
-        Create, Normal, Battle, Death
+        Create, Normal, Roaming, Battle, Death
     }
-
     public Transform player;
     public float detectionRange = 4f; //몬스터가 플레이어를 감지하는 영역
     public float moveSpeed = 1f; // 몬스터 스피드
@@ -20,11 +20,11 @@ public class Enemy : BattleSystem
     public float MonsterHP = 5f; //몬스터 체력
     public Animator myanim;
     public LayerMask groundLayer;
+   
 
-    private float curtHP;
+    [SerializeField] float curtHP;
     private bool isChasing = false;
     private bool isAttacking = false;
-    private bool isBattle = false;
     private Vector3 startPosition;
     private float lastAttackTime = 0f;
 
@@ -32,7 +32,9 @@ public class Enemy : BattleSystem
     {
         startPosition = transform.position;
         curtHP = MonsterHP;
+        Initialize();
     }
+    
     private void Update()
     {
         if (player == null)
@@ -64,8 +66,6 @@ public class Enemy : BattleSystem
                 }
                 myanim.SetBool("Ismoving", false);
             }
-        
-       
     }
     private void Battle()
     {
@@ -74,26 +74,43 @@ public class Enemy : BattleSystem
         lastAttackTime = Time.time;
         
     }
-    public void TakeDamage(int damage)
+    public new void TakeDamage(int dmg)
     {
-        curtHP -= damage;
-        myanim.SetTrigger("Damage");
-        // 몬스터가 더이상 데미지를 받을 수 없을때 사망
-        if (curtHP <= 0)
+        
+        base.TakeDamage(dmg);
+        if(curHp <= 0) // 죽었다.
         {
-            Die();
-            myanim.SetTrigger("Die");
-        }
-        else
-        {
-            myanim.SetTrigger("Damage");
+            // 땅으로 사라진다.
+            Debug.Log("죽음 실행");
+            Destroy(gameObject, deathDelay);
+            DisApear();
+           
         }
     }
     public void Die()
     {
-        // 몬스터 사망시 애니메이션 추가
         myanim.SetTrigger("Die");
         Destroy(gameObject, deathDelay);
+    }
+    public void DisApear()
+    {
+        StartCoroutine(DisApearing(2.0f));
+    }
+    IEnumerator DisApearing(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Destroy(gameObject);
+
+        float dist = 2.0f;
+        while (dist > 0.0f)
+        {
+            float delta = 0.5f * Time.deltaTime;
+            dist -= delta;
+            transform.Translate(Vector3.down * delta, Space.World);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
     private void FixedUpdate()
     {
