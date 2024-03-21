@@ -33,13 +33,11 @@ public class ShopNPC : MonoBehaviour
             }
         }
     }
-
     void OpenShop()
     {
         shopUI.SetActive(true);
         isShop = true;
     }
-
     void CloseShop()
     {
         shopUI.SetActive(false);
