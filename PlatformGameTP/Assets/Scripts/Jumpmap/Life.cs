@@ -9,21 +9,29 @@ using UnityEngine.UI;
 
 public class Life : CharacterProperty
 {
-    public int playerLife = 2;
-    public GameDirector gameDirector;
-    public Transform transform;
-    private int maxlife = 2;
+    [SerializeField] GameObject countDown;
+    [SerializeField] GameObject countDown2;
+    public GameObject ReStart;
+    public GameObject End;
+
+    private Event settime;
+
     public Vector3 respawnPoint;
     public Vector3 endPoint;
     public Vector3 EndObject;
-    public GameObject ReStart;
-    public GameObject Spawn;
+
+    public GameDirector gameDirector;
+    public Transform transform;
+
+    public int playerLife = 2;
     public int Currentlife;
-    public GameObject End;
+    float originTime;
+    Countdown time;
 
     // Start is called before the first frame update
     void Start()
     {
+        time = FindObjectOfType<Countdown>();
         Currentlife = playerLife;
         this.gameDirector.Init(this.playerLife);
     }
@@ -33,27 +41,25 @@ public class Life : CharacterProperty
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            playerLife--;
-            this.gameDirector.Init(this.playerLife);
+            Currentlife--;
+            this.gameDirector.Init(this.Currentlife);
             RestartPlayer();
-            Currentlife = playerLife;
         }
-        if(playerLife <= 0)
+        if(Currentlife <= 0)
         {
-            playerLife = 0;
-            Currentlife = playerLife;
+            Currentlife = 0;
             EndPlayer();
+            countDown.SetActive(false);
+            time.SetTime();
+
+            /* 라이프가 0일때 점프맵이 종료되면서 전맵으로 이동한다.
+             * 전맵으로 이동하고 나서도 시간을 갱신해야한다.
+             * 현재 반복중.
+             */
         }
+
     }
 
-    /*public void TimeAttack()
-    {
-        if (playerLife <= 0)
-        {
-            StopAllCoroutines();
-        }
-    }
-    */
     void RestartPlayer()
     {
         ReStart.transform.position = respawnPoint;
@@ -62,6 +68,13 @@ public class Life : CharacterProperty
     void EndPlayer()
     {
         End.transform.position = EndObject;
+    }
+
+     public void Time()
+    {
+        Currentlife--;
+        this.gameDirector.Init(this.Currentlife);
+        RestartPlayer();
     }
 
 }
