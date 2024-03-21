@@ -12,14 +12,16 @@ public class Enemy : BattleSystem
     }
     public Transform player;
     public float detectionRange = 4f; //몬스터가 플레이어를 감지하는 영역
-    public float moveSpeed = 1f; // 몬스터 스피드
+    public float moveSpeed = 3f; // 몬스터 스피드
     public float attackCooldown = 5f; // 몬스터 공격 딜레이
-    public float attackRange = 2f;// 몬스터의 공격 범위
+    public float attackRange = 4f;// 몬스터의 공격 범위
     public float returnSpeed = 2f; // 몬스터가 제자리로 복귀하는 속도
     public float deathDelay = 2f; // 몬스터가 죽어서 사라지는 시간
     public float MonsterHP = 5f; //몬스터 체력
+    public float rotationSpeed = 360f;
     public Animator myanim;
     public LayerMask groundLayer;
+   
    
 
     [SerializeField] float curtHP;
@@ -27,6 +29,7 @@ public class Enemy : BattleSystem
     private bool isAttacking = false;
     private Vector3 startPosition;
     private float lastAttackTime = 0f;
+    [SerializeField]private bool isDead = false; //몬스터가 죽었는지 여부를 나타내는 변수
 
     private void Start()
     {
@@ -37,60 +40,84 @@ public class Enemy : BattleSystem
     
     private void Update()
     {
-        if (player == null)
+        if (isDead || player == null)
             return;
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer <= detectionRange)
+        if ( distanceToPlayer <= detectionRange)
         {
             isChasing = true;
             myanim.SetBool("Ismoving", true);
             transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-            if (distanceToPlayer < 1.0f) 
+            if (distanceToPlayer < 1.0f)
             {
                 Battle();
                 if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
                 {
                     // 플레이어가 공격 범위 내에 있고, 공격 쿨다운이 지난 경우
                     Battle();
+
                 }
             }
+            
         }
-            if (distanceToPlayer > detectionRange)
-            {
-                //플레이어가 몬스터의 영역을 벗어나면 몬스터가 시작위치로 복귀
-                transform.position = Vector3.MoveTowards(transform.position, startPosition, returnSpeed * Time.deltaTime);
+        else
 
-                if (transform.position == startPosition)
-                {
-                    isChasing = false;
-                }
+        {
+            // 플레이어가 몬스터의 영역을 벗어나면 몬스터가 시작 위치로 복귀
+            Vector3 directionToStart = (startPosition - transform.position).normalized;
+
+            // 몬스터가 시작 위치를 바라보도록 회전
+            Quaternion targetRotation = Quaternion.LookRotation(directionToStart);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+            // 회전이 완료되면 제자리로 이동
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, startPosition, returnSpeed * Time.deltaTime);
+            }
+            if (Vector3.Distance(transform.position, startPosition) < 0.1f)
+            {
+                isChasing = false;
                 myanim.SetBool("Ismoving", false);
             }
+
+        }
     }
     private void Battle()
     {
-        isAttacking = true;
-        myanim.SetTrigger("Attack");
-        lastAttackTime = Time.time;
-        
+        if (curHp > 0)
+        {
+            isAttacking = true;
+            myanim.SetTrigger("Attack");
+            lastAttackTime = Time.time;
+        }
+        else
+        {
+            // 몬스터가 이미 죽었으면 추적을 멈춤
+            isDead = true;
+            isChasing = false;
+        }
+
     }
     public new void TakeDamage(float dmg)
     {
         
         base.TakeDamage(dmg);
-        if(curHp <= 0) // 죽었다.
+        if(curHp <= 0 && !isDead) // 죽음
         {
             // 땅으로 사라진다.
             Debug.Log("죽음 실행");
-            Destroy(gameObject, deathDelay);
-            DisApear();
-           
+            Die();
         }
     }
     public void Die()
     {
         myanim.SetTrigger("Die");
+        //사라지기전에 추적을 멈춤
+        isDead = true;
         Destroy(gameObject, deathDelay);
+        
     }
     public void DisApear()
     {
