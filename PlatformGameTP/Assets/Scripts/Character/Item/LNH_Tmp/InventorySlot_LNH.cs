@@ -8,7 +8,7 @@ public class InventorySlot_LNH : ItemProperty
     int slotNumber;
     Image myImg;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         myImg = GetComponent<Image>(); // 아이템 아이콘 이미지
         slotNumber = GetSlotNumber(); // 자신이 부모로부터 몇번째 자식인지 나타내는 정수
@@ -53,3 +53,5 @@ public class InventorySlot_LNH : ItemProperty
         return cnt;
     }
 }
+
+
