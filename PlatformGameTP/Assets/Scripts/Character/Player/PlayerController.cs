@@ -9,7 +9,7 @@ public class PlayerController : BattleSystem
     [SerializeField][Header("플레이어 이동 속도")] float moveSpeed = 4.0f;
     [SerializeField][Header("플레이어 회전 속도")] float rotSpeed = 1.0f;
     [SerializeField][Header("플레이어 점프 세기")] float jumpForce = 2.0f;
-    [SerializeField][Header("플레이어 스펠 목록")] Transform[] spellObject; // 스펠 어짜피 1개 들고 다니니깐 이거 배열이 아니라 그냥 한개로 수정해야함
+    [SerializeField][Header("플레이어 스펠")] Transform spellObject; // 스펠 어짜피 1개 들고 다니니깐 이거 배열이 아니라 그냥 한개로 수정해야함
     [SerializeField]
     [Header("플레이어 2D 이동 방식 토글")] bool controll2D = true;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
@@ -20,7 +20,11 @@ public class PlayerController : BattleSystem
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
+    public UnityEvent changeCamera2D;
+    public UnityEvent changeCameraTopView;
+    public UnityEvent<bool> changeCamera3D;
     public bool isSpellReady = false;
+    public bool is3d = true;
 
     float curRotY;
     float ap;
@@ -69,6 +73,19 @@ public class PlayerController : BattleSystem
     public void SwitchControllType2D(bool _type)
     {
         controll2D = _type;
+        if (controll2D)
+        {
+            Constraints2D();
+            // 2D 카메라 시점 변경 함수 호출
+            changeCamera2D?.Invoke();
+        }
+        else
+        {
+            Constraints3D();
+            // 3D 카메라 시점 변경 함수 호출
+            if(is3d)changeCamera3D?.Invoke(is3d);
+            else changeCameraTopView?.Invoke();
+        }
     }
 
     void Constraints2D()
@@ -262,6 +279,7 @@ public class PlayerController : BattleSystem
         float y = Input.GetAxis("Horizontal");
 
         Vector3 rotDir = new Vector3(y, 0, x);
+        if(!Mathf.Approximately(x,0.0f) || !Mathf.Approximately(y, 0.0f))
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * rotSpeed);
     }
 
@@ -360,19 +378,13 @@ public class PlayerController : BattleSystem
 
     public void UsingSpell(Vector3 spellPoint) // 여기서 스펠을 사용한다.
     {
-        if (spellObject[0] != null)
+        if (spellObject != null)
         {
             myAnim.SetTrigger("UseSpell");
-            if (spellObject[0].gameObject.tag == "AttackSpell")Instantiate(spellObject[0], new Vector3(0, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
-            else Instantiate(spellObject[0],this.transform);
-            spellObject[0] = null;
+            if (spellObject.gameObject.tag == "AttackSpell")Instantiate(spellObject, new Vector3(0, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
+            else Instantiate(spellObject,this.transform);
+            spellObject = null;
 
-            if (spellObject[1] != null)
-            {
-                spellObject[0] = spellObject[1];
-                spellObject[1] = null;
-            }
-            
         }
         
     }
@@ -384,7 +396,7 @@ public class PlayerController : BattleSystem
 
     public Transform GetCurrentSpell()
     {
-        return this.spellObject[0];
+        return this.spellObject;
     }
 
     public void HealBuff()
