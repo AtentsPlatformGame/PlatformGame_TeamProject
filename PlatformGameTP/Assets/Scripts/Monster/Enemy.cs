@@ -28,14 +28,14 @@ public class Enemy : BattleSystem
     private bool isChasing = false;
     private bool isAttacking = false;
     private Vector3 startPosition;
-    private float lastAttackTime = 0f;
+    private float lastAttackTime = 1f;
     [SerializeField]private bool isDead = false; //몬스터가 죽었는지 여부를 나타내는 변수
 
     private void Start()
     {
         startPosition = transform.position;
         curtHP = MonsterHP;
-        Initialize();
+        base.Initialize();
     }
     
     private void Update()
@@ -102,9 +102,11 @@ public class Enemy : BattleSystem
     }
     public new void TakeDamage(float dmg)
     {
-        
+
         base.TakeDamage(dmg);
-        if(curHp <= 0 && !isDead) // 죽음
+        
+
+        if (curHp <= 0 && !isDead) // 죽음
         {
             // 땅으로 사라진다.
             Debug.Log("죽음 실행");
