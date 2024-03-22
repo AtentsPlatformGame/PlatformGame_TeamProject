@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class Tmp_deleteLater : MonoBehaviour
 {
-    public UnityEvent<bool> changeCamera;
-    public UnityEvent<bool> tmpC;
-    bool toggle = true;
+    public UnityEvent change2D;
+    public UnityEvent change3D;
+    public UnityEvent changeTV;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,18 +19,17 @@ public class Tmp_deleteLater : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            changeCamera?.Invoke(true);
+            change2D?.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            changeCamera?.Invoke(false);
+            change3D?.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            tmpC?.Invoke(toggle);
-            toggle = !toggle;
+            changeTV?.Invoke();
         }
     }
 }

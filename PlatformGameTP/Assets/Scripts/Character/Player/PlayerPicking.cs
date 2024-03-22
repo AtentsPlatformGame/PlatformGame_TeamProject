@@ -51,6 +51,7 @@ public class PlayerPicking : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1))
             {
+                if (playerController.GetCurrentSpell() == null) return;
                 Debug.Log("스펠 사용 준비");
                 spellReadyAct?.Invoke(true);
                 // 이때부터 사정거리를 표시해야함
@@ -67,14 +68,11 @@ public class PlayerPicking : MonoBehaviour
         }
         else // 스펠 사용 준비 후
         {
-
-            //DrawSpellPoint();
+            // 2D 컨트롤 때 스펠 그리기
             DrawSpell(attackSpellPointImg);
 
             if (Input.GetMouseButtonDown(0)) // 스펠 사용
             {
-                
-                
                 Debug.Log("스펠 사용");
                 //SpellCanvasEnabled(false);
                 //playerController.ResetSpellTrigger();
@@ -132,8 +130,19 @@ public class PlayerPicking : MonoBehaviour
         distance = Mathf.Min(distance, spellMaxRange);
 
         newHitPoint = transform.position + hitDir * distance;
-        _spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
+        // 2D일때
+        if (playerController.GetControllType())
+        {
+            _spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
+        }
+        else
+        {
+            _spellPointImg.transform.position = new Vector3(newHitPoint.x, newHitPoint.y + 0.1f, newHitPoint.z);
+        }
+        
     }
 
    
+
+
 }

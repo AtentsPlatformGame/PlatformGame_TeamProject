@@ -20,9 +20,7 @@ public class PlayerController : BattleSystem
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
-    public UnityEvent changeCamera2D;
-    public UnityEvent changeCameraTopView;
-    public UnityEvent<bool> changeCamera3D;
+    
     public bool isSpellReady = false;
     public bool is3d = true;
 
@@ -64,7 +62,7 @@ public class PlayerController : BattleSystem
             }
             else // 앞뒤, 양옆 4방향으로 움직이는 코드, 점프는 안만듬
             {
-                Rotate3D();
+               // Rotate3D();
                 Move3D();
             }
         }
@@ -76,15 +74,12 @@ public class PlayerController : BattleSystem
         if (controll2D)
         {
             Constraints2D();
-            // 2D 카메라 시점 변경 함수 호출
-            changeCamera2D?.Invoke();
+            
         }
         else
         {
             Constraints3D();
-            // 3D 카메라 시점 변경 함수 호출
-            if(is3d)changeCamera3D?.Invoke(is3d);
-            else changeCameraTopView?.Invoke();
+            
         }
     }
 
@@ -208,79 +203,18 @@ public class PlayerController : BattleSystem
             }
         }
 
-        transform.Translate(deltaXPos + deltaYPos, Space.World); // 앞뒤 이동.
+        transform.Translate(deltaXPos + deltaYPos, Space.World);
         myAnim.SetFloat("SpeedX", Mathf.Abs(x));
         myAnim.SetFloat("SpeedY", Mathf.Abs(y));
+        Rotate3D(x, y);
     }
 
-    void Rotate3D()
-    { // 월드 기준으로 회전한다.
-        /*
-        #region 노가다 형식의 8방향 회전
-        Vector3 dir = Vector3.zero;
-        // 아래 임시 회전 코드, 나중에 싹다 갈아 엎을거임
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) // 월드 상 앞을 본다
-        {
-            dir = Vector3.forward;
-        }
-
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))// 월드 상 뒤를 본다
-        {
-            dir = Vector3.back;
-        }
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // 월드 상 오른쪽을 본다
-        {
-            dir = Vector3.right;
-        }
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // 월드 상 왼쪽을 본다
-        {
-            dir = Vector3.left;
-        }
-
-        if((Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)) ||
-            (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))) // 월드상 좌측 앞을 본다
-        {
-            dir = Vector3.forward + Vector3.left;
-        }
-
-        if ((Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)) ||
-            (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))) // 월드상 우측 앞을 본다
-        {
-            dir = Vector3.forward + Vector3.right;
-        }
-
-        if ((Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A)) ||
-            (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))) // 월드상 좌측 뒤를 본다
-        {
-            dir = Vector3.back + Vector3.left;
-        }
-
-        if ((Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D)) ||
-            (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))) // 월드상 좌측 뒤를 본다
-        {
-            dir = Vector3.back + Vector3.right;
-        }
-
-
-
-        if (rotating != null)
-        {
-            StopCoroutine(rotating);
-            rotating = null;
-        }
-        else
-        {
-            rotating = StartCoroutine(Rotating(dir));
-        }
-        #endregion
-        */
-        float x = Input.GetAxis("Vertical");
-        float y = Input.GetAxis("Horizontal");
-
-        Vector3 rotDir = new Vector3(y, 0, x);
-        if(!Mathf.Approximately(x,0.0f) || !Mathf.Approximately(y, 0.0f))
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir), Time.deltaTime * rotSpeed);
+    void Rotate3D(float x, float y)
+    { 
+        // 월드 기준으로 회전한다.
+        Vector3 lookDir = new Vector3(y, 0, x);
+        if (!Mathf.Approximately(x, 0.0f) || !Mathf.Approximately(y, 0.0f))
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * rotSpeed);
     }
 
     IEnumerator Rotating(Vector3 dir)
@@ -381,8 +315,18 @@ public class PlayerController : BattleSystem
         if (spellObject != null)
         {
             myAnim.SetTrigger("UseSpell");
-            if (spellObject.gameObject.tag == "AttackSpell")Instantiate(spellObject, new Vector3(0, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
-            else Instantiate(spellObject,this.transform);
+            if (spellObject.gameObject.tag == "AttackSpell")
+            {
+                if (controll2D)
+                {
+                    Instantiate(spellObject, new Vector3(0.0f, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(spellObject, new Vector3(spellPoint.x, spellPoint.y + 0.1f, spellPoint.z), Quaternion.identity);
+                }
+            }
+            else Instantiate(spellObject, this.transform);
             spellObject = null;
 
         }
@@ -427,11 +371,18 @@ public class PlayerController : BattleSystem
             case ITEMTYPE.CURSEDACCE:
                 break;
             case ITEMTYPE.SPELL:
+                
                 break;
             default:
                 break;
         }
         Initialize();
     }
+
+    public bool GetControllType()
+    {
+        return this.controll2D;
+    }
+
 
 }
