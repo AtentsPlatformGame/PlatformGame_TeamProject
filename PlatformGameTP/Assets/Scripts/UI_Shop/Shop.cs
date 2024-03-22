@@ -14,6 +14,7 @@ namespace LGH
 
         public GameObject shopUI;
         public GameObject shopBuyQues;
+        public GameObject CheckBuyItems;
         public GameObject[] itemObj;
         public int[] itemPrice;
 
@@ -21,11 +22,13 @@ namespace LGH
         {
             shopUI.SetActive(false);
             shopBuyQues.SetActive(false);
+            CheckBuyItems.SetActive(false);
+            
         }
 
         public void OnPurchase()
         {
-            itemToBuy = EventSystem.current.currentSelectedGameObject; // 선택한 아이템 정보
+            //itemToBuy = EventSystem.current.currentSelectedGameObject; // 선택한 아이템 정보
             ShopItem_LNH shopItem = itemToBuy.GetComponent<ShopItem_LNH>(); // 선택한 아이템이 가지고 있는 스크립트
             if (shopItem != null) // 만약 그 스크립트가 존재한다면
             {
@@ -33,6 +36,13 @@ namespace LGH
                 updateStatAct?.Invoke(buyItemStat);
                 Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}");
             } // 위에서 어떠한 처리를 하면 되겠습니다. 현재는 단순히 정보 출력만 합니다.
+
+        }
+
+        public void CheckBuyItem()
+        {
+            CheckBuyItems.SetActive(true);
+            itemToBuy = EventSystem.current.currentSelectedGameObject;
 
         }
     }

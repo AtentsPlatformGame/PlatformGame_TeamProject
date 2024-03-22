@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Inventory :MonoBehaviour
 {
-    [SerializeField] Transform MyInventory;
+    public Transform MyInventory;
     [SerializeField] Transform MyOptions;
 
     public GameObject MyExplanation;
