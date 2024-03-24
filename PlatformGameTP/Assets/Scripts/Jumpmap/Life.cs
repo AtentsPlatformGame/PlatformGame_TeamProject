@@ -7,10 +7,11 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 
-public class Life : CharacterProperty
+public class Life : MonoBehaviour
 {
     [SerializeField] GameObject countDown;
-    [SerializeField] GameObject countDown2;
+    [SerializeField] GameObject life;
+
     public GameObject ReStart;
     public GameObject End;
 
@@ -45,19 +46,12 @@ public class Life : CharacterProperty
             this.gameDirector.Init(this.Currentlife);
             RestartPlayer();
         }
-        if(Currentlife <= 0)
+        if(Currentlife == 0)
         {
             Currentlife = 0;
             EndPlayer();
             countDown.SetActive(false);
-            time.SetTime();
-
-            /* 라이프가 0일때 점프맵이 종료되면서 전맵으로 이동한다.
-             * 전맵으로 이동하고 나서도 시간을 갱신해야한다.
-             * 현재 반복중.
-             */
         }
-
     }
 
     void RestartPlayer()

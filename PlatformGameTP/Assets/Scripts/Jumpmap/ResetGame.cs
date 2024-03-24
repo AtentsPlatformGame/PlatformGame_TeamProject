@@ -8,6 +8,7 @@ public class ResetGame : MonoBehaviour
     public GameObject objectToReset;
     [SerializeField] GameObject countDown;
     [SerializeField] GameObject countDown2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,6 @@ public class ResetGame : MonoBehaviour
     {
         if (countDown != false)
             countDown.SetActive(false);
-        countDown2.SetActive(true);
     }
 
 }
