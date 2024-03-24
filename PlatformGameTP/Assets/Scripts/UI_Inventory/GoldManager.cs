@@ -6,17 +6,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GoldManager : MonoBehaviour
+public class GoldManager : Inventory
 {
-    public static int gold;
+    
     
     public TextMeshProUGUI Owngold;
     // Start is called before the first frame update
     void Start()
     {
-        gold = 0;
+        PlayerGold = 0;
         Owngold = GetComponent<TextMeshProUGUI>();
-        Owngold.text = gold.ToString();
+        Owngold.text = PlayerGold.ToString();
         
     }
 
@@ -24,7 +24,7 @@ public class GoldManager : MonoBehaviour
     void Update()
     {
         CountGold();
-        Owngold.text = gold.ToString();
+        Owngold.text = PlayerGold.ToString();
     }
 
     //CountGold => ÇÊµå °ñµå È¹µæ·®°ú »óÁ¡ÀÇ °ñµå·® °è»êÇÏ¿© ¹Ý¿µ
@@ -32,7 +32,7 @@ public class GoldManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F12))
         {
-            gold++;
+                PlayerGold++;
         }
     }
 }

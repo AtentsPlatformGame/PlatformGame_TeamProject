@@ -5,15 +5,16 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory :MonoBehaviour
+public class Inventory :ItemProperty
 {
+
     public Transform MyInventory;
     [SerializeField] Transform MyOptions;
 
     public GameObject MyExplanation;
     public bool checkInventory;
     public bool checkOptions;
-    
+   
 
 
 

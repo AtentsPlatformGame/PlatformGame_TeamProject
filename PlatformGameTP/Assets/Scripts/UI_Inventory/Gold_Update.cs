@@ -19,7 +19,7 @@ public class Gold_Update : GoldManager
     // Update is called once per frame
     void Update()
     {
-        GoldCount.text = $"{gold}";
+        GoldCount.text = $"{PlayerGold}";
 
     }
 }

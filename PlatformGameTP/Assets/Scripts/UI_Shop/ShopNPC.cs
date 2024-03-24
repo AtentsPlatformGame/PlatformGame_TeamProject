@@ -16,7 +16,7 @@ public class ShopNPC : Inventory
     private void Start()
     {
         InventoryOrgPos = MyInventory.transform.position;
-        ShopWithInventory = new Vector3(1500,600 ,0);
+        
         GKeyPopup.SetActive(false);
     }
     private void Update()
@@ -53,7 +53,7 @@ public class ShopNPC : Inventory
     {
         shopUI.SetActive(true);
         MyInventory.gameObject.SetActive(true);
-        MyInventory.transform.position = ShopWithInventory;
+        MyInventory.transform.Translate(new Vector3(250,0,0));
         GKeyPopup.SetActive(false);
         isShop = true;
     }
@@ -61,7 +61,7 @@ public class ShopNPC : Inventory
     {
         shopUI.SetActive(false);
         MyInventory.gameObject.SetActive(false);
-        
+        //MyInventory.transform.Translate(new Vector3(200, 0, 0));
         isShop = false;
     }
 }

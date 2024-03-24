@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace LGH
 {
-    public class Shop : MonoBehaviour
+    public class Shop : ItemProperty
     {
         public UnityEvent<ItemStat> updateStatAct;
         GameObject itemToBuy;
@@ -15,14 +15,17 @@ namespace LGH
         public GameObject shopUI;
         public GameObject shopBuyQues;
         public GameObject CheckBuyItems;
+        public GameObject NoMoney;
         public GameObject[] itemObj;
-        public int[] itemPrice;
+        public int NowGold = 0;
+        
 
         private void Start()
         {
             shopUI.SetActive(false);
             shopBuyQues.SetActive(false);
             CheckBuyItems.SetActive(false);
+            NoMoney.SetActive(false);
             
         }
 
@@ -30,11 +33,22 @@ namespace LGH
         {
             //itemToBuy = EventSystem.current.currentSelectedGameObject; // 선택한 아이템 정보
             ShopItem_LNH shopItem = itemToBuy.GetComponent<ShopItem_LNH>(); // 선택한 아이템이 가지고 있는 스크립트
+            
             if (shopItem != null) // 만약 그 스크립트가 존재한다면
             {
                 ItemStat buyItemStat = shopItem.GetItemStat();
-                updateStatAct?.Invoke(buyItemStat);
-                Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}");
+                if (PlayerGold >= buyItemStat.ItemsPrice)
+                {
+                    PlayerGold -= buyItemStat.ItemsPrice;
+                   
+                    updateStatAct?.Invoke(buyItemStat);
+                    Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}, 가격{buyItemStat.ItemsPrice}");
+                }
+                else
+                {
+                    NoMoney.SetActive(true);
+                    Debug.Log("돈없음");
+                }
             } // 위에서 어떠한 처리를 하면 되겠습니다. 현재는 단순히 정보 출력만 합니다.
 
         }

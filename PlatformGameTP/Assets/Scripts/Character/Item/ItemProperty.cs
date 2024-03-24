@@ -30,11 +30,15 @@ public struct ItemStat
     [Tooltip("방어구 추가 체력 개수를 결정합니다.")] public float PlusHeart; // 추가 체력(방어구)
     [Header("아이템(장신구)의 추가 이속")] 
     [Tooltip("장신구의 추가 이동속도를 결정합니다.")] public float PlusSpeed; // 추가 이속
+    [Header("아이템(장신구) 가격")]
+    [Tooltip("아이템의 가격을 결정합니다.")] public int ItemsPrice; // 추가 이속
     // 이 아래로 위와 같이 추가
 }
 public class ItemProperty : MonoBehaviour
 {
     [SerializeField] protected ItemStat itemStat;
+    public static int PlayerGold;
+
 
     #region GEt함수 아래 함수들을 이용해 필요한 정보들을 얻어갑니다.
 
