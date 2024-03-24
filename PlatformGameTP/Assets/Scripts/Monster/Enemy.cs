@@ -13,7 +13,6 @@ public class Enemy : BattleSystem
     public Transform player;
     public float detectionRange = 4f; //몬스터가 플레이어를 감지하는 영역
     public float moveSpeed = 3f; // 몬스터 스피드
-    public float attackCooldown = 5f; // 몬스터 공격 딜레이
     public float attackRange = 4f;// 몬스터의 공격 범위
     public float returnSpeed = 2f; // 몬스터가 제자리로 복귀하는 속도
     public float deathDelay = 2f; // 몬스터가 죽어서 사라지는 시간
@@ -28,7 +27,8 @@ public class Enemy : BattleSystem
     private bool isChasing = false;
     private bool isAttacking = false;
     private Vector3 startPosition;
-    private float lastAttackTime = 1f;
+    private float lastAttackTime = 0f; // 마지막으로 공격한 시간을 저장하는 변수
+    public float attackDelay = 2f; // 공격 딜레이 설정 (몬스터가 2초에 한 번씩 공격)
     [SerializeField]private bool isDead = false; //몬스터가 죽었는지 여부를 나타내는 변수
 
     private void Start()
@@ -51,11 +51,16 @@ public class Enemy : BattleSystem
             transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
             if (distanceToPlayer < 1.0f)
             {
-                Battle();
-                if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldown)
+                if (Time.time >= lastAttackTime + attackDelay)
                 {
-                    // 플레이어가 공격 범위 내에 있고, 공격 쿨다운이 지난 경우
                     Battle();
+                    lastAttackTime = Time.time;
+                }
+                // 시간을 비교하여 attackDelay보다 오랜 시간이 지났는지 확인
+                if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackDelay)
+                {
+                    Battle();
+                    lastAttackTime = Time.time; // 마지막으로 공격한 시간 갱신
 
                 }
             }
