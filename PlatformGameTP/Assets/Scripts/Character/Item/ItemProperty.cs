@@ -17,6 +17,8 @@ public enum ITEMTYPE
 [System.Serializable]
 public struct ItemStat
 {
+    [Header("아이템의 고유넘버")]
+    [Tooltip("아이템 고유넘버(Weapon 0~9 / Amor 10 ~ 19 / Spell 20 ~ 29 / Passive 30 ~ 39 / Cursed 40 ~49")] public int ItemNumber;
     [Header("아이템의 아이콘")]
     [Tooltip("아이템 이미지를 바인딩해주세요")] public Sprite itemIcon;
     [Header("아이템 설명 이미지")]
