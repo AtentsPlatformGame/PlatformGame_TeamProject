@@ -213,7 +213,6 @@ public class PlayerController : BattleSystem
     { 
         // 월드 기준으로 회전한다.
         Vector3 lookDir = new Vector3(y, 0, x);
-        if (lookDir == Vector3.zero) return;
         if (!Mathf.Approximately(x, 0.0f) || !Mathf.Approximately(y, 0.0f))
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * rotSpeed);
     }

@@ -20,6 +20,8 @@ public class Enemy : BattleSystem
     public float rotationSpeed = 360f;
     public Animator myanim;
     public LayerMask groundLayer;
+    public int dropGold;
+    public UnityEvent<int> increaseGold;
    
    
 
@@ -48,9 +50,10 @@ public class Enemy : BattleSystem
         {
             isChasing = true;
             myanim.SetBool("Ismoving", true);
-            transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-            if (distanceToPlayer < 1.0f)
+            if(isChasing) transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            if (distanceToPlayer < attackRange)
             {
+                isChasing = false;
                 if (Time.time >= lastAttackTime + attackDelay)
                 {
                     Battle();
@@ -120,6 +123,7 @@ public class Enemy : BattleSystem
     }
     public void Die()
     {
+        increaseGold?.Invoke(dropGold);
         myanim.SetTrigger("Die");
         //사라지기전에 추적을 멈춤
         isDead = true;
