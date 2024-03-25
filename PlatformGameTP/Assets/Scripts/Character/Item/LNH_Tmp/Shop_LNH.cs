@@ -47,6 +47,7 @@ public class Shop_LNH : MonoBehaviour
      */
     public void OnPurchase()
     {
+        itemToBuy = EventSystem.current.currentSelectedGameObject;
         // 선택한 아이템 정보
         ShopItem_LNH shopItme = itemToBuy.GetComponent<ShopItem_LNH>(); // 선택한 아이템이 가지고 있는 스크립트
         if (shopItme != null) // 만약 그 스크립트가 존재한다면
