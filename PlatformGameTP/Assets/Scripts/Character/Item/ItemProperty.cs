@@ -9,7 +9,6 @@ public enum ITEMTYPE
     NONE, // 아이템이 아님
     WEAPON, // 무기
     ARMOR, // 방어구
-    ACCE, // 장신구(악세)
     SPELL, // 스펠
     PASSIVE, // 패시브 아이템
     CURSEDACCE // 저주받은 장신구

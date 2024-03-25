@@ -33,9 +33,6 @@ public class Inventory_LNH : MonoBehaviour
             case ITEMTYPE.ARMOR:
                 UpdateSlot(1, _itemStat);
                 break;
-            case ITEMTYPE.ACCE:
-                UpdateSlot(2, _itemStat);
-                break;
             case ITEMTYPE.CURSEDACCE:
                 UpdateSlot(3, _itemStat);
                 break;
