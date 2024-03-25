@@ -10,7 +10,6 @@ public class Countdown : MonoBehaviour
     float originTime;
     [SerializeField] float setTime = 60.0f;
     [SerializeField] TMPro.TMP_Text countdownText;
-    [SerializeField] GameObject countDown;
 
     Life life;
 
@@ -19,7 +18,7 @@ public class Countdown : MonoBehaviour
     int minute;
     float second;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         life = FindObjectOfType<Life>();
         

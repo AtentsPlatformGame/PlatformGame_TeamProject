@@ -15,7 +15,6 @@ public class Life : MonoBehaviour
     public GameObject ReStart;
     public GameObject End;
 
-    private Event settime;
 
     public Vector3 respawnPoint;
     public Vector3 endPoint;
@@ -24,51 +23,64 @@ public class Life : MonoBehaviour
     public GameDirector gameDirector;
     public Transform transform;
 
-    public int playerLife = 2;
-    public int Currentlife;
-    float originTime;
-    Countdown time;
+    public int originLife;
+    int currentLife;
+    
+    bool failGame = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        time = FindObjectOfType<Countdown>();
-        Currentlife = playerLife;
-        this.gameDirector.Init(this.playerLife);
+        Init();
+        this.gameDirector.Init(this.currentLife);
     }
+    void Init()
+    {
+        currentLife = originLife;
+    } 
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Currentlife--;
-            this.gameDirector.Init(this.Currentlife);
-            RestartPlayer();
+            Time();
         }
-        if(Currentlife == 0)
+        if(currentLife <= 0 && !failGame)
         {
-            Currentlife = 0;
+            currentLife = 0;
             EndPlayer();
             countDown.SetActive(false);
+            
         }
     }
 
-    void RestartPlayer()
+    void RestartPlayer() // 재시작
     {
         ReStart.transform.position = respawnPoint;
     }
 
-    void EndPlayer()
+    void EndPlayer() // 실패
     {
         End.transform.position = EndObject;
+        failGame = true;
     }
 
      public void Time()
     {
-        Currentlife--;
-        this.gameDirector.Init(this.Currentlife);
+        currentLife--;
+        this.gameDirector.Init(this.currentLife);
         RestartPlayer();
     }
+    public void DecreaseLife()
+    {
+        this.currentLife--;
+    }
+
+    public int GetLife()
+    {
+        return currentLife;
+    }
+
 
 }

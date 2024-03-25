@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
-    public TMPro.TMP_Text txtScore;
     private int totalScore;
     public GameObject[] lifes;
 
@@ -17,9 +16,5 @@ public class GameDirector : MonoBehaviour
         for (int i = 0; i < playerLife; i++)
             this.lifes[i].SetActive(true);
     }
-    public void AddScore(int score)
-    {
-        this.totalScore += score;
-        this.txtScore.text = totalScore.ToString();
-    }
+    
 }
