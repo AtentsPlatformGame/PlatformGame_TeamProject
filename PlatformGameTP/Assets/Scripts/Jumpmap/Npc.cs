@@ -21,15 +21,15 @@ public class Npc : MonoBehaviour
     void Update()
     {
         RaycastHit Tphit;
-        if (Physics.Raycast(transform.position, transform.forward, out Tphit, Mathf.Infinity, TP))
-        {
-            isTpobject = false;
-            GKeyPopup.SetActive(false);
-        }
-        else
+        if (Physics.Raycast(transform.position, transform.forward,out Tphit, Mathf.Infinity, TP))
         {
             isTpobject = true;
             GKeyPopup.SetActive(true);
+        }
+        else
+        {
+            isTpobject = false;
+            GKeyPopup.SetActive(false);
         }
         if (isTpobject && Input.GetKeyDown(KeyCode.G))
         {
