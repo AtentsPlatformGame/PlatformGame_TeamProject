@@ -17,13 +17,13 @@ public class Enemy : BattleSystem
     public float returnSpeed = 2f; // 몬스터가 제자리로 복귀하는 속도
     public float deathDelay = 2f; // 몬스터가 죽어서 사라지는 시간
     public float MonsterHP = 5f; //몬스터 체력
-    public float rotationSpeed = 360f;
     public Animator myanim;
     public LayerMask groundLayer;
     public int dropGold;
     public UnityEvent<int> increaseGold;
-   
-   
+    
+    
+    
 
     [SerializeField] float curtHP;
     private bool isChasing = false;
@@ -38,8 +38,11 @@ public class Enemy : BattleSystem
         startPosition = transform.position;
         curtHP = MonsterHP;
         base.Initialize();
+        
+       
     }
-    
+
+   
     private void Update()
     {
         if (isDead || player == null)
@@ -77,7 +80,7 @@ public class Enemy : BattleSystem
 
             // 몬스터가 시작 위치를 바라보도록 회전
             Quaternion targetRotation = Quaternion.LookRotation(directionToStart);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
 
             // 회전이 완료되면 제자리로 이동
             if (Quaternion.Angle(transform.rotation, targetRotation) < 0.1f)
