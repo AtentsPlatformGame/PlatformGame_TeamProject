@@ -17,6 +17,7 @@ public class Enemy : BattleSystem
     public float returnSpeed = 2f; // 몬스터가 제자리로 복귀하는 속도
     public float deathDelay = 2f; // 몬스터가 죽어서 사라지는 시간
     public float MonsterHP = 5f; //몬스터 체력
+    public float rotSpeed = 1;
     public Animator myanim;
     public LayerMask groundLayer;
     public int dropGold;
@@ -79,6 +80,7 @@ public class Enemy : BattleSystem
             Vector3 directionToStart = (startPosition - transform.position).normalized;
 
             // 몬스터가 시작 위치를 바라보도록 회전
+           
             Quaternion targetRotation = Quaternion.LookRotation(directionToStart);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
 
