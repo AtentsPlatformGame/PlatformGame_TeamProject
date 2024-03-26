@@ -13,14 +13,14 @@ public class PlayerController : BattleSystem
     [SerializeField]
     [Header("플레이어 2D 이동 방식 토글")] bool controll2D = true;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
-    
+
 
     public GameObject orgFireball;
     public LayerMask groundMask;
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
-    
+
     public bool isSpellReady = false;
     public bool is3d = true;
 
@@ -35,6 +35,9 @@ public class PlayerController : BattleSystem
     Coroutine attackDelay;
     Coroutine teleportDelay;
     Coroutine rotating;
+
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -62,7 +65,7 @@ public class PlayerController : BattleSystem
             }
             else // 앞뒤, 양옆 4방향으로 움직이는 코드, 점프는 안만듬
             {
-               // Rotate3D();
+                // Rotate3D();
                 Move3D();
             }
         }
@@ -74,12 +77,12 @@ public class PlayerController : BattleSystem
         if (controll2D)
         {
             Constraints2D();
-            
+
         }
         else
         {
             Constraints3D();
-            
+
         }
     }
 
@@ -123,7 +126,7 @@ public class PlayerController : BattleSystem
 
     void Rotate()
     {
-        
+
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // 오른쪽으로 회전, +
         {
             curRotY = 0.0f; // 곧바로 방향 전환
@@ -143,7 +146,7 @@ public class PlayerController : BattleSystem
     {
 
         isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.1f, groundMask);
-        Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
+        //Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
 
         myAnim.SetBool("IsGround", isGround);
         if (isGround)
@@ -182,9 +185,12 @@ public class PlayerController : BattleSystem
     #region MoveOn3D
     void Move3D()
     {
+
         Constraints3D();
         float x = Input.GetAxis("Vertical");
         float y = Input.GetAxis("Horizontal");
+
+
         Vector3 deltaXPos = Vector3.forward * x * Time.deltaTime * moveSpeed;
         Vector3 deltaYPos = Vector3.right * y * Time.deltaTime * moveSpeed;
 
@@ -207,14 +213,19 @@ public class PlayerController : BattleSystem
         myAnim.SetFloat("SpeedX", Mathf.Abs(x));
         myAnim.SetFloat("SpeedY", Mathf.Abs(y));
         Rotate3D(x, y);
+
     }
 
     void Rotate3D(float x, float y)
-    { 
+    {
         // 월드 기준으로 회전한다.
-        Vector3 lookDir = new Vector3(y, 0, x);
+
         if (!Mathf.Approximately(x, 0.0f) || !Mathf.Approximately(y, 0.0f))
+        {
+            Vector3 lookDir = new Vector3(y, 0, x);
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * rotSpeed);
+        }
+
     }
 
     IEnumerator Rotating(Vector3 dir)
@@ -330,7 +341,7 @@ public class PlayerController : BattleSystem
             spellObject = null;
 
         }
-        
+
     }
 
     public void ResetSpellTrigger()
@@ -361,14 +372,14 @@ public class PlayerController : BattleSystem
                 if (_itemStat.Ap != 0) this.battleStat.AP = _itemStat.Ap; // 공격력 증가
                 break;
             case ITEMTYPE.ARMOR:
-                if(!Mathf.Approximately(_itemStat.PlusHeart,0.0f)) this.battleStat.MaxHp = _itemStat.PlusHeart; // 최대 체력 증가
+                if (!Mathf.Approximately(_itemStat.PlusHeart, 0.0f)) this.battleStat.MaxHp = _itemStat.PlusHeart; // 최대 체력 증가
                 break;
             case ITEMTYPE.PASSIVE:
                 break;
             case ITEMTYPE.CURSEDACCE:
                 break;
             case ITEMTYPE.SPELL:
-                
+
                 break;
             default:
                 break;

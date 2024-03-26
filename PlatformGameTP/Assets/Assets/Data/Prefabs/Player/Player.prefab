@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5187121080939245157
 Transform:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 1534761592030040419}
   - component: {fileID: 9156897443290321834}
   - component: {fileID: 4433721155396448155}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,12 +282,13 @@ MonoBehaviour:
     AttackRange: 10
     AttackDelay: 2
     ProjectileSpeed: 5
+    MoveSpeed: 0
   moveSpeed: 4
   rotSpeed: 720
   jumpForce: 8
-  jumpCharge: 1
+  spellObject: {fileID: 419305800515105285, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
+  controll2D: 1
   rotYRange: {x: 0, y: 180}
-  spellObject: {fileID: 7478731271839673279, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
   orgFireball: {fileID: 2856997113365272791, guid: 4d2243e06e00da345b22d936d75f5eec, type: 3}
   groundMask:
     serializedVersion: 2
@@ -298,6 +299,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isSpellReady: 0
+  is3d: 0
 --- !u!54 &1534761592030040419
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -360,7 +362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f448c2fadbb6d74a822feb61ee7a052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellPointImg: {fileID: 3423680331148236107}
+  attackSpellPointImg: {fileID: 3423680331148236107}
+  buffSpellPoinImg: {fileID: 7234328256132774364}
   spellRangeImg: {fileID: 7713614161774906625}
   spellMaxRange: 5
   layermask:
@@ -727,7 +730,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2874589411529629851
 Transform:
   m_ObjectHideFlags: 0

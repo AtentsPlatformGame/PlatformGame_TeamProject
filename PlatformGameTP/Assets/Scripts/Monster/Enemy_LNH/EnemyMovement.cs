@@ -8,7 +8,7 @@ public class EnemyMovement : BattleSystem
     public float moveSpeed = 2.0f;
     public float rotSpeed = 360.0f;
     Coroutine move = null;
-    Coroutine rotate = null;
+    protected Coroutine rotate = null;
     Coroutine attack = null;
     // Start is called before the first frame update
     void Start()
@@ -139,7 +139,7 @@ public class EnemyMovement : BattleSystem
         doneAct?.Invoke();
     }
 
-    IEnumerator Rotating(Vector3 dir)
+    protected IEnumerator Rotating(Vector3 dir)
     {
         //float d = Vector3.Dot(transform.forward, dir);
         //float r = Mathf.Acos(d);
