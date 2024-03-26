@@ -14,15 +14,9 @@ public class Tp : MonoBehaviour
     [SerializeField] Transform tp;
     [SerializeField] GameObject Player;
     [SerializeField] GameObject countDown;
-    [SerializeField] GameObject Canvas;
-    public GameObject GKeyPopup;
 
     public Life life;
     public LayerMask mask;
-    public LayerMask TP;
-
-    public bool isTpobject = false;
-    public bool isPopup = false;
 
     private void Start()
     {
@@ -31,28 +25,6 @@ public class Tp : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit Tphit;
-        if (Physics.Raycast(transform.position, transform.forward, out Tphit, Mathf.Infinity, TP))
-        {
-            isTpobject = true;
-            GKeyPopup.SetActive(true);
-        }
-        else
-        {
-            isTpobject = false;
-            GKeyPopup.SetActive(false);
-        }
-        if (isTpobject && Input.GetKeyDown(KeyCode.G))
-        {
-            if (isPopup)
-            {
-                OutTp();
-            }
-            else
-            {
-                InTp();
-            }
-        }
     }
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
@@ -88,19 +60,6 @@ public class Tp : MonoBehaviour
         }
         //만약에 오브젝트가 꺼져있으면 키고, 켜져있으면 끈다.
         //
-    }
-
-    void InTp()
-    {
-        Canvas.SetActive(true);
-        GKeyPopup.SetActive(false);
-        isPopup = true;
-    }
-
-    void OutTp()
-    {
-        Canvas.SetActive(false);
-        isPopup = false;
     }
 
 }
