@@ -306,11 +306,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &591138466 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3423680331148236107, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-  m_PrefabInstance: {fileID: 824652554}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &824652554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -319,102 +314,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: is3d
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: controll2D
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: spellObject
-      value: 
-      objectReference: {fileID: 419305800515105285, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: spellObject.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: spellObject.Array.data[0]
-      value: 
-      objectReference: {fileID: 898328576160968675, guid: 3355f6bfa6db8b24281b827de929694c, type: 3}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: spellObject.Array.data[1]
-      value: 
-      objectReference: {fileID: 8029142899459995171, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera2D.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera3D.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera2D.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera3D.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera2D.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1913709797}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera3D.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1913709797}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera2D.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera3D.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera2D.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetCamera2D
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera3D.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetCameraTopView
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera2D.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CameraController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera3D.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CameraController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera2D.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: changeCamera3D.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 3891765266597473588, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3891765266597473588, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4433721155396448155, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: buffSpellPoinImg
-      value: 
-      objectReference: {fileID: 1377572231}
-    - target: {fileID: 4433721155396448155, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-      propertyPath: attackSpellPointImg
-      value: 
-      objectReference: {fileID: 591138466}
     - target: {fileID: 5821733687863010582, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -521,6 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemStat:
+    ItemNumber: 0
     itemIcon: {fileID: 0}
     itemDescriptionImage: {fileID: 0}
     ItemType: 0
@@ -543,11 +447,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1377572231 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7234328256132774364, guid: e1c93f26665c2924b886242320f75dda, type: 3}
-  m_PrefabInstance: {fileID: 824652554}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1850827139
 GameObject:
   m_ObjectHideFlags: 0

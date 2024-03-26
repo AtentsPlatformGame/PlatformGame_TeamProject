@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyState : EnemyMovement
 {
     public enum State
     {
-        Create, Normal, Roaming, Battle, Death
+        Create, Normal, Roaming, Battle, Death, Missing
     }
     public State myState = State.Create;
-
+    public LayerMask groundMask;
+    public Rigidbody rigid;
     public Transform hpViewPos;
+    public float jumpForce;
 
     Vector3 startPos;
     float playTime = 0.0f;
+    bool isGround = true;
 
     //HpBar myHpBar;
     void ChangeState(State s)
@@ -22,13 +26,24 @@ public class EnemyState : EnemyMovement
         myState = s;
         switch (myState)
         {
-            case State.Normal:
-                //2~5초 사이의 대기 시간을 가지고 로밍을 한다.
+            case State.Missing:
+                // 놓쳤으니깐 물음표를 띄운다.
+                //2~5초 사이의 대기 시간을 가지고 원래 자리로 돌아간다.
                 playTime = Random.Range(2.0f, 5.0f);
-                StartCoroutine(DelayChangeState(State.Roaming, playTime));
+                MoveToOriginPos(startPos, playTime);
+                // 원래 자리로 돌아가고 거기서 노말로 스테이트를 변환
+                
+                break;
+            case State.Normal:
+                playTime = Random.Range(1.0f, 3.0f);
+                // dir을 반대로, 회전도 시킨다.
+                StartCoroutine(DelayChangeState(State.Roaming, playTime)); // 돌아간 뒤에 로밍으로 스테이트를 변환
+                // 로밍으로 바꿀 때 방향을 바꿔 반대로 로밍하게 한다. 이때 회전도 시켜야함
                 break;
             case State.Roaming:
-                MoveToPos(GetRndPos(), () => ChangeState(State.Normal));
+                Debug.Log("로밍 상태");
+                //MoveToPos(GetRndPos(), () => ChangeState(State.Normal)); // 자기의 발 아래 레이를 쏴 해당 블록의 좌우 z 경계까지 이동한다. 끝점과 끝점까지
+                // 위처럼 스테이트를 다시 노말로 바꾸고 노말에서는 방향을 바꾸어 다시 로밍으로 바꾼다.
                 break;
             case State.Battle:
                 AttackTarget(myTarget);
@@ -91,6 +106,10 @@ public class EnemyState : EnemyMovement
     void Update()
     {
         StateProcess();
+        if(myState != State.Death)
+        {
+            IsGround();
+        }
     }
 
     public void FindTarget(Transform target)
@@ -105,7 +124,7 @@ public class EnemyState : EnemyMovement
         if (myState == State.Death) return;
         myTarget = null;
         StopAttack();
-        ChangeState(State.Normal);
+        ChangeState(State.Missing);
     }
 
     protected override void OnDead()
@@ -134,5 +153,56 @@ public class EnemyState : EnemyMovement
             yield return null;
         }
         Destroy(gameObject);
+    }
+
+    void MoveToOriginPos(Vector3 originPos, float playTime)
+    {
+        StartCoroutine(MovingToOringPos(originPos, playTime));
+    }
+
+    IEnumerator MovingToOringPos(Vector3 originPos, float playTime)
+    {
+        Vector3 dir = originPos - transform.position;
+        float dist = dir.magnitude;
+        dir.Normalize();
+        if (rotate != null) StopCoroutine(rotate);
+        rotate = StartCoroutine(Rotating(dir));
+
+
+        while (!Mathf.Approximately(dist, 0.0f))
+        {
+            float delta = moveSpeed * Time.deltaTime;
+            if (delta > dist) delta = dist;
+            dist -= delta;
+            transform.Translate(dir * delta, Space.World);
+            // 발 앞에서 레이를 쏴 거기가 땅이라면 점프를 한다.
+            if(Physics.Raycast(transform.position + new Vector3(0.0f, 0.2f, 0.0f), transform.forward, 1.1f, groundMask))
+            {
+                if (isGround)
+                {
+                    Jump();
+                }
+            }
+            yield return null;
+        }
+
+        yield return StartCoroutine(DelayChangeState(State.Normal, playTime));
+    }
+
+    void IsGround()
+    {
+        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.1f, groundMask);
+        //Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
+
+        myAnim.SetBool("IsGround", isGround);
+        if (isGround)
+        {
+            Debug.Log("hit");
+        }
+    }
+
+    void Jump()
+    {
+        rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 }
