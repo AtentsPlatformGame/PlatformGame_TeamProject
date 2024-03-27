@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4622324352310014521}
+  - component: {fileID: 5053261108994299147}
   m_Layer: 5
   m_Name: Countdown
   m_TagString: Untagged
@@ -112,6 +113,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5053261108994299147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095833786930798073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205a0ceee7042854bbe19c3737df73f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setTime: 60
+  countdownText: {fileID: 5748762857203456845}
+  Fail:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4510521751869035485
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +141,6 @@ GameObject:
   - component: {fileID: 6756569314565620933}
   - component: {fileID: 2063398767717031693}
   - component: {fileID: 5748762857203456845}
-  - component: {fileID: 5217686329569522917}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -247,17 +264,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5217686329569522917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4510521751869035485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 205a0ceee7042854bbe19c3737df73f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  setTime: 1
-  countdownText: {fileID: 5748762857203456845}

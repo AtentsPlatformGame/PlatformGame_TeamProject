@@ -4,14 +4,13 @@ using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 public class Countdown : MonoBehaviour
 {
     float originTime;
     [SerializeField] float setTime = 60.0f;
     [SerializeField] TMPro.TMP_Text countdownText;
-
-    Life life;
+    public UnityEvent Fail; 
 
     string minutesS = "";
     string secondsS = "";
@@ -20,8 +19,6 @@ public class Countdown : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        life = FindObjectOfType<Life>();
-        
         originTime = setTime;
         countdownText.text = setTime.ToString();
     }
@@ -33,8 +30,9 @@ public class Countdown : MonoBehaviour
             setTime -= Time.deltaTime;
         else if (setTime <= 0.0f)
         {
-            life.Time();
+            Fail?.Invoke();
             setTime = originTime;
+            this.gameObject.SetActive(false);
         }
 
         //countdownText.text = Mathf.Round(setTime).ToString();
@@ -44,11 +42,6 @@ public class Countdown : MonoBehaviour
         minutesS = minute.ToString();
         secondsS = Mathf.Round(second).ToString();
         countdownText.text = minutesS + " : " + secondsS;
-    }
-    
-    public void SetTime()
-    {
-        setTime = originTime;
     }
 
 }
