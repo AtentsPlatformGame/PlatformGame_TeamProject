@@ -7,9 +7,12 @@ public class EnemyMovement : BattleSystem
 {
     public float moveSpeed = 2.0f;
     public float rotSpeed = 360.0f;
+    protected Vector3 dir;
+
     Coroutine move = null;
     protected Coroutine rotate = null;
     Coroutine attack = null;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -103,6 +106,7 @@ public class EnemyMovement : BattleSystem
 
     protected IEnumerator MovingToPos(Vector3 target, UnityAction doneAct, UnityAction animAct)
     {
+        Debug.Log($"MovingToPos ½ÇÇà : target : {target}");
         Vector3 dir = target - transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
@@ -166,4 +170,5 @@ public class EnemyMovement : BattleSystem
             yield return null;
         }
     }
+
 }
