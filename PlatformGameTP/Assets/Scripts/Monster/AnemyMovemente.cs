@@ -11,6 +11,11 @@ public class AnemyMovemente : BattleSystem
     Coroutine rotate = null;
     Coroutine attack = null;
 
+    public LayerMask groundMask;
+    protected Vector3 dir;
+    protected int jumpCount = 0;
+    protected float myPlayTime;
+
     void Start()
     {
         
@@ -20,6 +25,68 @@ public class AnemyMovemente : BattleSystem
     void Update()
     {
         
+    }
+    protected void Initialize()
+    {
+        curHp = battleStat.MaxHp; // BattleSystem 수정 부분
+    }
+    protected void CrashEnter(Collision other)
+    {
+        if ((1 << other.gameObject.layer & groundMask) != 0)
+        {
+            Vector3 rayDir = Vector3.zero;
+            if (dir.x > 0.0f)
+            {
+                rayDir = Vector3.back;
+            }
+            else if (dir.x < 0.0f)
+            {
+                rayDir = Vector3.forward;
+            }
+
+            if (CheckWall(rayDir)) return;
+
+            myAnim.SetBool("IsAir", false);
+            jumpCount = 0;
+        }
+    }
+
+
+    protected void CrashExit(Collision other)
+    {
+        if ((1 << other.gameObject.layer & groundMask) != 0)
+        {
+            Vector3 rayDir = Vector3.zero;
+            if (dir.x > 0.0f)
+            {
+                rayDir = Vector3.forward;
+            }
+            else if (dir.x < 0.0f)
+            {
+                rayDir = Vector3.back;
+            }
+            if (CheckWall(rayDir)) return;
+
+            myAnim.SetBool("IsAir", true);
+        }
+    }
+    bool CheckWall(Vector3 rayDir)
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            RaycastHit hit;
+                if(Physics.Raycast((Vector3)transform.position+Vector3.up * 1.0f
+                    * (float)i, rayDir, out hit, 1.0f+ 0.1f,groundMask))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    protected void UpdatePosition()
+    {
+        if (!myAnim.GetBool("IsAttacking"))
+            transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
     }
     public void MoveToPos(Vector3 target)
     {
@@ -102,6 +169,24 @@ public class AnemyMovemente : BattleSystem
             angle -= delta;
             transform.Rotate(Vector3.up * rotDir * delta);
             yield return null;
+        }
+    }
+
+    protected void UpdateAnimState()
+    {
+        if (Mathf.Approximately(dir.x, 0.0f))
+        {
+            myAnim.SetBool("IsMoving", false);
+        }
+        else if (dir.x > 0.0f)
+        {
+            (allRenderer[0] as SpriteRenderer).flipX = false;
+            myAnim.SetBool("IsMoving", true);
+        }
+        else if (dir.x < 0.0f)
+        {
+            (allRenderer[0] as SpriteRenderer).flipX = true;
+            myAnim.SetBool("IsMoving", true);
         }
     }
 }
