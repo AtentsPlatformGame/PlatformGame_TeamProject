@@ -11,11 +11,16 @@ public class EnemyState : EnemyMovement
     }
     public State myState = State.Create;
     public LayerMask groundMask;
+    public LayerMask moveLimitMask;
     public Rigidbody rigid;
     public Transform hpViewPos;
     public float jumpForce;
 
     Vector3 startPos;
+    Vector3 leftLimitPos;
+    Vector3 rightLimitPos;
+    Vector3 limitPos;
+
     float playTime = 0.0f;
     bool isGround = true;
 
@@ -32,16 +37,51 @@ public class EnemyState : EnemyMovement
                 playTime = Random.Range(2.0f, 5.0f);
                 MoveToOriginPos(startPos, playTime);
                 // 원래 자리로 돌아가고 거기서 노말로 스테이트를 변환
-                
                 break;
             case State.Normal:
+                //RaycastHit hit = Physics.Raycast(transform.position, Vector2.down, 100.0f, groundMask);
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, Vector2.down, out hit, 10.0f, groundMask))
+                {
+                    if (hit.transform != null)
+                    {
+                        RaycastHit subHit;
+                        if (Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.forward, out subHit, 1000.0f, moveLimitMask)) // 보이는걸론 오른쪽, 월드상으론 앞으로
+                        {
+                            if (subHit.transform != null)
+                            {
+                                rightLimitPos = new Vector3(0, transform.position.y, subHit.point.z);
+                            }
+                        }
+
+
+                        if(Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.back, out subHit, 1000.0f, moveLimitMask))
+                        {
+                            if (subHit.transform != null)
+                            {
+                                leftLimitPos = new Vector3(0, transform.position.y, subHit.point.z);
+                            }
+                        }
+                        
+                    }
+                    
+                    float leftDist = Vector3.Distance(transform.position, leftLimitPos);
+                    float rightDist = Vector3.Distance(transform.position, rightLimitPos);
+
+                    limitPos = (leftDist > rightDist) ? leftLimitPos: rightLimitPos ;
+
+                }
+                
                 playTime = Random.Range(1.0f, 3.0f);
                 // dir을 반대로, 회전도 시킨다.
                 StartCoroutine(DelayChangeState(State.Roaming, playTime)); // 돌아간 뒤에 로밍으로 스테이트를 변환
+                //base.UpdateAnimState();
                 // 로밍으로 바꿀 때 방향을 바꿔 반대로 로밍하게 한다. 이때 회전도 시켜야함
                 break;
             case State.Roaming:
                 Debug.Log("로밍 상태");
+                // normal state에서 방향과 갈 수 있는 최대 위치를 지정해줬으니 그 위치까지 이동한다.
+                MoveToPos(limitPos, () => ChangeState(State.Normal));
                 //MoveToPos(GetRndPos(), () => ChangeState(State.Normal)); // 자기의 발 아래 레이를 쏴 해당 블록의 좌우 z 경계까지 이동한다. 끝점과 끝점까지
                 // 위처럼 스테이트를 다시 노말로 바꾸고 노말에서는 방향을 바꾸어 다시 로밍으로 바꾼다.
                 break;
@@ -66,14 +106,7 @@ public class EnemyState : EnemyMovement
     {
         switch (myState)
         {
-            case State.Normal:
-                /*
-                playTime -= Time.deltaTime;
-                if(playTime <= 0.0f)
-                {
-                    ChangeState(State.Roaming);
-                }
-                */
+            case State.Roaming:
                 break;
             case State.Battle:
                 break;
@@ -106,7 +139,7 @@ public class EnemyState : EnemyMovement
     void Update()
     {
         StateProcess();
-        if(myState != State.Death)
+        if (myState != State.Death)
         {
             IsGround();
         }
@@ -176,7 +209,7 @@ public class EnemyState : EnemyMovement
             dist -= delta;
             transform.Translate(dir * delta, Space.World);
             // 발 앞에서 레이를 쏴 거기가 땅이라면 점프를 한다.
-            if(Physics.Raycast(transform.position + new Vector3(0.0f, 0.2f, 0.0f), transform.forward, 1.1f, groundMask))
+            if (Physics.Raycast(transform.position + new Vector3(0.0f, 0.2f, 0.0f), transform.forward, 1.1f, groundMask))
             {
                 if (isGround)
                 {
