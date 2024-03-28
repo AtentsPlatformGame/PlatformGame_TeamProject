@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
         isPopup = false;
     }
 
+    //입장 버튼 GameStart
     public void GameStart()
     {
         TimeScaleOn();
@@ -92,13 +93,14 @@ public class GameManager : MonoBehaviour
         CountDownCanvas.gameObject.SetActive(true);
     }
 
+    //나가기 버튼 Exit
     public void Exit()
     {
         TimeScaleOn();
         Canvas.SetActive(false);
     }
 
-
+    //기믹 실패 FailGimic
     public void FailGimic()
     {
         FailCanvas.SetActive(true); //Fail UI //버튼을 누르면 문앞으로 플레이어를 내보낸다.
@@ -116,7 +118,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    //성공 ClearGimic
+    //기믹 성공 ClearGimic
     public void ClearGimic()
     {
         CountDownCanvas.gameObject.SetActive(false); // 카운트다운을 꺼버리던가, 멈춘다.
@@ -125,6 +127,7 @@ public class GameManager : MonoBehaviour
         TimeScaleOff();
     }
 
+    //아이템 보상 ItemGet
     public void ItemGet()
     {
         ItemGetCanvas.SetActive(true);
@@ -147,7 +150,8 @@ public class GameManager : MonoBehaviour
         tpstart.transform.position = tpend.transform.position;
     }
 
-    public void FailAct() // Act -> 버튼을 눌렀을 때 실행할 함수
+    //Fail 버튼을 누르면 문앞으로 나가진다.
+    public void FailAct()
     {
         FailCanvas.SetActive(false);
         Tp(Player, GimicEnd);
@@ -162,6 +166,7 @@ public class GameManager : MonoBehaviour
         TimeScaleOn();
     }
 
+    //겟 버튼을 누르면 시간이 흐른다.
     public void itemGetAct()
     {
         ItemGetCanvas.SetActive(false);
