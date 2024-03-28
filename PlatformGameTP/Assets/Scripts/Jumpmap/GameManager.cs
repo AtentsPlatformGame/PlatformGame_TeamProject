@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         }
         if (isTpobject && Input.GetKeyDown(KeyCode.G) && PlayerHp == 1)
         {
+            TimeScaleOff();
             if (isPopup)
             {
                 CanvasOff();
@@ -57,7 +58,6 @@ public class GameManager : MonoBehaviour
             {
                 CanvasOn();  //게임시작
             }
-
         }
     }
 
@@ -74,8 +74,8 @@ public class GameManager : MonoBehaviour
     void CanvasOn()
     {
         Canvas.SetActive(true);  //버튼 캔버스 온
-        GKeyPopup.SetActive(false);  //
-        isPopup = true;  //
+        GKeyPopup.SetActive(false);  
+        isPopup = true;
     }
 
     void CanvasOff()
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
     public void GameStart()
     {
+        TimeScaleOn();
         CanvasOff();
         Tp(Player, GimicStart);
         CountDownCanvas.gameObject.SetActive(true);
@@ -93,20 +94,15 @@ public class GameManager : MonoBehaviour
 
     public void Exit()
     {
+        TimeScaleOn();
         Canvas.SetActive(false);
     }
+
 
     public void FailGimic()
     {
         FailCanvas.SetActive(true); //Fail UI //버튼을 누르면 문앞으로 플레이어를 내보낸다.
-        if (FailCanvas)
-        {
-            TimeScaleOff();
-        }
-        else
-        {
-            TimeScaleOn();
-        }
+        TimeScaleOff();
         Hp();
     }
 
@@ -126,12 +122,13 @@ public class GameManager : MonoBehaviour
         CountDownCanvas.gameObject.SetActive(false); // 카운트다운을 꺼버리던가, 멈춘다.
         ClearCanvas.SetActive(true); //Clear UI //버튼을 누르면 문앞으로 플레이어를 내보낸다.
         Hp();
+        TimeScaleOff();
     }
 
     public void ItemGet()
     {
         ItemGetCanvas.SetActive(true);
-        Hp();
+        TimeScaleOff();
     }
 
     public void CountDownEnd()
@@ -162,12 +159,13 @@ public class GameManager : MonoBehaviour
     {
         ClearCanvas.SetActive(false);
         Tp(Player, GimicEnd);
+        TimeScaleOn();
     }
 
     public void itemGetAct()
     {
         ItemGetCanvas.SetActive(false);
-        Tp(Player, GimicEnd);
+        TimeScaleOn();
     }
 
 }
