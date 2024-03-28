@@ -7,11 +7,13 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 public class Countdown : MonoBehaviour
 {
+    [Header("시간종료 레이 오브젝트")] public GameObject countdownpoint;
     float originTime;
     [SerializeField] float setTime = 60.0f;
     [SerializeField] TMPro.TMP_Text countdownText;
-    public UnityEvent Fail; 
+    public UnityEvent Fail;
 
+    public bool countdown = false;
     string minutesS = "";
     string secondsS = "";
     int minute;
@@ -34,8 +36,7 @@ public class Countdown : MonoBehaviour
             setTime = originTime;
             this.gameObject.SetActive(false);
         }
-
-        //countdownText.text = Mathf.Round(setTime).ToString();
+     
         minute = (int)(setTime / 60.0f);
         second = setTime % 60.0f;
 

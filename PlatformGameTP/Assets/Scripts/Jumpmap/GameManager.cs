@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     [Header("입장 캔버스")][SerializeField] GameObject Canvas;
     [Header("실패 캔버스")][SerializeField] GameObject FailCanvas;
     [Header("성공 캔버스")][SerializeField] GameObject ClearCanvas;
+    [Header("나가기 캔버스")][SerializeField] GameObject ExitCanvas;
     [Header("카운트다운 캔버스")][SerializeField] GameObject CountDown;
 
     [Header("팝업 캔버스")] public GameObject GKeyPopup;
-    [Header("레이를 쏘는 오브젝트")] public GameObject Raypoint;
+    [Header("입장 레이 오브젝트")] public GameObject Raypoint;
     [Header("플레이어")] public Transform Player;
     [Header("기믹 시작 위치")] public Transform GimicStart;
     [Header("내보낼 때 위치(문 앞)")] public Transform GimicEnd;
@@ -53,10 +55,13 @@ public class GameManager : MonoBehaviour
                 CanvasOn();  //게임시작
             }
         }
+
+
+
     }
     void CanvasOn()
     {
-        Canvas.SetActive(true);  //버튼캔버스
+        Canvas.SetActive(true);  //버튼 캔버스 온
         GKeyPopup.SetActive(false);  //
         isPopup = true;  //
     }
@@ -74,11 +79,35 @@ public class GameManager : MonoBehaviour
         CountDown.gameObject.SetActive(true);
     }
 
+    public void Exit()
+    {
+        Canvas.SetActive(false);
+    }
+
     public void FailGimic()
     {
         FailCanvas.SetActive(true); //Fail UI //버튼을 누르면 문앞으로 플레이어를 내보낸다.
+        if (FailCanvas)
+        {
+            TimeScaleOff();
+        }
+        else
+        {
+            TimeScaleOn();
+        }
     }
 
+    void TimeScaleOff()
+    {
+        Time.timeScale = 0.0f;
+    }
+
+    void TimeScaleOn()
+    {
+        Time.timeScale = 1.0f;
+    }
+
+    //성공 ClearGimic
     public void ClearGimic()
     {
         CountDown.gameObject.SetActive(false); // 카운트다운을 꺼버리던가, 멈춘다.
@@ -94,24 +123,21 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         tpstart.transform.position = tpend.transform.position;
-
-        //if (countDown != null) //만약에 null 이 아니라면
-        //countDown.SetActive(true); // 카운트다운 시작
-
-
-        //만약에 오브젝트가 꺼져있으면 키고, 켜져있으면 끈다.
-        //
     }
 
     public void FailAct() // Act -> 버튼을 눌렀을 때 실행할 함수
     {
         FailCanvas.SetActive(false);
         Tp(Player, GimicEnd);
+        TimeScaleOn();
     }
 
+    //성공 버튼을 누르면 문앞으로 나가진다.
     public void ClearAct()
     {
         ClearCanvas.SetActive(false);
         Tp(Player, GimicEnd);
     }
+
+
 }
