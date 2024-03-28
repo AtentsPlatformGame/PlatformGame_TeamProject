@@ -28,7 +28,7 @@ public class Item_explan : Inventory, IPointerEnterHandler, IPointerExitHandler
     void Start()
     {
         MouseOverCheck = false;
-        Vect = new Vector3(2, -60 , 0);
+        Vect = new Vector3(2, -120 , 0);
        // MyExplanation.gameObject.SetActive(false);
     }
 
