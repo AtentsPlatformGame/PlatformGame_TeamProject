@@ -177,8 +177,8 @@ public class PlayerController : BattleSystem
 
     void Jump()
     {
-
-        rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        Vector3 jumpVelocity = Vector3.up * Mathf.Sqrt(jumpForce * -Physics.gravity.y);
+        rigid.AddForce(jumpVelocity, ForceMode.Impulse);
     }
     #endregion
 

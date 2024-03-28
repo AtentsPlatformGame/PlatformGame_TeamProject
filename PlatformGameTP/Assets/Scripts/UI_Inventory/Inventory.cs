@@ -14,14 +14,14 @@ public class Inventory :ItemProperty
     public GameObject MyExplanation;
     public bool checkInventory;
     public bool checkOptions;
-   
+    public bool CheckItemBox;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CheckItemBox = false;
         if (MyInventory != null)
         {
             checkInventory = false;
@@ -46,7 +46,7 @@ public class Inventory :ItemProperty
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (checkInventory == false && checkOptions == false)
+            if (checkInventory == false && checkOptions == false && CheckItemBox == false)
             {
                 PopUp(MyInventory);
                 checkInventory= true;
@@ -61,7 +61,7 @@ public class Inventory :ItemProperty
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (checkOptions == false && checkInventory == false)
+            if (checkOptions == false && checkInventory == false && CheckItemBox == false)
             {
                 PopUp(MyOptions);
                 checkOptions= true;

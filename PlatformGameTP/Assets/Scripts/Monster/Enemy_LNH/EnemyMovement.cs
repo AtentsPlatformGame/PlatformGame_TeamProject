@@ -30,12 +30,13 @@ public class EnemyMovement : BattleSystem
     {
         if (attack != null) StopCoroutine(attack);
         attack = null;
-        myAnim.SetBool("IsMoving", false);
+        myAnim.SetBool("IsRunning", false);
     }
 
     protected void AttackTarget(Transform target)
     {
         StopAllCoroutines();
+        if (myAnim.GetBool("IsRoaming")) myAnim.SetBool("IsRoaming", false);
         attack = StartCoroutine(AttackingTarget(target));
     }
 
@@ -43,7 +44,7 @@ public class EnemyMovement : BattleSystem
     {
         while (target != null)
         {
-            myAnim.SetBool("IsMoving", true);
+            myAnim.SetBool("IsRunning", true);
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
             if (dist < 0.0f) dist = 0.0f;
@@ -51,7 +52,7 @@ public class EnemyMovement : BattleSystem
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
             if (Mathf.Approximately(dist, 0.0f))
             {
-                myAnim.SetBool("IsMoving", false);
+                myAnim.SetBool("IsRunning", false);
                 if (battleTime >= battleStat.AttackDelay)
                 {
                     battleTime = 0.0f;
@@ -66,7 +67,7 @@ public class EnemyMovement : BattleSystem
                 transform.Translate(dir * delta, Space.World);
                 if (Mathf.Approximately(dist, 0.0f))
                 {
-                    myAnim.SetBool("IsMoving", false);
+                    myAnim.SetBool("IsRunning", false);
                 }
             }
             float angle = Vector3.Angle(transform.forward, dir);
@@ -77,7 +78,7 @@ public class EnemyMovement : BattleSystem
 
             yield return null;
         }
-        myAnim.SetBool("IsMoving", false);
+        myAnim.SetBool("IsRunning", false);
     }
 
     public void MoveToPos(Vector3 target)
@@ -115,7 +116,7 @@ public class EnemyMovement : BattleSystem
 
         if (animAct == null)
         {
-            myAnim.SetBool("IsMoving", true);
+            myAnim.SetBool("IsRoaming", true);
         }
         else
         {
@@ -133,7 +134,7 @@ public class EnemyMovement : BattleSystem
 
         if (animAct == null)
         {
-            myAnim.SetBool("IsMoving", false);
+            myAnim.SetBool("IsRoaming", false);
         }
         else
         {

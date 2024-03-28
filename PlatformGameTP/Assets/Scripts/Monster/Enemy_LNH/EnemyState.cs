@@ -7,20 +7,22 @@ public class EnemyState : EnemyMovement
 {
     public enum State
     {
-        Create, Normal, Roaming, Battle, Death, Missing
+        Create, Normal, Roaming, Battle, Death, Missing, Detect
     }
     public State myState = State.Create;
     public LayerMask groundMask;
     public LayerMask moveLimitMask;
     public Rigidbody rigid;
     public Transform hpViewPos;
+    public GameObject detectUI;
+    public GameObject missngUI;
     public float jumpForce;
 
     Vector3 startPos;
     Vector3 leftLimitPos;
     Vector3 rightLimitPos;
     Vector3 limitPos;
-
+    Color originColor;
     float playTime = 0.0f;
     bool isGround = true;
 
@@ -31,12 +33,17 @@ public class EnemyState : EnemyMovement
         myState = s;
         switch (myState)
         {
+            case State.Detect:
+                // 플레이어가 아웃라인에 걸린 위치로 이동한다.
+                // 해당 위치로 이동후 Missing 스테이트로 변환
+                // 만약 플레이어가 그 전에 걸리면 알아서 battle로 갈거임
+                MoveToPos(limitPos, () => ChangeState(State.Missing));
+                break;
             case State.Missing:
                 // 놓쳤으니깐 물음표를 띄운다.
-                //2~5초 사이의 대기 시간을 가지고 원래 자리로 돌아간다.
-                playTime = Random.Range(2.0f, 5.0f);
-                MoveToOriginPos(startPos, playTime);
+                //일정 대기 시간을 가지고 원래 자리로 돌아간다.
                 // 원래 자리로 돌아가고 거기서 노말로 스테이트를 변환
+                StartCoroutine(MissingTarget());
                 break;
             case State.Normal:
                 //RaycastHit hit = Physics.Raycast(transform.position, Vector2.down, 100.0f, groundMask);
@@ -55,23 +62,23 @@ public class EnemyState : EnemyMovement
                         }
 
 
-                        if(Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.back, out subHit, 1000.0f, moveLimitMask))
+                        if (Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.back, out subHit, 1000.0f, moveLimitMask))
                         {
                             if (subHit.transform != null)
                             {
                                 leftLimitPos = new Vector3(0, transform.position.y, subHit.point.z);
                             }
                         }
-                        
+
                     }
-                    
+
                     float leftDist = Vector3.Distance(transform.position, leftLimitPos);
                     float rightDist = Vector3.Distance(transform.position, rightLimitPos);
 
-                    limitPos = (leftDist > rightDist) ? leftLimitPos: rightLimitPos ;
+                    limitPos = (leftDist > rightDist) ? leftLimitPos : rightLimitPos;
 
                 }
-                
+
                 playTime = Random.Range(1.0f, 3.0f);
                 // dir을 반대로, 회전도 시킨다.
                 StartCoroutine(DelayChangeState(State.Roaming, playTime)); // 돌아간 뒤에 로밍으로 스테이트를 변환
@@ -94,16 +101,9 @@ public class EnemyState : EnemyMovement
         }
     }
 
-    Vector3 GetRndPos()
-    {
-        Vector3 dir = Vector3.forward;
-        dir = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0) * dir;
-        dir *= Random.Range(0.0f, 3.0f);
-        return startPos + dir;
-    }
-
     void StateProcess()
     {
+        transform.position = new Vector3(0.0f, transform.position.y, transform.position.z);
         switch (myState)
         {
             case State.Roaming:
@@ -145,6 +145,66 @@ public class EnemyState : EnemyMovement
         }
     }
 
+    public void DetectTarget(Transform target)
+    {
+        if (myState == State.Death) return;
+        StopAllCoroutines();
+        StartCoroutine(DetectingTarget(target));
+    }
+
+    IEnumerator DetectingTarget(Transform target)
+    {
+
+        if (myAnim.GetBool("IsRoaming"))
+        {
+            myAnim.SetBool("IsRoaming", false);
+        }
+
+        if (myAnim.GetBool("IsRunning"))
+        {
+            myAnim.SetBool("IsRunning", false);
+        }
+        myAnim.SetTrigger("Detect");
+        TurnOnDetectImg(detectUI);
+
+        playTime = Random.Range(1.0f, 2.0f);
+        limitPos = target.position;
+
+        yield return StartCoroutine(DelayChangeState(State.Detect, playTime));
+    }
+
+    IEnumerator MissingTarget()
+    {
+        TurnOnDetectImg(missngUI);
+        myAnim.SetBool("IsRoaming", false);
+        myAnim.SetBool("IsRunning", false);
+
+        yield return new WaitForSeconds(1.5f);
+        playTime = Random.Range(2.0f, 4.0f);
+        MoveToOriginPos(startPos, playTime);
+    }
+
+    public void TurnOnDetectImg(GameObject _imgSet)
+    {
+        if (_imgSet != null)
+        {
+            StartCoroutine(TurningDetectOnActionImg(_imgSet));
+        }
+    }
+
+    IEnumerator TurningDetectOnActionImg(GameObject _imgSet)
+    {
+        _imgSet.gameObject.SetActive(true);
+        int cnt = _imgSet.transform.childCount;
+
+        for (int i = 0; i < cnt; i++)
+        {
+            Transform obj = _imgSet.transform.GetChild(i);
+            obj.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     public void FindTarget(Transform target)
     {
         if (myState == State.Death) return;
@@ -168,23 +228,27 @@ public class EnemyState : EnemyMovement
 
     public void DisApear()
     {
+        Debug.Log("disappear 실행");
         StartCoroutine(DisApearing(2.0f));
     }
 
     IEnumerator DisApearing(float delay)
     {
+        Debug.Log("disappearing 실행 대기");
         yield return new WaitForSeconds(delay);
+        Debug.Log("disappearing 실행");
 
         //Destroy(myHpBar.gameObject);
 
-        float dist = 2.0f;
+        /*float dist = 2.0f;
         while (dist > 0.0f)
         {
             float delta = 0.5f * Time.deltaTime;
             dist -= delta;
             transform.Translate(Vector3.down * delta, Space.World);
             yield return null;
-        }
+        }*/
+        
         Destroy(gameObject);
     }
 
@@ -195,6 +259,7 @@ public class EnemyState : EnemyMovement
 
     IEnumerator MovingToOringPos(Vector3 originPos, float playTime)
     {
+        myAnim.SetBool("IsRoaming", true);
         Vector3 dir = originPos - transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
@@ -214,28 +279,26 @@ public class EnemyState : EnemyMovement
                 if (isGround)
                 {
                     Jump();
+                    yield return new WaitForSeconds(0.3f);
                 }
             }
             yield return null;
         }
-
+        myAnim.SetBool("IsRoaming", false);
         yield return StartCoroutine(DelayChangeState(State.Normal, playTime));
     }
 
     void IsGround()
     {
-        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.1f, groundMask);
+        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.01f, groundMask);
         //Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
 
-        myAnim.SetBool("IsGround", isGround);
-        if (isGround)
-        {
-            Debug.Log("hit");
-        }
     }
 
     void Jump()
     {
-        rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        Vector3 jumpVelocity = Vector3.up * Mathf.Sqrt(jumpForce * -Physics.gravity.y);
+
+        rigid.AddForce(jumpVelocity, ForceMode.Impulse);
     }
 }

@@ -43,8 +43,5 @@ public class Passive_Item : ItemProperty
         }
         return;
 
-        Debug.Log(PassiveRnd[0]);
-        Debug.Log(PassiveRnd[1]);
-        Debug.Log(PassiveRnd[2]);
     }
 }
