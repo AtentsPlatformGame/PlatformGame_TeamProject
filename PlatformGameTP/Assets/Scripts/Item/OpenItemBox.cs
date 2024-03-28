@@ -57,17 +57,17 @@ public class OpenItemBox : Inventory
 
     void OnTriggerEnter(Collider other)
     {
-        ItemPopup.SetActive(true);
+        if (ItemPopup != null) ItemPopup.SetActive(true);
         checkBox = true;
     }
     void OnTriggerStay(Collider other)
     {
-        ItemPopup.SetActive(true);
+        if(ItemPopup != null)ItemPopup.SetActive(true);
         checkBox = true;
     }
     void OnTriggerExit(Collider other)
     {
-        ItemPopup.SetActive(false);
+        if (ItemPopup != null) ItemPopup.SetActive(false);
         checkBox = false;
         CheckItemBox= false;
     }
@@ -78,7 +78,7 @@ public class OpenItemBox : Inventory
         ItemMenu.SetActive(true);
         RandomShow();
         ItemPopup.SetActive(false) ;
-        //Destroy(ItemPopup);
+        Destroy(ItemPopup);
       
     }
 
