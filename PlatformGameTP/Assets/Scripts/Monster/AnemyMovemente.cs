@@ -26,7 +26,7 @@ public class AnemyMovemente : BattleSystem
     {
         
     }
-    protected void Initialize()
+    protected new void Initialize()
     {
         curHp = battleStat.MaxHp; // BattleSystem 수정 부분
     }
@@ -46,7 +46,7 @@ public class AnemyMovemente : BattleSystem
 
             if (CheckWall(rayDir)) return;
 
-            myAnim.SetBool("IsAir", false);
+            
             jumpCount = 0;
         }
     }
@@ -67,7 +67,7 @@ public class AnemyMovemente : BattleSystem
             }
             if (CheckWall(rayDir)) return;
 
-            myAnim.SetBool("IsAir", true);
+            
         }
     }
     bool CheckWall(Vector3 rayDir)
