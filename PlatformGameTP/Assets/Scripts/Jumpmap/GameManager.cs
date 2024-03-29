@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
     {
         RaycastHit Tphit;
         if (Physics.Raycast(Raypoint.transform.position, Raypoint.transform.forward, out Tphit, Mathf.Infinity, TP) ||
-            Physics.Raycast(Raypoint.transform.position + Vector3.forward * 0.5f, Raypoint.transform.forward, out Tphit, Mathf.Infinity, TP) ||
-            Physics.Raycast(Raypoint.transform.position + Vector3.back * 0.5f, Raypoint.transform.forward, out Tphit, Mathf.Infinity, TP))
+            Physics.Raycast(Raypoint.transform.position + Vector3.forward * 0.1f, Raypoint.transform.forward, out Tphit, Mathf.Infinity, TP) ||
+            Physics.Raycast(Raypoint.transform.position + Vector3.back * 0.1f, Raypoint.transform.forward, out Tphit, Mathf.Infinity, TP))
         {
             isTpobject = true;
             GKeyPopup.SetActive(true);
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         TimeScaleOn();
-        Canvas.SetActive(false);
+        CanvasOff();
     }
 
     //±â¹Í ½ÇÆÐ FailGimic
