@@ -34,13 +34,13 @@ public class Inventory_LNH : MonoBehaviour
                 UpdateSlot(1, _itemStat);
                 break;
             case ITEMTYPE.CURSEDACCE:
-                UpdateSlot(3, _itemStat);
+                UpdateSlot(2, _itemStat);
                 break;
             case ITEMTYPE.PASSIVE:
-                UpdateSlot(4, _itemStat);
+                UpdateSlot(3, _itemStat);
                 break;
             case ITEMTYPE.SPELL:
-                UpdateSlot(5, _itemStat);
+                UpdateSlot(4, _itemStat);
                 break;
             default:
                 break;

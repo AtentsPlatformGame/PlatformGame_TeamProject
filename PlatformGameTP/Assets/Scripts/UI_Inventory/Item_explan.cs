@@ -16,7 +16,7 @@ public class Item_explan : Inventory, IPointerEnterHandler, IPointerExitHandler
     {
         
         MyExplanation.gameObject.SetActive(true);
-        MyExplanation.transform.position = gameObject.transform.position + Vect;
+        //MyExplanation.transform.position = gameObject.transform.position + Vect;
         MyExplanation.GetComponent<Image>().sprite = this.GetComponent<InventorySlot_LNH>().GetItemStat().itemDescriptionImage;
 
     }
@@ -28,14 +28,14 @@ public class Item_explan : Inventory, IPointerEnterHandler, IPointerExitHandler
     void Start()
     {
         MouseOverCheck = false;
-        Vect = new Vector3(2, -120 , 0);
+        Vect = new Vector3(0, 0 , 0);
        // MyExplanation.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        MousePos = Input.mousePosition;
+        //MousePos = Input.mousePosition;
     }
 
 

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [Header("실패 캔버스")][SerializeField] GameObject FailCanvas;
     [Header("성공 캔버스")][SerializeField] GameObject ClearCanvas;
     [Header("카운트다운 캔버스")][SerializeField] GameObject CountDownCanvas;
-    [Header("아이템보상 캔버스")][SerializeField] GameObject ItemGetCanvas;
+    
 
     [Header("팝업 캔버스")] public GameObject GKeyPopup;
     [Header("입장 레이 오브젝트")] public GameObject Raypoint;
@@ -24,11 +24,26 @@ public class GameManager : MonoBehaviour
     public float GimicHp = 1; //최대 기믹 입장 횟수
     public float PlayerHp; // 현재 기믹 입장 횟수
 
+    public GameObject card1;
+    public GameObject card2;
+    public GameObject card3;
+    public GameObject card4;
+    public GameObject card5;
+    public GameObject card6;
+    public int cardCount;
+
     // Start is called before the first frame update
     void Start()
     {
         PlayerHp = GimicHp;
         GKeyPopup.SetActive(false);
+        cardCount = 0;
+        card1.SetActive(false);
+        card2.SetActive(false);
+        card3.SetActive(false);
+        card4.SetActive(false);
+        card5.SetActive(false);
+        card6.SetActive(false);
     }
 
     // Update is called once per frame
@@ -130,7 +145,8 @@ public class GameManager : MonoBehaviour
     //아이템 보상 ItemGet
     public void ItemGet()
     {
-        ItemGetCanvas.SetActive(true);
+        
+        RandomCard();
         TimeScaleOff();
     }
 
@@ -169,8 +185,45 @@ public class GameManager : MonoBehaviour
     //겟 버튼을 누르면 시간이 흐른다.
     public void itemGetAct()
     {
-        ItemGetCanvas.SetActive(false);
+        
+        
         TimeScaleOn();
+    }
+
+    public void RandomCard()
+    {
+        
+        int RndcardNum = Random.Range(1, 7);
+        if (RndcardNum == 1 && cardCount == 0)
+        {
+            card1.SetActive(true);
+            cardCount++;
+        }
+        if (RndcardNum == 2 && cardCount == 0)
+        {
+            card2.SetActive(true);
+            cardCount++;
+        }
+        if (RndcardNum == 3 && cardCount == 0)
+        {
+            card3.SetActive(true);
+            cardCount++;
+        }
+        if (RndcardNum == 4 && cardCount == 0)
+        {
+            card4.SetActive(true);
+            cardCount++;
+        }
+        if (RndcardNum == 5 && cardCount == 0)
+        {
+            card5.SetActive(true);
+            cardCount++;
+        }
+        if (RndcardNum == 6 && cardCount == 0)
+        {
+            card6.SetActive(true);
+            cardCount++;
+        }
     }
 
 }
