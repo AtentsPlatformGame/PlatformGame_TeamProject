@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDetectImg : MonoBehaviour
+public class DetectImgSet : MonoBehaviour
 {
-    Vector3 originRot;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -16,7 +15,7 @@ public class EnemyDetectImg : MonoBehaviour
         yield return new WaitForSeconds(1f);
         int cnt = transform.childCount;
 
-        for(int i = 0; i < cnt; i++)
+        for (int i = 0; i < cnt; i++)
         {
             Transform obj = transform.GetChild(i);
             obj.gameObject.SetActive(false);
