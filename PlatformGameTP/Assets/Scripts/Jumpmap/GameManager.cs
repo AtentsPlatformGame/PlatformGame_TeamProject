@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [Header("기믹 시작 위치")] public Transform GimicStart;
     [Header("내보낼 때 위치(문 앞)")] public Transform GimicEnd;
 
+    [Header("성공 시 뒤로 못 가게 하는 콜라이더")] public GameObject NotGoBack; //성공 시 뒤로 돌아가 죽는 거 방지
+
     public LayerMask TP;
     public bool isTpobject = false;
     public bool isPopup = false;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerHp = GimicHp;
         GKeyPopup.SetActive(false);
+        NotGoBack.SetActive(false); 
         cardCount = 0;
         card1.SetActive(false);
         card2.SetActive(false);
@@ -106,6 +109,7 @@ public class GameManager : MonoBehaviour
         CanvasOff();
         Tp(Player, GimicStart);
         CountDownCanvas.gameObject.SetActive(true);
+        NotGoBack.SetActive(false);
     }
 
     //나가기 버튼 Exit
@@ -121,6 +125,7 @@ public class GameManager : MonoBehaviour
         FailCanvas.SetActive(true); //Fail UI //버튼을 누르면 문앞으로 플레이어를 내보낸다.
         TimeScaleOff();
         Hp();
+       
     }
 
     void TimeScaleOff()
@@ -136,6 +141,7 @@ public class GameManager : MonoBehaviour
     //기믹 성공 ClearGimic
     public void ClearGimic()
     {
+        
         CountDownCanvas.gameObject.SetActive(false); // 카운트다운을 꺼버리던가, 멈춘다.
         ClearCanvas.SetActive(true); //Clear UI //버튼을 누르면 문앞으로 플레이어를 내보낸다.
         Hp();
@@ -152,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     public void CountDownEnd()
     {
+        NotGoBack.SetActive(true);
         CountDownCanvas.gameObject.SetActive(false); //카운트다운을 꺼버린다.
     }
 
@@ -180,6 +187,7 @@ public class GameManager : MonoBehaviour
         ClearCanvas.SetActive(false);
         Tp(Player, GimicEnd);
         TimeScaleOn();
+        NotGoBack.SetActive(false );
     }
 
     //겟 버튼을 누르면 시간이 흐른다.
@@ -190,6 +198,12 @@ public class GameManager : MonoBehaviour
         TimeScaleOn();
     }
 
+    public void DieFalling()
+    {
+        PlayerHp = 0.0f;
+        GimicHp = 0.0f; 
+    }
+  
     public void RandomCard()
     {
         
