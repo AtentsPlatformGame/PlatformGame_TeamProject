@@ -4800,6 +4800,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2303790651989448907, guid: 315e3037d6061204cad190d8fb3728b6, type: 3}
   m_PrefabInstance: {fileID: 397667401}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1088886053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1088886054}
+  m_Layer: 0
+  m_Name: NullNotGoBack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1088886054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088886053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.908269, y: 7.410019, z: 58.624027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1099196873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4406401197777256, guid: 4710d4d66beeb59408ae416205b7e543, type: 3}
@@ -7828,6 +7859,7 @@ MonoBehaviour:
   Player: {fileID: 879955506}
   GimicStart: {fileID: 1430034553}
   GimicEnd: {fileID: 1107903055}
+  NotGoBack: {fileID: 1088886053}
   TP:
     serializedVersion: 2
     m_Bits: 8
@@ -10738,3 +10770,4 @@ SceneRoots:
   - {fileID: 1172987642}
   - {fileID: 5532977532218649135}
   - {fileID: 1190697499}
+  - {fileID: 1088886054}
