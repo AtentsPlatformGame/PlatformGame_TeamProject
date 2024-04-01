@@ -40,7 +40,7 @@ public class EnemyMovement : BattleSystem
         attack = StartCoroutine(AttackingTarget(target));
     }
 
-    IEnumerator AttackingTarget(Transform target)
+    protected virtual IEnumerator AttackingTarget(Transform target)
     {
         while (target != null)
         {

@@ -20,17 +20,17 @@ public class EnemyState : EnemyMovement
     public UnityEvent<int> dropGoldAct;
     public float jumpForce;
 
-    [SerializeField] int dropGold;
-    Vector3 startPos;
-    Vector3 leftLimitPos;
-    Vector3 rightLimitPos;
-    Vector3 limitPos;
+    public int dropGold;
+    protected Vector3 startPos;
+    protected Vector3 leftLimitPos;
+    protected Vector3 rightLimitPos;
+    protected Vector3 limitPos;
     Color originColor;
-    float playTime = 0.0f;
-    bool isGround = true;
+    protected float playTime = 0.0f;
+    protected bool isGround = true;
 
     //HpBar myHpBar;
-    void ChangeState(State s)
+    protected void ChangeState(State s)
     {
         if (myState == s) return;
         myState = s;
@@ -104,7 +104,7 @@ public class EnemyState : EnemyMovement
         }
     }
 
-    void StateProcess()
+    protected void StateProcess()
     {
         transform.position = new Vector3(0.0f, transform.position.y, transform.position.z);
         switch (myState)
@@ -116,7 +116,7 @@ public class EnemyState : EnemyMovement
         }
     }
 
-    IEnumerator DelayChangeState(State s, float t)
+    protected IEnumerator DelayChangeState(State s, float t)
     {
         yield return new WaitForSeconds(t);
         ChangeState(s);
@@ -155,7 +155,7 @@ public class EnemyState : EnemyMovement
         StartCoroutine(DetectingTarget(target));
     }
 
-    IEnumerator DetectingTarget(Transform target)
+    protected IEnumerator DetectingTarget(Transform target)
     {
 
         if (myAnim.GetBool("IsRoaming"))
@@ -176,7 +176,7 @@ public class EnemyState : EnemyMovement
         yield return StartCoroutine(DelayChangeState(State.Detect, playTime));
     }
 
-    IEnumerator MissingTarget()
+    protected IEnumerator MissingTarget()
     {
         TurnOnDetectImg(missngUI);
         myAnim.SetBool("IsRoaming", false);
@@ -195,7 +195,7 @@ public class EnemyState : EnemyMovement
         }
     }
 
-    IEnumerator TurningDetectOnActionImg(GameObject _imgSet)
+    protected IEnumerator TurningDetectOnActionImg(GameObject _imgSet)
     {
         _imgSet.gameObject.SetActive(true);
         int cnt = _imgSet.transform.childCount;
@@ -237,7 +237,7 @@ public class EnemyState : EnemyMovement
         StartCoroutine(DisApearing(2.0f));
     }
 
-    IEnumerator DisApearing(float delay)
+    protected IEnumerator DisApearing(float delay)
     {
         Debug.Log("disappearing 실행 대기");
         yield return new WaitForSeconds(delay);
@@ -257,12 +257,12 @@ public class EnemyState : EnemyMovement
         Destroy(gameObject);
     }
 
-    void MoveToOriginPos(Vector3 originPos, float playTime)
+    protected void MoveToOriginPos(Vector3 originPos, float playTime)
     {
         StartCoroutine(MovingToOringPos(originPos, playTime));
     }
 
-    IEnumerator MovingToOringPos(Vector3 originPos, float playTime)
+    protected IEnumerator MovingToOringPos(Vector3 originPos, float playTime)
     {
         myAnim.SetBool("IsRoaming", true);
         Vector3 dir = originPos - transform.position;
@@ -293,14 +293,14 @@ public class EnemyState : EnemyMovement
         yield return StartCoroutine(DelayChangeState(State.Normal, playTime));
     }
 
-    void IsGround()
+    protected void IsGround()
     {
         isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.01f, groundMask);
         //Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
 
     }
 
-    void Jump()
+    protected void Jump()
     {
         Vector3 jumpVelocity = Vector3.up * Mathf.Sqrt(jumpForce * -Physics.gravity.y);
 
