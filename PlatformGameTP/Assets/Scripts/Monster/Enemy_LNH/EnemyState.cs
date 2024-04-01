@@ -8,7 +8,7 @@ public class EnemyState : EnemyMovement
 {
     public enum State
     {
-        Create, Normal, Roaming, Battle, Death, Missing, Detect
+        Create, Normal, Roaming, Battle, Death, Missing, Detect, Phase
     }
     public State myState = State.Create;
     public LayerMask groundMask;
@@ -30,7 +30,7 @@ public class EnemyState : EnemyMovement
     protected bool isGround = true;
 
     //HpBar myHpBar;
-    protected void ChangeState(State s)
+    protected virtual void ChangeState(State s)
     {
         if (myState == s) return;
         myState = s;
