@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class DemonWarriorAnimEvent : AnimEvent_LNH
 {
-
+    public Transform attackPoint;
     public UnityEvent verticalAttackAct;
     public UnityEvent horizontalAttackAct;
     public void VerticalAttackEvent()
@@ -17,4 +17,5 @@ public class DemonWarriorAnimEvent : AnimEvent_LNH
     {
         horizontalAttackAct?.Invoke();
     }
+
 }

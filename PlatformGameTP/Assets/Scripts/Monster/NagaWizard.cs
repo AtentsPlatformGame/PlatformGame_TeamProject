@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemonWarriorController : EnemyState
+public class NagaWizard : EnemyState
 {
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
@@ -13,6 +13,7 @@ public class DemonWarriorController : EnemyState
     [SerializeField] Transform skeleton;
     [SerializeField] bool isPhaseChanged = false;
 
+    // Start is called before the first frame update
     protected override void ChangeState(State s)
     {
         base.ChangeState(s);
@@ -140,3 +141,4 @@ public class DemonWarriorController : EnemyState
         Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
     }
 }
+
