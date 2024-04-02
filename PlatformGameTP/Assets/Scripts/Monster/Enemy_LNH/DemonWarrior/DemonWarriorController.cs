@@ -6,7 +6,8 @@ public class DemonWarriorController : EnemyState
 {
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
-    public Transform attackPoint;
+
+    public Transform slashPoint;
     public Transform spawnPoint;
 
     [SerializeField] Transform skeleton;
@@ -47,7 +48,7 @@ public class DemonWarriorController : EnemyState
     void Update()
     {
         base.StateProcess();
-        if(!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp * 0.5))
+        if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp * 0.5))
         {
             ChangeState(State.Phase);
             isPhaseChanged = true;
@@ -60,12 +61,26 @@ public class DemonWarriorController : EnemyState
 
     IEnumerator SpawnSkeleton(Transform spawnPoint)
     {
-        //GameObject obj = Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint) as GameObject;
-        Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint);
-        //skeleton.transform.SetParent(null);
+        Transform obj;
+        obj = Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint);
+        //Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint);
+        obj.gameObject.transform.SetParent(null);
         yield return StartCoroutine(DelayChangeState(State.Normal, 1.5f));
     }
 
+    public new void OnAttack()
+    {
+        Collider[] list = Physics.OverlapSphere(attackPoint.position, 1.0f, enemyMask);
+
+        foreach (Collider col in list)
+        {
+            IDamage act = col.GetComponent<IDamage>();
+            if (act != null)
+            {
+                act.TakeDamage(30.0f);
+            }
+        }
+    }
     protected override IEnumerator AttackingTarget(Transform target)
     {
         while (target != null)
@@ -117,11 +132,11 @@ public class DemonWarriorController : EnemyState
 
     public void VirticalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, attackPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
+        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
     }
 
     public void HorizontalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, attackPoint.transform.position, Quaternion.identity, null);
+        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
     }
 }
