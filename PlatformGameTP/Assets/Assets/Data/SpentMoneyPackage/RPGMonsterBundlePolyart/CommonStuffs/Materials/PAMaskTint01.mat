@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PAMaskTint01
-  m_Shader: {fileID: 4800000, guid: 0bff5e6051be4b628bf3c1161e4f663c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 918a47a8d5997c54dbff7c3ccc734abe, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -27,8 +27,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3107e2afcb02411d902c3f3b12faa750, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DissolveMap:
+        m_Texture: {fileID: 2800000, guid: 37c853eb2548363499defe4dd0f99173, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Emission:
         m_Texture: {fileID: 2800000, guid: d84cc81065ac4648aceaf93b68ea05cf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 68805ce992c44391896061e7e9c1b40f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -55,6 +63,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SAM:
         m_Texture: {fileID: 2800000, guid: 9f9105e8376161f4bb30dc3a8b32b1ca, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -75,8 +87,15 @@ Material:
     - _Color07Power: 4.5
     - _Color08Power: 7.1
     - _Color09Power: 6.7
+    - _DissolveAmount: 0
+    - _DissolveEmission: 1
+    - _DissolveWidth: 0.05
+    - _Glossiness: 0.5
+    - _Metallic: 0
+    - _NormalStrenght: 0.5
     - __dirty: 1
     m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color01: {r: 1, g: 0, b: 0.14694071, a: 0}
     - _Color02: {r: 0.028301895, g: 0.022561416, b: 0.022561416, a: 0}
     - _Color03: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 0}
@@ -86,5 +105,6 @@ Material:
     - _Color07: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
     - _Color08: {r: 0.3490566, g: 0.3474101, b: 0.3474101, a: 0}
     - _Color09: {r: 1, g: 0.017761573, b: 0, a: 0}
+    - _DissolveColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionPower: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 0}
   m_BuildTextureStacks: []

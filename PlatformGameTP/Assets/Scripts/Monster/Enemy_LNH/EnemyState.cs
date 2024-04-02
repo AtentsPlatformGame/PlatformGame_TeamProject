@@ -237,7 +237,7 @@ public class EnemyState : EnemyMovement
         StartCoroutine(DisApearing(2.0f));
     }
 
-    protected IEnumerator DisApearing(float delay)
+    protected virtual IEnumerator DisApearing(float delay)
     {
         Debug.Log("disappearing 실행 대기");
         yield return new WaitForSeconds(delay);

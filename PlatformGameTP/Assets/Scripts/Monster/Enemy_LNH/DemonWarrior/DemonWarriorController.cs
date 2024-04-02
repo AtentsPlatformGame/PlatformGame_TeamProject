@@ -48,6 +48,7 @@ public class DemonWarriorController : EnemyState
     void Update()
     {
         base.StateProcess();
+        if (this.myState == State.Death) return;
         if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp * 0.5))
         {
             ChangeState(State.Phase);
@@ -70,14 +71,14 @@ public class DemonWarriorController : EnemyState
 
     public new void OnAttack()
     {
-        Collider[] list = Physics.OverlapSphere(attackPoint.position, 1.0f, enemyMask);
+        Collider[] list = Physics.OverlapSphere(attackPoint.position, 3.0f, enemyMask);
 
         foreach (Collider col in list)
         {
             IDamage act = col.GetComponent<IDamage>();
             if (act != null)
             {
-                act.TakeDamage(30.0f);
+                act.TakeDamage(this.battleStat.AP);
             }
         }
     }
@@ -130,6 +131,23 @@ public class DemonWarriorController : EnemyState
         myAnim.SetBool("IsRunning", false);
     }
 
+    protected override IEnumerator DisApearing(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        //Destroy(myHpBar.gameObject);
+        float _fillAmount = 0.0f;
+        while (_fillAmount < 1.0f)
+        {
+            _fillAmount = Mathf.Clamp(_fillAmount + Time.deltaTime, 0.0f, 1.0f);
+            foreach (Renderer renderer in allRenderer)
+            {
+                renderer.material.SetFloat("_DissolveAmount", _fillAmount);
+            }
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
     public void VirticalAttackEffect()
     {
         Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
