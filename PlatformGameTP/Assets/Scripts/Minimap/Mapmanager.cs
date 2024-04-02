@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Mapmanager : MonoBehaviour
 {
-    [Header("¹Ì´Ï¸Ê Äµ¹ö½º")][SerializeField] GameObject Mapcanvas;
+    [Header("¹Ì´Ï¸Ê ¿Â Äµ¹ö½º")][SerializeField] GameObject Mapcanvas;
+
+    public bool Mapobject = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,21 +17,22 @@ public class Mapmanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            CanvasOn();
-            if (Mapcanvas)
+            if (Mapobject)
             {
-                CanvasOn();
+                Mapobject = false;
+                CanvasOff();
             }
             else
             {
-                CanvasOff();
+                Mapobject = true;
+                CanvasOn();
             }
         }
     }
 
-    public void CanvasOn()
+        public void CanvasOn()
     {
         Mapcanvas.SetActive(true);
     }
