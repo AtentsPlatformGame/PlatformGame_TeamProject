@@ -86,13 +86,16 @@ public class NagaWizard : EnemyState
     {
         while (target != null)
         {
+            Debug.Log("공격을한다");
             myAnim.SetBool("IsRunning", true);
-            int pattern = Random.Range(0, 2);
+            int pattern = Random.Range(0, 3);
+
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
-            if (dist < 0.0f) dist = 0.0f;
+            if (dist < 0.0001f) dist = 0.0f;
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
+            Debug.Log(dist);
             if (Mathf.Approximately(dist, 0.0f))
             {
                 myAnim.SetBool("IsRunning", false);
@@ -101,11 +104,18 @@ public class NagaWizard : EnemyState
                     battleTime = 0.0f;
                     if (pattern == 0)
                     {
+                        Debug.Log("일반1번");
                         myAnim.SetTrigger("Attack1");
                     }
-                    else
+                    else if (pattern == 1) 
                     {
+                        Debug.Log("일반2번");
                         myAnim.SetTrigger("Attack2");
+                    }
+                    else if(this.curHp <= 2)
+                    {
+                        Debug.Log("특수패턴 발동");
+                        myAnim.SetTrigger("Dead");
                     }
                 }
             }

@@ -35,6 +35,7 @@ public class EnemyMovement : BattleSystem
 
     protected void AttackTarget(Transform target)
     {
+        
         StopAllCoroutines();
         if (myAnim.GetBool("IsRoaming")) myAnim.SetBool("IsRoaming", false);
         attack = StartCoroutine(AttackingTarget(target));
@@ -44,6 +45,7 @@ public class EnemyMovement : BattleSystem
     {
         while (target != null)
         {
+            
             myAnim.SetBool("IsRunning", true);
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
