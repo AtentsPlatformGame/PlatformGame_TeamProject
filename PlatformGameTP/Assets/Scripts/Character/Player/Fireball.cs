@@ -26,6 +26,7 @@ public class Fireball : MonoBehaviour
     private void OnEnable()
     {
         spawnPos = transform.position;
+        oldPos = transform.position;
     }
     // Update is called once per frame
     void Update()
