@@ -29,7 +29,7 @@ public class EnemyState : EnemyMovement
     protected float playTime = 0.0f;
     protected bool isGround = true;
 
-    //HpBar myHpBar;
+    HpBar myHpBar;
     protected virtual void ChangeState(State s)
     {
         if (myState == s) return;
@@ -132,7 +132,12 @@ public class EnemyState : EnemyMovement
          SceneData.Instance.hpBarsTransform);
         myHpBar = obj.GetComponent<HpBar>();
         myHpBar.myTarget = hpViewPos;
-        base.changeHpAct.AddListener(myHpBar.ChangeHpSlider);*/
+
+        base.changeHpAct.AddListener(myHpBar.ChangeHpSlider); */
+        
+        /*changeHpAct 가 안보임.
+        영상 1시간13분56초엔 Enemy스크립트에 ChangeHpAct가 있음
+        */
 
         startPos = transform.position;
         ChangeState(State.Normal);
@@ -243,7 +248,7 @@ public class EnemyState : EnemyMovement
         yield return new WaitForSeconds(delay);
         Debug.Log("disappearing 실행");
 
-        //Destroy(myHpBar.gameObject);
+        Destroy(myHpBar.gameObject);
 
         /*float dist = 2.0f;
         while (dist > 0.0f)

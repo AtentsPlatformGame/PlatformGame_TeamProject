@@ -12,6 +12,7 @@ public struct BattleStat
     public float AttackDelay; // 공격 속도
     public float ProjectileSpeed; // 투사체 속도
     public float MoveSpeed; // 이동속도
+    
 }
 
 public interface IDamage
@@ -66,7 +67,6 @@ public class BattleSystem : CharacterProperty, IDamage
     private void TargetDead()
     {
         StopAllCoroutines();
-
     }
 
     protected void Initialize()
