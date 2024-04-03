@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class NagaWizard : EnemyState
@@ -9,10 +10,13 @@ public class NagaWizard : EnemyState
 
     public Transform slashPoint;
     public Transform spawnPoint;
+    public GameObject TsunamiLeft;
+    public GameObject TsunamiRight;
+    public int PhaseCount = 0;
 
-    [SerializeField] Transform skeleton;
     [SerializeField] bool isPhaseChanged = false;
 
+    public Vector3 SpecialPatternPos;
     // Start is called before the first frame update
     protected override void ChangeState(State s)
     {
@@ -24,7 +28,7 @@ public class NagaWizard : EnemyState
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
                 myAnim.SetTrigger("Spawn");
-                StartCoroutine(SpawnSkeleton(spawnPoint));
+                
                 break;
             default:
                 break;
@@ -40,7 +44,9 @@ public class NagaWizard : EnemyState
         myHpBar = obj.GetComponent<HpBar>();
         myHpBar.myTarget = hpViewPos;
         base.changeHpAct.AddListener(myHpBar.ChangeHpSlider);*/
-
+        TsunamiLeft.SetActive(false);
+        TsunamiRight.SetActive(false);
+        SpecialPatternPos = new (0.0f, 2.5f, 41.0f);
         startPos = transform.position;
         base.ChangeState(State.Normal);
     }
@@ -60,14 +66,7 @@ public class NagaWizard : EnemyState
         }
     }
 
-    IEnumerator SpawnSkeleton(Transform spawnPoint)
-    {
-        Transform obj;
-        obj = Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint);
-        //Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint);
-        obj.gameObject.transform.SetParent(null);
-        yield return StartCoroutine(DelayChangeState(State.Normal, 1.5f));
-    }
+ 
 
     public new void OnAttack()
     {
@@ -96,28 +95,47 @@ public class NagaWizard : EnemyState
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
             Debug.Log(dist);
+            //특수패턴
+
+          
+
+            if (this.curHp < 3 && PhaseCount == 0)
+            {
+                Debug.Log("특수패턴 발동");
+                myAnim.SetTrigger("SpecialPattern");
+                this.transform.position = SpecialPatternPos;
+                TsunamiLeft.SetActive(true);
+                TsunamiRight.SetActive(true);
+                yield return new WaitForSeconds(5.0f);
+
+                TsunamiLeft.SetActive(false);
+                TsunamiRight.SetActive(false);
+                PhaseCount = 1;
+            }
+           
+
             if (Mathf.Approximately(dist, 0.0f))
             {
                 myAnim.SetBool("IsRunning", false);
                 if (battleTime >= battleStat.AttackDelay)
                 {
+                    TsunamiLeft.SetActive(false);
+                    TsunamiRight.SetActive(false);
                     battleTime = 0.0f;
                     if (pattern == 0)
                     {
                         Debug.Log("일반1번");
                         myAnim.SetTrigger("Attack1");
+
                     }
-                    else if (pattern == 1) 
+                    else if (pattern == 1)
                     {
                         Debug.Log("일반2번");
                         myAnim.SetTrigger("Attack2");
                     }
-                    else if(this.curHp <= 2)
-                    {
-                        Debug.Log("특수패턴 발동");
-                        myAnim.SetTrigger("Dead");
-                    }
+
                 }
+
             }
             else
             {
