@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class OrcMonster : MonoBehaviour
+public class OrcMonsterAnimEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public UnityEvent verticalAttackAct;
+    public UnityEvent horizontalAttackAct;
+    public void VerticalAttackEvent()
     {
-        
+        verticalAttackAct?.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HorizontalAttackEvent()
     {
-        
+        horizontalAttackAct?.Invoke();
     }
 }

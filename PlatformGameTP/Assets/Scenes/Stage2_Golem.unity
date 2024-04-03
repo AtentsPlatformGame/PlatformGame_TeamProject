@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &78592845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 78592846}
+  m_Layer: 19
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &78592846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78592845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.96, z: 1.94}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4360654882493092404}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &266908587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,15 +425,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020322438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4c78d2c18138e408b048bbdcdf661a, type: 3}
+  m_Script: {fileID: 11500000, guid: d7709e01860ed6c4685404b246287ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackAct:
+  verticalAttackAct:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8051765841160278869}
-        m_TargetAssemblyTypeName: DemonWarriorController, Assembly-CSharp
-        m_MethodName: OnAttack
+        m_TargetAssemblyTypeName: OrcMonsterController, Assembly-CSharp
+        m_MethodName: VirticalAttackEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -412,12 +443,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  deadAct:
+  horizontalAttackAct:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8051765841160278869}
-        m_TargetAssemblyTypeName: EnemyState, Assembly-CSharp
-        m_MethodName: DisApear
+        m_TargetAssemblyTypeName: OrcMonsterController, Assembly-CSharp
+        m_MethodName: HorizontalAttackEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -455,7 +486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5622405645614709998, guid: 4fd57feab237a964a80ec8e6261af9ce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.738874
+      value: 8.21
       objectReference: {fileID: 0}
     - target: {fileID: 5622405645614709998, guid: 4fd57feab237a964a80ec8e6261af9ce, type: 3}
       propertyPath: m_LocalRotation.w
@@ -597,6 +628,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5821733687863010582, guid: e1c93f26665c2924b886242320f75dda, type: 3}
   m_PrefabInstance: {fileID: 537624240}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2141818748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2141818749}
+  m_Layer: 0
+  m_Name: SlashPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2141818749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141818748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.14, z: 1.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4360654882493092404}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &15533579558654360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,15 +1171,17 @@ Transform:
   m_GameObject: {fileID: 8051765841160278868}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 24.308847}
+  m_LocalPosition: {x: 0, y: 0, z: 11.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 2141818749}
   - {fileID: 892339084112439488}
   - {fileID: 7714594176849995212}
   - {fileID: 5610920714043268519}
   - {fileID: 7175869569419232222}
   - {fileID: 1020322439}
+  - {fileID: 78592846}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4363534384858669051
@@ -1712,14 +1776,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8051765841160278868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 901a7c9ba906a2144baa3110890c9a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b2615f5ce107c14597b548e470cd161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   battleStat:
     AP: 1
-    MaxHp: 10
-    AttackRange: 3
-    AttackDelay: 1
+    MaxHp: 5
+    AttackRange: 2
+    AttackDelay: 2
     ProjectileSpeed: 0
     MoveSpeed: 0
   attackPoint: {fileID: 1614066751}
@@ -1731,10 +1795,10 @@ MonoBehaviour:
   myState: 0
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 262144
   moveLimitMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   rigid: {fileID: 0}
   hpViewPos: {fileID: 0}
   detectUI: {fileID: 5813439319281001685}
@@ -1742,13 +1806,12 @@ MonoBehaviour:
   dropGoldAct:
     m_PersistentCalls:
       m_Calls: []
-  jumpForce: 0
-  dropGold: 0
-  virticalAttackEffect: {fileID: 0}
-  horizontalAttackEffect: {fileID: 0}
-  slashPoint: {fileID: 0}
-  spawnPoint: {fileID: 0}
-  skeleton: {fileID: 0}
+  jumpForce: 5
+  dropGold: 100
+  virticalAttackEffect: {fileID: 1233010467109672509, guid: 4aa9f30a28a77224ba84b2a2c334c71b, type: 3}
+  horizontalAttackEffect: {fileID: 1233010467109672509, guid: 4aa9f30a28a77224ba84b2a2c334c71b, type: 3}
+  slashPoint: {fileID: 2141818749}
+  spawnPoint: {fileID: 78592846}
   isPhaseChanged: 0
 --- !u!212 &8581713279728354738
 SpriteRenderer:
