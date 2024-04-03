@@ -12,8 +12,8 @@ public class Fireball : MonoBehaviour
     public UnityEvent getApAct;
     public GameObject explosionVFX;
     bool isFire = false;
-    float dmg = 0.5f;
-    float attackRange;
+    [SerializeField]float dmg = 0.5f;
+    [SerializeField] float attackRange;
     
     Vector3 oldPos;
     Vector3 spawnPos;
@@ -25,6 +25,7 @@ public class Fireball : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("파이어볼 생성");
         spawnPos = transform.position;
         oldPos = transform.position;
     }

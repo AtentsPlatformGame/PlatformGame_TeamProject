@@ -134,7 +134,6 @@ public class DemonWarriorController : EnemyState
     protected override IEnumerator DisApearing(float delay)
     {
         yield return new WaitForSeconds(delay);
-
         //Destroy(myHpBar.gameObject);
         float _fillAmount = 0.0f;
         while (_fillAmount < 1.0f)

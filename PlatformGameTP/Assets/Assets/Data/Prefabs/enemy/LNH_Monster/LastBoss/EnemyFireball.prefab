@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7565730336791113472}
   - component: {fileID: -1188238625029392514}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: EnemyFireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 724233238244324116}
@@ -97,14 +97,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crashMask:
     serializedVersion: 2
-    m_Bits: 786432
-  projectileSpeed: 3
-  acceleration: 2
+    m_Bits: 262152
+  projectileSpeed: 5
+  acceleration: 4
   getApAct:
     m_PersistentCalls:
       m_Calls: []
   explosionVFX: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
-  attackRange: 5
+  dmg: 2
+  attackRange: 50
 --- !u!1001 &721555973779323512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,6 +117,18 @@ PrefabInstance:
     - target: {fileID: 1434627103891488, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
       propertyPath: m_Name
       value: Magic fire pro yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -156,6 +169,38 @@ PrefabInstance:
     - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198151785488069066, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.0666116
+      objectReference: {fileID: 0}
+    - target: {fileID: 198445861013216388, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198445861013216388, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.42356968
+      objectReference: {fileID: 0}
+    - target: {fileID: 198445861013216388, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198574290624373436, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198574290624373436, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.15225315
+      objectReference: {fileID: 0}
+    - target: {fileID: 198574290624373436, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
