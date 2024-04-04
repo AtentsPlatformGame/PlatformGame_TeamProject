@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OrcMonsterAnimEvent : MonoBehaviour
+public class OrcMonsterAnimEvent : AnimEvent_Orc
 {
     public UnityEvent verticalAttackAct;
     public UnityEvent horizontalAttackAct;

@@ -7,7 +7,7 @@ public class OrcMonsterController : EnemyState
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
 
-    public Transform slashPoint;
+    public Transform hitPoint;
     public Transform spawnPoint;
 
 
@@ -142,12 +142,12 @@ public class OrcMonsterController : EnemyState
     }
     public void VirticalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
+        Instantiate(virticalAttackEffect, hitPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
     }
 
     public void HorizontalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
+        Instantiate(virticalAttackEffect, hitPoint.transform.position, Quaternion.identity, null);
     }
 
 
