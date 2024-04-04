@@ -68,6 +68,7 @@ public class NagaWizard : EnemyState
         {
             base.IsGround();
         }
+    
     }
 
  
@@ -102,7 +103,7 @@ public class NagaWizard : EnemyState
             
 
             //특수패턴
-            if (this.curHp < 3 && PhaseCount == 0)
+            if (this.curHP < 3 && PhaseCount == 0)
             {
                 Debug.Log("특수패턴 발동");
                 myAnim.SetTrigger("SpecialPattern");

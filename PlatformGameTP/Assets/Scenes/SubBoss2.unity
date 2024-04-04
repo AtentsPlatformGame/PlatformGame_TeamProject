@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1552,13 +1552,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95d75f2e473bb74bbe843901f963dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeHpAct:
+    m_PersistentCalls:
+      m_Calls: []
   battleStat:
     AP: 3
-    MaxHp: 3
+    MaxHp: 4
     AttackRange: 8
     AttackDelay: 2
     ProjectileSpeed: 0
     MoveSpeed: 3
+  _curHP: 0
   attackPoint: {fileID: 1295914381}
   enemyMask:
     serializedVersion: 2
@@ -1712,6 +1716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901a7c9ba906a2144baa3110890c9a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changeHpAct:
+    m_PersistentCalls:
+      m_Calls: []
   battleStat:
     AP: 3
     MaxHp: 2
@@ -1719,6 +1726,7 @@ MonoBehaviour:
     AttackDelay: 2
     ProjectileSpeed: 0
     MoveSpeed: 3
+  _curHP: 0
   attackPoint: {fileID: 1545610471}
   enemyMask:
     serializedVersion: 2
