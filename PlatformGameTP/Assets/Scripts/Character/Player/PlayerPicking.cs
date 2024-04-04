@@ -37,7 +37,7 @@ public class PlayerPicking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerController.isAlive() == false || playerController == null) return;
+        if (playerController.isAlive() == false || playerController == null || !playerController.GetMovePossible()) return;
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 

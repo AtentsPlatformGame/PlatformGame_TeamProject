@@ -13,7 +13,7 @@ public class PlayerController : BattleSystem
     [SerializeField]
     [Header("플레이어 2D 이동 방식 토글")] bool controll2D = true;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
-
+    [SerializeField, Header("플레이어 컨트롤 제어")] bool canMove = true;
 
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -27,6 +27,7 @@ public class PlayerController : BattleSystem
     float curRotY;
     float ap;
     bool isGround;
+    
     float attackDeltaTime = 0.0f;
     float teleportDeltaTime = 0.0f;
 
@@ -55,18 +56,21 @@ public class PlayerController : BattleSystem
     {
         if (isAlive())
         {
-            if (controll2D) // 앞뒤 2방향으로 움직이고 점프하는 코드
+            if (canMove)
             {
-                IsGround();
-                TryJump();
-                Rotate();
-                Move(); // 회전과 동시에 움직이기
-                        //if (canMove) Move(); // 회전이 끝나면 움직이기
-            }
-            else // 앞뒤, 양옆 4방향으로 움직이는 코드, 점프는 안만듬
-            {
-                // Rotate3D();
-                Move3D();
+                if (controll2D) // 앞뒤 2방향으로 움직이고 점프하는 코드
+                {
+                    IsGround();
+                    TryJump();
+                    Rotate();
+                    Move(); // 회전과 동시에 움직이기
+                            //if (canMove) Move(); // 회전이 끝나면 움직이기
+                }
+                else // 앞뒤, 양옆 4방향으로 움직이는 코드, 점프는 안만듬
+                {
+                    // Rotate3D();
+                    Move3D();
+                }
             }
         }
     }
@@ -390,6 +394,21 @@ public class PlayerController : BattleSystem
     public bool GetControllType()
     {
         return this.controll2D;
+    }
+
+    public bool GetMovePossible()
+    {
+        return this.canMove;
+    }
+
+    public void MoveTrue()
+    {
+        this.canMove = true;
+    }
+
+    public void MoveFalse()
+    {
+        this.canMove = false;
     }
 
 

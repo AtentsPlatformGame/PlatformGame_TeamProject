@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LastBoss_FlyingDemonKing : EnemyState
 {
+    
     public Transform clawAttackEffect; // 할퀴기 공격 vfx
     public Transform biteAttackEffect; // 깨물기 공격 vfx
     public Transform fireBallEffect; // 원거리 공격 vfx
@@ -12,10 +13,14 @@ public class LastBoss_FlyingDemonKing : EnemyState
     public Transform biteAttackPoint; // 깨물기 공격 포인트
     public Transform fireBallPoint; // 원거리 공격 발사 포인트
 
-    [SerializeField] Transform spawnMonster1;
-    [SerializeField] Transform spawnMonster2;
+    [SerializeField] Transform spawnTombStone;
+    [SerializeField] Collider bossCollider;
     [SerializeField] bool isPhaseChanged = false;
     [SerializeField] bool isSpawnStart = false;
+    [SerializeField, Header("아웃라인 퍼셉션")] Transform outLinePerception;
+    [SerializeField, Header("인라인 퍼셉션")] Transform inLinePerception;
+
+    Vector3 beforeSpawnPos;
 
     protected override void ChangeState(State s)
     {
@@ -24,13 +29,13 @@ public class LastBoss_FlyingDemonKing : EnemyState
         {
             case State.Phase:
                 StopAllCoroutines();
+                bossCollider.enabled = false;
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
                 myAnim.SetTrigger("Spawn");
-                //StartCoroutine(SpawnSkeleton(spawnPoint));
-                // 몬스터를 한마리(아마 1관보스 재탕) 소환한다.
-                // 몬스터를 소환하고 자기는 하늘 위로 올라간다. 올라가있는 시간동안 초당 hp를 n만큼(최대 얼마) 회복한다.
-                // 소환한 몬스터가 죽으면 다시 올라가기 전 위치로 내려온다.
+                // 비석을 소환함
+                // 비석을 소환하고 자기는 하늘 위로 올라간다.
+                // 시간 내로 비석 기믹을 클리어하지 못하면 피를 일정이상 회복하고 성공하면 다시 아래로 내려와 기절함
                 break;
             case State.Phase2:
                 StopAllCoroutines();
@@ -41,6 +46,11 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 // 방식 바꿀 때 컨트롤 못하게 했다가 특정 버튼이나 뭔가를 클릭하는 걸 둬서 그걸 누르면 다시 움직일 수 있다.
                 // 페이즈2에선 일반 패턴 3개랑 일정 쿨타임이 있는 랜덤 위치에 메테오 사용하기 패턴을 추가한다.
                 // 페이즈2에선 일반 패턴 데미지나 속도를 수정한다.
+                break;
+            case State.Dizzy:
+                myAnim.SetTrigger("Dizzy");
+                bossCollider.enabled = true;
+                StartCoroutine(DelayChangeState(State.Battle, 5f));
                 break;
             default:
                 break;
@@ -60,16 +70,16 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         base.StateProcess();
         if (this.myState == State.Death) return;
-        if (!isSpawnStart && this.curHp <= (this.battleStat.MaxHp * 0.7))
+        if (!isSpawnStart && this.curHp <= (this.battleStat.MaxHp * 0.6))
         {
             ChangeState(State.Phase);
             isSpawnStart = true;
         }
-        if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp) * 0.5)
+        /*if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp) * 0.4)
         {
             ChangeState(State.Phase2);
             isPhaseChanged = true;
-        }
+        }*/
         if (myState != State.Death)
         {
             base.IsGround();
@@ -213,5 +223,59 @@ public class LastBoss_FlyingDemonKing : EnemyState
             obj = Instantiate(fireBallEffect, fireBallPoint.transform.position, Quaternion.Euler(angle, 0.0f, 0.0f), null);
             obj.localScale = new Vector3(2, 2, 2);
         }
+    }
+
+    public void SpawnTombStone()
+    {
+        StartCoroutine(SpawningTombStone());
+    }
+
+    IEnumerator SpawningTombStone()
+    {
+        beforeSpawnPos = transform.position;
+        outLinePerception.gameObject.SetActive(false);
+        inLinePerception.gameObject.SetActive(false);
+        ChangeState(State.Create);
+        rigid.useGravity = false;
+        Vector3 upPos = transform.position + new Vector3(0, 20, 0);
+        Vector3 dir = upPos - fireBallPoint.position;
+        float dist = dir.magnitude;
+        dir.Normalize();
+        float delta = Time.deltaTime * 20.0f;
+        while (!Mathf.Approximately(dist, 0.0f))
+        {
+            if (dist < delta) dist = delta;
+            dist -= delta;
+            transform.Translate(dir * delta, Space.World);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1f);
+        if (spawnTombStone != null) spawnTombStone.gameObject.SetActive(true);
+        yield return null;
+    }
+
+    public void Dizzy()
+    {
+        StartCoroutine(Dizzing());
+    }
+
+    IEnumerator Dizzing()
+    {
+        Vector3 dir = beforeSpawnPos - transform.position;
+        float dist = dir.magnitude;
+        dir.Normalize();
+        float delta = Time.deltaTime * 20.0f;
+        while (!Mathf.Approximately(dist, 0.0f))
+        {
+            if (dist < delta) dist = delta;
+            dist -= delta;
+            transform.Translate(dir * delta, Space.World);
+            yield return null;
+        } // 다 내려옴
+        ChangeState(State.Dizzy);
+        yield return new WaitForSeconds(5f);
+        outLinePerception.gameObject.SetActive(true);
+        inLinePerception.gameObject.SetActive(true);
+        rigid.useGravity = true;
     }
 }

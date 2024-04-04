@@ -10,7 +10,7 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public UnityEvent clawAttackAct;
     public UnityEvent biteAttackAct;
     public UnityEvent fireballAttackAct;
-
+    public UnityEvent spawnTombStoneAct;
     public void OnClawAttack()
     {
         clawOnAttackAct?.Invoke();
@@ -33,5 +33,10 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public void FireballAttackEvent()
     {
         fireballAttackAct?.Invoke();
+    }
+
+    public void SpawnTombStoneEvent()
+    {
+        spawnTombStoneAct?.Invoke();
     }
 }

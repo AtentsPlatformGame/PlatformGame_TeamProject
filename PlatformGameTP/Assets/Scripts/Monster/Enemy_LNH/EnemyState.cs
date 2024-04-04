@@ -8,7 +8,7 @@ public class EnemyState : EnemyMovement
 {
     public enum State
     {
-        Create, Normal, Roaming, Battle, Death, Missing, Detect, Phase, Phase2
+        Create, Normal, Roaming, Battle, Death, Missing, Detect, Phase, Phase2, Dizzy
     }
     public State myState = State.Create;
     public LayerMask groundMask;
