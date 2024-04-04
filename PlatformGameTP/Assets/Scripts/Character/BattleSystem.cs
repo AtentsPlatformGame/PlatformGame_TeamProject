@@ -22,7 +22,9 @@ public interface IDamage
 
 public class BattleSystem : CharacterProperty, IDamage
 {
+    public UnityEvent<float> changeHpAct;
     [SerializeField] protected BattleStat battleStat;
+    [SerializeField] float _curHP = 0.0f;
     public event UnityAction deathAlarm; // event 키워드가 붙으면 이 클래스 밖에서 초기화, 실행이 불가능함. 접근 지정 제한자와 비슷한 느낌? 실수 방지
     public Transform attackPoint;
     public LayerMask enemyMask;
@@ -30,6 +32,16 @@ public class BattleSystem : CharacterProperty, IDamage
     protected float curHp; // 수정부분 protected float curHp = 0.0f
     protected float battleTime = 0.0f;
     Transform _target = null;
+
+    protected float curHP
+    {
+        get => _curHP;
+        set
+        {
+            _curHP = value;
+            changeHpAct?.Invoke(_curHP / battleStat.MaxHp);
+        }
+    }
 
     protected Transform myTarget
     {
@@ -71,14 +83,14 @@ public class BattleSystem : CharacterProperty, IDamage
 
     protected void Initialize()
     {
-        curHp = battleStat.MaxHp;
+        curHP = battleStat.MaxHp;
     }
     
     public void TakeDamage(float _dmg)
     {
-        curHp -= _dmg;
-        Debug.Log(curHp);
-        if (curHp <= 0.0f)
+        curHP -= _dmg;
+        Debug.Log(curHP);
+        if (curHP <= 0.0f)
         {
             // 체력이 다 해 쓰러짐
             OnDead();
@@ -125,7 +137,7 @@ public class BattleSystem : CharacterProperty, IDamage
 
     public bool isAlive()
     {
-        return curHp > 0.0f;
+        return curHP > 0.0f;
     }
 
 }

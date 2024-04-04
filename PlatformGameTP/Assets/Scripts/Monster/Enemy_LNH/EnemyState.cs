@@ -79,7 +79,6 @@ public class EnemyState : EnemyMovement
                     float rightDist = Vector3.Distance(transform.position, rightLimitPos);
 
                     limitPos = (leftDist > rightDist) ? leftLimitPos : rightLimitPos;
-
                 }
 
                 playTime = Random.Range(1.0f, 3.0f);
@@ -128,16 +127,11 @@ public class EnemyState : EnemyMovement
     {
         base.Initialize();
         //GameObject.Find("HpBars");
-        /*GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/HpStatus"),
+        GameObject obj = Instantiate(Resources.Load<GameObject>("HpStatus"),
          SceneData.Instance.hpBarsTransform);
         myHpBar = obj.GetComponent<HpBar>();
         myHpBar.myTarget = hpViewPos;
-
-        base.changeHpAct.AddListener(myHpBar.ChangeHpSlider); */
-        
-        /*changeHpAct 가 안보임.
-        영상 1시간13분56초엔 Enemy스크립트에 ChangeHpAct가 있음
-        */
+        base.changeHpAct.AddListener(myHpBar.ChangeHpSlider);
 
         startPos = transform.position;
         ChangeState(State.Normal);
@@ -258,8 +252,9 @@ public class EnemyState : EnemyMovement
             transform.Translate(Vector3.down * delta, Space.World);
             yield return null;
         }*/
-        
+
         Destroy(gameObject);
+        
     }
 
     protected void MoveToOriginPos(Vector3 originPos, float playTime)
