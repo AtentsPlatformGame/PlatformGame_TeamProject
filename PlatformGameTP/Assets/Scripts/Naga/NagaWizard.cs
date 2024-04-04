@@ -12,6 +12,8 @@ public class NagaWizard : EnemyState
     public Transform spawnPoint;
     public GameObject TsunamiLeft;
     public GameObject TsunamiRight;
+    public GameObject BeforeTsunami;
+    public GameObject WarningSign;
     public int PhaseCount = 0;
 
     [SerializeField] bool isPhaseChanged = false;
@@ -46,6 +48,8 @@ public class NagaWizard : EnemyState
         base.changeHpAct.AddListener(myHpBar.ChangeHpSlider);*/
         TsunamiLeft.SetActive(false);
         TsunamiRight.SetActive(false);
+        BeforeTsunami.SetActive(false);
+        WarningSign.SetActive(false);
         SpecialPatternPos = new (0.0f, 2.5f, 41.0f);
         startPos = transform.position;
         base.ChangeState(State.Normal);
@@ -95,15 +99,20 @@ public class NagaWizard : EnemyState
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
             Debug.Log(dist);
+            
+
             //특수패턴
-
-          
-
             if (this.curHp < 3 && PhaseCount == 0)
             {
                 Debug.Log("특수패턴 발동");
                 myAnim.SetTrigger("SpecialPattern");
                 this.transform.position = SpecialPatternPos;
+                WarningSign.SetActive(true);
+                BeforeTsunami.SetActive(true);
+
+                yield return new WaitForSeconds(5.0f);
+                BeforeTsunami.SetActive(false);
+                WarningSign.SetActive(false);
                 TsunamiLeft.SetActive(true);
                 TsunamiRight.SetActive(true);
                 yield return new WaitForSeconds(5.0f);
@@ -161,7 +170,7 @@ public class NagaWizard : EnemyState
 
     public void VirticalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
+        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
     }
 
     public void HorizontalAttackEffect()
