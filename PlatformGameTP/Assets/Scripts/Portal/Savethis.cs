@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Savethis : MonoBehaviour
 {
-    public static Vector3 savedPosition;
+    public Transform portalPosition;
     void Start()
     {
-        savedPosition = transform.position;
+        // 첫 번째 씬에서 포탈 위치를 저장
+        PlayerPrefs.SetFloat("PortalX", portalPosition.position.x);
+        PlayerPrefs.SetFloat("PortalY", portalPosition.position.y);
+        PlayerPrefs.SetFloat("PortalZ", portalPosition.position.z);
     }
 }
