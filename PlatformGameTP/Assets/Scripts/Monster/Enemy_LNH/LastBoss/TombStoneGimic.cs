@@ -11,7 +11,8 @@ public class TombStoneGimic : MonoBehaviour
     [SerializeField] Image[] myChilds;
     [SerializeField] int idx = 0;
     public UnityEvent clearGimicAct;
-
+    public UnityEvent failGimicAct;
+    bool failGimic = false;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -21,6 +22,10 @@ public class TombStoneGimic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (failGimic)
+        {
+            failGimicAct?.Invoke();
+        }
         if (idx >= myChilds.Length)
         {
             clearGimicAct?.Invoke();
@@ -35,11 +40,7 @@ public class TombStoneGimic : MonoBehaviour
             }
             else
             {
-                for(int i = idx; i >= 0; i--)
-                {
-                    myChilds[i].gameObject.SetActive(true);
-                }
-                idx = 0;
+                failGimic = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -51,11 +52,7 @@ public class TombStoneGimic : MonoBehaviour
             }
             else
             {
-                for (int i = idx; i >= 0; i--)
-                {
-                    myChilds[i].gameObject.SetActive(true);
-                }
-                idx = 0;
+                failGimic = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -67,11 +64,7 @@ public class TombStoneGimic : MonoBehaviour
             }
             else
             {
-                for (int i = idx; i >= 0; i--)
-                {
-                    myChilds[i].gameObject.SetActive(true);
-                }
-                idx = 0;
+                failGimic = true;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -83,11 +76,7 @@ public class TombStoneGimic : MonoBehaviour
             }
             else
             {
-                for (int i = idx; i >= 0; i--)
-                {
-                    myChilds[i].gameObject.SetActive(true);
-                }
-                idx = 0;
+                failGimic = true;
             }
         }
     }

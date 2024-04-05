@@ -1,17 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LastBoss_FlyingDemonKing : EnemyState
 {
-    
+    public UnityEvent changePlayerCameraSet;
+    [Header("할퀴기 공격 vfx"), Space(5)]
     public Transform clawAttackEffect; // 할퀴기 공격 vfx
+    [Header("깨물기 공격 vfx"), Space(5)]
     public Transform biteAttackEffect; // 깨물기 공격 vfx
+    [Header("원거리 공격 vfx"), Space(5)]
     public Transform fireBallEffect; // 원거리 공격 vfx
+    [Header("메테오 위치 vfx"), Space(5)]
+    public Transform demonMeteorPointEffect; // 메테오 vfx
+    [Header("메테오 vfx"), Space(5)]
+    public Transform demonMeteorEffect; // 메테오 vfx
 
+    [Header("할퀴기 공격 포인트"), Space(5)]
     public Transform clawAttackPoint; // 할퀴기 공격 포인트
+    [Header("깨물기 공격 포인트"), Space(5)]
     public Transform biteAttackPoint; // 깨물기 공격 포인트
+    [Header("원거리 공격 발사 포인트"), Space(5)]
     public Transform fireBallPoint; // 원거리 공격 발사 포인트
+    [Header("랜덤 메테오 공격 위치"), Space(5)]
+    public Transform demonMeteorPoint; // 랜덤 메테오 공격 위치
 
     [SerializeField] Transform spawnTombStone;
     [SerializeField] Collider bossCollider;
@@ -19,9 +32,12 @@ public class LastBoss_FlyingDemonKing : EnemyState
     [SerializeField] bool isSpawnStart = false;
     [SerializeField, Header("아웃라인 퍼셉션")] Transform outLinePerception;
     [SerializeField, Header("인라인 퍼셉션")] Transform inLinePerception;
+    [SerializeField, Header("메테오 공격 쿨타임")] float meteorCoolTime;
 
+    float meteorTime;
     Vector3 beforeSpawnPos;
 
+    #region ChangeState
     protected override void ChangeState(State s)
     {
         base.ChangeState(s);
@@ -29,6 +45,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
         {
             case State.Phase:
                 StopAllCoroutines();
+                rigid.useGravity = false;
                 bossCollider.enabled = false;
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
@@ -49,6 +66,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 break;
             case State.Dizzy:
                 myAnim.SetTrigger("Dizzy");
+                rigid.useGravity = true;
                 bossCollider.enabled = true;
                 StartCoroutine(DelayChangeState(State.Battle, 5f));
                 break;
@@ -56,7 +74,9 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 break;
         }
     }
+    #endregion
 
+    #region Start,Upate
     // Start is called before the first frame update
     void Start()
     {
@@ -70,25 +90,27 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         base.StateProcess();
         if (this.myState == State.Death) return;
-        if (!isSpawnStart && this.curHp <= (this.battleStat.MaxHp * 0.6))
+        if (!isSpawnStart && this.curHP <= (this.battleStat.MaxHp * 0.6))
         {
             ChangeState(State.Phase);
             isSpawnStart = true;
         }
-        /*if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp) * 0.4)
+        else if (isSpawnStart && !isPhaseChanged && this.curHP <= (this.battleStat.MaxHp) * 0.4)
         {
             ChangeState(State.Phase2);
             isPhaseChanged = true;
-        }*/
+        }
         if (myState != State.Death)
         {
             base.IsGround();
         }
     }
+    #endregion
 
+    #region 공격 판정
     public void OnClawAttack()
     {
-        Collider[] list = Physics.OverlapSphere(clawAttackPoint.position, 3.0f, enemyMask);
+        Collider[] list = Physics.OverlapSphere(clawAttackPoint.position, 4.5f, enemyMask);
 
         foreach (Collider col in list)
         {
@@ -119,12 +141,14 @@ public class LastBoss_FlyingDemonKing : EnemyState
         while (target != null)
         {
             myAnim.SetBool("IsRunning", true);
-            int pattern = Random.Range(0, 3);
+            int pattern = Random.Range(0, 4);
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
             if (dist < 0.00001f) dist = 0.0f;
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
+            meteorCoolTime += Time.deltaTime;
+            
             if (pattern != 2) // 원거리 공격이 아니라면
             {
                 if (Mathf.Approximately(dist, 0.0f)) // 근접 공격
@@ -157,11 +181,25 @@ public class LastBoss_FlyingDemonKing : EnemyState
             }
             else
             {
-                myAnim.SetBool("IsRunning", false);
-                if (battleTime >= battleStat.AttackDelay)
+                if (pattern == 3)
                 {
-                    battleTime = 0.0f;
-                    myAnim.SetTrigger("Attack3");
+                    myAnim.SetBool("IsRunning", false);
+                    if (battleTime >= battleStat.AttackDelay)
+                    {
+                        battleTime = 0.0f;
+                        myAnim.SetTrigger("Attack3");
+                    }
+                }
+                else
+                {
+                    if (meteorTime >= meteorCoolTime && isPhaseChanged)
+                    {
+                        meteorTime = 0.0f;
+                        // 메테오 발사 트리거를 건다.
+                        //myAnim.SetTrigger("SpecialAttack");
+
+
+                    }
                 }
 
             }
@@ -177,7 +215,9 @@ public class LastBoss_FlyingDemonKing : EnemyState
         }
         myAnim.SetBool("IsRunning", false);
     }
+    #endregion
 
+    #region 죽은 뒤 사라지기
     protected override IEnumerator DisApearing(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -195,11 +235,13 @@ public class LastBoss_FlyingDemonKing : EnemyState
         }
         Destroy(gameObject);
     }
+    #endregion
 
+    #region 기본공격 이펙트 생성
     public void ClawAttackEffect()
     {
         Transform obj;
-        obj = Instantiate(clawAttackEffect, clawAttackPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
+        obj = Instantiate(clawAttackEffect, clawAttackPoint.transform.position, Quaternion.Euler(-60.0f, transform.rotation.eulerAngles.y, -90.0f), null);
         obj.localScale = new Vector3(2, 2, 2);
     }
 
@@ -220,10 +262,13 @@ public class LastBoss_FlyingDemonKing : EnemyState
             float angle = Vector3.Angle(dir, fireBallPoint.forward);
             Debug.Log(angle);
             Transform obj;
-            obj = Instantiate(fireBallEffect, fireBallPoint.transform.position, Quaternion.Euler(angle, 0.0f, 0.0f), null);
+            obj = Instantiate(fireBallEffect, fireBallPoint.transform.position, Quaternion.Euler(angle, transform.rotation.eulerAngles.y, 0.0f), null);
             obj.localScale = new Vector3(2, 2, 2);
         }
     }
+    #endregion
+
+    #region 비석 소환 패턴
 
     public void SpawnTombStone()
     {
@@ -238,6 +283,8 @@ public class LastBoss_FlyingDemonKing : EnemyState
         ChangeState(State.Create);
         rigid.useGravity = false;
         Vector3 upPos = transform.position + new Vector3(0, 20, 0);
+        yield return StartCoroutine(MoveForGimic(upPos));
+        /*
         Vector3 dir = upPos - fireBallPoint.position;
         float dist = dir.magnitude;
         dir.Normalize();
@@ -248,7 +295,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
             dist -= delta;
             transform.Translate(dir * delta, Space.World);
             yield return null;
-        }
+        }*/
         yield return new WaitForSeconds(1f);
         if (spawnTombStone != null) spawnTombStone.gameObject.SetActive(true);
         yield return null;
@@ -261,7 +308,8 @@ public class LastBoss_FlyingDemonKing : EnemyState
 
     IEnumerator Dizzing()
     {
-        Vector3 dir = beforeSpawnPos - transform.position;
+        yield return StartCoroutine(MoveForGimic(beforeSpawnPos));
+        /*Vector3 dir = beforeSpawnPos - transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
         float delta = Time.deltaTime * 20.0f;
@@ -271,11 +319,52 @@ public class LastBoss_FlyingDemonKing : EnemyState
             dist -= delta;
             transform.Translate(dir * delta, Space.World);
             yield return null;
-        } // 다 내려옴
+        } // 다 내려옴*/
         ChangeState(State.Dizzy);
+        // 스턴이 걸린듯한 사운드 추가
         yield return new WaitForSeconds(5f);
         outLinePerception.gameObject.SetActive(true);
         inLinePerception.gameObject.SetActive(true);
-        rigid.useGravity = true;
     }
+
+    IEnumerator MoveForGimic(Vector3 _pos)
+    {
+        Debug.Log($"{_pos}로 이동중");
+        Vector3 dir = _pos - transform.position;
+        float dist = dir.magnitude;
+        dir.Normalize();
+        float delta = Time.deltaTime * 20.0f;
+        while (!Mathf.Approximately(dist, 0.0f))
+        {
+            if (dist < delta) dist = delta;
+            dist -= delta;
+            transform.Translate(dir * delta, Space.World);
+            yield return null;
+        }
+    }
+
+    public void FailGimic()
+    {
+        StartCoroutine(Healing());
+    }
+
+    IEnumerator Healing()
+    {
+        bossCollider.enabled = true;
+        // 웃는 사운드 추가
+        yield return StartCoroutine(MoveForGimic(beforeSpawnPos));
+        ChangeState(State.Battle);
+        outLinePerception.gameObject.SetActive(true);
+        inLinePerception.gameObject.SetActive(true);
+        rigid.useGravity = true;
+        this.curHP += this.battleStat.MaxHp * 0.2f;
+    }
+    #endregion
+
+    #region 페이즈2
+    public void ChangePhase2()
+    {
+        changePlayerCameraSet?.Invoke();
+    }
+    #endregion
 }

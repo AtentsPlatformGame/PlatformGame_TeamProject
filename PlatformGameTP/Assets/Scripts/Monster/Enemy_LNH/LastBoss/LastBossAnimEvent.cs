@@ -11,6 +11,8 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public UnityEvent biteAttackAct;
     public UnityEvent fireballAttackAct;
     public UnityEvent spawnTombStoneAct;
+    public UnityEvent phase2Act;
+    public UnityEvent specialAttackAct;
     public void OnClawAttack()
     {
         clawOnAttackAct?.Invoke();
@@ -38,5 +40,15 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public void SpawnTombStoneEvent()
     {
         spawnTombStoneAct?.Invoke();
+    }
+
+    public void ChangeToPhase2()
+    {
+        phase2Act?.Invoke();
+    }
+
+    public void OnSpecialAttack()
+    {
+        specialAttackAct?.Invoke();
     }
 }
