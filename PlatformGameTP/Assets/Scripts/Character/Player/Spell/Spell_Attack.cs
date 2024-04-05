@@ -26,7 +26,7 @@ public class Spell_Attack : Spell_Info
             Debug.Log($"{spellDmg} 만큼의 데미지를 입힘");
             if(bs != null)
             {
-                //bs.TakeDamage(spellDmg);
+                bs.TakeDamage(spellDmg);
             }
         }
     }

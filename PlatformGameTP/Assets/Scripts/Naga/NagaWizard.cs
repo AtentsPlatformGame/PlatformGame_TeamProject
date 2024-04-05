@@ -15,6 +15,8 @@ public class NagaWizard : EnemyState
     public GameObject BeforeTsunami;
     public GameObject WarningSign;
     public int PhaseCount = 0;
+    public GameObject GreetingBoss;
+    static int greetingCounts = 0;
 
     [SerializeField] bool isPhaseChanged = false;
 
@@ -35,6 +37,7 @@ public class NagaWizard : EnemyState
             default:
                 break;
         }
+
     }
     // Start is called before the first frame update
     void Start()
@@ -50,6 +53,7 @@ public class NagaWizard : EnemyState
         TsunamiRight.SetActive(false);
         BeforeTsunami.SetActive(false);
         WarningSign.SetActive(false);
+        GreetingBoss.SetActive(false) ;
         SpecialPatternPos = new (0.0f, 2.5f, 41.0f);
         startPos = transform.position;
         base.ChangeState(State.Normal);
@@ -68,6 +72,13 @@ public class NagaWizard : EnemyState
         {
             base.IsGround();
         }
+        if (myState == State.Battle && greetingCounts == 0) 
+        {
+            GreetingBoss.SetActive(true);
+            Invoke("TurnOffGreetings", 3.0f);
+        
+        }
+
     
     }
 
@@ -92,7 +103,7 @@ public class NagaWizard : EnemyState
         {
             Debug.Log("공격을한다");
             myAnim.SetBool("IsRunning", true);
-            int pattern = Random.Range(0, 3);
+            int pattern = Random.Range(0, 5);
 
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
@@ -132,13 +143,13 @@ public class NagaWizard : EnemyState
                     TsunamiLeft.SetActive(false);
                     TsunamiRight.SetActive(false);
                     battleTime = 0.0f;
-                    if (pattern == 0)
+                    if (pattern == 0 || pattern == 1 || pattern == 2 || pattern == 3)
                     {
                         Debug.Log("일반1번");
                         myAnim.SetTrigger("Attack1");
 
                     }
-                    else if (pattern == 1)
+                    else if(pattern == 4)
                     {
                         Debug.Log("일반2번");
                         myAnim.SetTrigger("Attack2");
@@ -171,12 +182,19 @@ public class NagaWizard : EnemyState
 
     public void VirticalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
+        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y, 0.0f), null);
     }
 
     public void HorizontalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
+        Instantiate(horizontalAttackEffect, slashPoint.transform.position, Quaternion.Euler(180.0f, transform.rotation.eulerAngles.y, 0.0f), null);
     }
+
+    public void TurnOffGreetings()
+    {
+        GreetingBoss.SetActive(false);
+        greetingCounts = 1;
+    }
+
 }
 
