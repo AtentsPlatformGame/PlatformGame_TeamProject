@@ -11,17 +11,13 @@ public class TutorialPortal : MonoBehaviour
     public Button yesMove;
     public LayerMask Player;
     public float raycastDistance = 100;
+    private FadeInOut FadeManager;
     void Start()
     {
         potalQuestion.SetActive(false);
         yesMove.onClick.AddListener(NextScene);
+        FadeManager = FindObjectOfType<FadeInOut>();
     }
-
-    void NextScene()
-    {
-        SceneManager.LoadScene("Stage1");
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -31,5 +27,9 @@ public class TutorialPortal : MonoBehaviour
             potalQuestion.SetActive(true);
             //ChangeScene();
         }
+    }
+    void NextScene()
+    {
+        FadeManager.FadeOutAndLoadScene("LoadingScene");
     }
 }
