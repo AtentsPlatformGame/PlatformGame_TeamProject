@@ -6,12 +6,16 @@ public class OrcMonsterController : EnemyState
 {
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
+    public Transform skillAttackEffect;
+    public Transform getHitEffect;
 
     public Transform hitPoint;
     public Transform spawnPoint;
 
-
     [SerializeField] bool isPhaseChanged = false;
+    [SerializeField] bool isRushChanged = false;
+
+    public float rushSpeed = 10f;
 
     protected override void ChangeState(State s)
     {
@@ -57,9 +61,22 @@ public class OrcMonsterController : EnemyState
         {
             base.IsGround();
         }
+        if(!isRushChanged && this.curHP <=(this.battleStat.MaxHp * 0.5))
+        {
+            ChangeState(State.Rush);
+            myAnim.SetTrigger("Howling");
+            if (isRushChanged)
+            {
+                myAnim.SetBool("StartRush", true);
+                myAnim.SetTrigger("Rush");
+                transform.Translate(Vector3.forward * rushSpeed * Time.deltaTime);
+            }
+            myAnim.SetBool("StartRush", false);
+            isRushChanged = true;
+        } 
+        
     }
 
-   
 
     public new void OnAttack()
     {
@@ -150,5 +167,14 @@ public class OrcMonsterController : EnemyState
         Instantiate(virticalAttackEffect, hitPoint.transform.position, Quaternion.identity, null);
     }
 
+    public void SkillAttackEffect()
+    {
+        Instantiate(skillAttackEffect, hitPoint.transform.position, Quaternion.Euler(-100.0f, 0.0f, -140.0f), null);
+    }
+
+    public void GetHitEffect()
+    {
+        Instantiate(getHitEffect, transform.position, Quaternion.identity, null);
+    }
 
 }
