@@ -10,6 +10,8 @@ public class TombStone : MonoBehaviour
     [SerializeField] float patternTime;
 
     public Transform summonEffect;
+    public Transform summonAura;
+    public Transform spawnEffect;
     public Transform summonPoint;
     public Transform destroyPoint;
 
@@ -48,6 +50,8 @@ public class TombStone : MonoBehaviour
 
     IEnumerator SummonTombStone() // 비석 소환
     {
+        summonAura.gameObject.SetActive(true);
+        spawnEffect.GetComponent<ParticleSystem>().Play();
         Vector3 dir = summonPoint.position - this.transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
@@ -69,8 +73,10 @@ public class TombStone : MonoBehaviour
 
     IEnumerator DestroyTombStone() // 비석 파괴
     {
+        spawnEffect.GetComponent<ParticleSystem>().Play();
         myCollider.enabled = false;
         summonEffect.gameObject.SetActive(false);
+        summonAura.gameObject.SetActive(false);
 
         Debug.Log("삭제 시작");
         Vector3 dir = destroyPoint.position - this.transform.position;
@@ -157,5 +163,10 @@ public class TombStone : MonoBehaviour
     public void ClearGimic()
     {
         this.clearGimmic = true;
+    }
+
+    public void FailGimic()
+    {
+        this.playTime = patternTime;
     }
 }
