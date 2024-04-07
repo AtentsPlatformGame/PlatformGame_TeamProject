@@ -143,10 +143,14 @@ public class NagaWizard : EnemyState
                     TsunamiLeft.SetActive(false);
                     TsunamiRight.SetActive(false);
                     battleTime = 0.0f;
-                    if (pattern == 0 || pattern == 1 || pattern == 2 || pattern == 3)
+                    if (pattern == 0 || pattern == 1 || pattern == 2 )
                     {
                         Debug.Log("ÀÏ¹Ý1¹ø");
                         myAnim.SetTrigger("Attack1");
+
+                    }
+                    else if(pattern == 3)
+                    {
 
                     }
                     else if(pattern == 4)
@@ -182,12 +186,12 @@ public class NagaWizard : EnemyState
 
     public void VirticalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y, 0.0f), null);
+        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(270.0f, transform.rotation.eulerAngles.y, 0.0f), null);
     }
 
     public void HorizontalAttackEffect()
     {
-        Instantiate(horizontalAttackEffect, slashPoint.transform.position, Quaternion.Euler(180.0f, transform.rotation.eulerAngles.y, 0.0f), null);
+        Instantiate(horizontalAttackEffect, slashPoint.transform.position, Quaternion.Euler(270.0f, transform.rotation.eulerAngles.y, 0.0f), null);
     }
 
     public void TurnOffGreetings()

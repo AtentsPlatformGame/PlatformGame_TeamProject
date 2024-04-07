@@ -39231,6 +39231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5182820693866792781}
   - component: {fileID: 3612994230323370822}
+  - component: {fileID: 6074581003240838358}
   - component: {fileID: 5726018809045565519}
   - component: {fileID: 6415707391935192240}
   m_Layer: 0
@@ -39278,6 +39279,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 2
+--- !u!114 &6074581003240838358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8378648546881499446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2b4e6ee20bc7a4295a868bd968afe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellMask:
+    serializedVersion: 2
+    m_Bits: 8
+  spellDmg: 5
 --- !u!198 &5726018809045565519
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -42931,7 +42948,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     type: 1
     collisionMode: 0
@@ -43104,7 +43121,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 8
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
