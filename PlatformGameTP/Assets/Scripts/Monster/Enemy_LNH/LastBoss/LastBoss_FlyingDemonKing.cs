@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -45,6 +46,11 @@ public class LastBoss_FlyingDemonKing : EnemyState
         {
             case State.Phase:
                 StopAllCoroutines();
+                foreach (Renderer renderer in allRenderer)
+                {
+                    Color tmpColor = new Color(0, 0, 0, 0);
+                    renderer.material.color = tmpColor;
+                }
                 rigid.useGravity = false;
                 bossCollider.enabled = false;
                 myAnim.SetBool("IsRoaming", false);
@@ -56,6 +62,11 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 break;
             case State.Phase2:
                 StopAllCoroutines();
+                foreach (Renderer renderer in allRenderer)
+                {
+                    Color tmpColor = new Color(0, 0, 0, 0);
+                    renderer.material.color = tmpColor;
+                }
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
                 myAnim.SetTrigger("Phase2");
@@ -181,9 +192,9 @@ public class LastBoss_FlyingDemonKing : EnemyState
             }
             else
             {
+                myAnim.SetBool("IsRunning", false);
                 if (pattern == 3)
                 {
-                    myAnim.SetBool("IsRunning", false);
                     if (battleTime >= battleStat.AttackDelay)
                     {
                         battleTime = 0.0f;
@@ -218,6 +229,38 @@ public class LastBoss_FlyingDemonKing : EnemyState
     #endregion
 
     #region 죽은 뒤 사라지기
+
+    public override void TakeDamage(float _dmg)
+    {
+        curHP -= _dmg;
+        Debug.Log(curHP);
+        if (curHP <= 0.0f)
+        {
+            // 체력이 다 해 쓰러짐
+            OnDead();
+            myAnim.SetTrigger("Dead");
+        }
+        else
+        {
+            myAnim.SetTrigger("Damage");
+            StartCoroutine(DamagingDemon());
+        }
+    }
+    IEnumerator DamagingDemon()
+    {
+        foreach (Renderer renderer in allRenderer)
+        {
+            Color tmpColor = new Color(255,0,0,0.3f);
+            
+            renderer.material.color = tmpColor;
+        }
+        yield return new WaitForSeconds(0.3f);
+        foreach (Renderer renderer in allRenderer)
+        {
+            Color tmpColor = new Color(0, 0, 0, 0);
+            renderer.material.color = tmpColor;
+        }
+    }
     protected override IEnumerator DisApearing(float delay)
     {
         yield return new WaitForSeconds(delay);

@@ -23,6 +23,7 @@ public class TombStone : MonoBehaviour
     public LayerMask playerMask;
     public GameObject GKeyPopUp;
     public GameObject GimicScreen;
+    public float spawnSpeed = 20.0f;
 
     BoxCollider myCollider;
     
@@ -55,7 +56,7 @@ public class TombStone : MonoBehaviour
         Vector3 dir = summonPoint.position - this.transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
-        float delta = Time.deltaTime * 20f;
+        float delta = Time.deltaTime * spawnSpeed;
 
         while (!Mathf.Approximately(dist, 0.0f))
         {
@@ -82,7 +83,7 @@ public class TombStone : MonoBehaviour
         Vector3 dir = destroyPoint.position - this.transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
-        float delta = Time.deltaTime * 20f;
+        float delta = Time.deltaTime * spawnSpeed;
         Debug.Log(dist);
 
         while (!Mathf.Approximately(dist, 0.0f))

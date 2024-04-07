@@ -86,7 +86,7 @@ public class BattleSystem : CharacterProperty, IDamage
         curHP = battleStat.MaxHp;
     }
     
-    public void TakeDamage(float _dmg)
+    public virtual void TakeDamage(float _dmg)
     {
         curHP -= _dmg;
         Debug.Log(curHP);

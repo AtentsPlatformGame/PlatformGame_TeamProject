@@ -13,6 +13,8 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public UnityEvent spawnTombStoneAct;
     public UnityEvent phase2Act;
     public UnityEvent specialAttackAct;
+    public UnityEvent fadeInAct;
+    public UnityEvent fadeOutAct;
     public void OnClawAttack()
     {
         clawOnAttackAct?.Invoke();
@@ -50,5 +52,15 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public void OnSpecialAttack()
     {
         specialAttackAct?.Invoke();
+    }
+
+    public void OnFadeIn()
+    {
+        fadeInAct?.Invoke();
+    }
+
+    public void OnFadeOut()
+    {
+        fadeOutAct?.Invoke();
     }
 }
