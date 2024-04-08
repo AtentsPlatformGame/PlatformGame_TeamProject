@@ -13,10 +13,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     public Transform biteAttackEffect; // 깨물기 공격 vfx
     [Header("원거리 공격 vfx"), Space(5)]
     public Transform fireBallEffect; // 원거리 공격 vfx
-    [Header("메테오 위치 vfx"), Space(5)]
-    public Transform demonMeteorPointEffect; // 메테오 vfx
-    [Header("메테오 vfx"), Space(5)]
-    public Transform demonMeteorEffect; // 메테오 vfx
+    
 
     [Header("할퀴기 공격 포인트"), Space(5)]
     public Transform clawAttackPoint; // 할퀴기 공격 포인트
@@ -24,18 +21,16 @@ public class LastBoss_FlyingDemonKing : EnemyState
     public Transform biteAttackPoint; // 깨물기 공격 포인트
     [Header("원거리 공격 발사 포인트"), Space(5)]
     public Transform fireBallPoint; // 원거리 공격 발사 포인트
-    [Header("랜덤 메테오 공격 위치"), Space(5)]
-    public Transform demonMeteorPoint; // 랜덤 메테오 공격 위치
-
+    
     [SerializeField] Transform spawnTombStone;
     [SerializeField] Collider bossCollider;
     [SerializeField] bool isPhaseChanged = false;
     [SerializeField] bool isSpawnStart = false;
     [SerializeField, Header("아웃라인 퍼셉션")] Transform outLinePerception;
     [SerializeField, Header("인라인 퍼셉션")] Transform inLinePerception;
-    [SerializeField, Header("메테오 공격 쿨타임")] float meteorCoolTime;
+    [SerializeField, Header("메테오 공격 쿨타임")] float meteorDelay = 1.0f;
 
-    float meteorTime;
+    float meteorCoolTime;
     Vector3 beforeSpawnPos;
 
     #region ChangeState
@@ -70,6 +65,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
                 myAnim.SetTrigger("Phase2");
+                StartCoroutine(DelayChangeState(State.Battle, 5f));
                 // 페이즈2 코루틴 시작하기, 여기선 플레이어 컨트롤 방식 바꾸고 카메라 바꾸고 페이드아웃도 해야하고 할게 많음
                 // 방식 바꿀 때 컨트롤 못하게 했다가 특정 버튼이나 뭔가를 클릭하는 걸 둬서 그걸 누르면 다시 움직일 수 있다.
                 // 페이즈2에선 일반 패턴 3개랑 일정 쿨타임이 있는 랜덤 위치에 메테오 사용하기 패턴을 추가한다.
@@ -80,6 +76,25 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 rigid.useGravity = true;
                 bossCollider.enabled = true;
                 StartCoroutine(DelayChangeState(State.Battle, 5f));
+                break;
+            case State.SpecialPattern:
+                foreach (Renderer renderer in allRenderer)
+                {
+                    Color tmpColor = new Color(0, 0, 0, 0);
+                    renderer.material.color = tmpColor;
+                }
+                if (meteorCoolTime >= meteorDelay)
+                {
+                    meteorCoolTime = 0.0f;
+                    // 메테오 발사 트리거를 건다.
+                    myAnim.SetTrigger("SpecialAttack");
+                    StartCoroutine(DelayChangeState(State.Battle, 2f));
+                }
+                else
+                {
+                    StartCoroutine(DelayChangeState(State.Battle, 0f));
+                }
+                
                 break;
             default:
                 break;
@@ -115,6 +130,8 @@ public class LastBoss_FlyingDemonKing : EnemyState
         {
             base.IsGround();
         }
+
+        
     }
     #endregion
 
@@ -152,13 +169,28 @@ public class LastBoss_FlyingDemonKing : EnemyState
         while (target != null)
         {
             myAnim.SetBool("IsRunning", true);
-            int pattern = Random.Range(0, 4);
+            int pattern = 0;
+            if (isPhaseChanged)
+            {
+                pattern = Random.Range(0, 4);
+                if(pattern == 3)
+                {
+                    yield return StartCoroutine(DelayChangeState(State.SpecialPattern, 0.0f));
+                }
+            }
+            else
+            {
+                pattern = Random.Range(0,3);
+            }
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
             if (dist < 0.00001f) dist = 0.0f;
             float delta;
-            if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
-            meteorCoolTime += Time.deltaTime;
+            if (!myAnim.GetBool("IsAttacking"))
+            {
+                battleTime += Time.deltaTime;
+                meteorCoolTime += Time.deltaTime;
+            }
             
             if (pattern != 2) // 원거리 공격이 아니라면
             {
@@ -193,7 +225,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
             else
             {
                 myAnim.SetBool("IsRunning", false);
-                if (pattern == 3)
+                if (pattern == 2)
                 {
                     if (battleTime >= battleStat.AttackDelay)
                     {
@@ -201,18 +233,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
                         myAnim.SetTrigger("Attack3");
                     }
                 }
-                else
-                {
-                    if (meteorTime >= meteorCoolTime && isPhaseChanged)
-                    {
-                        meteorTime = 0.0f;
-                        // 메테오 발사 트리거를 건다.
-                        //myAnim.SetTrigger("SpecialAttack");
-
-
-                    }
-                }
-
+                
             }
 
             float angle = Vector3.Angle(transform.forward, dir);
@@ -372,7 +393,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
 
     IEnumerator MoveForGimic(Vector3 _pos)
     {
-        Debug.Log($"{_pos}로 이동중");
+        //Debug.Log($"{_pos}로 이동중");
         Vector3 dir = _pos - transform.position;
         float dist = dir.magnitude;
         dir.Normalize();

@@ -43,7 +43,7 @@ public class LastBossFade : MonoBehaviour
         FadeCoroutine = StartCoroutine(FadeOut());
     }
 
-    IEnumerator FadeIn()
+    IEnumerator FadeOut()
     {
         curTime = 0.0f;
         while(curTime <= fadeTime)
@@ -55,7 +55,7 @@ public class LastBossFade : MonoBehaviour
         cg.alpha = 1.0f;
     }
 
-    IEnumerator FadeOut()
+    IEnumerator FadeIn()
     {
         curTime = 0.0f;
         while (curTime <= fadeTime)

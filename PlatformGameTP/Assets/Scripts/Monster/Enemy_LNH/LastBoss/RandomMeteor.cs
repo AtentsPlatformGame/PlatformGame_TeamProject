@@ -11,8 +11,8 @@ public class RandomMeteor : MonoBehaviour
     [SerializeField] int meteorCount;
     [SerializeField]
     Vector3[] meteorPoints;
-    [SerializeField] Vector2 xClamp = new Vector2(-10,11);
-    [SerializeField] Vector2 zClamp = new Vector2(-10, 11);
+    [SerializeField] Vector2 xClamp = new Vector2(-7,8);
+    [SerializeField] Vector2 zClamp = new Vector2(-7, 8);
     Transform target;
 
     // Start is called before the first frame update
@@ -49,15 +49,21 @@ public class RandomMeteor : MonoBehaviour
             int rndZ = Random.Range((int)zClamp.x, (int)zClamp.y);
             if (i == 0)
             {
-                Instantiate(meteorPointVFX, new Vector3(rndX, 0.0f, rndZ), Quaternion.identity, null);
+                Instantiate(meteorPointVFX, new Vector3(target.position.x, 0.0f, target.position.z), Quaternion.identity, null);
                 prevX = rndX;
                 prevZ = rndZ;
             }
             else
             {
-                if (Mathf.Abs(prevX - rndX) >= 5 || Mathf.Abs(prevZ - rndZ) >= 5)
+                int maxX = Mathf.Max(prevX, rndX);
+                int minX = Mathf.Min(prevX, rndX);
+                int maxZ = Mathf.Max(prevZ, rndZ);
+                int minZ = Mathf.Min(prevZ, rndZ);
+
+                if(maxX - minX <= 5 || maxZ - minZ <= 5)
+                //if (Mathf.Abs(prevX - rndX) >= 5 || Mathf.Abs(prevZ - rndZ) >= 5)
                 {
-                    Instantiate(meteorPointVFX, new Vector3(rndX, 0.0f, rndZ), Quaternion.identity, null);
+                    Instantiate(meteorPointVFX, new Vector3(target.position.x + rndX, 0.0f, target.position.z + rndZ), Quaternion.identity, null);
                     prevX = rndX;
                     prevZ = rndZ;
                 }
@@ -67,7 +73,7 @@ public class RandomMeteor : MonoBehaviour
                 }
             }
 
-            meteorPoints[i] = new Vector3(prevX, 20.0f, prevZ);
+            meteorPoints[i] = new Vector3(target.position.x + prevX, 20.0f, target.position.z + prevZ);
             i++;
             yield return new WaitForSeconds(0.2f);
         }
