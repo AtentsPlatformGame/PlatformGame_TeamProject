@@ -117,8 +117,10 @@ public class NagaWizard : EnemyState
             if (this.curHP < 3 && PhaseCount == 0)
             {
                 Debug.Log("특수패턴 발동");
-                myAnim.SetTrigger("SpecialPattern");
+               
                 this.transform.position = SpecialPatternPos;
+                yield return new WaitForSeconds(1.0f);
+                myAnim.SetTrigger("SpecialPattern");
                 WarningSign.SetActive(true);
                 BeforeTsunami.SetActive(true);
 
