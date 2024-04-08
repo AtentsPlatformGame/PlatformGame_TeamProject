@@ -8,6 +8,9 @@ public class Portalllll1 : MonoBehaviour
     public LayerMask Player;
     public float raycastDistance = 100;
     private FadeInOut FadeManager;
+
+    private string saveData;
+
     void Start()
     {
         FadeManager = FindObjectOfType<FadeInOut>();

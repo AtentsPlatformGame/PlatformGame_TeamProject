@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 814141513}
   - component: {fileID: 814141512}
   - component: {fileID: 814141514}
-  m_Layer: 25
+  m_Layer: 0
   m_Name: TestTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3891765266597473588, guid: e1c93f26665c2924b886242320f75dda, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1940471497}
   m_SourcePrefab: {fileID: 100100000, guid: e1c93f26665c2924b886242320f75dda, type: 3}
 --- !u!4 &926377030 stripped
 Transform:
@@ -944,8 +947,8 @@ Transform:
   m_GameObject: {fileID: 1450557817}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 53}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 53}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -962,7 +965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef44c5705e406e45b19ba5a52d21f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalPosition: {fileID: 1450557820}
+  saveFileName: collisionData.json
 --- !u!1 &1560360215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,7 +1052,7 @@ GameObject:
   - component: {fileID: 1621623798}
   - component: {fileID: 1621623797}
   - component: {fileID: 1621623799}
-  m_Layer: 25
+  m_Layer: 0
   m_Name: NextStagePortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1416,6 +1419,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5821733687863010582, guid: e1c93f26665c2924b886242320f75dda, type: 3}
   m_PrefabInstance: {fileID: 926377029}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1940471480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3891765266597473588, guid: e1c93f26665c2924b886242320f75dda, type: 3}
+  m_PrefabInstance: {fileID: 926377029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1940471497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940471480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb4c33a87a066a4796ed9d565ba91e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadFileName: collisionData.json
 --- !u!1 &1950697454
 GameObject:
   m_ObjectHideFlags: 0
