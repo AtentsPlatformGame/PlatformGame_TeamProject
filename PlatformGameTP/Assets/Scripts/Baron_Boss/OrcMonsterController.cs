@@ -14,8 +14,12 @@ public class OrcMonsterController : EnemyState
 
     [SerializeField] bool isPhaseChanged = false;
     [SerializeField] bool isRushChanged = false;
+    [SerializeField] bool isRushing = false;
+    public int phasecount = 0;
+    private float rushTimer = 0f;
+    private const float rushDuration = 3f;
 
-    public float rushSpeed = 10f;
+    public float rushSpeed = 5f;
 
     protected override void ChangeState(State s)
     {
@@ -52,7 +56,7 @@ public class OrcMonsterController : EnemyState
     {
         base.StateProcess();
         if (this.myState == State.Death) return;
-        if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp * 0.5))
+        if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp * 0.7))
         {
             ChangeState(State.Phase);
             isPhaseChanged = true;
@@ -61,19 +65,37 @@ public class OrcMonsterController : EnemyState
         {
             base.IsGround();
         }
+
+
+        /*
         if(!isRushChanged && this.curHP <=(this.battleStat.MaxHp * 0.5))
         {
-            ChangeState(State.Rush);
+            //ChangeState(State.Rush);
             myAnim.SetTrigger("Howling");
-            if (isRushChanged)
+            isRushing = true;
+            rushTimer = 0;
+            isRushChanged = true;
+        }
+        if (isRushing)
+        {
+            rushTimer += Time.deltaTime;
+
+            if(rushTimer >= rushDuration)
+            {
+                myAnim.SetBool("StartRush", false);
+                isRushing = false;
+                
+                ChangeState(State.Rush);
+            }
+            else
             {
                 myAnim.SetBool("StartRush", true);
                 myAnim.SetTrigger("Rush");
                 transform.Translate(Vector3.forward * rushSpeed * Time.deltaTime);
+                
             }
-            myAnim.SetBool("StartRush", false);
-            isRushChanged = true;
-        } 
+            return;
+    }*/
         
     }
 
@@ -102,7 +124,19 @@ public class OrcMonsterController : EnemyState
             if (dist < 0.0f) dist = 0.0f;
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
-            if (Mathf.Approximately(dist, 0.0f))
+
+            if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 0)
+            {
+                myAnim.SetTrigger("Howling");
+                yield return new WaitForSeconds(2.0f);
+                myAnim.SetTrigger("Rush");
+                transform.Translate(Vector3.forward * rushSpeed * Time.deltaTime);
+                phasecount = 1;
+
+            }
+
+
+                if (Mathf.Approximately(dist, 0.0f))
             {
                 myAnim.SetBool("IsRunning", false);
                 if (battleTime >= battleStat.AttackDelay)

@@ -100,6 +100,8 @@ public class EnemyState : EnemyMovement
             case State.Death:
                 StopAllCoroutines();
                 break;
+           
+
         }
     }
 

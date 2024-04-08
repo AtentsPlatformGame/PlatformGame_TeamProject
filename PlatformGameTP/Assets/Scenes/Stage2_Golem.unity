@@ -1649,7 +1649,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 2, z: 8}
+  m_Size: {x: 10, y: 2, z: 10}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!212 &7279378649478531369
 SpriteRenderer:
@@ -1817,7 +1817,7 @@ MonoBehaviour:
       m_Calls: []
   battleStat:
     AP: 1
-    MaxHp: 5
+    MaxHp: 3
     AttackRange: 2
     AttackDelay: 2
     ProjectileSpeed: 0
@@ -1852,6 +1852,10 @@ MonoBehaviour:
   hitPoint: {fileID: 2141818749}
   spawnPoint: {fileID: 78592846}
   isPhaseChanged: 0
+  isRushChanged: 0
+  isRushing: 0
+  phasecount: 0
+  rushSpeed: 5
 --- !u!212 &8581713279728354738
 SpriteRenderer:
   m_ObjectHideFlags: 0
