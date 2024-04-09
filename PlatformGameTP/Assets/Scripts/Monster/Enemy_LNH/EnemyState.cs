@@ -51,25 +51,28 @@ public class EnemyState : EnemyMovement
             case State.Normal:
                 //RaycastHit hit = Physics.Raycast(transform.position, Vector2.down, 100.0f, groundMask);
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector2.down, out hit, 10.0f, groundMask))
+                if (Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 10.0f, groundMask))
                 {
+                    //Debug.Log($"{hit.point}, 땅에 닿음");
                     if (hit.transform != null)
                     {
                         RaycastHit subHit;
-                        if (Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.forward, out subHit, 1000.0f, moveLimitMask)) // 보이는걸론 오른쪽, 월드상으론 앞으로
+                        if (Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.forward, out subHit, 8.5f, moveLimitMask)) // 보이는걸론 오른쪽, 월드상으론 앞으로
                         {
                             if (subHit.transform != null)
                             {
                                 rightLimitPos = new Vector3(0, transform.position.y, subHit.point.z);
+                               //Debug.Log($"{subHit.point} : 오른쪽 맞은 곳");
                             }
                         }
 
 
-                        if (Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.back, out subHit, 1000.0f, moveLimitMask))
+                        if (Physics.Raycast(hit.point + Vector3.down * 0.5f, Vector3.back, out subHit, 8.5f, moveLimitMask))
                         {
                             if (subHit.transform != null)
                             {
                                 leftLimitPos = new Vector3(0, transform.position.y, subHit.point.z);
+                                //Debug.Log($"{subHit.point} : 왼쪽 맞은 곳");
                             }
                         }
 
