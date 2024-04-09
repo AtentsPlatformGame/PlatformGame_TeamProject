@@ -165,7 +165,7 @@ PrefabInstance:
     - target: {fileID: 8511647367367272476, guid: b1fb9d8daadd406285425a05257521b0, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 67defe535244159458f9eb49cc6bdb1e, type: 2}
+      objectReference: {fileID: 9100000, guid: 68f634d9e51816b4c946ff8b95c6a74c, type: 2}
     - target: {fileID: 8511647367367272476, guid: b1fb9d8daadd406285425a05257521b0, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -527,12 +527,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  skillAttackAct:
+  amputeateSkillAct:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8051765841160278869}
         m_TargetAssemblyTypeName: OrcMonsterController, Assembly-CSharp
-        m_MethodName: SkillAttackEffect
+        m_MethodName: AmputeateSkillEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  buffAct:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8051765841160278869}
+        m_TargetAssemblyTypeName: OrcMonsterController, Assembly-CSharp
+        m_MethodName: BuffEffect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -806,7 +821,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 10
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &880689517577238327
 Animator:
@@ -1649,7 +1664,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 2, z: 10}
+  m_Size: {x: 16, y: 2, z: 16}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!212 &7279378649478531369
 SpriteRenderer:
@@ -1817,7 +1832,7 @@ MonoBehaviour:
       m_Calls: []
   battleStat:
     AP: 1
-    MaxHp: 3
+    MaxHp: 2
     AttackRange: 2
     AttackDelay: 2
     ProjectileSpeed: 0
@@ -1847,15 +1862,13 @@ MonoBehaviour:
   dropGold: 100
   virticalAttackEffect: {fileID: 7264847263909231863, guid: 3138a83bedbd6ad4481ba0b061da2eb6, type: 3}
   horizontalAttackEffect: {fileID: 7264847263909231863, guid: 3138a83bedbd6ad4481ba0b061da2eb6, type: 3}
-  skillAttackEffect: {fileID: 3769969031047562847, guid: ffdfb7851a968494f8fe76ee88f3791a, type: 3}
+  amputeateSkillEffect: {fileID: 0}
+  buffEffect: {fileID: 5862613817031353211, guid: 4d9a3b35b3bc07649b697df7fb497b6d, type: 3}
   getHitEffect: {fileID: 3125908671876608229, guid: 2e07e5ba5a6e8b74d8206f9be0e29d37, type: 3}
   hitPoint: {fileID: 2141818749}
   spawnPoint: {fileID: 78592846}
   isPhaseChanged: 0
-  isRushChanged: 0
-  isRushing: 0
   phasecount: 0
-  rushSpeed: 5
 --- !u!212 &8581713279728354738
 SpriteRenderer:
   m_ObjectHideFlags: 0

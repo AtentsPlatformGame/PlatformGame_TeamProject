@@ -6,20 +6,19 @@ public class OrcMonsterController : EnemyState
 {
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
-    public Transform skillAttackEffect;
+    public Transform amputeateSkillEffect;
+    public Transform buffEffect;
     public Transform getHitEffect;
 
     public Transform hitPoint;
     public Transform spawnPoint;
 
     [SerializeField] bool isPhaseChanged = false;
-    [SerializeField] bool isRushChanged = false;
-    [SerializeField] bool isRushing = false;
+    
+   
     public int phasecount = 0;
-    private float rushTimer = 0f;
-    private const float rushDuration = 3f;
-
-    public float rushSpeed = 5f;
+    
+    
 
     protected override void ChangeState(State s)
     {
@@ -67,36 +66,6 @@ public class OrcMonsterController : EnemyState
         }
 
 
-        /*
-        if(!isRushChanged && this.curHP <=(this.battleStat.MaxHp * 0.5))
-        {
-            //ChangeState(State.Rush);
-            myAnim.SetTrigger("Howling");
-            isRushing = true;
-            rushTimer = 0;
-            isRushChanged = true;
-        }
-        if (isRushing)
-        {
-            rushTimer += Time.deltaTime;
-
-            if(rushTimer >= rushDuration)
-            {
-                myAnim.SetBool("StartRush", false);
-                isRushing = false;
-                
-                ChangeState(State.Rush);
-            }
-            else
-            {
-                myAnim.SetBool("StartRush", true);
-                myAnim.SetTrigger("Rush");
-                transform.Translate(Vector3.forward * rushSpeed * Time.deltaTime);
-                
-            }
-            return;
-    }*/
-        
     }
 
 
@@ -127,16 +96,21 @@ public class OrcMonsterController : EnemyState
 
             if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 0)
             {
+                
+                // 오크의 체력이 절반이 되었을때 자신의 공격력을 2증가 버프하는 패턴 
                 myAnim.SetTrigger("Howling");
-                yield return new WaitForSeconds(2.0f);
-                myAnim.SetTrigger("Rush");
-                transform.Translate(Vector3.forward * rushSpeed * Time.deltaTime);
+                this.battleStat.AP += 2;
+                this.battleStat.MoveSpeed += 1;
                 phasecount = 1;
-
+                Debug.Log("공업");
             }
 
 
-                if (Mathf.Approximately(dist, 0.0f))
+                
+
+            
+
+            if (Mathf.Approximately(dist, 0.0f))
             {
                 myAnim.SetBool("IsRunning", false);
                 if (battleTime >= battleStat.AttackDelay)
@@ -201,9 +175,13 @@ public class OrcMonsterController : EnemyState
         Instantiate(virticalAttackEffect, hitPoint.transform.position, Quaternion.identity, null);
     }
 
-    public void SkillAttackEffect()
+    public void AmputeateSkillEffect()
     {
-        Instantiate(skillAttackEffect, hitPoint.transform.position, Quaternion.Euler(-100.0f, 0.0f, -140.0f), null);
+        
+    }
+    public void BuffEffect()
+    {
+        Instantiate(buffEffect, transform.position, Quaternion.identity, null);
     }
 
     public void GetHitEffect()
