@@ -63,7 +63,7 @@ public class RandomMeteor : MonoBehaviour
                 if(maxX - minX <= 5 || maxZ - minZ <= 5)
                 //if (Mathf.Abs(prevX - rndX) >= 5 || Mathf.Abs(prevZ - rndZ) >= 5)
                 {
-                    Instantiate(meteorPointVFX, new Vector3(target.position.x + rndX, 0.0f, target.position.z + rndZ), Quaternion.identity, null);
+                    Instantiate(meteorPointVFX, new Vector3(target.position.x + rndX, 18.0f, target.position.z + rndZ), Quaternion.identity, null);
                     prevX = rndX;
                     prevZ = rndZ;
                 }
@@ -73,7 +73,7 @@ public class RandomMeteor : MonoBehaviour
                 }
             }
 
-            meteorPoints[i] = new Vector3(target.position.x + prevX, 20.0f, target.position.z + prevZ);
+            meteorPoints[i] = new Vector3(target.position.x + prevX, 40.0f, target.position.z + prevZ);
             i++;
             yield return new WaitForSeconds(0.2f);
         }

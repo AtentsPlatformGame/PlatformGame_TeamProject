@@ -43,6 +43,15 @@ public class LastBossFade : MonoBehaviour
         FadeCoroutine = StartCoroutine(FadeOut());
     }
 
+    public void StartFadeOutAndIn()
+    {
+        if (FadeCoroutine != null)
+        {
+            StopAllCoroutines();
+            FadeCoroutine = null;
+        }
+        FadeCoroutine = StartCoroutine(FadingOut());
+    }
     IEnumerator FadeOut()
     {
         curTime = 0.0f;
@@ -65,5 +74,32 @@ public class LastBossFade : MonoBehaviour
             yield return null;
         }
         cg.alpha = 0.0f;
+    }
+
+    IEnumerator FadingOut()
+    {
+        playerMoveFalseAct?.Invoke();
+        curTime = 0.0f;
+        while (curTime <= fadeTime)
+        {
+            cg.alpha = Mathf.Lerp(0.0f, 1.0f, curTime / fadeTime);
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+        cg.alpha = 1.0f;
+        yield return StartCoroutine(FadingIn());
+    }
+
+    IEnumerator FadingIn()
+    {
+        curTime = 0.0f;
+        while (curTime <= fadeTime)
+        {
+            cg.alpha = Mathf.Lerp(1.0f, 0.0f, curTime / fadeTime);
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+        cg.alpha = 0.0f;
+        playerMoveTrueAct?.Invoke();
     }
 }

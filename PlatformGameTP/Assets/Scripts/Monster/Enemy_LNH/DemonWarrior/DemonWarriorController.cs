@@ -12,6 +12,7 @@ public class DemonWarriorController : EnemyState
 
     [SerializeField] Transform skeleton;
     [SerializeField] bool isPhaseChanged = false;
+    [SerializeField] Transform LastBoss;
 
     protected override void ChangeState(State s)
     {
@@ -49,7 +50,7 @@ public class DemonWarriorController : EnemyState
     {
         base.StateProcess();
         if (this.myState == State.Death) return;
-        if (!isPhaseChanged && this.curHp <= (this.battleStat.MaxHp * 0.5))
+        if (!isPhaseChanged && this.curHP <= (this.battleStat.MaxHp * 0.5))
         {
             ChangeState(State.Phase);
             isPhaseChanged = true;
@@ -59,7 +60,7 @@ public class DemonWarriorController : EnemyState
             base.IsGround();
         }
     }
-
+    #region Ω∫ƒÃ∑π≈Ê º“»Ø ∆–≈œ
     IEnumerator SpawnSkeleton(Transform spawnPoint)
     {
         Transform obj;
@@ -68,10 +69,11 @@ public class DemonWarriorController : EnemyState
         obj.gameObject.transform.SetParent(null);
         yield return StartCoroutine(DelayChangeState(State.Normal, 1.5f));
     }
-
+    #endregion
+    #region ∞¯∞›∆«¡§, ¿Ã∆Â∆Æ
     public new void OnAttack()
     {
-        Collider[] list = Physics.OverlapSphere(attackPoint.position, 3.0f, enemyMask);
+        Collider[] list = Physics.OverlapSphere(attackPoint.position, 5.0f, enemyMask);
 
         foreach (Collider col in list)
         {
@@ -82,6 +84,7 @@ public class DemonWarriorController : EnemyState
             }
         }
     }
+
     protected override IEnumerator AttackingTarget(Transform target)
     {
         while (target != null)
@@ -112,7 +115,7 @@ public class DemonWarriorController : EnemyState
             else
             {
                 dir.Normalize();
-                delta = moveSpeed * Time.deltaTime;
+                delta = battleStat.MoveSpeed * Time.deltaTime;
                 if (delta > dist) delta = dist;
                 transform.Translate(dir * delta, Space.World);
                 if (Mathf.Approximately(dist, 0.0f))
@@ -131,6 +134,23 @@ public class DemonWarriorController : EnemyState
         myAnim.SetBool("IsRunning", false);
     }
 
+    public void VirticalAttackEffect()
+    {
+        Transform vtEff;
+        vtEff = Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(-60.0f, transform.rotation.eulerAngles.y, -90.0f), null);
+        vtEff.localScale = new Vector3(2f, 2f, 2f);
+    }
+
+    public void HorizontalAttackEffect()
+    {
+        //Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
+        Transform hzEff;
+        hzEff = Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y - 100.0f, 0.0f), null);
+        hzEff.localScale = new Vector3(2f, 2f, 2f);
+    }
+    #endregion
+
+    #region ªÁ∏¡∆«¡§
     protected override IEnumerator DisApearing(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -145,15 +165,22 @@ public class DemonWarriorController : EnemyState
             }
             yield return null;
         }
+
+        yield return StartCoroutine(SpawingLastBoss());
+        Debug.Log("º“»Ø«ÿ¡‡");
         Destroy(gameObject);
-    }
-    public void VirticalAttackEffect()
-    {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
+        
     }
 
-    public void HorizontalAttackEffect()
+    public void SpawnLastBoss()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.identity, null);
+        StartCoroutine(SpawingLastBoss());
     }
+
+    IEnumerator SpawingLastBoss()
+    {
+        yield return new WaitForSeconds(1f);
+        if (LastBoss != null) LastBoss.gameObject.SetActive(true);
+    }
+    #endregion
 }
