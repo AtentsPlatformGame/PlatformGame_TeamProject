@@ -14,6 +14,11 @@ public class NagaWizard : EnemyState
     public GameObject TsunamiRight;
     public GameObject BeforeTsunami;
     public GameObject WarningSign;
+    public GameObject TidalWave;
+    public GameObject TidalWaveWarning;
+    public GameObject SafeArea1;
+    
+    
     public int PhaseCount = 0;
     public GameObject GreetingBoss;
     static int greetingCounts = 0;
@@ -54,6 +59,11 @@ public class NagaWizard : EnemyState
         BeforeTsunami.SetActive(false);
         WarningSign.SetActive(false);
         GreetingBoss.SetActive(false) ;
+        TidalWave.SetActive(false) ;
+        SafeArea1.SetActive(false) ;
+
+        
+        TidalWaveWarning.SetActive(false);
         SpecialPatternPos = new (0.0f, 2.5f, 41.0f);
         startPos = transform.position;
         base.ChangeState(State.Normal);
@@ -68,7 +78,7 @@ public class NagaWizard : EnemyState
             ChangeState(State.Phase);
             isPhaseChanged = true;
         }
-        if (myState != State.Death)
+        if (myState != State.Death) 
         {
             base.IsGround();
         }
@@ -114,12 +124,12 @@ public class NagaWizard : EnemyState
             
 
             //특수패턴
-            if (this.curHP < 3 && PhaseCount == 0)
+            if (this.curHP < this.battleStat.MaxHp * 0.8 && PhaseCount == 0)
             {
                 Debug.Log("특수패턴 발동");
                
                 this.transform.position = SpecialPatternPos;
-                yield return new WaitForSeconds(1.0f);
+                
                 myAnim.SetTrigger("SpecialPattern");
                 WarningSign.SetActive(true);
                 BeforeTsunami.SetActive(true);
@@ -135,7 +145,45 @@ public class NagaWizard : EnemyState
                 TsunamiRight.SetActive(false);
                 PhaseCount = 1;
             }
-           
+            if (this.curHP < this.battleStat.MaxHp * 0.5 && PhaseCount == 1)
+            {
+                this.transform.position = SpecialPatternPos;
+                myAnim.SetTrigger("SpecialPattern");
+                Debug.Log("특수패턴 발동");
+                TidalWaveWarning.SetActive(true);             
+                SafeArea1.SetActive(true);
+             
+                yield return new WaitForSeconds(2.0f);
+                TidalWaveWarning.SetActive(false);
+                TidalWave.SetActive(true);
+                yield return new WaitForSeconds(5.0f);
+
+                SafeArea1.SetActive(false);
+                TidalWave.SetActive(false);
+                PhaseCount =  2;
+            }
+            if (this.curHP < this.battleStat.MaxHp * 0.3 && PhaseCount == 2)
+            {
+                Debug.Log("특수패턴 발동");
+
+                this.transform.position = SpecialPatternPos;
+                
+                myAnim.SetTrigger("SpecialPattern");
+                WarningSign.SetActive(true);
+                BeforeTsunami.SetActive(true);
+
+                yield return new WaitForSeconds(5.0f);
+                BeforeTsunami.SetActive(false);
+                WarningSign.SetActive(false);
+                TsunamiLeft.SetActive(true);
+                TsunamiRight.SetActive(true);
+                yield return new WaitForSeconds(5.0f);
+
+                TsunamiLeft.SetActive(false);
+                TsunamiRight.SetActive(false);
+                PhaseCount = 3;
+            }
+
 
             if (Mathf.Approximately(dist, 0.0f))
             {
