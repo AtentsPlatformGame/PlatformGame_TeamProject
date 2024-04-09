@@ -6,39 +6,62 @@ using System.IO;
 
 public class TestData : MonoBehaviour
 {
-    public string loadFileName = "positionData.json"; // 불러올 JSON 파일 이름
+    public string fileName = "positions.json";
 
-    private void Awake()
+    [System.Serializable]
+    public class PositionData
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        public float x;
+        public float y;
+        public float z;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    [System.Serializable]
+    public class PositionList
     {
-        LoadPositionFromJson();
+        public List<PositionData> positions;
     }
 
-    private void LoadPositionFromJson()
+    // Method to save positions to JSON file
+    public void SavePositions(List<Vector3> positions)
     {
-        // JSON 파일 경로
-        string filePath = Path.Combine(Application.persistentDataPath, loadFileName);
+        PositionList positionList = new PositionList();
+        positionList.positions = new List<PositionData>();
 
-        if (File.Exists(filePath))
+        foreach (Vector3 pos in positions)
         {
-            // JSON 파일로부터 데이터 읽기
-            string jsonData = File.ReadAllText(filePath);
+            PositionData positionData = new PositionData();
+            positionData.x = pos.x;
+            positionData.y = pos.y;
+            positionData.z = pos.z;
+            positionList.positions.Add(positionData);
+        }
 
-            // JSON 데이터를 벡터로 변환
-            Vector3 position = JsonUtility.FromJson<Vector3>(jsonData);
+        string json = JsonUtility.ToJson(positionList);
+        File.WriteAllText(fileName, json);
+    }
 
-            // 오브젝트 위치 이동
-            transform.position = position;
+    // Method to load positions from JSON file
+    public List<Vector3> LoadPositions()
+    {
+        List<Vector3> positions = new List<Vector3>();
 
-            Debug.Log("Position loaded from: " + filePath);
+        if (File.Exists(fileName))
+        {
+            string json = File.ReadAllText(fileName);
+            PositionList positionList = JsonUtility.FromJson<PositionList>(json);
+
+            foreach (PositionData positionData in positionList.positions)
+            {
+                Vector3 position = new Vector3(positionData.x, positionData.y, positionData.z);
+                positions.Add(position);
+            }
         }
         else
         {
-            Debug.LogWarning("Position data file not found at: " + filePath);
+            Debug.LogWarning("JSON file does not exist: " + fileName);
         }
+
+        return positions;
     }
 }

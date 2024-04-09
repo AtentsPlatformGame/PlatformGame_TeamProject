@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TutorialPortal : MonoBehaviour
+public class NextStagePortal : MonoBehaviour
 {
     //public string nextSceneName;
     public GameObject potalQuestion;
     public Button yesMove;
     public LayerMask Player;
     public float raycastDistance = 100;
-    private FadeInOut FadeManager;
+    private SceneFadeInOut FadeManager;
     void Start()
     {
         potalQuestion.SetActive(false);
         yesMove.onClick.AddListener(NextScene);
-        FadeManager = FindObjectOfType<FadeInOut>();
+        FadeManager = FindObjectOfType<SceneFadeInOut>();
     }
     // Update is called once per frame
     void Update()

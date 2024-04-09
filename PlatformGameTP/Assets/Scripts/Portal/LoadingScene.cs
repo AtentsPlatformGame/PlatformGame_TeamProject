@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LLoading : MonoBehaviour
+public class LoadingScene : MonoBehaviour
 {
-    public static LLoading instance;
+    public static LoadingScene instance;
     public string nextSceneName;
     public GameObject Loading;
 
