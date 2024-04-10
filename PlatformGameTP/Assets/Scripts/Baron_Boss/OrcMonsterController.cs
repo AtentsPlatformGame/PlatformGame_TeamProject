@@ -14,12 +14,9 @@ public class OrcMonsterController : EnemyState
     public Transform spawnPoint;
 
     [SerializeField] bool isPhaseChanged = false;
-    
    
     public int phasecount = 0;
-    
-    
-
+    public Vector3 PatternPos;
     protected override void ChangeState(State s)
     {
         base.ChangeState(s);
@@ -48,6 +45,7 @@ public class OrcMonsterController : EnemyState
 
         startPos = transform.position;
         base.ChangeState(State.Normal);
+        PatternPos = new(0.0f, 0.0f, 11.0f);
     }
 
     // Update is called once per frame
@@ -64,7 +62,6 @@ public class OrcMonsterController : EnemyState
         {
             base.IsGround();
         }
-
 
     }
 
@@ -96,19 +93,14 @@ public class OrcMonsterController : EnemyState
 
             if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 0)
             {
-                
-                // 오크의 체력이 절반이 되었을때 자신의 공격력을 2증가 버프하는 패턴 
+                this.transform.position = PatternPos;
                 myAnim.SetTrigger("Howling");
+                // 오크의 체력이 절반이 되었을때 능력치를 버프하는 패턴 
                 this.battleStat.AP += 2;
                 this.battleStat.MoveSpeed += 1;
                 phasecount = 1;
-                Debug.Log("공업");
+                Debug.Log("공업 이속업");
             }
-
-
-                
-
-            
 
             if (Mathf.Approximately(dist, 0.0f))
             {
