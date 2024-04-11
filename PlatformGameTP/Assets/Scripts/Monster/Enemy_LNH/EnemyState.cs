@@ -17,6 +17,7 @@ public class EnemyState : EnemyMovement
     public Transform hpViewPos;
     public GameObject detectUI;
     public GameObject missngUI;
+    public GameObject Rewards;
     public UnityEvent<int> dropGoldAct;
     public float jumpForce;
 
@@ -225,6 +226,7 @@ public class EnemyState : EnemyMovement
         myTarget = null;
         StopAttack();
         ChangeState(State.Missing);
+
     }
 
     protected override void OnDead()

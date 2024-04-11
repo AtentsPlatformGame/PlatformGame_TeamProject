@@ -92,6 +92,7 @@ public class BattleSystem : CharacterProperty, IDamage
         Debug.Log(curHP);
         if (curHP <= 0.0f)
         {
+            
             // 체력이 다 해 쓰러짐
             OnDead();
             myAnim.SetTrigger("Dead");
@@ -129,6 +130,7 @@ public class BattleSystem : CharacterProperty, IDamage
 
     protected virtual void OnDead()
     {
+       
         deathAlarm?.Invoke();
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().useGravity = false;
