@@ -7,7 +7,6 @@ public class OrcMonsterAnimEvent : AnimEvent_Orc
 {
     public UnityEvent verticalAttackAct;
     public UnityEvent horizontalAttackAct;
-    public UnityEvent amputeateSkillAct;
     public UnityEvent buffAct;
     public UnityEvent gethitAct;
     public void VerticalAttackEvent()
@@ -18,11 +17,6 @@ public class OrcMonsterAnimEvent : AnimEvent_Orc
     public void HorizontalAttackEvent()
     {
         horizontalAttackAct?.Invoke();
-    }
-
-    public void AmputeateSkillactEvent()
-    {
-        amputeateSkillAct?.Invoke();
     }
 
     public void BuffactEvent()
