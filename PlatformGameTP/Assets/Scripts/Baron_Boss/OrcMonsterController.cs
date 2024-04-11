@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class OrcMonsterController : EnemyState
 {
+    public GameObject PatternPillar;
+
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
     public Transform amputeateSkillEffect;
@@ -45,7 +47,9 @@ public class OrcMonsterController : EnemyState
 
         startPos = transform.position;
         base.ChangeState(State.Normal);
-        PatternPos = new(0.0f, 0.0f, 11.0f);
+        PatternPos = new(0.0f, 0.0f, 15.0f);
+
+        PatternPillar.SetActive(false);
     }
 
     // Update is called once per frame
@@ -91,18 +95,39 @@ public class OrcMonsterController : EnemyState
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
 
-            if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 0)
+            if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 1)
             {
                 this.transform.position = PatternPos;
+                myAnim.SetBool("Running", true);
+                myAnim.SetBool("Roaming", true);
                 myAnim.SetTrigger("Howling");
                 // 오크의 체력이 절반이 되었을때 능력치를 버프하는 패턴 
                 this.battleStat.AP += 2;
                 this.battleStat.MoveSpeed += 1;
-                phasecount = 1;
+                phasecount = 2;
                 Debug.Log("공업 이속업");
+                yield return new WaitForSeconds(3.0f);
+                myAnim.SetBool("Running", false);
+                myAnim.SetBool("Roaming", false);
             }
 
-            if (Mathf.Approximately(dist, 0.0f))
+            if (this.curHP <= (this.battleStat.MaxHp * 0.8) && phasecount == 0)
+            {
+                this.transform.position = PatternPos;
+                myAnim.SetBool("Running", true);
+                myAnim.SetBool("Roaming", true);
+                myAnim.SetTrigger("PatternP");
+                PatternPillar.SetActive(true);
+                // 오크의 체력이 80%일때 기둥을 쓰러트리는 패턴
+                yield return new WaitForSeconds(1.0f);
+                //Destroy(PatternPillar);
+                PatternPillar.SetActive(false);
+                myAnim.SetBool("Running", false);
+                myAnim.SetBool("Roaming", false);
+                phasecount = 1;
+            }
+
+                if (Mathf.Approximately(dist, 0.0f))
             {
                 myAnim.SetBool("IsRunning", false);
                 if (battleTime >= battleStat.AttackDelay)
