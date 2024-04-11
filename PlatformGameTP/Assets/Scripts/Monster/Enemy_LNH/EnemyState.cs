@@ -62,7 +62,7 @@ public class EnemyState : EnemyMovement
                         {
                             if (subHit.transform != null)
                             {
-                                rightLimitPos = new Vector3(0, transform.position.y, subHit.point.z);
+                                rightLimitPos = new Vector3(0, transform.position.y, subHit.point.z - 0.1f);
                                //Debug.Log($"{subHit.point} : 오른쪽 맞은 곳");
                             }
                         }
@@ -72,7 +72,7 @@ public class EnemyState : EnemyMovement
                         {
                             if (subHit.transform != null)
                             {
-                                leftLimitPos = new Vector3(0, transform.position.y, subHit.point.z);
+                                leftLimitPos = new Vector3(0, transform.position.y, subHit.point.z+0.1f);
                                 //Debug.Log($"{subHit.point} : 왼쪽 맞은 곳");
                             }
                         }
