@@ -29,6 +29,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     [SerializeField, Header("아웃라인 퍼셉션")] Transform outLinePerception;
     [SerializeField, Header("인라인 퍼셉션")] Transform inLinePerception;
     [SerializeField, Header("메테오 공격 쿨타임")] float meteorDelay = 1.0f;
+    [SerializeField, Header("클리어 포탈")] Transform clearPortal;
 
     float meteorCoolTime;
     Vector3 beforeSpawnPos;
@@ -95,6 +96,9 @@ public class LastBoss_FlyingDemonKing : EnemyState
                     StartCoroutine(DelayChangeState(State.Battle, 0f));
                 }
                 
+                break;
+            case State.Create:
+                StopAllCoroutines();
                 break;
             default:
                 break;
@@ -168,6 +172,15 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         while (target != null)
         {
+            BattleSystem bs = target.gameObject.GetComponent<BattleSystem>();
+            if(bs != null)
+            {
+                if (!bs.isAlive())
+                {
+                    ChangeState(State.Create);
+                    StopAllCoroutines();
+                }
+            }
             myAnim.SetBool("IsRunning", true);
             int pattern = 0;
             if (isPhaseChanged)
@@ -260,6 +273,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
             // 체력이 다 해 쓰러짐
             OnDead();
             myAnim.SetTrigger("Dead");
+            clearPortal.gameObject.SetActive(true);
         }
         else
         {
