@@ -66,9 +66,11 @@ public class PlayerController : BattleSystem
                     Move(); // 회전과 동시에 움직이기
                             //if (canMove) Move(); // 회전이 끝나면 움직이기
                 }
-                else // 앞뒤, 양옆 4방향으로 움직이는 코드, 점프는 안만듬
+                else // 앞뒤, 양옆 4방향으로 움직이는 코드,
                 {
                     // Rotate3D();
+                    IsGround();
+                    TryJump();
                     Move3D();
                 }
             }

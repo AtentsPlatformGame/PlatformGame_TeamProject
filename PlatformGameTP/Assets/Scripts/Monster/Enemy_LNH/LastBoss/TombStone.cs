@@ -8,6 +8,7 @@ public class TombStone : MonoBehaviour
 {
     [SerializeField] bool isTombStoneGimicOn = false;
     [SerializeField] float patternTime;
+    [SerializeField] Slider gimicTimeSlider;
 
     public Transform summonEffect;
     public Transform summonAura;
@@ -102,6 +103,7 @@ public class TombStone : MonoBehaviour
     {
         while(playTime < patternTime)
         {
+            gimicTimeSlider.value = (patternTime - playTime) / patternTime;
             playTime += Time.deltaTime;
             if (clearGimmic) break;
             yield return null;
