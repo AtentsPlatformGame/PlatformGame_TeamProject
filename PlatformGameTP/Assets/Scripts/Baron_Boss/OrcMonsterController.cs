@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class OrcMonsterController : EnemyState
 {
     public GameObject PatternPillar;
@@ -70,7 +71,6 @@ public class OrcMonsterController : EnemyState
 
     }
 
-
     public new void OnAttack()
     {
         Collider[] list = Physics.OverlapSphere(attackPoint.position, 3.0f, enemyMask);
@@ -136,8 +136,8 @@ public class OrcMonsterController : EnemyState
                 myAnim.SetTrigger("PatternS");
                 PatternStons.SetActive(true);
                 // 오크의 체력이 20%남았을때 낙석 패턴
-                yield return new WaitForSeconds(2.0f);
-                Destroy(PatternStons);
+                yield return new WaitForSeconds(4.0f);
+                PatternStons.SetActive(false);
                 myAnim.SetBool("Running", false);
                 myAnim.SetBool("Roaming", false);
                 phasecount = 3;
