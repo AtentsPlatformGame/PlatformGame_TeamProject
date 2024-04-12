@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class NextStagePortal : MonoBehaviour
 {
-    //public string nextSceneName;
     public GameObject potalQuestion;
     public Button yesMove;
     public LayerMask Player;
     public float raycastDistance = 100;
+    //페이드인아웃
     private SceneFadeInOut FadeManager;
     void Start()
     {

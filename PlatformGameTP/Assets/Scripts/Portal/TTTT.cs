@@ -10,7 +10,7 @@ public class TTTT : MonoBehaviour
     public Transform characterTransform;
 
     // JSON 파일로 저장할 경로
-    public string savePath = "character_position.json";
+    public string savePath = "stage1_position.json";
     CharacterPositionData positionData;
 
     private void Awake()

@@ -21,7 +21,7 @@ public class LoadingScene : MonoBehaviour
         while (!asyncLoad.isDone)
         {
             // 진행 상황 업데이트
-            // 예: 진행 상황을 보여주는 바 업데이트
+            // 나중에 로딩바 넣을때
             yield return null;
         }
     }

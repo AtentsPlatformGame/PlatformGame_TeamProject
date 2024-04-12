@@ -9,7 +9,7 @@ public class CharaterSave : MonoBehaviour
     public Transform characterTransform;
     public Transform savePoint;
     // JSON 파일로 저장할 경로
-    public string savePath = "character_position.json";
+    public string savePath = "stage1_position.json";
     public Vector3 startingPosition = new Vector3(0f, 1f, 0f);
 
     void Start()

@@ -22,7 +22,6 @@ public class TestData : MonoBehaviour
         public List<PositionData> positions;
     }
 
-    // Method to save positions to JSON file
     public void SavePositions(List<Vector3> positions)
     {
         PositionList positionList = new PositionList();
@@ -41,7 +40,6 @@ public class TestData : MonoBehaviour
         File.WriteAllText(fileName, json);
     }
 
-    // Method to load positions from JSON file
     public List<Vector3> LoadPositions()
     {
         List<Vector3> positions = new List<Vector3>();
