@@ -11,7 +11,8 @@ public enum ITEMTYPE
     ARMOR, // 방어구
     SPELL, // 스펠
     PASSIVE, // 패시브 아이템
-    CURSEDACCE // 저주받은 장신구
+    CURSEDACCE, // 저주받은 장신구
+    BOSSTOKEN
 }
 
 [System.Serializable]
