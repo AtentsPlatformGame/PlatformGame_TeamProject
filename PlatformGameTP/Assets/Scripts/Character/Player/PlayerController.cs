@@ -23,6 +23,7 @@ public class PlayerController : BattleSystem
 
     public bool isSpellReady = false;
     public bool is3d = true;
+    public float jumpCoolTime = 0.5f;
 
     float curRotY;
     float ap;
@@ -157,6 +158,7 @@ public class PlayerController : BattleSystem
         myAnim.SetBool("IsGround", isGround);
         if (isGround)
         {
+            jumpCoolTime += Time.deltaTime;
             Debug.Log("hit");
         }
     }
@@ -174,8 +176,9 @@ public class PlayerController : BattleSystem
             myAnim.SetTrigger("Jumping");
         }
         UnityEngine.Debug.Log(isGround);*/
-        if (isGround && Input.GetKeyDown(KeyCode.Space))
+        if (isGround && Input.GetKeyDown(KeyCode.Space) && jumpCoolTime >= 0.25f)
         {
+            jumpCoolTime = 0.0f;
             Jump();
             myAnim.SetTrigger("Jumping");
         }

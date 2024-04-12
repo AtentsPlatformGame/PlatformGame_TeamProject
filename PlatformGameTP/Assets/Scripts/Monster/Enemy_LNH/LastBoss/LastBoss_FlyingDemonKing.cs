@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class LastBoss_FlyingDemonKing : EnemyState
 {
@@ -30,6 +31,8 @@ public class LastBoss_FlyingDemonKing : EnemyState
     [SerializeField, Header("인라인 퍼셉션")] Transform inLinePerception;
     [SerializeField, Header("메테오 공격 쿨타임")] float meteorDelay = 1.0f;
     [SerializeField, Header("클리어 포탈")] Transform clearPortal;
+    [SerializeField, Header("보스 피통 UI")] GameObject bossHpBar;
+    [SerializeField, Header("보스 피통 슬라이더")] Slider bossHpSlider;
 
     float meteorCoolTime;
     Vector3 beforeSpawnPos;
@@ -98,7 +101,6 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 
                 break;
             case State.Create:
-                StopAllCoroutines();
                 break;
             default:
                 break;
@@ -106,8 +108,13 @@ public class LastBoss_FlyingDemonKing : EnemyState
     }
     #endregion
 
-    #region Start,Upate
+    #region Enable,Start,Upate
     // Start is called before the first frame update
+
+    private void OnEnable()
+    {
+        if (bossHpBar != null && !bossHpBar.activeSelf) bossHpBar.SetActive(true);
+    }
     void Start()
     {
         base.Initialize();
@@ -120,6 +127,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         base.StateProcess();
         if (this.myState == State.Death) return;
+        
         if (!isSpawnStart && this.curHP <= (this.battleStat.MaxHp * 0.6))
         {
             ChangeState(State.Phase);
@@ -172,6 +180,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         while (target != null)
         {
+            
             BattleSystem bs = target.gameObject.GetComponent<BattleSystem>();
             if(bs != null)
             {
@@ -280,6 +289,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
             myAnim.SetTrigger("Damage");
             StartCoroutine(DamagingDemon());
         }
+        bossHpSlider.value = this.curHP / this.battleStat.MaxHp;
     }
     IEnumerator DamagingDemon()
     {
@@ -311,6 +321,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
             }
             yield return null;
         }
+        if(bossHpBar != null)bossHpBar.SetActive(false);
         Destroy(gameObject);
     }
     #endregion
@@ -351,6 +362,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     public void SpawnTombStone()
     {
         StartCoroutine(SpawningTombStone());
+        Debug.Log("비석 소환 패턴 시작");
     }
 
     IEnumerator SpawningTombStone()
@@ -362,19 +374,9 @@ public class LastBoss_FlyingDemonKing : EnemyState
         rigid.useGravity = false;
         Vector3 upPos = transform.position + new Vector3(0, 20, 0);
         yield return StartCoroutine(MoveForGimic(upPos));
-        /*
-        Vector3 dir = upPos - fireBallPoint.position;
-        float dist = dir.magnitude;
-        dir.Normalize();
-        float delta = Time.deltaTime * 20.0f;
-        while (!Mathf.Approximately(dist, 0.0f))
-        {
-            if (dist < delta) dist = delta;
-            dist -= delta;
-            transform.Translate(dir * delta, Space.World);
-            yield return null;
-        }*/
+        Debug.Log("이동 끝");
         yield return new WaitForSeconds(1f);
+        Debug.Log("비석 소화안애만");
         if (spawnTombStone != null) spawnTombStone.gameObject.SetActive(true);
         yield return null;
     }
@@ -387,17 +389,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     IEnumerator Dizzing()
     {
         yield return StartCoroutine(MoveForGimic(beforeSpawnPos));
-        /*Vector3 dir = beforeSpawnPos - transform.position;
-        float dist = dir.magnitude;
-        dir.Normalize();
-        float delta = Time.deltaTime * 20.0f;
-        while (!Mathf.Approximately(dist, 0.0f))
-        {
-            if (dist < delta) dist = delta;
-            dist -= delta;
-            transform.Translate(dir * delta, Space.World);
-            yield return null;
-        } // 다 내려옴*/
+        
         ChangeState(State.Dizzy);
         // 스턴이 걸린듯한 사운드 추가
         yield return new WaitForSeconds(5f);

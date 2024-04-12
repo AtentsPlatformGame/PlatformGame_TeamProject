@@ -44156,6 +44156,7 @@ GameObject:
   - component: {fileID: 8705986516592252172}
   - component: {fileID: 9114385727598248433}
   - component: {fileID: 3603459165372389175}
+  - component: {fileID: 7898075613310273068}
   m_Layer: 0
   m_Name: Laser AOE
   m_TagString: AttackSpell
@@ -47848,7 +47849,7 @@ ParticleSystem:
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
-    multiplyColliderForceByCollisionAngle: 1
+    multiplyColliderForceByCollisionAngle: 0
     m_Planes: []
     m_Dampen:
       serializedVersion: 2
@@ -47906,7 +47907,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -48024,13 +48025,14 @@ ParticleSystem:
   TriggerModule:
     enabled: 0
     serializedVersion: 2
-    inside: 1
+    inside: 2
     outside: 0
     enter: 0
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
-    primitives: []
+    primitives:
+    - {fileID: 0}
   SubModule:
     serializedVersion: 2
     enabled: 1
@@ -49085,6 +49087,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 5
+--- !u!114 &7898075613310273068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478731271839673279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2b4e6ee20bc7a4295a868bd968afe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellMask:
+    serializedVersion: 2
+    m_Bits: 524288
+  spellDmg: 5
 --- !u!1 &9063691487585404173
 GameObject:
   m_ObjectHideFlags: 0

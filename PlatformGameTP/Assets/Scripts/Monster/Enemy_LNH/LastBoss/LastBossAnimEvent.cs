@@ -15,6 +15,8 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public UnityEvent specialAttackAct;
     public UnityEvent fadeInAct;
     public UnityEvent fadeOutAct;
+    public UnityEvent patternOnAct;
+    public UnityEvent patternOffAct;
     public void OnClawAttack()
     {
         clawOnAttackAct?.Invoke();
@@ -62,5 +64,14 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public void OnFadeOut()
     {
         fadeOutAct?.Invoke();
+    }
+
+    public void OnPatternOn()
+    {
+        patternOnAct?.Invoke();
+    }
+    public void OnPatternOff()
+    {
+        patternOffAct?.Invoke();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DemonWarriorController : EnemyState
 {
@@ -9,10 +10,13 @@ public class DemonWarriorController : EnemyState
 
     public Transform slashPoint;
     public Transform spawnPoint;
+    public Transform warpPoint;
 
     [SerializeField] Transform skeleton;
     [SerializeField] bool isPhaseChanged = false;
     [SerializeField] Transform LastBoss;
+    [SerializeField, Header("보스 피통 UI")] GameObject bossHpBar;
+    [SerializeField, Header("보스 피통 슬라이더")] Slider bossHpSlider;
 
     protected override void ChangeState(State s)
     {
@@ -30,17 +34,16 @@ public class DemonWarriorController : EnemyState
                 break;
         }
     }
+    private void OnEnable()
+    {
+        if (bossHpBar != null && !bossHpBar.activeSelf) bossHpBar.SetActive(true);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         base.Initialize();
-        //GameObject.Find("HpBars");
-        /*GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/HpStatus"),
-         SceneData.Instance.hpBarsTransform);
-        myHpBar = obj.GetComponent<HpBar>();
-        myHpBar.myTarget = hpViewPos;
-        base.changeHpAct.AddListener(myHpBar.ChangeHpSlider);*/
-
+        
         startPos = transform.position;
         base.ChangeState(State.Normal);
     }
@@ -50,6 +53,7 @@ public class DemonWarriorController : EnemyState
     {
         base.StateProcess();
         if (this.myState == State.Death) return;
+        
         if (!isPhaseChanged && this.curHP <= (this.battleStat.MaxHp * 0.5))
         {
             ChangeState(State.Phase);
@@ -67,7 +71,7 @@ public class DemonWarriorController : EnemyState
         obj = Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint);
         //Instantiate(skeleton, spawnPoint.transform.position, Quaternion.identity, spawnPoint);
         obj.gameObject.transform.SetParent(null);
-        yield return StartCoroutine(DelayChangeState(State.Normal, 1.5f));
+        yield return StartCoroutine(DelayChangeState(State.Battle, 1.5f));
     }
     #endregion
     #region 공격판정, 이펙트
@@ -151,9 +155,18 @@ public class DemonWarriorController : EnemyState
     #endregion
 
     #region 사망판정
+
+    public override void TakeDamage(float _dmg)
+    {
+        base.TakeDamage(_dmg);
+        bossHpSlider.value = this.curHP / this.battleStat.MaxHp;
+
+    }
     protected override IEnumerator DisApearing(float delay)
     {
+        if (bossHpBar != null) bossHpBar.SetActive(false);
         yield return new WaitForSeconds(delay);
+
         //Destroy(myHpBar.gameObject);
         float _fillAmount = 0.0f;
         while (_fillAmount < 1.0f)
@@ -168,6 +181,7 @@ public class DemonWarriorController : EnemyState
 
         yield return StartCoroutine(SpawingLastBoss());
         Debug.Log("소환해줘");
+        if (myTarget != null) myTarget.position = warpPoint.position;
         Destroy(gameObject);
         
     }

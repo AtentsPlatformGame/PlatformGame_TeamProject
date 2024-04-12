@@ -11,14 +11,14 @@ public class LastBossFade : MonoBehaviour
     [SerializeField] float fadeTime = 1.0f;
 
     float curTime = 0.0f;
-    CanvasGroup cg;
+    [SerializeField] CanvasGroup cg;
     Coroutine FadeCoroutine;
    
 
     // Start is called before the first frame update
     void Awake()
     {
-        cg = GetComponent<CanvasGroup>();   
+
     }
 
     public void StartFadeIn()
