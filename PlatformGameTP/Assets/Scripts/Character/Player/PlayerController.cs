@@ -9,11 +9,13 @@ public class PlayerController : BattleSystem
     [SerializeField][Header("플레이어 이동 속도")] float moveSpeed = 4.0f;
     [SerializeField][Header("플레이어 회전 속도")] float rotSpeed = 1.0f;
     [SerializeField][Header("플레이어 점프 세기")] float jumpForce = 2.0f;
-    [SerializeField][Header("플레이어 스펠")] Transform spellObject; // 스펠 어짜피 1개 들고 다니니깐 이거 배열이 아니라 그냥 한개로 수정해야함
+    [SerializeField][Header("플레이어 스펠")] Transform spellObject;
     [SerializeField]
     [Header("플레이어 2D 이동 방식 토글")] bool controll2D = true;
     [SerializeField] Vector2 rotYRange = new Vector2(0.0f, 180.0f);
     [SerializeField, Header("플레이어 컨트롤 제어")] bool canMove = true;
+    [SerializeField, Header("텔레포트 이펙트")] Transform teleportVFX;
+    [SerializeField, Header("텔레포트 잔상 이펙트"), Space(5)] Transform teleportFogVFX;
 
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -123,6 +125,11 @@ public class PlayerController : BattleSystem
                 Debug.Log("벽에 막힘");
                 deltaPos = deltaPos.normalized * hit.distance;
             }
+            if(teleportVFX != null)
+            {
+                teleportVFX.GetComponent<ParticleSystem>().Play();
+                Instantiate(teleportFogVFX, transform.position, Quaternion.identity);
+            }
         }
 
         transform.Translate(deltaPos); // 앞뒤 이동.
@@ -215,6 +222,11 @@ public class PlayerController : BattleSystem
                 Debug.Log("벽에 막힘");
                 deltaXPos = deltaXPos.normalized * hit.distance;
                 deltaYPos = deltaYPos.normalized * hit.distance;
+            }
+            if (teleportVFX != null)
+            {
+                teleportVFX.GetComponent<ParticleSystem>().Play();
+                Instantiate(teleportFogVFX, transform.position, Quaternion.identity);
             }
         }
 
