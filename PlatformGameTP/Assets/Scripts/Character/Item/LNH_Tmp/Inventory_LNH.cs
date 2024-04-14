@@ -42,6 +42,13 @@ public class Inventory_LNH : MonoBehaviour
             case ITEMTYPE.SPELL:
                 UpdateSlot(4, _itemStat);
                 break;
+            case ITEMTYPE.BOSSTOKEN1:
+                UpdateSlot(5, _itemStat);
+                break;
+            case ITEMTYPE.BOSSTOKEN2:
+                UpdateSlot(6, _itemStat);
+                break;
+
             default:
                 break;
         }

@@ -12,7 +12,8 @@ public enum ITEMTYPE
     SPELL, // 스펠
     PASSIVE, // 패시브 아이템
     CURSEDACCE, // 저주받은 장신구
-    BOSSTOKEN
+    BOSSTOKEN1,
+    BOSSTOKEN2,
 }
 
 [System.Serializable]
