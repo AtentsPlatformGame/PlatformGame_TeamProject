@@ -23,7 +23,7 @@ public class TestPortal: MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance, Player))
         {
             savedPosition = transform.position;
-            FadeManager.FadeOutAndLoadScene("JTG-Village");
+            FadeManager.FadeOutAndLoadScene("LGH");
         }
     }
 }
