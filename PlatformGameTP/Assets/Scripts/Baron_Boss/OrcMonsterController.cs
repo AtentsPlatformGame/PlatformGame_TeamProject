@@ -150,15 +150,15 @@ public class OrcMonsterController : EnemyState
             if (this.curHp <=(this.battleStat.MaxHp * 0.2) && phasecount == 2 )
             {
                 this.transform.position = PatternPos;
-                
-                myAnim.SetBool("Roaming", true);
+                myAnim.SetBool("IsRunning", false);
+                WarningS.SetActive(true);
+                yield return new WaitForSeconds(3.0f);
+                WarningS.SetActive(false);
                 myAnim.SetTrigger("PatternS");
                 PatternStons.SetActive(true);
                 // 오크의 체력이 20%남았을때 낙석 패턴
                 yield return new WaitForSeconds(3.0f);
                 PatternStons.SetActive(false);
-                myAnim.SetBool("Running", false);
-                myAnim.SetBool("Roaming", false);
                 phasecount = 3;
 
             }
