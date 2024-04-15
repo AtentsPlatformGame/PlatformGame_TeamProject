@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerController : BattleSystem
 {
-
-    [SerializeField][Header("플레이어 이동 속도")] float moveSpeed = 4.0f;
     [SerializeField][Header("플레이어 회전 속도")] float rotSpeed = 1.0f;
     [SerializeField][Header("플레이어 점프 세기")] float jumpForce = 2.0f;
     [SerializeField][Header("플레이어 스펠")] Transform spellObject;
@@ -16,6 +14,7 @@ public class PlayerController : BattleSystem
     [SerializeField, Header("플레이어 컨트롤 제어")] bool canMove = true;
     [SerializeField, Header("텔레포트 이펙트")] Transform teleportVFX;
     [SerializeField, Header("텔레포트 잔상 이펙트"), Space(5)] Transform teleportFogVFX;
+    [SerializeField, Header("플레이어 최초 스텟")] PlayerStatData playerStatData;
 
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -30,10 +29,11 @@ public class PlayerController : BattleSystem
     float curRotY;
     float ap;
     bool isGround;
-    
     float attackDeltaTime = 0.0f;
     float teleportDeltaTime = 0.0f;
 
+    
+    BattleStat originalStat;
     Rigidbody rigid;
     Fireball fireBall;
     Coroutine attackDelay;
@@ -45,13 +45,13 @@ public class PlayerController : BattleSystem
     // Start is called before the first frame update
     private void Awake()
     {
+        OriginalStatInit(playerStatData.GetPlayerStatInfo());
         Initialize();
     }
     void Start()
     {
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
@@ -78,6 +78,16 @@ public class PlayerController : BattleSystem
                 }
             }
         }
+    }
+
+    void OriginalStatInit(PlayerBattleStat pb)
+    {
+        this.originalStat.AP = pb.AP;
+        this.originalStat.MaxHp = pb.MaxHp;
+        this.originalStat.AttackRange = pb.AttackRange;
+        this.originalStat.AttackDelay = pb.AttackDelay;
+        this.originalStat.ProjectileSpeed = pb.ProjectileSpeed;
+        this.originalStat.MoveSpeed = pb.MoveSpeed;
     }
     #region ControllChange
     public void SwitchControllType2D(bool _type)
@@ -113,7 +123,7 @@ public class PlayerController : BattleSystem
     {
         Constraints2D();
         float x = Input.GetAxis("Horizontal");
-        Vector3 deltaPos = transform.forward * x * Time.deltaTime * moveSpeed;
+        Vector3 deltaPos = transform.forward * x * Time.deltaTime * battleStat.MoveSpeed;
 
         if (!Mathf.Approximately(x, 0.0f) && Input.GetKeyDown(KeyCode.LeftShift) && Mathf.Approximately(teleportDeltaTime, 0.0f)) // 텔레포트, 추후 쿨타임 추가 예정
         {
@@ -207,8 +217,8 @@ public class PlayerController : BattleSystem
         float y = Input.GetAxis("Horizontal");
 
 
-        Vector3 deltaXPos = Vector3.forward * x * Time.deltaTime * moveSpeed;
-        Vector3 deltaYPos = Vector3.right * y * Time.deltaTime * moveSpeed;
+        Vector3 deltaXPos = Vector3.forward * x * Time.deltaTime * battleStat.MoveSpeed;
+        Vector3 deltaYPos = Vector3.right * y * Time.deltaTime * battleStat.MoveSpeed;
 
         if ((!Mathf.Approximately(x, 0.0f) || !Mathf.Approximately(y, 0.0f)) &&
             Input.GetKeyDown(KeyCode.LeftShift) && Mathf.Approximately(teleportDeltaTime, 0.0f)) // 텔레포트, 추후 쿨타임 추가 예정
@@ -302,12 +312,11 @@ public class PlayerController : BattleSystem
 
     public new void OnAttack()
     {
-        ap = GetAp();
         // 애니메이션 이벤트
         // 파이어볼(?)이 생성되어 앞으로 발사되는 함수
         GameObject obj = Instantiate(orgFireball, rightAttackPoint);
         obj.transform.SetParent(null);
-        obj.GetComponent<Fireball>().SetFireBallAP(ap); // 파이어볼 공격력 설정
+        obj.GetComponent<Fireball>().SetFireBallAP(GetAp()); // 파이어볼 공격력 설정
         obj.GetComponent<Fireball>().SetAttackRange(GetAttackRange()); // 파이어볼 공격 사거리 결정
         obj.GetComponent<Fireball>().SetProjectileSpeed(GetProjectileSpeed()); // 파이어볼 투사체 속도 결정
     }
@@ -335,7 +344,10 @@ public class PlayerController : BattleSystem
         teleportDeltaTime = 0f;
     }
 
-
+    public void SetSpell(ItemStat _itemStat)
+    {
+        this.spellObject = _itemStat.SpellObject;
+    }
     public void ReadyToUseSpell(bool isReady)
     {
         isSpellReady = isReady;
@@ -377,35 +389,70 @@ public class PlayerController : BattleSystem
 
     public void HealBuff()
     {
-
+        this.curHP += this.battleStat.MaxHp * 0.5f;
+        if (this.curHP >= this.battleStat.MaxHp)
+        {
+            this.curHP = this.battleStat.MaxHp;
+        }
+        Debug.Log("힐 스펠 사용");
     }
 
     public void SpeedBuff()
     {
-
+        StartCoroutine(SpeedBuffActing());
     }
-    public void UpdatePlayerStat(ItemStat _itemStat)
+    IEnumerator SpeedBuffActing()
     {
+        float originSpeed = this.battleStat.MoveSpeed;
+        this.battleStat.MoveSpeed += this.battleStat.MoveSpeed * 0.5f;
+        yield return new WaitForSeconds(5f);
+        this.battleStat.MoveSpeed = originSpeed;
+    }
+    public void UpdatePlayerStat(BattleStat _itemStat) // 여기서 _itemStat은 인벤토리에서 자기 자식들의 stat을 더한 총합을 넣어야함
+    {
+        /*BattleStat tmpBattleStat = new BattleStat();
         if (_itemStat.ItemType == ITEMTYPE.NONE) return;
         switch (_itemStat.ItemType)
         {
             case ITEMTYPE.WEAPON:
-                if (_itemStat.Ap != 0) this.battleStat.AP = _itemStat.Ap; // 공격력 증가
+                if (_itemStat.Ap != 0) tmpBattleStat.AP += _itemStat.Ap; // 공격력 증가
                 break;
             case ITEMTYPE.ARMOR:
-                if (!Mathf.Approximately(_itemStat.PlusHeart, 0.0f)) this.battleStat.MaxHp = _itemStat.PlusHeart; // 최대 체력 증가
-                break;
-            case ITEMTYPE.PASSIVE:
-                break;
-            case ITEMTYPE.CURSEDACCE:
+                if (!Mathf.Approximately(_itemStat.PlusHeart, 0.0f)) tmpBattleStat.MaxHp += _itemStat.PlusHeart; // 최대 체력 증가
                 break;
             case ITEMTYPE.SPELL:
-
+                if (_itemStat.SpellObject != null) this.spellObject = _itemStat.SpellObject; // 스펠 적용
+                break;
+            case ITEMTYPE.PASSIVE:
+                if (!Mathf.Approximately(_itemStat.PlusSpeed, 0.0f)) tmpBattleStat.MoveSpeed += _itemStat.PlusSpeed; // 이동속도 증가
+                if (!Mathf.Approximately(_itemStat.PlusAttackRange, 0.0f)) tmpBattleStat.AttackRange += _itemStat.PlusAttackRange; // 사정거리 증가
+                if (!Mathf.Approximately(_itemStat.PlusProjectileSpeed, 0.0f)) tmpBattleStat.ProjectileSpeed += _itemStat.PlusProjectileSpeed; // 투사체 속도 증가
+                break;
+            case ITEMTYPE.CURSEDACCE:
+                if (_itemStat.Ap != 0) tmpBattleStat.AP += _itemStat.Ap; // 공격력 증가
+                if (!Mathf.Approximately(_itemStat.PlusHeart, 0.0f)) tmpBattleStat.MaxHp += _itemStat.PlusHeart; // 최대 체력 증가
+                if (!Mathf.Approximately(_itemStat.PlusSpeed, 0.0f)) tmpBattleStat.MoveSpeed += _itemStat.PlusSpeed; // 이동속도 증가
+                if (!Mathf.Approximately(_itemStat.PlusAttackRange, 0.0f)) tmpBattleStat.AttackRange += _itemStat.PlusAttackRange; // 사정거리 증가
+                if (!Mathf.Approximately(_itemStat.PlusProjectileSpeed, 0.0f)) tmpBattleStat.ProjectileSpeed += _itemStat.PlusProjectileSpeed; // 투사체 속도 증가
                 break;
             default:
                 break;
         }
-        Initialize();
+        this.battleStat.AP = this.originalStat.AP + tmpBattleStat.AP;
+        this.battleStat.MaxHp = this.originalStat.MaxHp + tmpBattleStat.MaxHp;
+        this.battleStat.MoveSpeed = this.originalStat.MoveSpeed + tmpBattleStat.MoveSpeed;
+        this.battleStat.AttackRange = this.originalStat.AttackRange + tmpBattleStat.AttackRange;
+        this.battleStat.ProjectileSpeed = this.originalStat.ProjectileSpeed + tmpBattleStat.ProjectileSpeed;*/
+
+        // 위처럼 하지 말고 인벤토리에 들어있는 아이템이 바뀔 경우에만 인벤토리 안에 있는 아이템들의 스텟 총합을 더해서 아래의 5줄짜리 코드를 적용함
+        this.battleStat.AP = this.originalStat.AP + _itemStat.AP;
+        this.battleStat.MaxHp = this.originalStat.MaxHp + _itemStat.MaxHp;
+        this.battleStat.MoveSpeed = this.originalStat.MoveSpeed + _itemStat.MoveSpeed;
+        this.battleStat.AttackRange = this.originalStat.AttackRange + _itemStat.AttackRange;
+        this.battleStat.ProjectileSpeed = this.originalStat.ProjectileSpeed + _itemStat.ProjectileSpeed;
+        
+
+        //Initialize();
     }
 
     public bool GetControllType()

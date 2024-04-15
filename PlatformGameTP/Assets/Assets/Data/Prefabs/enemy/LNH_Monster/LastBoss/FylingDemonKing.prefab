@@ -2464,6 +2464,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  patternOnAct:
+    m_PersistentCalls:
+      m_Calls: []
+  patternOffAct:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5355912946347102339
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,7 +3512,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418176755422317696}
-  - component: {fileID: 5155627026197662655}
   - component: {fileID: 1874383207167482772}
   - component: {fileID: 3476560796981930923}
   m_Layer: 19
@@ -3537,29 +3542,6 @@ Transform:
   - {fileID: 8491129120046416783}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5155627026197662655
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7845668504784936927}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.18
-  m_Height: 0.6
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!54 &1874383207167482772
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3627,6 +3609,7 @@ MonoBehaviour:
   hpViewPos: {fileID: 0}
   detectUI: {fileID: 4101693370355538110}
   missngUI: {fileID: 3426084653231582376}
+  Rewards: {fileID: 0}
   dropGoldAct:
     m_PersistentCalls:
       m_Calls: []
@@ -3654,12 +3637,15 @@ MonoBehaviour:
   biteAttackPoint: {fileID: 344015269135389181}
   fireBallPoint: {fileID: 2899682528373358138}
   spawnTombStone: {fileID: 0}
-  bossCollider: {fileID: 5155627026197662655}
+  bossCollider: {fileID: 0}
   isPhaseChanged: 0
   isSpawnStart: 0
   outLinePerception: {fileID: 5798969003851382007}
   inLinePerception: {fileID: 6495971699412623047}
   meteorDelay: 10
+  clearPortal: {fileID: 0}
+  bossHpBar: {fileID: 0}
+  bossHpSlider: {fileID: 0}
 --- !u!1 &7847130564312867419
 GameObject:
   m_ObjectHideFlags: 0

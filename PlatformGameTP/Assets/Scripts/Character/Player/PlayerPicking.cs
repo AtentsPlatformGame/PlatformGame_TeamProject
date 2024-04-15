@@ -17,6 +17,7 @@ public class PlayerPicking : MonoBehaviour
     public UnityEvent attackAct; // PlayerController Attack()
     public UnityEvent<bool> spellReadyAct; // 스펠 사용 준비 
     public UnityEvent<Vector3> useSpellAct; // 스펠 사용
+    public UnityEvent useBuffSpellAct;
     PlayerController playerController;
 
     Vector3 pos;
@@ -68,8 +69,11 @@ public class PlayerPicking : MonoBehaviour
         }
         else // 스펠 사용 준비 후
         {
-            // 2D 컨트롤 때 스펠 그리기
-            DrawSpell(attackSpellPointImg);
+            if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때
+            {
+                // 2D 컨트롤 때 스펠 그리기
+                DrawSpell(attackSpellPointImg);
+            }
 
             if (Input.GetMouseButtonDown(0)) // 스펠 사용
             {
@@ -80,12 +84,13 @@ public class PlayerPicking : MonoBehaviour
                 if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때
                 {
                     SpellObjectEnabled(attackSpellPointImg, spellRangeImg, false);
+                    
                 }
                 else // 사용하고자하는 스펠이 Buff일 때
                 {
                     SpellObjectEnabled(buffSpellPoinImg, spellRangeImg, false);
+                    //useBuffSpellAct?.Invoke();
                 }
-
                 useSpellAct?.Invoke(newHitPoint);
                 spellReadyAct?.Invoke(false);
             }

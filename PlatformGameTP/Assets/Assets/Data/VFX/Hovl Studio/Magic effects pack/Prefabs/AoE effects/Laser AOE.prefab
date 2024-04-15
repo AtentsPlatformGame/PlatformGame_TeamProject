@@ -44156,7 +44156,6 @@ GameObject:
   - component: {fileID: 8705986516592252172}
   - component: {fileID: 9114385727598248433}
   - component: {fileID: 3603459165372389175}
-  - component: {fileID: 7898075613310273068}
   m_Layer: 0
   m_Name: Laser AOE
   m_TagString: AttackSpell
@@ -47842,7 +47841,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     type: 1
     collisionMode: 0
@@ -49087,22 +49086,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 5
---- !u!114 &7898075613310273068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7478731271839673279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db2b4e6ee20bc7a4295a868bd968afe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellMask:
-    serializedVersion: 2
-    m_Bits: 524288
-  spellDmg: 5
 --- !u!1 &9063691487585404173
 GameObject:
   m_ObjectHideFlags: 0
