@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class Inventory_LNH : MonoBehaviour
 {
-    public UnityEvent<ItemStat> updatePlayerStatAct; // 플레이어 정보를 새로 입력받은 아이템 정보로 갱신하는 UnityEvent
+    public UnityEvent<BattleStat> updatePlayerStatAct; // 플레이어 정보를 새로 입력받은 아이템 정보로 갱신하는 UnityEvent
+    public UnityEvent<ItemStat> updatePlayerSpell;
     public UnityEvent<ItemStat>[] updateItemStat; // 각 인벤토리 슬롯마다 각기 달리 정보를 갱신하는 UnityEvent
 
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class Inventory_LNH : MonoBehaviour
     // 상점에서 구매했을 때, 아이템 파밍시 모두 사용하는 코드
     public void UpdateInventory(ItemStat _itemStat) // 새로 구매, 파밍한 아이템이 들어왔다면
     {
+        BattleStat calStat = new BattleStat();
         // 아이템 타입에 따라서 각 칸의 바인딩 된 함수를 호출하고
         // 플레이어 스텟을 갱신함
         switch (_itemStat.ItemType)
@@ -41,6 +43,7 @@ public class Inventory_LNH : MonoBehaviour
                 break;
             case ITEMTYPE.SPELL:
                 UpdateSlot(4, _itemStat);
+                updatePlayerSpell?.Invoke(_itemStat);
                 break;
             case ITEMTYPE.BOSSTOKEN1:
                 UpdateSlot(5, _itemStat);
@@ -52,13 +55,38 @@ public class Inventory_LNH : MonoBehaviour
             default:
                 break;
         }
+
+        calStat = CalculateInven();
+        updatePlayerStatAct?.Invoke(calStat);
     }
 
     void UpdateSlot(int idx, ItemStat _itemStat)
     {
         updateItemStat[idx]?.Invoke(_itemStat);
-        updatePlayerStatAct?.Invoke(_itemStat);
 
     }
+
+    BattleStat CalculateInven()
+    {
+        BattleStat tmpStat = new BattleStat();
+
+        for(int i = 0; i < 4; i++)
+        {
+            InventorySlot_LNH inventoryItemProperty = this.transform.GetChild(i).GetComponent<InventorySlot_LNH>();
+            
+            if (inventoryItemProperty != null)
+            {
+                ItemStat inventoryItemStat = inventoryItemProperty.GetItemStat();
+                tmpStat.AP += inventoryItemStat.Ap;
+                tmpStat.MaxHp += inventoryItemStat.PlusHeart;
+                tmpStat.AttackRange += inventoryItemStat.PlusAttackRange;
+                tmpStat.ProjectileSpeed += inventoryItemStat.PlusProjectileSpeed;
+                tmpStat.MoveSpeed += inventoryItemStat.PlusSpeed;
+            }
+        }
+        return tmpStat;
+    }
+
+
     
 }

@@ -21,7 +21,7 @@ public class PlayerController : BattleSystem
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
-    public GameObject DeathIMG;
+    //public GameObject DeathIMG;
 
 
     public bool isSpellReady = false;
@@ -54,12 +54,16 @@ public class PlayerController : BattleSystem
     {
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
-        DeathIMG.GetComponent<CanvasGroup>().alpha = 0.0f;
+        //DeathIMG.GetComponent<CanvasGroup>().alpha = 0.0f;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            ShowStat();
+        }
         if (isAlive())
         {
             if (canMove)
@@ -498,8 +502,21 @@ public class PlayerController : BattleSystem
             {
                 time = 1.0f;
             }
-            DeathIMG.GetComponent<CanvasGroup>().alpha = time;
+            //DeathIMG.GetComponent<CanvasGroup>().alpha = time;
         }
         yield return null;
+    }
+
+
+    // 추후 삭제 예정
+    void ShowStat()
+    {
+        Debug.Log($"공격력 : {this.battleStat.AP}");
+        Debug.Log($"현재 체력 : {this.curHP}");
+        Debug.Log($"최대 체력 : {this.battleStat.MaxHp}");
+        Debug.Log($"공격 사거리 : {this.battleStat.AttackRange}");
+        Debug.Log($"공격 속도 : {this.battleStat.AttackDelay}");
+        Debug.Log($"투사체 속도 : {this.battleStat.ProjectileSpeed}");
+        Debug.Log($"이동속도 : {this.battleStat.MoveSpeed}");
     }
 }
