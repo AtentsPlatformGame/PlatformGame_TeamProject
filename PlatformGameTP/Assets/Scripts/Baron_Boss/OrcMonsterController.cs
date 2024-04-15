@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class OrcMonsterController : EnemyState
 {
     public GameObject PatternPillar;
     public GameObject PatternStons;
+    public GameObject OrcMonster;
+
+    public GameObject Call;
+    public GameObject WarningP;
+    public GameObject WarningA;
+    public GameObject WarningS;
+    public GameObject Clear;
 
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
@@ -17,7 +25,8 @@ public class OrcMonsterController : EnemyState
     public Transform spawnPoint;
 
     [SerializeField] bool isPhaseChanged = false;
-   
+
+    static int callCounts = 0;
     public int phasecount = 0;
     public Vector3 PatternPos;
     protected override void ChangeState(State s)
@@ -48,10 +57,16 @@ public class OrcMonsterController : EnemyState
 
         startPos = transform.position;
         base.ChangeState(State.Normal);
-        PatternPos = new(0.0f, 0.0f, 15.0f);
+        PatternPos = new(0.0f, 0.0f, 27.0f);
 
         PatternPillar.SetActive(false);
         PatternStons.SetActive(false);
+
+        Call.SetActive(false);
+        WarningP.SetActive(false);
+        WarningA.SetActive(false);
+        WarningS.SetActive(false);
+        Clear.SetActive(false);
     }
 
     // Update is called once per frame
@@ -67,6 +82,11 @@ public class OrcMonsterController : EnemyState
         if (myState != State.Death)
         {
             base.IsGround();
+        }
+        if(myState == State.Battle && callCounts == 0)
+        {
+            Call.SetActive(true);
+            Invoke("TurnOffCall", 2.0f);
         }
 
     }
@@ -99,44 +119,43 @@ public class OrcMonsterController : EnemyState
             if (this.curHP <= (this.battleStat.MaxHp * 0.8) && phasecount == 0)
             {
                 this.transform.position = PatternPos;
-                myAnim.SetBool("Running", true);
-                myAnim.SetBool("Roaming", true);
-                myAnim.SetTrigger("PatternP");
+                myAnim.SetBool("IsRunning", false);
+                WarningP.SetActive(true);
+                yield return new WaitForSeconds(3.0f);
+                WarningP.SetActive(false);
                 PatternPillar.SetActive(true);
+                Debug.Log("기둥 무너짐");
                 // 오크의 체력이 80%일때 기둥을 쓰러트리는 패턴
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(3.0f);
                 //Destroy(PatternPillar);
                 PatternPillar.SetActive(false);
-                myAnim.SetBool("Running", false);
-                myAnim.SetBool("Roaming", false);
                 phasecount = 1;
             }
 
             if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 1)
             {
                 this.transform.position = PatternPos;
-                myAnim.SetBool("Running", true);
-                myAnim.SetBool("Roaming", true);
+                myAnim.SetBool("IsRunning", false);
+                WarningA.SetActive(true);
+                yield return new WaitForSeconds(3.0f);
+                WarningA.SetActive(false);
                 myAnim.SetTrigger("Howling");
                 // 오크의 체력이 절반이 되었을때 능력치를 버프하는 패턴 
                 this.battleStat.AP += 2;
                 this.battleStat.MoveSpeed += 1;
                 phasecount = 2;
                 Debug.Log("공업 이속업");
-                yield return new WaitForSeconds(3.0f);
-                myAnim.SetBool("Running", false);
-                myAnim.SetBool("Roaming", false);
             }
 
             if (this.curHp <=(this.battleStat.MaxHp * 0.2) && phasecount == 2 )
             {
                 this.transform.position = PatternPos;
-                myAnim.SetBool("Running", true);
+                
                 myAnim.SetBool("Roaming", true);
                 myAnim.SetTrigger("PatternS");
                 PatternStons.SetActive(true);
                 // 오크의 체력이 20%남았을때 낙석 패턴
-                yield return new WaitForSeconds(4.0f);
+                yield return new WaitForSeconds(3.0f);
                 PatternStons.SetActive(false);
                 myAnim.SetBool("Running", false);
                 myAnim.SetBool("Roaming", false);
@@ -220,4 +239,9 @@ public class OrcMonsterController : EnemyState
         Instantiate(getHitEffect, transform.position, Quaternion.identity, null);
     }
 
+    public void TurnOffCall()
+    {
+        Call.SetActive(false);
+        callCounts = 1;
+    }
 }

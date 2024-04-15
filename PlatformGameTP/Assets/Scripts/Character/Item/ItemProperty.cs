@@ -33,8 +33,14 @@ public struct ItemStat
     [Tooltip("방어구 추가 체력 개수를 결정합니다.")] public float PlusHeart; // 추가 체력(방어구)
     [Header("아이템(장신구)의 추가 이속")] 
     [Tooltip("장신구의 추가 이동속도를 결정합니다.")] public float PlusSpeed; // 추가 이속
+    [Header("아이템(장신구)의 추가 이속")]
+    [Tooltip("장신구의 추가 투사체속도를 결정합니다.")] public float PlusProjectileSpeed; // 추가 투사체속도
+    [Header("아이템(장신구)의 추가 이속")]
+    [Tooltip("장신구의 추가 사정거리를 결정합니다.")] public float PlusAttackRange; // 추가 사정거리
     [Header("아이템(장신구) 가격")]
     [Tooltip("아이템의 가격을 결정합니다.")] public int ItemsPrice; // 아이템 가격
+    [Header("아이템(스펠) VFX")]
+    [Tooltip("만약 아이템이 스펠일 경우 스펠 프리펩을 넣어주세요.")] public Transform SpellObject; // 스펠일 때 스펠 vfx
     // 이 아래로 위와 같이 추가
 }
 public class ItemProperty : MonoBehaviour

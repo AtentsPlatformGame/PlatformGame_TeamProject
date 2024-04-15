@@ -264,7 +264,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
             if (delta > angle) delta = angle;
             transform.Rotate(Vector3.up * rotDir * delta);
 
-
+            Debug.Log($"플레이어와의 거리 : {dist}");
             yield return null;
         }
         myAnim.SetBool("IsRunning", false);
