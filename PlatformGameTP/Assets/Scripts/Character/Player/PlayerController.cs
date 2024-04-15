@@ -21,6 +21,8 @@ public class PlayerController : BattleSystem
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
+    public GameObject DeathIMG;
+
 
     public bool isSpellReady = false;
     public bool is3d = true;
@@ -52,6 +54,7 @@ public class PlayerController : BattleSystem
     {
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
+        DeathIMG.GetComponent<CanvasGroup>().alpha = 0.0f;
     }
 
     // Update is called once per frame
@@ -475,5 +478,28 @@ public class PlayerController : BattleSystem
         this.canMove = false;
     }
 
+    protected override void OnDead()
+    {
+        
 
+        base.OnDead();
+
+        StartCoroutine(ChangeAlpha());
+  
+    }
+
+    public IEnumerator ChangeAlpha()
+    {
+        float time = 0.0f;
+        while (time < 1.0f)
+        {
+            time += 0.1f * Time.deltaTime;
+            if (time > 1.0f)
+            {
+                time = 1.0f;
+            }
+            DeathIMG.GetComponent<CanvasGroup>().alpha = time;
+        }
+        yield return null;
+    }
 }

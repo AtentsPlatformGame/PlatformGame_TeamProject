@@ -814,6 +814,7 @@ MonoBehaviour:
   TidalWave: {fileID: 973944678}
   TidalWaveWarning: {fileID: 1095206017}
   SafeArea1: {fileID: 1274779478}
+  NagaToken: {fileID: 131632853}
   PhaseCount: 0
   GreetingBoss: {fileID: 664918905}
   isPhaseChanged: 0
@@ -960,7 +961,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376386997}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -1022,7 +1023,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3495,8 +3496,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
+      propertyPath: DeathIMG
+      value: 
+      objectReference: {fileID: 376386997}
+    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
+      propertyPath: DeathImg
+      value: 
+      objectReference: {fileID: 1399120297}
+    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: battleStat.MaxHp
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3891765266597473588, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: m_Name
@@ -4265,10 +4274,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 376387002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1399120299
 MonoBehaviour:
@@ -9070,7 +9079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a655397aae33a4e40a90564263e41672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BossRewards: {fileID: 1442409500}
+  BossRewards: {fileID: 131632853}
   rewardsCount: 0
 --- !u!65 &1728298175
 BoxCollider:
@@ -10851,6 +10860,6 @@ SceneRoots:
   - {fileID: 1274779479}
   - {fileID: 245820207}
   - {fileID: 1728298173}
-  - {fileID: 376387002}
   - {fileID: 747118654}
   - {fileID: 1442409504}
+  - {fileID: 376387002}

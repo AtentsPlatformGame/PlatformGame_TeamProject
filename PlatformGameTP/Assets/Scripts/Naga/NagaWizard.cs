@@ -18,6 +18,7 @@ public class NagaWizard : EnemyState
     public GameObject TidalWave;
     public GameObject TidalWaveWarning;
     public GameObject SafeArea1;
+    public GameObject NagaToken;
 
 
     
@@ -65,7 +66,7 @@ public class NagaWizard : EnemyState
         TidalWave.SetActive(false) ;
         SafeArea1.SetActive(false) ;
         Rewards.SetActive(false);
-     
+        NagaToken.SetActive(false);
         
         
         TidalWaveWarning.SetActive(false);
