@@ -15,17 +15,20 @@ public class OrcMonsterController : EnemyState
     public GameObject WarningA;
     public GameObject WarningS;
     public GameObject Clear;
+    public GameObject Orcreward;
 
     public Transform virticalAttackEffect;
     public Transform horizontalAttackEffect;
     public Transform buffEffect;
     public Transform getHitEffect;
+    public Transform ClearImg;
 
     public Transform hitPoint;
     public Transform spawnPoint;
 
     [SerializeField] bool isPhaseChanged = false;
 
+    static int ClearCounts = 0;
     static int callCounts = 0;
     public int phasecount = 0;
     public Vector3 PatternPos;
@@ -67,6 +70,7 @@ public class OrcMonsterController : EnemyState
         WarningA.SetActive(false);
         WarningS.SetActive(false);
         Clear.SetActive(false);
+        Orcreward.SetActive(false);
     }
 
     // Update is called once per frame
@@ -88,7 +92,6 @@ public class OrcMonsterController : EnemyState
             Call.SetActive(true);
             Invoke("TurnOffCall", 2.0f);
         }
-
     }
 
     public new void OnAttack()
@@ -132,7 +135,7 @@ public class OrcMonsterController : EnemyState
                 phasecount = 1;
             }
 
-            if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 1)
+            if (this.curHP <= (this.battleStat.MaxHp * 0.6) && phasecount == 1)
             {
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
@@ -147,7 +150,7 @@ public class OrcMonsterController : EnemyState
                 Debug.Log("공업 이속업");
             }
 
-            if (this.curHp <=(this.battleStat.MaxHp * 0.2) && phasecount == 2 )
+            if (this.curHp <=(this.battleStat.MaxHp * 0.3) && phasecount == 2 )
             {
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
@@ -218,6 +221,25 @@ public class OrcMonsterController : EnemyState
         }
         Destroy(gameObject);
     }
+
+    protected override void OnDead()
+    {
+        base.OnDead();
+        dropGoldAct?.Invoke(dropGold);
+        Orcreward.SetActive(true);
+        ChangeState(State.Death);
+       
+    }
+    public void OnClear()
+    {
+        if (myState == State.Death && ClearCounts == 0)
+        {
+            /*Clear.SetActive(true);
+            Invoke("TurnOffClear", 3.0f);*/
+            StartCoroutine(ClearCanvasOn());
+        }
+    }
+
     public void VirticalAttackEffect()
     {
         Instantiate(virticalAttackEffect, hitPoint.transform.position, Quaternion.Euler(-60.0f, 0.0f, -90.0f), null);
@@ -243,5 +265,21 @@ public class OrcMonsterController : EnemyState
     {
         Call.SetActive(false);
         callCounts = 1;
+    }
+
+    public void TurnOffClear()
+    {
+        Clear.SetActive(false);
+        ClearCounts = 1;
+    }
+
+    IEnumerator ClearCanvasOn()
+    {
+        Debug.Log("클리어 코루틴 시작");
+        Clear.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+
+        Clear.SetActive(false);
+        Debug.Log("클리어 코루틴 끝");
     }
 }

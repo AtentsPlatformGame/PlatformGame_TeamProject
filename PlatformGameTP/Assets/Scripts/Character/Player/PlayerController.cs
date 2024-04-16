@@ -499,8 +499,7 @@ public class PlayerController : BattleSystem
         DeathIMG.GetComponent<CanvasGroup>().alpha = 1.0f;
         
        
-        
-        
+             
     }
 
 
