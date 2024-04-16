@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class NagaWizard : EnemyState
     public GameObject TidalWaveWarning;
     public GameObject SafeArea1;
     public GameObject NagaToken;
-
+    public GameObject NagaClearText;
 
     
     
@@ -67,6 +68,7 @@ public class NagaWizard : EnemyState
         SafeArea1.SetActive(false) ;
         Rewards.SetActive(false);
         NagaToken.SetActive(false);
+        NagaClearText.SetActive(false);
         
         
         TidalWaveWarning.SetActive(false);
@@ -268,6 +270,11 @@ public class NagaWizard : EnemyState
     protected override void OnDead()
     {
         base.OnDead();
+        StartCoroutine(ClearText());
+        StartCoroutine(ClearTextFinish());
+
+        StopCoroutine(ClearText());
+        StopCoroutine(ClearTextFinish());
         dropGoldAct?.Invoke(dropGold);
         Debug.Log("보상");
         Rewards.SetActive(true);
@@ -275,6 +282,16 @@ public class NagaWizard : EnemyState
         // 플레이어한테 골드를 주고 플레이어가 인벤토리를 킬 때 인벤토리가 그 정보를 가져와서 골드를 갱신한다. 그리고 다시 플레이어 골드도 갱신한다.
         ChangeState(State.Death);
     }
-
+    public IEnumerator ClearText()
+    {
+        NagaClearText.SetActive(true);
+        yield return null;
+    }
+    public IEnumerator ClearTextFinish()
+    {
+        yield return new WaitForSeconds(3.0f);
+        NagaClearText.SetActive(false);
+        yield return null;
+    }
 }
 
