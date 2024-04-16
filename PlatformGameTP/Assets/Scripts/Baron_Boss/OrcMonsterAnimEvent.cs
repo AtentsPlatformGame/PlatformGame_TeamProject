@@ -9,6 +9,7 @@ public class OrcMonsterAnimEvent : AnimEvent_Orc
     public UnityEvent horizontalAttackAct;
     public UnityEvent buffAct;
     public UnityEvent gethitAct;
+    public UnityEvent ClearImg;
     public void VerticalAttackEvent()
     {
         verticalAttackAct?.Invoke();
@@ -27,5 +28,10 @@ public class OrcMonsterAnimEvent : AnimEvent_Orc
     public void GethitEvent()
     {
         gethitAct?.Invoke();
+    }
+
+    public void clearImg()
+    {
+        ClearImg?.Invoke();
     }
 }
