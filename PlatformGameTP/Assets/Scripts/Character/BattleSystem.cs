@@ -12,6 +12,22 @@ public struct BattleStat
     public float AttackDelay; // 공격 속도
     public float ProjectileSpeed; // 투사체 속도
     public float MoveSpeed; // 이동속도
+    // 위까지는 어느정도 몬스터와 플레이어가 공유하는 부분
+    // 아래부터는 완전 플레이어 전용 스텟들
+
+    /*
+        크기 증가 -> int 변수 만들어서 처리
+        공격을 한번 더 함 -> bool 변수 만들어서 처리
+        체력 회복 -> bool 변수 만들어서 처리
+        죽을 시 체력 3으로 부활 -> bool 변수 추가
+        피격 반칸 고정 -> bool 변수 추가
+     */
+    public int AttackSize; // 평타 크기
+    public bool AttackTwice; // 이중평타 여부
+    public bool HealAfterAttack; // 흡혈 여부
+    public bool ResurrectionOneTime; // 부활 여부
+    public bool HitOnlyHalf; // 피격 반칸 여부
+
 }
 
 public interface IDamage
@@ -27,8 +43,6 @@ public class BattleSystem : CharacterProperty, IDamage
     public event UnityAction deathAlarm; // event 키워드가 붙으면 이 클래스 밖에서 초기화, 실행이 불가능함. 접근 지정 제한자와 비슷한 느낌? 실수 방지
     public Transform attackPoint;
     public LayerMask enemyMask;
-    
-
 
     protected float curHp; // 수정부분 protected float curHp = 0.0f
     protected float battleTime = 0.0f;
@@ -75,6 +89,31 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         return this.battleStat.ProjectileSpeed;
     }
+
+    public int GetAttackSize()
+    {
+        return this.battleStat.AttackSize;
+    }
+
+    public bool GetAttackTwice()
+    {
+        return this.battleStat.AttackTwice;
+    }
+
+    public bool GetHealAfterAttack()
+    {
+        return this.battleStat.HealAfterAttack;
+    }
+
+    public bool GetResurrectionOneTime()
+    {
+        return this.battleStat.ResurrectionOneTime;
+    }
+
+    public bool GetHitOnlyHalf()
+    {
+        return this.battleStat.HitOnlyHalf;
+    }
     #endregion
 
     private void TargetDead()
@@ -86,14 +125,14 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         curHP = battleStat.MaxHp;
     }
-    
+
     public virtual void TakeDamage(float _dmg)
     {
         curHP -= _dmg;
         Debug.Log(curHP);
         if (curHP <= 0.0f)
         {
-            
+
             // 체력이 다 해 쓰러짐
             OnDead();
             myAnim.SetTrigger("Dead");
@@ -107,7 +146,7 @@ public class BattleSystem : CharacterProperty, IDamage
 
     IEnumerator DamagingEffect(Color effColor)
     {
-        foreach(Renderer renderer in allRenderer)
+        foreach (Renderer renderer in allRenderer)
         {
             renderer.material.color = effColor;
         }
@@ -132,9 +171,9 @@ public class BattleSystem : CharacterProperty, IDamage
 
     protected virtual void OnDead()
     {
-       
+
         deathAlarm?.Invoke();
-       
+
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().useGravity = false;
     }
@@ -145,6 +184,6 @@ public class BattleSystem : CharacterProperty, IDamage
         return curHP > 0.0f;
     }
 
-  
+
 }
 

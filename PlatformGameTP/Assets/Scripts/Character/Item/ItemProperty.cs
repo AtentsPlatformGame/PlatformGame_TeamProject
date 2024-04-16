@@ -33,15 +33,28 @@ public struct ItemStat
     [Tooltip("방어구 추가 체력 개수를 결정합니다.")] public float PlusHeart; // 추가 체력(방어구)
     [Header("아이템(장신구)의 추가 이속")] 
     [Tooltip("장신구의 추가 이동속도를 결정합니다.")] public float PlusSpeed; // 추가 이속
-    [Header("아이템(장신구)의 추가 이속")]
+    [Header("아이템(장신구)의 추가 투사체 속도")]
     [Tooltip("장신구의 추가 투사체속도를 결정합니다.")] public float PlusProjectileSpeed; // 추가 투사체속도
-    [Header("아이템(장신구)의 추가 이속")]
+    [Header("아이템(장신구)의 추가 공격속도")]
+    [Tooltip("장신구의 추가 공격속도를 결정합니다.")] public float PlusAttackDelay; // 추가 공격 속도
+    [Header("아이템(장신구)의 추가 사정거리")]
     [Tooltip("장신구의 추가 사정거리를 결정합니다.")] public float PlusAttackRange; // 추가 사정거리
     [Header("아이템(장신구) 가격")]
     [Tooltip("아이템의 가격을 결정합니다.")] public int ItemsPrice; // 아이템 가격
     [Header("아이템(스펠) VFX")]
     [Tooltip("만약 아이템이 스펠일 경우 스펠 프리펩을 넣어주세요.")] public Transform SpellObject; // 스펠일 때 스펠 vfx
+
     // 이 아래로 위와 같이 추가
+    [Header("평타 크기 변경")]
+    [Tooltip("아이템 효과로 파이어볼 크기를 키웁니다."), Range(1,2)] public int PlusAttackSize; // 평타 크기
+    [Header("평타를 두번 발사 할 수 있는지")]
+    [Tooltip("아이템 효과로 파이어볼을 한번에 두발 발사합니다.")] public bool IsAttackTwice; // 이중평타 여부
+    [Header("평타로 흡혈 여부")]
+    [Tooltip("아이템 효과로 평타 적중 시 30% 확률로 체력을 회복합니다.")] public bool IsHealAfterAttack; // 흡혈 여부
+    [Header("부활 여부")]
+    [Tooltip("아이템 효과로 1회 부활 할 수 있습니다.")] public bool IsResurrectionOneTime; // 부활 여부
+    [Header("반칸 피격 고정 여부")]
+    [Tooltip("아이템 효과로 피격시 체력이 반칸씩 답니다.")] public bool IsHitOnlyHalf; // 피격 반칸 여부
 }
 public class ItemProperty : MonoBehaviour
 {

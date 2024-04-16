@@ -11,10 +11,11 @@ public class Fireball : MonoBehaviour
     public float acceleration = 2.0f; // 가속도
     public UnityEvent getApAct;
     public GameObject explosionVFX;
-    bool isFire = false;
+    bool isConsume = false;
     [SerializeField]float dmg = 0.5f;
     [SerializeField] float attackRange;
-    
+
+    PlayerController player;
     Vector3 oldPos;
     Vector3 spawnPos;
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class Fireball : MonoBehaviour
 
     private void OnEnable()
     {
+        player = FindObjectOfType<PlayerController>();
         Debug.Log("파이어볼 생성");
         spawnPos = transform.position;
         oldPos = transform.position;
@@ -35,6 +37,7 @@ public class Fireball : MonoBehaviour
         Ray ray = new Ray(oldPos, (transform.position - oldPos).normalized);
         if (Physics.Raycast(ray, out RaycastHit hit, (transform.position - oldPos).magnitude, crashMask))// 맞았다.
         {
+            
             Instantiate(explosionVFX, hit.point, Quaternion.identity);
             Destroy(gameObject);
             //Effect
@@ -45,6 +48,17 @@ public class Fireball : MonoBehaviour
             {
                 //float dmg = getApAct?.Invoke();
                 bs.TakeDamage(dmg);
+                if (isConsume)
+                {
+                    int rndHeal = Random.Range(0, 101);
+                    if (rndHeal <= 30)
+                    {
+                        if(player != null)
+                        {
+                            player.HealWithConsume();
+                        }
+                    }
+                }
             }
 
         }
@@ -74,6 +88,17 @@ public class Fireball : MonoBehaviour
     public void SetProjectileSpeed(float _pSpeed)
     {
         this.projectileSpeed = _pSpeed;
+    }
+
+    public void SetFireBallScale(int size)
+    {
+        this.transform.localScale *= size;
+        this.transform.GetChild(0).localScale *= size;
+    }
+
+    public void SetFireCanConsume(bool _isConsume)
+    {
+        this.isConsume = _isConsume;
     }
     #endregion
 

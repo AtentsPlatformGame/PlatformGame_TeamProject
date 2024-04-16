@@ -81,7 +81,13 @@ public class Inventory_LNH : MonoBehaviour
                 tmpStat.MaxHp += inventoryItemStat.PlusHeart;
                 tmpStat.AttackRange += inventoryItemStat.PlusAttackRange;
                 tmpStat.ProjectileSpeed += inventoryItemStat.PlusProjectileSpeed;
+                tmpStat.AttackDelay += inventoryItemStat.PlusAttackDelay;
                 tmpStat.MoveSpeed += inventoryItemStat.PlusSpeed;
+                tmpStat.AttackSize += inventoryItemStat.PlusAttackSize;
+                if(inventoryItemStat.IsAttackTwice) tmpStat.AttackTwice = inventoryItemStat.IsAttackTwice;
+                if(inventoryItemStat.IsHealAfterAttack) tmpStat.HealAfterAttack = inventoryItemStat.IsHealAfterAttack;
+                if(inventoryItemStat.IsResurrectionOneTime) tmpStat.ResurrectionOneTime = inventoryItemStat.IsResurrectionOneTime;
+                if(inventoryItemStat.IsHitOnlyHalf) tmpStat.HitOnlyHalf = inventoryItemStat.IsHitOnlyHalf;
             }
         }
         return tmpStat;

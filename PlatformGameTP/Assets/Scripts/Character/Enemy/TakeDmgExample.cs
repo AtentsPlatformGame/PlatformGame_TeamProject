@@ -21,7 +21,7 @@ public class TakeDmgExample : BattleSystem
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            player.GetComponent<BattleSystem>().TakeDamage(1);
+            player.GetComponent<BattleSystem>().TakeDamage(1.0f);
         }
     }
 }

@@ -320,6 +320,11 @@ public class PlayerController : BattleSystem
 
     public new void OnAttack()
     {
+        StartCoroutine(Attacking());
+    }
+
+    IEnumerator Attacking()
+    {
         // 애니메이션 이벤트
         // 파이어볼(?)이 생성되어 앞으로 발사되는 함수
         GameObject obj = Instantiate(orgFireball, rightAttackPoint);
@@ -327,6 +332,20 @@ public class PlayerController : BattleSystem
         obj.GetComponent<Fireball>().SetFireBallAP(GetAp()); // 파이어볼 공격력 설정
         obj.GetComponent<Fireball>().SetAttackRange(GetAttackRange()); // 파이어볼 공격 사거리 결정
         obj.GetComponent<Fireball>().SetProjectileSpeed(GetProjectileSpeed()); // 파이어볼 투사체 속도 결정
+        obj.GetComponent<Fireball>().SetFireBallScale(GetAttackSize()); // 파이어볼 크기 결정
+        obj.GetComponent<Fireball>().SetFireCanConsume(GetHealAfterAttack()); // 파이어볼 흡혈 여부 결정
+        yield return new WaitForSeconds(0.25f);
+        if (GetAttackTwice())
+        {
+            GameObject obj2 = Instantiate(orgFireball, rightAttackPoint);
+            obj2.transform.SetParent(null);
+            obj2.GetComponent<Fireball>().SetFireBallAP(GetAp()); // 파이어볼 공격력 설정
+            obj2.GetComponent<Fireball>().SetAttackRange(GetAttackRange()); // 파이어볼 공격 사거리 결정
+            obj2.GetComponent<Fireball>().SetProjectileSpeed(GetProjectileSpeed()); // 파이어볼 투사체 속도 결정
+            obj2.GetComponent<Fireball>().SetFireBallScale(GetAttackSize()); // 파이어볼 크기 결정
+            obj2.GetComponent<Fireball>().SetFireCanConsume(GetHealAfterAttack()); // 파이어볼 흡혈 여부 결정
+        }
+
     }
 
     // 아래로 중복코드, 수정 필요함
@@ -405,6 +424,15 @@ public class PlayerController : BattleSystem
         Debug.Log("힐 스펠 사용");
     }
 
+    public void HealWithConsume()
+    {
+        this.curHP++;
+        if (this.curHP >= this.battleStat.MaxHp)
+        {
+            this.curHP = this.battleStat.MaxHp;
+        }
+    }
+
     public void SpeedBuff()
     {
         StartCoroutine(SpeedBuffActing());
@@ -418,47 +446,19 @@ public class PlayerController : BattleSystem
     }
     public void UpdatePlayerStat(BattleStat _itemStat) // 여기서 _itemStat은 인벤토리에서 자기 자식들의 stat을 더한 총합을 넣어야함
     {
-        /*BattleStat tmpBattleStat = new BattleStat();
-        if (_itemStat.ItemType == ITEMTYPE.NONE) return;
-        switch (_itemStat.ItemType)
-        {
-            case ITEMTYPE.WEAPON:
-                if (_itemStat.Ap != 0) tmpBattleStat.AP += _itemStat.Ap; // 공격력 증가
-                break;
-            case ITEMTYPE.ARMOR:
-                if (!Mathf.Approximately(_itemStat.PlusHeart, 0.0f)) tmpBattleStat.MaxHp += _itemStat.PlusHeart; // 최대 체력 증가
-                break;
-            case ITEMTYPE.SPELL:
-                if (_itemStat.SpellObject != null) this.spellObject = _itemStat.SpellObject; // 스펠 적용
-                break;
-            case ITEMTYPE.PASSIVE:
-                if (!Mathf.Approximately(_itemStat.PlusSpeed, 0.0f)) tmpBattleStat.MoveSpeed += _itemStat.PlusSpeed; // 이동속도 증가
-                if (!Mathf.Approximately(_itemStat.PlusAttackRange, 0.0f)) tmpBattleStat.AttackRange += _itemStat.PlusAttackRange; // 사정거리 증가
-                if (!Mathf.Approximately(_itemStat.PlusProjectileSpeed, 0.0f)) tmpBattleStat.ProjectileSpeed += _itemStat.PlusProjectileSpeed; // 투사체 속도 증가
-                break;
-            case ITEMTYPE.CURSEDACCE:
-                if (_itemStat.Ap != 0) tmpBattleStat.AP += _itemStat.Ap; // 공격력 증가
-                if (!Mathf.Approximately(_itemStat.PlusHeart, 0.0f)) tmpBattleStat.MaxHp += _itemStat.PlusHeart; // 최대 체력 증가
-                if (!Mathf.Approximately(_itemStat.PlusSpeed, 0.0f)) tmpBattleStat.MoveSpeed += _itemStat.PlusSpeed; // 이동속도 증가
-                if (!Mathf.Approximately(_itemStat.PlusAttackRange, 0.0f)) tmpBattleStat.AttackRange += _itemStat.PlusAttackRange; // 사정거리 증가
-                if (!Mathf.Approximately(_itemStat.PlusProjectileSpeed, 0.0f)) tmpBattleStat.ProjectileSpeed += _itemStat.PlusProjectileSpeed; // 투사체 속도 증가
-                break;
-            default:
-                break;
-        }
-        this.battleStat.AP = this.originalStat.AP + tmpBattleStat.AP;
-        this.battleStat.MaxHp = this.originalStat.MaxHp + tmpBattleStat.MaxHp;
-        this.battleStat.MoveSpeed = this.originalStat.MoveSpeed + tmpBattleStat.MoveSpeed;
-        this.battleStat.AttackRange = this.originalStat.AttackRange + tmpBattleStat.AttackRange;
-        this.battleStat.ProjectileSpeed = this.originalStat.ProjectileSpeed + tmpBattleStat.ProjectileSpeed;*/
-
         // 위처럼 하지 말고 인벤토리에 들어있는 아이템이 바뀔 경우에만 인벤토리 안에 있는 아이템들의 스텟 총합을 더해서 아래의 5줄짜리 코드를 적용함
         this.battleStat.AP = this.originalStat.AP + _itemStat.AP;
         this.battleStat.MaxHp = this.originalStat.MaxHp + _itemStat.MaxHp;
         this.battleStat.MoveSpeed = this.originalStat.MoveSpeed + _itemStat.MoveSpeed;
         this.battleStat.AttackRange = this.originalStat.AttackRange + _itemStat.AttackRange;
         this.battleStat.ProjectileSpeed = this.originalStat.ProjectileSpeed + _itemStat.ProjectileSpeed;
-        
+        this.battleStat.AttackDelay = this.originalStat.AttackDelay - _itemStat.AttackDelay;
+        this.battleStat.AttackSize = this.originalStat.AttackSize + _itemStat.AttackSize;
+
+        this.battleStat.AttackTwice = _itemStat.AttackTwice;
+        this.battleStat.HealAfterAttack = _itemStat.HealAfterAttack;
+        this.battleStat.ResurrectionOneTime = _itemStat.ResurrectionOneTime;
+        this.battleStat.HitOnlyHalf = _itemStat.HitOnlyHalf;
 
         //Initialize();
     }
@@ -482,15 +482,42 @@ public class PlayerController : BattleSystem
     {
         this.canMove = false;
     }
-
-    protected override void OnDead()
+    public override void TakeDamage(float _dmg)
     {
         
-
+        if (GetHitOnlyHalf())
+        {
+            curHP -= _dmg*0.5f;
+        }
+        else
+        {
+            curHP -= _dmg;
+        }
+        
+        if (curHP <= 0.0f)
+        {
+            if (GetResurrectionOneTime())
+            {
+                curHP = 3.0f;
+                this.battleStat.ResurrectionOneTime = false;
+            }
+            else
+            {
+                // 체력이 다 해 쓰러짐
+                OnDead();
+                myAnim.SetTrigger("Dead");
+            }
+        }
+        else
+        {
+            myAnim.SetTrigger("Damage");
+        }
+        Debug.Log($"플레이어 맞음, 현재 체력 {this.curHP}");
+    }
+    protected override void OnDead()
+    {
         base.OnDead();
-
         StartCoroutine(ChangeAlpha());
-  
     }
 
     public IEnumerator ChangeAlpha()
