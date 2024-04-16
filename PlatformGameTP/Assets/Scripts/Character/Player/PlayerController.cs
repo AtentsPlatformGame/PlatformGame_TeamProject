@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class PlayerController : BattleSystem
 {
     [SerializeField][Header("플레이어 회전 속도")] float rotSpeed = 1.0f;
@@ -21,7 +22,7 @@ public class PlayerController : BattleSystem
     public Transform leftAttackPoint;
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
-    //public GameObject DeathIMG;
+    public GameObject DeathIMG;
 
 
     public bool isSpellReady = false;
@@ -54,7 +55,7 @@ public class PlayerController : BattleSystem
     {
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
-        //DeathIMG.GetComponent<CanvasGroup>().alpha = 0.0f;
+        DeathIMG.GetComponent<CanvasGroup>().alpha = 0.0f;
     }
 
     // Update is called once per frame
@@ -494,17 +495,12 @@ public class PlayerController : BattleSystem
 
     public IEnumerator ChangeAlpha()
     {
-        float time = 0.0f;
-        while (time < 1.0f)
-        {
-            time += 0.1f * Time.deltaTime;
-            if (time > 1.0f)
-            {
-                time = 1.0f;
-            }
-            //DeathIMG.GetComponent<CanvasGroup>().alpha = time;
-        }
-        yield return null;
+        yield return new WaitForSeconds(2.0f);
+        DeathIMG.GetComponent<CanvasGroup>().alpha = 1.0f;
+        
+       
+        
+        
     }
 
 
