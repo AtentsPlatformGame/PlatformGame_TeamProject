@@ -43,6 +43,8 @@ public class BattleSystem : CharacterProperty, IDamage
     public event UnityAction deathAlarm; // event 키워드가 붙으면 이 클래스 밖에서 초기화, 실행이 불가능함. 접근 지정 제한자와 비슷한 느낌? 실수 방지
     public Transform attackPoint;
     public LayerMask enemyMask;
+    public AudioClip attackSound;
+    public AudioClip damageSound;
 
     protected float curHp; // 수정부분 protected float curHp = 0.0f
     protected float battleTime = 0.0f;
@@ -159,6 +161,7 @@ public class BattleSystem : CharacterProperty, IDamage
 
     public void OnAttack()
     {
+        AudioSource.PlayClipAtPoint(attackSound, transform.position);
         if (myTarget == null) return;
         BattleSystem bs = myTarget.GetComponent<BattleSystem>();
         if (bs != null)
