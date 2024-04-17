@@ -116,6 +116,11 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         return this.battleStat.HitOnlyHalf;
     }
+
+    public float GetCurHP()
+    {
+        return this.curHP;
+    }
     #endregion
 
     private void TargetDead()

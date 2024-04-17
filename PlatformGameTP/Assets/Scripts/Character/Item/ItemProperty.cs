@@ -59,7 +59,7 @@ public struct ItemStat
 public class ItemProperty : MonoBehaviour
 {
     [SerializeField] protected ItemStat itemStat;
-    public static int PlayerGold;
+    public int PlayerGold;
 
 
     #region GEt함수 아래 함수들을 이용해 필요한 정보들을 얻어갑니다.
@@ -68,6 +68,12 @@ public class ItemProperty : MonoBehaviour
     {
         return this.itemStat;
     }
+
+    public int GetPlayerGold()
+    {
+        return this.PlayerGold;
+    }
+
    
     #endregion
 

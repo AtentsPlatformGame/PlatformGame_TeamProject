@@ -50,6 +50,7 @@ public class PlayerController : BattleSystem
     {
         OriginalStatInit(playerStatData.GetPlayerStatInfo());
         Initialize();
+
     }
     void Start()
     {
@@ -86,6 +87,11 @@ public class PlayerController : BattleSystem
                 }
             }
         }
+    }
+
+    public void Initialize(float _hp)
+    {
+        curHP = _hp;
     }
 
     void OriginalStatInit(PlayerBattleStat pb)
