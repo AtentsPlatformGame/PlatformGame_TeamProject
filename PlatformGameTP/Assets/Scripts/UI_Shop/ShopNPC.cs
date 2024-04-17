@@ -52,8 +52,8 @@ public class ShopNPC : Inventory
     void OpenShop()
     {
         shopUI.SetActive(true);
-        MyInventory.gameObject.SetActive(true);
-        MyInventory.transform.Translate(new Vector3(250,0,0));
+        //MyInventory.gameObject.SetActive(true);
+        //MyInventory.transform.Translate(new Vector3(250,0,0));
         GKeyPopup.SetActive(false);
         isShop = true;
     }

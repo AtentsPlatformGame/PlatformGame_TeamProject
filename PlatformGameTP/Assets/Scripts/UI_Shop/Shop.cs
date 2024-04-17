@@ -16,6 +16,7 @@ namespace LGH
         public GameObject shopBuyQues;
         public GameObject CheckBuyItems;
         public GameObject NoMoney;
+        public GameObject FinishBuy;
         public GameObject[] itemObj;
         public int NowGold = 0;
         
@@ -26,6 +27,7 @@ namespace LGH
             shopBuyQues.SetActive(false);
             CheckBuyItems.SetActive(false);
             NoMoney.SetActive(false);
+            FinishBuy.SetActive(false);
             
         }
 
@@ -42,6 +44,7 @@ namespace LGH
                     PlayerGold -= buyItemStat.ItemsPrice;
                    
                     updateStatAct?.Invoke(buyItemStat);
+                    FinishBuy.SetActive(true);
                     Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}, 가격{buyItemStat.ItemsPrice}");
                 }
                 else
@@ -56,6 +59,7 @@ namespace LGH
         public void CheckBuyItem()
         {
             CheckBuyItems.SetActive(true);
+  
             itemToBuy = EventSystem.current.currentSelectedGameObject;
 
         }

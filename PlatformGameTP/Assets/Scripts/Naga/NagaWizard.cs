@@ -154,7 +154,7 @@ public class NagaWizard : EnemyState
                     WarningSign.SetActive(false);
                     TsunamiLeft.SetActive(true);
                     TsunamiRight.SetActive(true);
-                    yield return new WaitForSeconds(3.0f);
+                    yield return new WaitForSeconds(2.0f);
 
                     TsunamiLeft.SetActive(false);
                     TsunamiRight.SetActive(false);
@@ -168,7 +168,7 @@ public class NagaWizard : EnemyState
                     TidalWaveWarning.SetActive(true);
                     SafeArea1.SetActive(true);
 
-                    yield return new WaitForSeconds(2.0f);
+                    yield return new WaitForSeconds(3.0f);
                     TidalWaveWarning.SetActive(false);
                     TidalWave.SetActive(true);
                     yield return new WaitForSeconds(5.0f);
@@ -192,7 +192,7 @@ public class NagaWizard : EnemyState
                     WarningSign.SetActive(false);
                     TsunamiLeft.SetActive(true);
                     TsunamiRight.SetActive(true);
-                    yield return new WaitForSeconds(3.0f);
+                    yield return new WaitForSeconds(2.0f);
 
                     TsunamiLeft.SetActive(false);
                     TsunamiRight.SetActive(false);
@@ -254,7 +254,7 @@ public class NagaWizard : EnemyState
 
     public void VirticalAttackEffect()
     {
-        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(270.0f, transform.rotation.eulerAngles.y, 0.0f), null);
+        Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(0.0f, transform.rotation.eulerAngles.y, 0.0f), null);
     }
 
     public void HorizontalAttackEffect()

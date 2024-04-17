@@ -642,11 +642,16 @@ MonoBehaviour:
       m_Calls: []
   battleStat:
     AP: 3
-    MaxHp: 1
+    MaxHp: 20
     AttackRange: 8
     AttackDelay: 2
     ProjectileSpeed: 0
     MoveSpeed: 3
+    AttackSize: 0
+    AttackTwice: 0
+    HealAfterAttack: 0
+    ResurrectionOneTime: 0
+    HitOnlyHalf: 0
   _curHP: 0
   attackPoint: {fileID: 1295914381}
   enemyMask:
@@ -671,7 +676,7 @@ MonoBehaviour:
       m_Calls: []
   jumpForce: 0
   dropGold: 0
-  virticalAttackEffect: {fileID: 5182820693866792781, guid: 79a6d6098ee0f9944a35bcf32b9cac92, type: 3}
+  virticalAttackEffect: {fileID: 5182820693866792781, guid: dd6bcf247ba7486429d007047117f8d2, type: 3}
   horizontalAttackEffect: {fileID: 898328576160968675, guid: 6f160c4878f41e140ab67b2a634cf6ba, type: 3}
   slashPoint: {fileID: 1295914381}
   spawnPoint: {fileID: 885815771}
@@ -2932,6 +2937,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6700046178465974880, guid: e1c93f26665c2924b886242320f75dda, type: 3}
   m_PrefabInstance: {fileID: 1245957649}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1150791459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2560595619707535064, guid: 7ea03855f66225448b2ef989975a08f3, type: 3}
+  m_PrefabInstance: {fileID: 5287584760400241676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1157070631
 GameObject:
   m_ObjectHideFlags: 0
@@ -3339,7 +3349,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 5f1774ee4d3b60340b5ba491316125f0, type: 2}
     - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: battleStat.MaxHp
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: battleStat.MoveSpeed
@@ -10291,6 +10301,34 @@ PrefabInstance:
     - target: {fileID: 4483916285357187182, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270407532761030827, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270407532761030827, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270407532761030827, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1150791459}
+    - target: {fileID: 5270407532761030827, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270407532761030827, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270407532761030827, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270407532761030827, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6401413456162211299, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
       propertyPath: m_Name
