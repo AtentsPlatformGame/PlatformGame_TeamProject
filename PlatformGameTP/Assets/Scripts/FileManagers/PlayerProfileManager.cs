@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.IO;
+using InventorySystem;
 
 public class PlayerProfileManager : MonoBehaviour
 {
-    public ItemProperty[] playerItems = new ItemProperty[7];
-    public string savePath;
     public UnityEvent<ItemStat> updatePlayerInvenAct;
+    public InventorySlot_LNH[] playerItems = new InventorySlot_LNH[7];
+    public string savePath;
+    public Transform inventory;
 
     PlayerController player;
-    ItemProperty[] saveItems = new ItemProperty[7];
-    ItemProperty[] loadItems = new ItemProperty[7];
+    ItemStat[] saveItems = new ItemStat[7];
+    ItemStat[] loadItems = new ItemStat[7];
 
 
     // load, load가 할 일은 저장된 플레이어의 현재 체력과 인벤토리 정보를 읽어와 플레이어에 반영한다. 반영할 때 이전에 썼던 Calculate를 써서 스텟을 적용한다.
@@ -22,7 +24,9 @@ public class PlayerProfileManager : MonoBehaviour
         {
             SceneChanger.instance.savePlayerProfileAct.AddListener(SavePlayerInvenProfile);
         }
+
         LoadPlayerInvenProfile();
+
     }
 
     // Start is called before the first frame update
@@ -39,9 +43,10 @@ public class PlayerProfileManager : MonoBehaviour
         {
             if (playerItems[i] != null)
             {
-                saveItems[i] = playerItems[i];
+                saveItems[i] = playerItems[i].GetItemStat();
             }
         }
+
 
         PlayerInventoryProfile playerProfile = new PlayerInventoryProfile(_curhp, saveItems);
 
@@ -62,14 +67,13 @@ public class PlayerProfileManager : MonoBehaviour
             // JSON을 데이터 구조로 역직렬화
             PlayerInventoryProfile playerProfile = JsonUtility.FromJson<PlayerInventoryProfile>(json);
 
-            // 캐릭터 위치 설정
             if (player != null) player.Initialize(playerProfile.GetPlayerCurHP());
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
-                if (playerProfile.GetItemProperty(i) != null)
+                if (playerProfile.GetItemProperty(i).ItemType != ITEMTYPE.NONE)
                 {
                     loadItems[i] = playerProfile.GetItemProperty(i);
-                    updatePlayerInvenAct?.Invoke(loadItems[i].GetItemStat());
+                    updatePlayerInvenAct?.Invoke(loadItems[i]);
                 }
             }
 
@@ -84,10 +88,10 @@ public class PlayerProfileManager : MonoBehaviour
     [System.Serializable]
     public class PlayerInventoryProfile
     {
-        float playerCurHp;
-        ItemProperty[] savedInven = new ItemProperty[7];
+        public float playerCurHp;
+        public ItemStat[] savedInven = new ItemStat[7];
 
-        public PlayerInventoryProfile(float _playerCurHp, ItemProperty[] _savedInven)
+        public PlayerInventoryProfile(float _playerCurHp, ItemStat[] _savedInven)
         {
             this.playerCurHp = _playerCurHp;
             this.savedInven = _savedInven;
@@ -98,7 +102,7 @@ public class PlayerProfileManager : MonoBehaviour
             return this.playerCurHp;
         }
 
-        public ItemProperty GetItemProperty(int idx)
+        public ItemStat GetItemProperty(int idx)
         {
             return this.savedInven[idx];
         }
