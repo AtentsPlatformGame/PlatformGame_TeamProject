@@ -28,9 +28,11 @@ public class OrcMonsterController : EnemyState
 
     [SerializeField] bool isPhaseChanged = false;
 
+    public LayerMask player;
     static int ClearCounts = 0;
     static int callCounts = 0;
     public int phasecount = 0;
+    public int PatternDamage = 5; //패턴발생 했을때 충돌 데미지
     public Vector3 PatternPos;
     protected override void ChangeState(State s)
     {
@@ -221,6 +223,7 @@ public class OrcMonsterController : EnemyState
         }
         Destroy(gameObject);
     }
+    
 
     protected override void OnDead()
     {
@@ -228,7 +231,6 @@ public class OrcMonsterController : EnemyState
         dropGoldAct?.Invoke(dropGold);
         Orcreward.SetActive(true);
         ChangeState(State.Death);
-       
     }
     public void OnClear()
     {
