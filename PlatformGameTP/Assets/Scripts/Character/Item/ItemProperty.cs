@@ -60,6 +60,13 @@ public class ItemProperty : MonoBehaviour
 {
     [SerializeField] protected ItemStat itemStat;
     public int PlayerGold;
+    public void CountGold()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            PlayerGold++;
+        }
+    }
 
 
     #region GEt함수 아래 함수들을 이용해 필요한 정보들을 얻어갑니다.

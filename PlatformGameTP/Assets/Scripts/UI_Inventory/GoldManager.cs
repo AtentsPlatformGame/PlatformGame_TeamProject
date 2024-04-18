@@ -26,13 +26,13 @@ public class GoldManager : Inventory
         CountGold();
         Owngold.text = PlayerGold.ToString();
     }
-
-    //CountGold => 필드 골드 획득량과 상점의 골드량 계산하여 반영
-    public void CountGold()
+    public new void CountGold()
     {
         if (Input.GetKeyDown(KeyCode.F12))
         {
-                PlayerGold++;
+            PlayerGold++;
         }
     }
+    //CountGold => 필드 골드 획득량과 상점의 골드량 계산하여 반영
+
 }
