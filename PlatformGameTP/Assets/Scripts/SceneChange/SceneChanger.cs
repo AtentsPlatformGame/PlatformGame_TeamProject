@@ -13,16 +13,24 @@ public class SceneChanger : MonoBehaviour
 {
     public static SceneChanger instance = null;
     public string nextSceneName;
+    public Transform savePoint;
     public UnityEvent sceneChangeAct;
     public UnityEvent savePlayerProfileAct;
-    [SerializeField] string filepath_tutorial;
-    [SerializeField] string filepath_stage1;
+    /*[SerializeField, Header("플레이어 인벤토리 정보 파일 저장 위치")] string filepath_playerProfile;
+    [SerializeField, Header("스테이지1 위치 정보 파일 저장 위치")] string filepath_stage1;
+    [SerializeField, Header("스테이지2 위치 정보 파일 저장 위치")] string filepath_stage2;*/
+    public string filepath_playerProfile;
+    public string filepath_stage1;
+    public string filepath_stage2;
     // Start is called before the first frame update
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            filepath_playerProfile = "PlayerProfile.json";
+            filepath_stage1 = "stage1Profile.json";
+            filepath_stage2 = "stage2Profile.json";
         }
         else if (instance != this)
         {
@@ -34,13 +42,17 @@ public class SceneChanger : MonoBehaviour
 
     public void GoToTutorialStage()
     {
-        if (File.Exists(filepath_tutorial))
+        if (File.Exists(filepath_playerProfile))
         {
-            File.Delete(filepath_tutorial);
+            File.Delete(filepath_playerProfile);
         }
         if (File.Exists(filepath_stage1))
         {
             File.Delete(filepath_stage1);
+        }
+        if (File.Exists(filepath_stage2))
+        {
+            File.Delete(filepath_stage2);
         }
 
         nextSceneName = "TutorialStage"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
@@ -65,6 +77,7 @@ public class SceneChanger : MonoBehaviour
 
     public void GoToStage1GimicRoom()
     {
+        Debug.Log("인스턴스의 기믹룸 점프");
         savePlayerProfileAct?.Invoke();
         nextSceneName = "Stage1GimicRoom"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();

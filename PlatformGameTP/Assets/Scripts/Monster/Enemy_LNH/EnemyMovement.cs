@@ -109,7 +109,7 @@ public class EnemyMovement : BattleSystem
 
     protected IEnumerator MovingToPos(Vector3 target, UnityAction doneAct, UnityAction animAct)
     {
-        Debug.Log($"MovingToPos 실행 : target : {target}");
+        //Debug.Log($"MovingToPos 실행 : target : {target}");
         Vector3 dir = target - transform.position;
         float dist = dir.magnitude;
         dir.Normalize();

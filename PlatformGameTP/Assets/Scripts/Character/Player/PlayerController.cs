@@ -49,7 +49,7 @@ public class PlayerController : BattleSystem
     private void Awake()
     {
         OriginalStatInit(playerStatData.GetPlayerStatInfo());
-        Initialize();
+        //Initialize();
 
     }
     void Start()
@@ -62,9 +62,14 @@ public class PlayerController : BattleSystem
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.F11))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             ShowStat();
+            Debug.Log($"curHP = {curHP}");
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            this.curHP--;
         }
         if (isAlive())
         {

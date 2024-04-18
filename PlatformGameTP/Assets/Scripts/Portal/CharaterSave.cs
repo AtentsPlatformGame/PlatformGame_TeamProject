@@ -2,27 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using JetBrains.Annotations;
 
 public class CharaterSave : MonoBehaviour
 {
     // 캐릭터의 Transform 컴포넌트
     public Transform characterTransform;
-    public Transform savePoint;
     // JSON 파일로 저장할 경로
-    public string savePath = "stage1_position.json";
-    public Vector3 startingPosition = new Vector3(0f, 1f, 0f);
+    public string savePath;
+    //public Vector3 startingPosition = new Vector3(0f, 1f, 0f);
+    public Transform startPoint;
 
     void Start()
     {
         // 플레이어 오브젝트의 위치를 시작 위치로 설정
-
+        LoadCharacterPosition();
     }
 
-    void SaveCharacterPosition()
+    public void SaveCharacterPosition(Transform savePoint)
     {
         // 캐릭터의 위치 정보를 담을 데이터 구조 생성
         CharacterPositionData positionData = new CharacterPositionData();
-        positionData.position = characterTransform.position;
+        positionData.position = savePoint.position;
         positionData.rotation = characterTransform.rotation.eulerAngles;
 
         // 데이터를 JSON 형식으로 직렬화
@@ -51,12 +52,13 @@ public class CharaterSave : MonoBehaviour
         else
         {
             Debug.LogWarning("No saved character position found at " + savePath);
+            characterTransform.position = startPoint.position;
         }
     }
 
 
 
-    // 키보드 입력으로 저장 및 불러오기 실행
+    /*// 키보드 입력으로 저장 및 불러오기 실행
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
@@ -67,7 +69,7 @@ public class CharaterSave : MonoBehaviour
         {
             LoadCharacterPosition();
         }
-    }
+    }*/
 }
 
 // 캐릭터 위치 정보를 담을 데이터 구조
