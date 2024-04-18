@@ -19,7 +19,7 @@ namespace LGH
         public GameObject FinishBuy;
         public GameObject[] itemObj;
         public int NowGold = 0;
-        
+        public int checkItemCount = 0;
 
         private void Start()
         {
@@ -30,7 +30,10 @@ namespace LGH
             FinishBuy.SetActive(false);
             
         }
-
+        public void Update()
+        {
+            CountGold();
+        }
         public void OnPurchase()
         {
             //itemToBuy = EventSystem.current.currentSelectedGameObject; // 선택한 아이템 정보
@@ -42,26 +45,45 @@ namespace LGH
                 if (PlayerGold >= buyItemStat.ItemsPrice)
                 {
                     PlayerGold -= buyItemStat.ItemsPrice;
-                   
-                    updateStatAct?.Invoke(buyItemStat);
+                    
+                    CheckBuyItems.SetActive(false);
                     FinishBuy.SetActive(true);
+                    updateStatAct?.Invoke(buyItemStat);
                     Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}, 가격{buyItemStat.ItemsPrice}");
                 }
-                else
-                {
-                    NoMoney.SetActive(true);
-                    Debug.Log("돈없음");
-                }
+            
             } // 위에서 어떠한 처리를 하면 되겠습니다. 현재는 단순히 정보 출력만 합니다.
 
         }
 
         public void CheckBuyItem()
-        {
-            CheckBuyItems.SetActive(true);
-  
+        {       
             itemToBuy = EventSystem.current.currentSelectedGameObject;
+            ShopItem_LNH shopItem = itemToBuy.GetComponent<ShopItem_LNH>();
+            ItemStat buyItemStat = shopItem.GetItemStat();
 
+            if (PlayerGold >= buyItemStat.ItemsPrice)
+            {
+                CheckBuyItems.SetActive(true);
+             
+            }
+            else
+            {
+                NoMoney.SetActive(true);
+                Debug.Log("돈없음");
+            }
+        }
+
+        public void ResetCount()
+        {
+            checkItemCount= 0;
+        }
+        public new void CountGold()
+        {
+            if (Input.GetKeyDown(KeyCode.F12))
+            {
+                PlayerGold++;
+            }
         }
     }
 }
