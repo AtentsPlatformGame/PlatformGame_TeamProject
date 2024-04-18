@@ -126,7 +126,7 @@ public class OrcMonsterController : EnemyState
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
                 WarningP.SetActive(true);
-                yield return new WaitForSeconds(3.0f);
+                yield return new WaitForSeconds(5.0f);
                 WarningP.SetActive(false);
                 PatternPillar.SetActive(true);
                 Debug.Log("±âµÕ ¹«³ÊÁü");
