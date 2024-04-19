@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 201405839}
   - component: {fileID: 201405838}
   - component: {fileID: 201405837}
+  - component: {fileID: 201405841}
   m_Layer: 5
   m_Name: Weapon5
   m_TagString: Untagged
@@ -856,6 +857,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201405835}
   m_CullTransparentMesh: 1
+--- !u!114 &201405841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201405835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1 &204754556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1137,6 +1175,7 @@ GameObject:
   - component: {fileID: 277924898}
   - component: {fileID: 277924897}
   - component: {fileID: 277924896}
+  - component: {fileID: 277924900}
   m_Layer: 5
   m_Name: Weapon3
   m_TagString: Untagged
@@ -1291,6 +1330,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277924894}
   m_CullTransparentMesh: 1
+--- !u!114 &277924900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277924894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1 &289307360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1380,7 @@ GameObject:
   - component: {fileID: 289307364}
   - component: {fileID: 289307363}
   - component: {fileID: 289307362}
+  - component: {fileID: 289307366}
   m_Layer: 5
   m_Name: Amor4
   m_TagString: Untagged
@@ -1458,6 +1535,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289307360}
   m_CullTransparentMesh: 1
+--- !u!114 &289307366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289307360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1 &305306600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,6 +1719,7 @@ GameObject:
   - component: {fileID: 313992338}
   - component: {fileID: 313992337}
   - component: {fileID: 313992336}
+  - component: {fileID: 313992340}
   m_Layer: 5
   m_Name: Weapon4
   m_TagString: Untagged
@@ -1759,6 +1874,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313992334}
   m_CullTransparentMesh: 1
+--- !u!114 &313992340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313992334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1 &387966603
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,6 +2409,7 @@ GameObject:
   - component: {fileID: 603789534}
   - component: {fileID: 603789533}
   - component: {fileID: 603789532}
+  - component: {fileID: 603789536}
   m_Layer: 5
   m_Name: Amor3
   m_TagString: Untagged
@@ -2411,6 +2564,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603789530}
   m_CullTransparentMesh: 1
+--- !u!114 &603789536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603789530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1 &657803188 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4975609495048866919, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
@@ -2876,6 +3066,7 @@ RectTransform:
   - {fileID: 2109799099}
   - {fileID: 1717575671}
   - {fileID: 537279478}
+  - {fileID: 1693683452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5465,6 +5656,7 @@ GameObject:
   - component: {fileID: 1196411442}
   - component: {fileID: 1196411441}
   - component: {fileID: 1196411440}
+  - component: {fileID: 1196411444}
   m_Layer: 5
   m_Name: Amor5
   m_TagString: Untagged
@@ -5619,6 +5811,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196411438}
   m_CullTransparentMesh: 1
+--- !u!114 &1196411444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196411438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1001 &1230461169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5794,6 +6023,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242591868}
+  m_CullTransparentMesh: 1
+--- !u!1 &1273694820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1273694821}
+  - component: {fileID: 1273694823}
+  - component: {fileID: 1273694822}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1273694821
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273694820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1693683452}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -201, y: -430}
+  m_SizeDelta: {x: 600, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1273694822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273694820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1799ad302e9dc3e4abcbeaf2d81d80dd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1273694823
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273694820}
   m_CullTransparentMesh: 1
 --- !u!1 &1300152775
 GameObject:
@@ -6093,6 +6397,7 @@ GameObject:
   - component: {fileID: 1351035956}
   - component: {fileID: 1351035955}
   - component: {fileID: 1351035954}
+  - component: {fileID: 1351035958}
   m_Layer: 5
   m_Name: Amor2
   m_TagString: Untagged
@@ -6247,6 +6552,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351035952}
   m_CullTransparentMesh: 1
+--- !u!114 &1351035958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351035952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1 &1352744547
 GameObject:
   m_ObjectHideFlags: 0
@@ -6840,6 +7182,7 @@ GameObject:
   - component: {fileID: 1418927369}
   - component: {fileID: 1418927368}
   - component: {fileID: 1418927367}
+  - component: {fileID: 1418927370}
   - component: {fileID: 1418927366}
   m_Layer: 5
   m_Name: Weapon2
@@ -6995,6 +7338,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418927364}
   m_CullTransparentMesh: 1
+--- !u!114 &1418927370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418927364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b37fe4e9dcf5f4593dcf7e29053878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemStat:
+    ItemNumber: 0
+    itemIcon: {fileID: 0}
+    itemDescriptionImage: {fileID: 0}
+    ItemType: 0
+    Ap: 0
+    PlusHeart: 0
+    PlusSpeed: 0
+    PlusProjectileSpeed: 0
+    PlusAttackDelay: 0
+    PlusAttackRange: 0
+    ItemsPrice: 0
+    SpellObject: {fileID: 0}
+    PlusAttackSize: 0
+    IsAttackTwice: 0
+    IsHealAfterAttack: 0
+    IsResurrectionOneTime: 0
+    IsHitOnlyHalf: 0
+  PlayerGold: 0
+  MyInventory: {fileID: 0}
+  MyOptions: {fileID: 0}
+  MyExplanation: {fileID: 1273694820}
+  checkInventory: 0
+  checkOptions: 0
+  CheckItemBox: 0
 --- !u!1 &1421701349
 GameObject:
   m_ObjectHideFlags: 0
@@ -7916,6 +8296,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664489453}
   m_CullTransparentMesh: 1
+--- !u!1 &1693683451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693683452}
+  m_Layer: 5
+  m_Name: ItemExplain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1693683452
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693683451}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1273694821}
+  m_Father: {fileID: 685193346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1695441846
 GameObject:
   m_ObjectHideFlags: 0
@@ -8518,7 +8934,7 @@ Transform:
   m_GameObject: {fileID: 1816164790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52355987, y: 103.46828, z: 22.47913}
+  m_LocalPosition: {x: 0.52355987, y: 103.46828, z: 17.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9015,7 +9431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5720164408381878083, guid: e71b47825a53d3c4f8dbdf89e5904821, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.17988
+      value: 10.179879
       objectReference: {fileID: 0}
     - target: {fileID: 5720164408381878083, guid: e71b47825a53d3c4f8dbdf89e5904821, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9031,7 +9447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8988737650615020184, guid: e71b47825a53d3c4f8dbdf89e5904821, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.17988
+      value: 10.179879
       objectReference: {fileID: 0}
     - target: {fileID: 8988737650615020184, guid: e71b47825a53d3c4f8dbdf89e5904821, type: 3}
       propertyPath: m_LocalPosition.y
