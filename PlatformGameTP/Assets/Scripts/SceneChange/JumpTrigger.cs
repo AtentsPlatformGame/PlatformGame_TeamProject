@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class JumpToSpecialRoom : MonoBehaviour
+public class JumpTrigger : MonoBehaviour
 {
     [SerializeField] Transform gKeyPopUp; // G키 팝업창 오브젝트
     [SerializeField] Canvas portalCanvas; // 포탈 캔버스
@@ -36,10 +36,6 @@ public class JumpToSpecialRoom : MonoBehaviour
             if (gKeyPopUp.gameObject.activeSelf && Input.GetKeyDown(KeyCode.G))
             {
                 if (portalCanvas != null)portalCanvas.gameObject.SetActive(true);
-                if(portalButton != null)
-                {
-                    portalButton.onClick.AddListener(jumpToTargetSceneAct.Invoke); // Jumper에 있는 위치 이동 함수를 바인딩
-                }
             }
         }
         
@@ -56,4 +52,6 @@ public class JumpToSpecialRoom : MonoBehaviour
             }
         }
     }
+
+    
 }

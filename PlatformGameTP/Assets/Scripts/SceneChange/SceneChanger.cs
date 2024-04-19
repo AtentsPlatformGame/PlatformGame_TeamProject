@@ -106,7 +106,7 @@ public class SceneChanger : MonoBehaviour
         sceneChangeAct?.Invoke();
     }
 
-    public void GoToStage2Village()
+    /*public void GoToStage2Village()
     {
         savePlayerProfileAct?.Invoke();
         nextSceneName = "Stage2Village"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
@@ -132,12 +132,12 @@ public class SceneChanger : MonoBehaviour
         nextSceneName = "Stage2MiddleBoss"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();
     }
+*/
 
-
-    public void GoToStage2LastBoss()
+    public void GoToLastBoss()
     {
         savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage2LastBoss"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
+        nextSceneName = "LastBoss"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();
     }
     #endregion

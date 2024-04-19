@@ -21,8 +21,12 @@ namespace LGH
         public int NowGold = 0;
         public int checkItemCount = 0;
 
+        GoldManager playerGoldManager;
+        int _PlayerGold;
         private void Start()
         {
+            playerGoldManager = FindObjectOfType<GoldManager>();
+            _PlayerGold = playerGoldManager.GetPlayerGold();
             shopUI.SetActive(false);
             shopBuyQues.SetActive(false);
             CheckBuyItems.SetActive(false);
@@ -42,10 +46,10 @@ namespace LGH
             if (shopItem != null) // 만약 그 스크립트가 존재한다면
             {
                 ItemStat buyItemStat = shopItem.GetItemStat();
-                if (PlayerGold >= buyItemStat.ItemsPrice)
+                if (_PlayerGold >= buyItemStat.ItemsPrice)
                 {
-                    PlayerGold -= buyItemStat.ItemsPrice;
-                    
+                    //PlayerGold -= buyItemStat.ItemsPrice;
+                    playerGoldManager.ChangeGold(buyItemStat.ItemsPrice * -1);
                     CheckBuyItems.SetActive(false);
                     FinishBuy.SetActive(true);
                     updateStatAct?.Invoke(buyItemStat);
@@ -62,7 +66,7 @@ namespace LGH
             ShopItem_LNH shopItem = itemToBuy.GetComponent<ShopItem_LNH>();
             ItemStat buyItemStat = shopItem.GetItemStat();
 
-            if (PlayerGold >= buyItemStat.ItemsPrice)
+            if (_PlayerGold >= buyItemStat.ItemsPrice)
             {
                 CheckBuyItems.SetActive(true);
              

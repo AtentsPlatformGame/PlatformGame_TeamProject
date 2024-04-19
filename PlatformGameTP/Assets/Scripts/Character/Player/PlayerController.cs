@@ -99,6 +99,22 @@ public class PlayerController : BattleSystem
         curHP = _hp;
     }
 
+    public void Initialize(PlayerStatData basicStat)
+    {
+        this.battleStat.AP = basicStat.GetPlayerStatInfo().AP;
+        this.battleStat.MaxHp = basicStat.GetPlayerStatInfo().MaxHp;
+        this.battleStat.AttackRange = basicStat.GetPlayerStatInfo().AttackRange;
+        this.battleStat.AttackDelay = basicStat.GetPlayerStatInfo().AttackDelay;
+        this.battleStat.ProjectileSpeed = basicStat.GetPlayerStatInfo().ProjectileSpeed;
+        this.battleStat.MoveSpeed = basicStat.GetPlayerStatInfo().MoveSpeed;
+        this.battleStat.AttackSize = basicStat.GetPlayerStatInfo().AttackSize;
+        this.battleStat.AttackTwice = basicStat.GetPlayerStatInfo().AttackTwice;
+        this.battleStat.HealAfterAttack = basicStat.GetPlayerStatInfo().HealAfterAttack;
+        this.battleStat.ResurrectionOneTime = basicStat.GetPlayerStatInfo().ResurrectionOneTime;
+        this.battleStat.HitOnlyHalf = basicStat.GetPlayerStatInfo().HitOnlyHalf;
+        Initialize(this.battleStat.MaxHp);
+    }
+
     void OriginalStatInit(PlayerBattleStat pb)
     {
         this.originalStat.AP = pb.AP;

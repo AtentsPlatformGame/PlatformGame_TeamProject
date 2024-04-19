@@ -4,35 +4,39 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-//using TMPro;
 
-public class GoldManager : Inventory
+public class GoldManager : MonoBehaviour
 {
-    
+    [SerializeField] int PlayerGold;
     
     public TextMeshProUGUI Owngold;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerGold = 0;
         Owngold = GetComponent<TextMeshProUGUI>();
         Owngold.text = PlayerGold.ToString();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        CountGold();
+        //CountGold();
         Owngold.text = PlayerGold.ToString();
     }
-    public new void CountGold()
+    public void ChangeGold(int _gold)
     {
-        if (Input.GetKeyDown(KeyCode.F12))
-        {
-            PlayerGold++;
-        }
+        this.PlayerGold += _gold;
+        if(this.PlayerGold <= 0) this.PlayerGold = 0;
     }
     //CountGold => ÇÊµå °ñµå È¹µæ·®°ú »óÁ¡ÀÇ °ñµå·® °è»êÇÏ¿© ¹Ý¿µ
 
+    public int GetPlayerGold()
+    {
+        return this.PlayerGold;
+    }
+
+    public void SetPlayerGold(int _gold)
+    {
+        this.PlayerGold = _gold;
+    }
 }
