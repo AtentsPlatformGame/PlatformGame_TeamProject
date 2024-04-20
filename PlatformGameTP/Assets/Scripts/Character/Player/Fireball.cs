@@ -12,6 +12,7 @@ public class Fireball : MonoBehaviour
     public UnityEvent getApAct;
     public GameObject explosionVFX;
     bool isConsume = false;
+    bool isHit = false;
     [SerializeField]float dmg = 0.5f;
     [SerializeField] float attackRange;
 
@@ -34,12 +35,12 @@ public class Fireball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = new Ray(oldPos, (transform.position - oldPos).normalized);
+        /*Ray ray = new Ray(oldPos, (transform.position - oldPos).normalized);
         if (Physics.Raycast(ray, out RaycastHit hit, (transform.position - oldPos).magnitude, crashMask))// 맞았다.
         {
             
-            Instantiate(explosionVFX, hit.point, Quaternion.identity);
-            Destroy(gameObject);
+            *//*Instantiate(explosionVFX, hit.point, Quaternion.identity);
+            Destroy(gameObject);*//*
             //Effect
             //Instantiate(orgEffect, hit.point, Quaternion.identity);
             //hit.point;
@@ -47,7 +48,7 @@ public class Fireball : MonoBehaviour
             if(bs != null)
             {
                 //float dmg = getApAct?.Invoke();
-                bs.TakeDamage(dmg);
+                *//*bs.TakeDamage(dmg);
                 if (isConsume)
                 {
                     int rndHeal = Random.Range(0, 101);
@@ -58,11 +59,11 @@ public class Fireball : MonoBehaviour
                             player.HealWithConsume();
                         }
                     }
-                }
+                }*//*
             }
 
         }
-        oldPos = transform.position;
+        oldPos = transform.position;*/
         gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * acceleration);
         transform.Translate(transform.forward * projectileSpeed * Time.deltaTime, Space.World);
         // 사거리를 벗어나면 사라지게
@@ -72,6 +73,36 @@ public class Fireball : MonoBehaviour
         if(dist >= attackRange)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((1 << other.gameObject.layer & crashMask) != 0)
+        {
+            var collisionPoint = other.ClosestPoint(transform.position);
+            Debug.Log("파이어볼 collision 엔터");
+            isHit = true;
+
+            Instantiate(explosionVFX, collisionPoint, Quaternion.identity);
+            Destroy(gameObject);
+            BattleSystem bs = other.transform.GetComponent<BattleSystem>();
+            if (bs != null)
+            {
+                //float dmg = getApAct?.Invoke();
+                bs.TakeDamage(dmg);
+                if (isConsume)
+                {
+                    int rndHeal = Random.Range(0, 101);
+                    if (rndHeal <= 30)
+                    {
+                        if (player != null)
+                        {
+                            player.HealWithConsume();
+                        }
+                    }
+                }
+            }
         }
     }
     #region get, set

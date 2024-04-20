@@ -70,8 +70,5 @@ public class LastBossAnimEvent : AnimEvent_LNH
     {
         patternOnAct?.Invoke();
     }
-    public void OnPatternOff()
-    {
-        patternOffAct?.Invoke();
-    }
+    
 }

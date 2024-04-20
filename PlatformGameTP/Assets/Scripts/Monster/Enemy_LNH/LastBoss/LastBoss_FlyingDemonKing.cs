@@ -125,9 +125,10 @@ public class LastBoss_FlyingDemonKing : EnemyState
     // Update is called once per frame
     void Update()
     {
-        base.StateProcess();
-        if (this.myState == State.Death) return;
         
+        if (this.myState == State.Death) return;
+        base.StateProcess();
+
         if (!isSpawnStart && this.curHP <= (this.battleStat.MaxHp * 0.6))
         {
             ChangeState(State.Phase);
@@ -287,7 +288,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
         else
         {
             myAnim.SetTrigger("Damage");
-            StartCoroutine(DamagingDemon());
+            //StartCoroutine(DamagingDemon());
         }
         bossHpSlider.value = this.curHP / this.battleStat.MaxHp;
     }

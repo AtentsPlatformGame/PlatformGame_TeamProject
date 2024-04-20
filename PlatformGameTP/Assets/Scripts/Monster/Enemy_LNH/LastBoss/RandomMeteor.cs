@@ -66,6 +66,7 @@ public class RandomMeteor : MonoBehaviour
                     Instantiate(meteorPointVFX, new Vector3(target.position.x + rndX, 18.0f, target.position.z + rndZ), Quaternion.identity, null);
                     prevX = rndX;
                     prevZ = rndZ;
+                    
                 }
                 else
                 {

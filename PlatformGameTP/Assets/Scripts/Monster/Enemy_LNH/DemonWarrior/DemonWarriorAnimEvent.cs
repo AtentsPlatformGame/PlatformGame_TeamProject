@@ -10,7 +10,6 @@ public class DemonWarriorAnimEvent : AnimEvent_LNH
     public UnityEvent horizontalAttackAct;
     public UnityEvent deadFadeAct;
     public UnityEvent patternOnAct;
-    public UnityEvent patternOffAct;
     public void VerticalAttackEvent()
     {
         verticalAttackAct?.Invoke();
@@ -31,9 +30,5 @@ public class DemonWarriorAnimEvent : AnimEvent_LNH
         patternOnAct?.Invoke();
     }
 
-    public void OnPatternOffEvent()
-    {
-        patternOffAct?.Invoke();
-    }
 
 }
