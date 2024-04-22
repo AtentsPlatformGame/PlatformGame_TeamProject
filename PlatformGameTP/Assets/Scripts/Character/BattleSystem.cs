@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct BattleStat
@@ -28,6 +29,7 @@ public struct BattleStat
     public bool ResurrectionOneTime; // 부활 여부
     public bool HitOnlyHalf; // 피격 반칸 여부
 
+    public Transform StatWindows;
 }
 
 public interface IDamage
