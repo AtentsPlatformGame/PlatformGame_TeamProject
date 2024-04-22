@@ -25,13 +25,13 @@ namespace LGH
         int _PlayerGold;
         private void Start()
         {
-            playerGoldManager = FindObjectOfType<GoldManager>();
-            _PlayerGold = playerGoldManager.GetPlayerGold();
             shopUI.SetActive(false);
             shopBuyQues.SetActive(false);
             CheckBuyItems.SetActive(false);
             NoMoney.SetActive(false);
             FinishBuy.SetActive(false);
+            playerGoldManager = FindObjectOfType<GoldManager>();
+            _PlayerGold = playerGoldManager.GetPlayerGold();
             
         }
         public void Update()
