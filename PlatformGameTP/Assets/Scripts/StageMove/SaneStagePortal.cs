@@ -10,6 +10,7 @@ public class SaneStagePortal : MonoBehaviour
 {
     public GameObject PlayerTeleport;
     public GameObject ExternalPortal;
+    public LayerMask playerMask;
     public Image Panel;
     float time = 0f;
     float F_time = 1;
@@ -29,24 +30,29 @@ public class SaneStagePortal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if ((1 << other.gameObject.layer & playerMask) != 0)
         {
-            Debug.Log("활성화");
-            Fade();
 
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                Debug.Log("활성화");
+                Fade();
 
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-       
-        if (Input.GetKeyDown(KeyCode.G))
+        if ((1 << other.gameObject.layer & playerMask) != 0)
         {
-            
-            Debug.Log("활성화");
-            Fade();
-            
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+
+                Debug.Log("활성화");
+                Fade();
+
+            }
         }
    
     }
