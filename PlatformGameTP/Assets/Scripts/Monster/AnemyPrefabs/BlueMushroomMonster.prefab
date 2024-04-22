@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 8700131251766410058}
   - component: {fileID: 3932138713174111163}
   - component: {fileID: 1619869931663917936}
+  - component: {fileID: 7983406424338688147}
   m_Layer: 0
   m_Name: InlinePerception
   m_TagString: Untagged
@@ -697,7 +698,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 1, z: 0}
@@ -747,6 +748,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &7983406424338688147
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4965595924781816416}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 2, z: 6}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5503842783022253339
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,11 +964,18 @@ MonoBehaviour:
     AttackDelay: 2
     ProjectileSpeed: 0
     MoveSpeed: 0
+    AttackSize: 0
+    AttackTwice: 0
+    HealAfterAttack: 0
+    ResurrectionOneTime: 0
+    HitOnlyHalf: 0
   _curHP: 0
   attackPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
+  attackSound: {fileID: 0}
+  damageSound: {fileID: 0}
   moveSpeed: 2
   rotSpeed: 360
   myState: 0
@@ -960,6 +989,7 @@ MonoBehaviour:
   hpViewPos: {fileID: 441402848417681035}
   detectUI: {fileID: 4208219041603666531}
   missngUI: {fileID: 3686730989742983228}
+  Rewards: {fileID: 0}
   dropGoldAct:
     m_PersistentCalls:
       m_Calls: []
@@ -1030,6 +1060,7 @@ GameObject:
   - component: {fileID: 4855780534343800884}
   - component: {fileID: 7288477941602282519}
   - component: {fileID: 4347658201488540575}
+  - component: {fileID: 2089741278038500347}
   m_Layer: 0
   m_Name: OutlinePerception
   m_TagString: Untagged
@@ -1069,7 +1100,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 7
   m_Center: {x: 0, y: 1, z: 0}
@@ -1107,6 +1138,27 @@ MonoBehaviour:
   lostEnemyAct:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &2089741278038500347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7717420565050441710}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 3, z: 8}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &8528086838218712644
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class PlayerProfileManager : MonoBehaviour
     public InventorySlot_LNH[] playerItems = new InventorySlot_LNH[7];
     string savePath;
     public Transform inventory;
+    public Transform StartPos;
 
     [SerializeField, Header("플레이어 기본 스텟")] PlayerStatData playerStatData;
     PlayerController player;
@@ -70,6 +71,7 @@ public class PlayerProfileManager : MonoBehaviour
         if(inventory != null)inventory.gameObject.SetActive(true);
         player = FindObjectOfType<PlayerController>();
         goldManager = FindObjectOfType<GoldManager>();
+        player.gameObject.transform.position = StartPos.position;
         savePath = SceneChanger.instance.filepath_playerProfile;
         Debug.Log("로드 시작");
         // JSON 파일로부터 데이터 읽기
