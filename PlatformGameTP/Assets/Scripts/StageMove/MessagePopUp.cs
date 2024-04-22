@@ -5,6 +5,7 @@ using UnityEngine;
 public class MessagePopUp : MonoBehaviour
 {
     public GameObject messagePopup;
+    public LayerMask playerMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +19,15 @@ public class MessagePopUp : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        messagePopup.SetActive(true);
+        if ((1 << other.gameObject.layer & playerMask) != 0)  messagePopup.SetActive(true);
     }
     private void OnTriggerStay(Collider other)
     {
-        messagePopup.SetActive(true);
+        if ((1 << other.gameObject.layer & playerMask) != 0)  messagePopup.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        messagePopup.SetActive(false);
+        if ((1 << other.gameObject.layer & playerMask) != 0)  messagePopup.SetActive(false);
     }
 }
