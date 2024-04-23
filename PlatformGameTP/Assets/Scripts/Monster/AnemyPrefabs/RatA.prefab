@@ -160,7 +160,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5383929149721529717}
         m_TargetAssemblyTypeName: EnemyState, Assembly-CSharp
-        m_MethodName: FindTarget
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -204,7 +204,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 3, z: 7}
+  m_Size: {x: 3, y: 3, z: 7}
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &1247257923876560266
 GameObject:
@@ -413,7 +413,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5383929149721529717}
         m_TargetAssemblyTypeName: EnemyState, Assembly-CSharp
-        m_MethodName: DetectTarget
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -445,7 +445,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 3, z: 9}
+  m_Size: {x: 3, y: 3, z: 9}
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &1754666328647976260
 GameObject:
@@ -671,6 +671,7 @@ MonoBehaviour:
     HealAfterAttack: 0
     ResurrectionOneTime: 0
     HitOnlyHalf: 0
+    StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 0}
   enemyMask:
