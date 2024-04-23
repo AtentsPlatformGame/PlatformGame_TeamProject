@@ -113,6 +113,8 @@ public class PlayerController : BattleSystem
         this.battleStat.ResurrectionOneTime = basicStat.GetPlayerStatInfo().ResurrectionOneTime;
         this.battleStat.HitOnlyHalf = basicStat.GetPlayerStatInfo().HitOnlyHalf;
         Initialize(this.battleStat.MaxHp);
+
+        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
     }
 
     void OriginalStatInit(PlayerBattleStat pb)
@@ -448,6 +450,7 @@ public class PlayerController : BattleSystem
         {
             this.curHP = this.battleStat.MaxHp;
         }
+        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
         Debug.Log("Èú ½ºÆç »ç¿ë");
     }
 
@@ -458,6 +461,7 @@ public class PlayerController : BattleSystem
         {
             this.curHP = this.battleStat.MaxHp;
         }
+        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
     }
 
     public void SpeedBuff()
@@ -511,7 +515,6 @@ public class PlayerController : BattleSystem
     }
     public override void TakeDamage(float _dmg)
     {
-        
         if (GetHitOnlyHalf())
         {
             curHP -= _dmg*0.5f;
@@ -520,12 +523,14 @@ public class PlayerController : BattleSystem
         {
             curHP -= _dmg;
         }
-        
+        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+
         if (curHP <= 0.0f)
         {
             if (GetResurrectionOneTime())
             {
                 curHP = 3.0f;
+                HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
                 this.battleStat.ResurrectionOneTime = false;
             }
             else

@@ -123,6 +123,16 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         return this.curHP;
     }
+
+    public float GetMaxHP()
+    {
+        return this.battleStat.MaxHp;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return this.battleStat.MoveSpeed;
+    }
     #endregion
 
     private void TargetDead()
@@ -134,6 +144,8 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         curHP = battleStat.MaxHp;
     }
+
+    
 
     public virtual void TakeDamage(float _dmg)
     {

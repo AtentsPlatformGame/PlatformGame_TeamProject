@@ -5,53 +5,54 @@ using UnityEngine.UI;
 
 public class HPbar : MonoBehaviour
 {
+    public static HPbar Instance;
+
     [SerializeField]public Slider myHpSlider;
+    [SerializeField] public Transform APstat;
+    [SerializeField] public Transform Rngstat;
+    [SerializeField] public Transform Spdstat;
 
-    private float MaxHp = 100;
-    private float CurHp = 100;
-    float imsi;
+    public Transform player;
+    PlayerController pc;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
-        imsi = (float)CurHp / (float)MaxHp;
+        Instance = this;
     }
 
+    void Start()
+    {
+        pc = player.GetComponent<PlayerController>();
+    }
 
-    // Update is called once per frame
+    public void UpdateHpbar(float curHp, float maxHp)
+    {
+        myHpSlider.value = (float)curHp / maxHp;//체력 비율로 설정
+    }
+
+    public void UpdateStats(float Ack, float Rng, float Spd)
+    {
+        APstat.GetComponent<Text>().text = Ack.ToString();
+    }
+
+    void UpdateUI()
+    {
+        if(pc != null)
+        {
+            HPbar.Instance.UpdateHpbar(pc.GetCurHP(),pc.GetMaxHP());
+            HPbar.Instance.UpdateStats(pc.GetAp(),pc.GetAttackRange(),pc.GetMoveSpeed());
+        }
+        
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-           if(CurHp > 0)
-            {
-                CurHp -= 10;
-            }
-           else
-            {
-                CurHp = 0;
-            }
-            imsi = (float)CurHp / (float)MaxHp;
-        }
-        ChangeHpSlider();
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            if(CurHp < 0)
-            {
-                CurHp += 10;
-            }
-            else
-            {
-                CurHp = MaxHp;
-            }
-            imsi = (float)CurHp / (float)MaxHp;
-        }
-        ChangeHpSlider();
+       
     }
 
 
     public void ChangeHpSlider()
     {
-        myHpSlider.value = Mathf.Lerp(myHpSlider.value, imsi, Time.deltaTime*2) ;
+        myHpSlider.value = Mathf.Lerp(myHpSlider.value, pc.GetCurHP(), Time.deltaTime*2) ;
     }
 }
