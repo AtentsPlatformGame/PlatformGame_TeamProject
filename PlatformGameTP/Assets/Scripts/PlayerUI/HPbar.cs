@@ -9,10 +9,11 @@ public class HPbar : MonoBehaviour
     public static HPbar Instance;
     [SerializeField] public Slider myHpSlider;
 
-    public TextMeshProUGUI Apstat;
+    public TextMeshProUGUI APstat;
+    public TextMeshProUGUI MoveSpdstat;
+    public TextMeshProUGUI AttackRangestat;
 
 
-    [SerializeField] float APs;
     public Transform player;
     PlayerController pc;
 
@@ -32,18 +33,25 @@ public class HPbar : MonoBehaviour
         myHpSlider.value = (float)curHp / maxHp;//체력 비율로 설정
     }
 
-    /*public void UpdateStats(float Ack, float Rng, float Spd)
+    public void APStats(float Ack)
     {
-        APstat.GetComponent<Text>().text = Ack.ToString();
-    }*/
+        APstat.GetComponent<TextMeshProUGUI>().text = Ack.ToString();
+        
+    }
+
+    public void SPDstats(float Spd)
+    {
+        MoveSpdstat.GetComponent<TextMeshProUGUI>().text = Spd.ToString();
+    }
+
+    public void AttackRange(float Rng)
+    {
+        AttackRangestat.GetComponent<TextMeshProUGUI>().text = Rng.ToString();
+    }
 
     public void Update()
     {
-        if(APs != 0)
-        {
-            Input.GetKeyDown(KeyCode.P);
-            APs +=1;
-        }
+       
     }
 
     void UpdateUI()
@@ -61,20 +69,6 @@ public class HPbar : MonoBehaviour
         myHpSlider.value = Mathf.Lerp(myHpSlider.value, pc.GetCurHP(), Time.deltaTime*2) ;
     }
 
-    public void ChangeAPstas(float _AP)
-    {
-       this.APs += _AP;
-        if (this.APs <= 0) this.APs = 0;
-    }
-
-    public float GetStatepUp()
-    {
-        return this.APs;
-    }
-
-    public void SetPlayerAP(float _AP)
-    {
-        this.APs = _AP;
-    }
+   
 
 }

@@ -114,7 +114,7 @@ public class PlayerController : BattleSystem
         this.battleStat.HitOnlyHalf = basicStat.GetPlayerStatInfo().HitOnlyHalf;
         Initialize(this.battleStat.MaxHp);
 
-        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        
     }
 
     void OriginalStatInit(PlayerBattleStat pb)
@@ -474,6 +474,7 @@ public class PlayerController : BattleSystem
         this.battleStat.MoveSpeed += this.battleStat.MoveSpeed * 0.5f;
         yield return new WaitForSeconds(5f);
         this.battleStat.MoveSpeed = originSpeed;
+        HPbar.Instance.SPDstats(this.battleStat.MoveSpeed);
     }
     public void UpdatePlayerStat(BattleStat _itemStat) // 여기서 _itemStat은 인벤토리에서 자기 자식들의 stat을 더한 총합을 넣어야함
     {
@@ -492,6 +493,10 @@ public class PlayerController : BattleSystem
         this.battleStat.HitOnlyHalf = _itemStat.HitOnlyHalf;
 
         //Initialize();
+        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+       /* HPbar.Instance.APStats(this.battleStat.AP);
+        HPbar.Instance.SPDstats(this.battleStat.MoveSpeed);
+        HPbar.Instance.AttackRange(this.battleStat.AttackRange);*/
     }
 
     public bool GetControllType()
