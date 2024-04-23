@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 
 public class SaneStagePortal : MonoBehaviour
 {
+    public UnityEvent LightChangeAct;
     public GameObject PlayerTeleport;
     public GameObject ExternalPortal;
     public LayerMask playerMask;
@@ -80,6 +81,7 @@ public class SaneStagePortal : MonoBehaviour
         time = 0f;
 
         PlayerTeleport.gameObject.transform.position = ExternalPortal.gameObject.transform.position;
+        LightChangeAct?.Invoke();
         yield return new WaitForSeconds(2.0f);
 
         while (alpha.a > 0f)

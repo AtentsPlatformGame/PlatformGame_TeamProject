@@ -72,7 +72,7 @@ public class PlayerProfileManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         goldManager = FindObjectOfType<GoldManager>();
         player.gameObject.transform.position = StartPos.position;
-        savePath = SceneChanger.instance.filepath_playerProfile;
+        if(SceneChanger.instance != null) savePath = SceneChanger.instance.filepath_playerProfile;
         Debug.Log("로드 시작");
         // JSON 파일로부터 데이터 읽기
         if (File.Exists(savePath))
