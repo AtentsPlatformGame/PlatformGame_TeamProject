@@ -494,9 +494,9 @@ public class PlayerController : BattleSystem
 
         //Initialize();
         HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
-       /* HPbar.Instance.APStats(this.battleStat.AP);
+        HPbar.Instance.APStats(this.battleStat.AP);
         HPbar.Instance.SPDstats(this.battleStat.MoveSpeed);
-        HPbar.Instance.AttackRange(this.battleStat.AttackRange);*/
+        HPbar.Instance.AttackRange(this.battleStat.AttackRange);
     }
 
     public bool GetControllType()
