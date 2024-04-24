@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -476,7 +476,7 @@ MonoBehaviour:
   LightChangeAct:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 539087672}
         m_TargetAssemblyTypeName: LightsIntensityController, Assembly-CSharp
         m_MethodName: StartDecreaseLights
         m_Mode: 1
@@ -650,7 +650,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LightChangeAct:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 539087672}
+        m_TargetAssemblyTypeName: LightsIntensityController, Assembly-CSharp
+        m_MethodName: StartDecreaseLights
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   PlayerTeleport: {fileID: 506830532}
   ExternalPortal: {fileID: 1629481601}
   playerMask:
@@ -2018,7 +2030,7 @@ GameObject:
   - component: {fileID: 539087671}
   m_Layer: 0
   m_Name: LightDown
-  m_TagString: UnderGround
+  m_TagString: DecreaseLights
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2032,7 +2044,7 @@ Transform:
   m_GameObject: {fileID: 539087669}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: -1.75, z: 3.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2076,8 +2088,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   globalPostProcessManager: {fileID: 1671401595}
-  groundPostProcessProfile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
-  undergroundPostProcessProfile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
+  coolTonePostProcessProfile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
+  warmTonePostProcessProfile: {fileID: 11400000, guid: f8c3722e9b2093148aeaab9c1da0ebfd, type: 2}
+  stage1Profile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
+  changeLightDelay: 5
 --- !u!1 &554456817
 GameObject:
   m_ObjectHideFlags: 0
@@ -16039,7 +16053,7 @@ MonoBehaviour:
   LightChangeAct:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1999151994}
         m_TargetAssemblyTypeName: LightsIntensityController, Assembly-CSharp
         m_MethodName: StartIncreaseLights
         m_Mode: 1
@@ -16537,7 +16551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1673232181
 Transform:
   m_ObjectHideFlags: 0
@@ -29195,7 +29209,7 @@ GameObject:
   - component: {fileID: 1999151993}
   m_Layer: 0
   m_Name: LightUp
-  m_TagString: Ground
+  m_TagString: IncreaseLights
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29209,7 +29223,7 @@ Transform:
   m_GameObject: {fileID: 1999151991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: -2.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29253,8 +29267,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   globalPostProcessManager: {fileID: 1671401595}
-  groundPostProcessProfile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
-  undergroundPostProcessProfile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
+  coolTonePostProcessProfile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
+  warmTonePostProcessProfile: {fileID: 11400000, guid: f8c3722e9b2093148aeaab9c1da0ebfd, type: 2}
+  stage1Profile: {fileID: 11400000, guid: 940def0e5d57c5442921441ec4bf6247, type: 2}
+  changeLightDelay: 5
 --- !u!4 &2002578382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6700973914613126020, guid: 0e53ee36d68ac8c4ebf2b7a25369eed1, type: 3}

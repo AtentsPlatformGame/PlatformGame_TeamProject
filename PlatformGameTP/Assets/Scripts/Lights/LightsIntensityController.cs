@@ -9,8 +9,10 @@ public class LightsIntensityController : MonoBehaviour
     public Transform GlobalLight;
     public LayerMask playerMask;
     public Transform globalPostProcessManager;
-    public PostProcessProfile groundPostProcessProfile;
-    public PostProcessProfile undergroundPostProcessProfile;
+    public PostProcessProfile coolTonePostProcessProfile;
+    public PostProcessProfile warmTonePostProcessProfile;
+    public PostProcessProfile stage1Profile;
+    public float changeLightDelay;
 
     Coroutine increaseCT;
     Coroutine decreaseCT;
@@ -18,7 +20,7 @@ public class LightsIntensityController : MonoBehaviour
     {
         if ((1 << other.gameObject.layer & playerMask) != 0)
         {
-            if (this.gameObject.tag == "Ground")
+            if (this.gameObject.tag == "IncreaseLights")
             {
                 if (decreaseCT != null)
                 {
@@ -29,7 +31,7 @@ public class LightsIntensityController : MonoBehaviour
                 increaseCT = StartCoroutine(IncreasingLightsIntensity());
 
             }
-            else if (this.gameObject.tag == "UnderGround")
+            else if (this.gameObject.tag == "DecreaseLights")
             {
                 if (increaseCT != null)
                 {
@@ -46,11 +48,13 @@ public class LightsIntensityController : MonoBehaviour
 
     public void StartIncreaseLights()
     {
+        globalPostProcessManager.GetComponent<PostProcessVolume>().profile = warmTonePostProcessProfile;
         StartCoroutine(IncreasingLightsIntensity());
     }
 
     public void StartDecreaseLights()
     {
+        globalPostProcessManager.GetComponent<PostProcessVolume>().profile = coolTonePostProcessProfile;
         StartCoroutine(DecreasingLightsIntensity());
     }
 
@@ -59,14 +63,18 @@ public class LightsIntensityController : MonoBehaviour
     {
         float increaseDelay = 0.0f;
         float curIntensity = GlobalLight.GetComponent<Light>().intensity;
-        while (increaseDelay <= 2.0f)
+        /*ColorGrading colorGrading;
+        stage1Profile.TryGetSettings(out colorGrading);
+        float curTemp = colorGrading.temperature.value;*/
+        while (increaseDelay <= changeLightDelay)
         {
             increaseDelay += Time.deltaTime;
-            GlobalLight.GetComponent<Light>().intensity = Mathf.Lerp(curIntensity, 1f, increaseDelay / 2.0f);
+            GlobalLight.GetComponent<Light>().intensity = Mathf.Lerp(curIntensity, 1f, increaseDelay / changeLightDelay);
+            //colorGrading.temperature.value = Mathf.Lerp(curTemp, -15f, increaseDelay / changeLightDelay);
             yield return null;
         }
         GlobalLight.GetComponent<Light>().intensity = 1.0f;
-        globalPostProcessManager.GetComponent<PostProcessVolume>().profile = groundPostProcessProfile;
+        //globalPostProcessManager.GetComponent<PostProcessVolume>().profile = groundPostProcessProfile;
         yield return null;
     }
 
@@ -74,14 +82,18 @@ public class LightsIntensityController : MonoBehaviour
     {
         float increaseDelay = 0.0f;
         float curIntensity = GlobalLight.GetComponent<Light>().intensity;
-        while (increaseDelay <= 2.0f)
+        /*ColorGrading colorGrading;
+        stage1Profile.TryGetSettings(out colorGrading);
+        float curTemp = colorGrading.temperature.value;*/
+        while (increaseDelay <= changeLightDelay)
         {
             increaseDelay += Time.deltaTime;
-            GlobalLight.GetComponent<Light>().intensity = Mathf.Lerp(curIntensity, 0.1f, increaseDelay / 2.0f);
+            GlobalLight.GetComponent<Light>().intensity = Mathf.Lerp(curIntensity, 0.1f, increaseDelay / changeLightDelay);
+            //colorGrading.temperature.value = Mathf.Lerp(curTemp, 15f, increaseDelay / changeLightDelay);
             yield return null;
         }
         GlobalLight.GetComponent<Light>().intensity = 0.1f;
-        globalPostProcessManager.GetComponent<PostProcessVolume>().profile = undergroundPostProcessProfile;
+        //globalPostProcessManager.GetComponent<PostProcessVolume>().profile = undergroundPostProcessProfile;
         yield return null;
     }
 }
