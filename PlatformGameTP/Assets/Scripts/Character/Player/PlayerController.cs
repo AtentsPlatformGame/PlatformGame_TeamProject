@@ -17,6 +17,7 @@ public class PlayerController : BattleSystem
     [SerializeField, Header("텔레포트 잔상 이펙트"), Space(5)] Transform teleportFogVFX;
     [SerializeField, Header("플레이어 최초 스텟")] PlayerStatData playerStatData;
 
+    public UnityEvent OnStatsChanged;
     public GameObject orgFireball;
     public LayerMask groundMask;
     public Transform leftAttackPoint;
@@ -35,7 +36,18 @@ public class PlayerController : BattleSystem
     float attackDeltaTime = 0.0f;
     float teleportDeltaTime = 0.0f;
 
+    //스텟 정보 델리게이트
+    /*public delegate void StatsChangedEvent(float _ap, float _spd);
+    public static event StatsChangedEvent OnStatsChanged;*/
     
+    //스텟값을 가져오는 함수들
+    /*private float GetAP() { return battleStat.AP; }
+    private new float GetMoveSpeed() { return battleStat.MoveSpeed; }
+    //스텟을 변경하는 함수
+    public void ModfyAP(float amount) { battleStat.AP += amount; }
+    public void ModfySPD(float amount) { battleStat.MoveSpeed += amount; }*/
+    //여기까지 새로 추가 함
+
     BattleStat originalStat;
     Rigidbody rigid;
     Fireball fireBall;
@@ -43,15 +55,19 @@ public class PlayerController : BattleSystem
     Coroutine teleportDelay;
     Coroutine rotating;
 
-
-
-    // Start is called before the first frame update
     private void Awake()
     {
         OriginalStatInit(playerStatData.GetPlayerStatInfo());
         //Initialize();
-
+        NotifyStatsChanged();
     }
+
+    private void NotifyStatsChanged()
+    {
+        //스텟 변경 시 이벤트 호출하는 함수
+        OnStatsChanged?.Invoke();
+    }
+
     void Start()
     {
         curRotY = transform.localRotation.eulerAngles.y;
@@ -474,7 +490,6 @@ public class PlayerController : BattleSystem
         this.battleStat.MoveSpeed += this.battleStat.MoveSpeed * 0.5f;
         yield return new WaitForSeconds(5f);
         this.battleStat.MoveSpeed = originSpeed;
-        HPbar.Instance.SPDstats(this.battleStat.MoveSpeed);
     }
     public void UpdatePlayerStat(BattleStat _itemStat) // 여기서 _itemStat은 인벤토리에서 자기 자식들의 stat을 더한 총합을 넣어야함
     {
@@ -494,9 +509,9 @@ public class PlayerController : BattleSystem
 
         //Initialize();
         HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
-        HPbar.Instance.APStats(this.battleStat.AP);
-        HPbar.Instance.SPDstats(this.battleStat.MoveSpeed);
-        HPbar.Instance.AttackRange(this.battleStat.AttackRange);
+        Debug.Log(this.battleStat.AP + " 공격력 변화 일어남");
+        
+        //NotifyStatsChanged();
     }
 
     public bool GetControllType()

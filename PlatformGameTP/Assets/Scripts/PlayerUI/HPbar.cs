@@ -25,7 +25,19 @@ public class HPbar : MonoBehaviour
     void Start()
     {
         pc = player.GetComponent<PlayerController>();
+        
+    }
 
+    private void Update()
+    {
+        //이벤트 핸들러 생성
+        UpdateUI();
+    }
+
+    private void OnDisable()
+    {
+        // 이벤트 핸들러 제거
+        UpdateUI();
     }
 
     public void UpdateHpbar(float curHp, float maxHp)
@@ -33,28 +45,22 @@ public class HPbar : MonoBehaviour
         myHpSlider.value = (float)curHp / maxHp;//체력 비율로 설정
     }
 
-    public void APStats(float Ack)
+
+    public void UpdateUI()
     {
-        APstat.GetComponent<TextMeshProUGUI>().text = Ack.ToString();
-        
+        if (pc != null)
+        {
+            float ap = pc.GetAp();
+            float spd = pc.GetMoveSpeed();
+
+            APstat.text = ap.ToString();
+            MoveSpdstat.text = spd.ToString();
+        }
     }
 
-    public void SPDstats(float Spd)
-    {
-        MoveSpdstat.GetComponent<TextMeshProUGUI>().text = Spd.ToString();
-    }
 
-    public void AttackRange(float Rng)
-    {
-        AttackRangestat.GetComponent<TextMeshProUGUI>().text = Rng.ToString();
-    }
 
-    public void Update()
-    {
-       
-    }
-
-    void UpdateUI()
+    void UpdateHP()
     {
         if(pc != null)
         {
@@ -66,7 +72,7 @@ public class HPbar : MonoBehaviour
 
     public void ChangeHpSlider()
     {
-        myHpSlider.value = Mathf.Lerp(myHpSlider.value, pc.GetCurHP(), Time.deltaTime*2) ;
+        myHpSlider.value = Mathf.Lerp(myHpSlider.value, pc.GetCurHP(),Time.deltaTime*2) ;
     }
 
    
