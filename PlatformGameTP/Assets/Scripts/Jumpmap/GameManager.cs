@@ -193,8 +193,6 @@ public class GameManager : MonoBehaviour
     //겟 버튼을 누르면 시간이 흐른다.
     public void itemGetAct()
     {
-        
-        
         TimeScaleOn();
     }
 

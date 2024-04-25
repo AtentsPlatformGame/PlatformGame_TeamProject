@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -43,6 +44,7 @@ public class BattleSystem : CharacterProperty, IDamage
     [SerializeField] protected BattleStat battleStat;
     [SerializeField] float _curHP = 0.0f;
     public event UnityAction deathAlarm; // event 키워드가 붙으면 이 클래스 밖에서 초기화, 실행이 불가능함. 접근 지정 제한자와 비슷한 느낌? 실수 방지
+    
     public Transform attackPoint;
     public LayerMask enemyMask;
     public AudioClip attackSound;
@@ -52,6 +54,17 @@ public class BattleSystem : CharacterProperty, IDamage
     protected float battleTime = 0.0f;
     Transform _target = null;
 
+    SoundManager soundManager;
+    AudioSource myAudioSource;
+    private void Start()
+    {
+        myAudioSource = GetComponent<AudioSource>();
+        /*soundManager = FindObjectOfType<SoundManager>();
+        if(soundManager != null && myAudioSource != null)
+            soundManager.SetVolumeAct?.AddListener(SetAudioSourceVolume);*/
+        if (SoundManager.Instance != null && myAudioSource != null)
+            SoundManager.Instance.SetVolumeAct?.AddListener(SetAudioSourceVolume);
+    }
     protected float curHP
     {
         get => _curHP;
@@ -180,7 +193,9 @@ public class BattleSystem : CharacterProperty, IDamage
 
     public void OnAttack()
     {
-        AudioSource.PlayClipAtPoint(attackSound, transform.position);
+        myAudioSource.clip = attackSound;
+        myAudioSource.Play();
+        //AudioSource.PlayClipAtPoint(attackSound, transform.position);
         if (myTarget == null) return;
         BattleSystem bs = myTarget.GetComponent<BattleSystem>();
         if (bs != null)
@@ -206,6 +221,10 @@ public class BattleSystem : CharacterProperty, IDamage
         return curHP > 0.0f;
     }
 
+    void SetAudioSourceVolume(float soundValue)
+    {
+        myAudioSource.volume = soundValue;
+    }
 
 }
 

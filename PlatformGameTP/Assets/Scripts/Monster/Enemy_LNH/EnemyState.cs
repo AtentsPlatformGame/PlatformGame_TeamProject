@@ -30,6 +30,7 @@ public class EnemyState : EnemyMovement
     protected float playTime = 0.0f;
     protected bool isGround = true;
 
+    
     HpBar myHpBar;
     protected virtual void ChangeState(State s)
     {

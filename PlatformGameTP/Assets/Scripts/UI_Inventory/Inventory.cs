@@ -16,8 +16,6 @@ public class Inventory :ItemProperty
     public bool checkOptions;
     public bool CheckItemBox;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -84,7 +82,6 @@ public class Inventory :ItemProperty
     public void PopDown(Transform popup)
     {
         popup.gameObject.SetActive(false);
-
     }
 
 
