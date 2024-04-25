@@ -577,8 +577,6 @@ public class PlayerController : BattleSystem
         yield return new WaitForSeconds(2.0f);
         DeathIMG.GetComponent<CanvasGroup>().alpha = 1.0f;
         
-       
-             
     }
 
 

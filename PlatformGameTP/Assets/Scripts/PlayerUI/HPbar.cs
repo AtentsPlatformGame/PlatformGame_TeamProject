@@ -11,8 +11,6 @@ public class HPbar : MonoBehaviour
 
     public TextMeshProUGUI APstat;
     public TextMeshProUGUI MoveSpdstat;
-    public TextMeshProUGUI AttackRangestat;
-
 
     public Transform player;
     PlayerController pc;
@@ -58,21 +56,19 @@ public class HPbar : MonoBehaviour
         }
     }
 
-
-
     void UpdateHP()
     {
-        if(pc != null)
-        {
-            HPbar.Instance.UpdateHpbar(pc.GetCurHP(),pc.GetMaxHP());
-          //HPbar.Instance.UpdateStats(pc.GetAp(),pc.GetAttackRange(),pc.GetMoveSpeed());
-        }
-        
+        HPbar.Instance.UpdateHpbar(pc.GetCurHP(),pc.GetMaxHP());
     }
 
     public void ChangeHpSlider()
     {
-        myHpSlider.value = Mathf.Lerp(myHpSlider.value, pc.GetCurHP(),Time.deltaTime*2) ;
+        float curHP = pc.GetCurHP();
+        float maxHP = pc.GetMaxHP();
+        //현재 HP와 최대HP 사이의 비율 계산
+        float ratio = curHP / maxHP;
+
+        myHpSlider.value = Mathf.Lerp(myHpSlider.value,ratio,Time.deltaTime*3);
     }
 
    
