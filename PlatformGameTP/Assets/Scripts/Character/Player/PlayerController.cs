@@ -576,7 +576,7 @@ public class PlayerController : BattleSystem
         {
             curHP -= _dmg;
         }
-        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        //HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
 
         if (curHP <= 0.0f)
         {

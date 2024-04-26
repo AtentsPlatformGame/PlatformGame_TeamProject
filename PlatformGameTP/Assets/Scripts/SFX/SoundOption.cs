@@ -20,4 +20,9 @@ public class SoundOption : MonoBehaviour
         }   
     }
 
+    private void Update()
+    {
+        
+    }
+
 }
