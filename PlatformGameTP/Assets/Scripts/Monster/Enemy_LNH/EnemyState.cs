@@ -31,6 +31,7 @@ public class EnemyState : EnemyMovement
     protected bool isGround = true;
 
     
+    
     HpBar myHpBar;
     protected virtual void ChangeState(State s)
     {
@@ -132,6 +133,14 @@ public class EnemyState : EnemyMovement
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("EnemyState Start");
+        if (SoundManager.Instance != null && myAudioSource != null)
+        {
+            myAudioSource.volume = SoundManager.Instance.soundValue;
+            SoundManager.Instance.SetVolumeAct.AddListener(SetVolumeSlider);
+            Debug.Log("EnemyState Start, Sound check");
+
+        }
         base.Initialize();
         //GameObject.Find("HpBars");
         GameObject obj = Instantiate(Resources.Load<GameObject>("HpStatus"),
@@ -141,6 +150,9 @@ public class EnemyState : EnemyMovement
         base.changeHpAct.AddListener(myHpBar.ChangeHpSlider);
 
         startPos = transform.position;
+        
+        
+
         ChangeState(State.Normal);
     }
 
@@ -230,6 +242,7 @@ public class EnemyState : EnemyMovement
 
     }
 
+
     protected override void OnDead()
     {
         base.OnDead();
@@ -314,4 +327,6 @@ public class EnemyState : EnemyMovement
 
         rigid.AddForce(jumpVelocity, ForceMode.Impulse);
     }
+
+    
 }

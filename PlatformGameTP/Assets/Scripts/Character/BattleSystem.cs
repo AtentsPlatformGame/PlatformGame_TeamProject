@@ -54,16 +54,11 @@ public class BattleSystem : CharacterProperty, IDamage
     protected float battleTime = 0.0f;
     Transform _target = null;
 
-    SoundManager soundManager;
-    AudioSource myAudioSource;
+    public AudioSource myAudioSource;
+    Slider volumeSlider;
     private void Start()
     {
-        myAudioSource = GetComponent<AudioSource>();
-        /*soundManager = FindObjectOfType<SoundManager>();
-        if(soundManager != null && myAudioSource != null)
-            soundManager.SetVolumeAct?.AddListener(SetAudioSourceVolume);*/
-        if (SoundManager.Instance != null && myAudioSource != null)
-            SoundManager.Instance.SetVolumeAct?.AddListener(SetAudioSourceVolume);
+        
     }
     protected float curHP
     {
@@ -221,9 +216,16 @@ public class BattleSystem : CharacterProperty, IDamage
         return curHP > 0.0f;
     }
 
-    void SetAudioSourceVolume(float soundValue)
+    public void SetAudioSourceVolume(float value)
     {
-        myAudioSource.volume = soundValue;
+        myAudioSource.volume = value;
+    }
+
+    public void SetVolumeSlider(Slider _slider)
+    {
+        volumeSlider = _slider;
+        Debug.Log("효과음 슬라이더 세팅");
+        volumeSlider.onValueChanged.AddListener(SetAudioSourceVolume);
     }
 
 }
