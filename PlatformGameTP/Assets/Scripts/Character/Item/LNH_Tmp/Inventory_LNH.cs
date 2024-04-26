@@ -88,6 +88,9 @@ public class Inventory_LNH : MonoBehaviour
                 if(inventoryItemStat.IsHealAfterAttack) tmpStat.HealAfterAttack = inventoryItemStat.IsHealAfterAttack;
                 if(inventoryItemStat.IsResurrectionOneTime) tmpStat.ResurrectionOneTime = inventoryItemStat.IsResurrectionOneTime;
                 if(inventoryItemStat.IsHitOnlyHalf) tmpStat.HitOnlyHalf = inventoryItemStat.IsHitOnlyHalf;
+                if (inventoryItemStat.CA_AttackPenalty) tmpStat.CA_AttackPenalty = inventoryItemStat.CA_AttackPenalty;
+                if (inventoryItemStat.CA_GoldPenalty) tmpStat.CA_AttackPenalty = inventoryItemStat.CA_GoldPenalty;
+                if (inventoryItemStat.CA_HpPenalty) tmpStat.CA_AttackPenalty = inventoryItemStat.CA_HpPenalty;
             }
         }
         return tmpStat;

@@ -16,6 +16,9 @@ public struct PlayerBattleStat
     public bool HealAfterAttack; // 흡혈 여부
     public bool ResurrectionOneTime; // 부활 여부
     public bool HitOnlyHalf; // 피격 반칸 여부
+    public bool CA_AttackPenalty; // 공격력 4배, 피격마다 반씩 줄어듦
+    public bool CA_GoldPenalty; // 골드 획득 3배, 피격시 모든 골드 소실
+    public bool CA_HPPenalty; // 공1 체력1 증가, 방 이동마다 피격당함
 }
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "ScriptableObject/PlayerStatData", order = 1)]

@@ -30,6 +30,10 @@ public struct BattleStat
     public bool ResurrectionOneTime; // 부활 여부
     public bool HitOnlyHalf; // 피격 반칸 여부
 
+    public bool CA_AttackPenalty; // 공격력 +2, 피격뎀 *2
+    public bool CA_GoldPenalty; // 골드 획득 3배, 피격시 모든 골드 소실
+    public bool CA_HPPenalty; // 공1 체력1 증가, 방 이동마다 피격당함
+
     public Transform StatWindows;
 }
 
@@ -146,6 +150,21 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         return this.battleStat.MoveSpeed;
     }
+    public bool GetCA_AttackPenalty()
+    {
+        return this.battleStat.CA_AttackPenalty;
+    }
+
+    public bool GetCA_HpPenalty()
+    {
+        return this.battleStat.CA_HPPenalty;
+    }
+
+    public bool GetCA_GoldPenalty()
+    {
+        return this.battleStat.CA_GoldPenalty;
+    }
+
     #endregion
 
     private void TargetDead()

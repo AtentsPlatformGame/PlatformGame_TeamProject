@@ -10,11 +10,16 @@ public class GoldManager : MonoBehaviour
     [SerializeField] int PlayerGold;
     
     public TextMeshProUGUI Owngold;
+    PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
+
         //Owngold = GetComponent<TextMeshProUGUI>();
         Owngold.text = PlayerGold.ToString();
+        /*Owngold = GetComponent<TextMeshProUGUI>();
+        Owngold.text = PlayerGold.ToString();*/
+        player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -25,7 +30,18 @@ public class GoldManager : MonoBehaviour
     }
     public void ChangeGold(int _gold)
     {
-        this.PlayerGold += _gold;
+        if(player != null)
+        {
+            if (player.GetCA_GoldPenalty())
+            {
+                this.PlayerGold += (_gold * 3);
+            }
+            else
+            {
+                this.PlayerGold += _gold;
+            }
+        }
+        
         if(this.PlayerGold <= 0) this.PlayerGold = 0;
     }
     //CountGold => ÇÊµå °ñµå È¹µæ·®°ú »óÁ¡ÀÇ °ñµå·® °è»êÇÏ¿© ¹Ý¿µ

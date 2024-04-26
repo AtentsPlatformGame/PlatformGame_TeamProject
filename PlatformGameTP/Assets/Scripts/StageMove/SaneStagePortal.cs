@@ -16,11 +16,12 @@ public class SaneStagePortal : MonoBehaviour
     float time = 0f;
     float F_time = 1;
     GameObject obj;
+    PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
 
-        
+        player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -93,6 +94,14 @@ public class SaneStagePortal : MonoBehaviour
         }
         DoMoving();
         Panel.gameObject.SetActive(false);
+        if (player != null)
+        {
+            if (player.GetCA_HpPenalty())
+            {
+                player.TakeDamage(-1f);
+            }
+        }
+
         yield return null;
 
     }

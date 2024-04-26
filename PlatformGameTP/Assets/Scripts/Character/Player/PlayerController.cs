@@ -35,6 +35,7 @@ public class PlayerController : BattleSystem
     bool isGround;
     float attackDeltaTime = 0.0f;
     float teleportDeltaTime = 0.0f;
+    GoldManager goldManager;
 
     //Ω∫≈› ¡§∫∏ µ®∏Æ∞‘¿Ã∆Æ
     /*public delegate void StatsChangedEvent(float _ap, float _spd);
@@ -73,6 +74,7 @@ public class PlayerController : BattleSystem
         curRotY = transform.localRotation.eulerAngles.y;
         rigid = this.GetComponent<Rigidbody>();
         DeathIMG.GetComponent<CanvasGroup>().alpha = 0.0f;
+        goldManager = FindObjectOfType<GoldManager>();
     }
 
     // Update is called once per frame
@@ -128,6 +130,11 @@ public class PlayerController : BattleSystem
         this.battleStat.HealAfterAttack = basicStat.GetPlayerStatInfo().HealAfterAttack;
         this.battleStat.ResurrectionOneTime = basicStat.GetPlayerStatInfo().ResurrectionOneTime;
         this.battleStat.HitOnlyHalf = basicStat.GetPlayerStatInfo().HitOnlyHalf;
+        this.battleStat.CA_AttackPenalty = basicStat.GetPlayerStatInfo().CA_AttackPenalty;
+        this.battleStat.CA_GoldPenalty = basicStat.GetPlayerStatInfo().CA_GoldPenalty;
+        this.battleStat.CA_HPPenalty = basicStat.GetPlayerStatInfo().CA_HPPenalty;
+
+        
         Initialize(this.battleStat.MaxHp);
 
         
@@ -141,6 +148,14 @@ public class PlayerController : BattleSystem
         this.originalStat.AttackDelay = pb.AttackDelay;
         this.originalStat.ProjectileSpeed = pb.ProjectileSpeed;
         this.originalStat.MoveSpeed = pb.MoveSpeed;
+        this.battleStat.AttackSize = pb.AttackSize;
+        this.battleStat.AttackTwice = pb.AttackTwice;
+        this.battleStat.HealAfterAttack = pb.HealAfterAttack;
+        this.battleStat.ResurrectionOneTime = pb.ResurrectionOneTime;
+        this.battleStat.HitOnlyHalf = pb.HitOnlyHalf;
+        this.battleStat.CA_AttackPenalty = pb.CA_AttackPenalty;
+        this.battleStat.CA_GoldPenalty = pb.CA_GoldPenalty;
+        this.battleStat.CA_HPPenalty = pb.CA_HPPenalty;
     }
     #region ControllChange
     public void SwitchControllType2D(bool _type)
@@ -506,6 +521,19 @@ public class PlayerController : BattleSystem
         this.battleStat.HealAfterAttack = _itemStat.HealAfterAttack;
         this.battleStat.ResurrectionOneTime = _itemStat.ResurrectionOneTime;
         this.battleStat.HitOnlyHalf = _itemStat.HitOnlyHalf;
+        this.battleStat.CA_AttackPenalty = _itemStat.CA_AttackPenalty;
+        this.battleStat.CA_GoldPenalty = _itemStat.CA_GoldPenalty;
+        this.battleStat.CA_HPPenalty = _itemStat.CA_HPPenalty;
+
+        if (this.battleStat.CA_AttackPenalty)
+        {
+            this.battleStat.AP += 2;
+        }
+        if (this.battleStat.CA_HPPenalty)
+        {
+            this.battleStat.AP += 1;
+            this.battleStat.MaxHp += 1;
+        }
 
         //Initialize();
         HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
@@ -535,9 +563,14 @@ public class PlayerController : BattleSystem
     }
     public override void TakeDamage(float _dmg)
     {
+        if (GetCA_GoldPenalty()) goldManager.ChangeGold(0);
         if (GetHitOnlyHalf())
         {
             curHP -= _dmg*0.5f;
+        }
+        if (GetCA_HpPenalty())
+        {
+            curHp -= _dmg * 2f;
         }
         else
         {

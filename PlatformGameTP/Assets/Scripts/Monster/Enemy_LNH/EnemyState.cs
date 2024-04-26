@@ -233,7 +233,7 @@ public class EnemyState : EnemyMovement
     protected override void OnDead()
     {
         base.OnDead();
-        dropGoldAct?.Invoke(dropGold); 
+        dropGoldAct?.Invoke(dropGold);
         // 플레이어한테 골드를 주고 플레이어가 인벤토리를 킬 때 인벤토리가 그 정보를 가져와서 골드를 갱신한다. 그리고 다시 플레이어 골드도 갱신한다.
         ChangeState(State.Death);
     }

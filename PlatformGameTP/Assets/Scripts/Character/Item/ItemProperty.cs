@@ -44,7 +44,6 @@ public struct ItemStat
     [Header("아이템(스펠) VFX")]
     [Tooltip("만약 아이템이 스펠일 경우 스펠 프리펩을 넣어주세요.")] public Transform SpellObject; // 스펠일 때 스펠 vfx
 
-    // 이 아래로 위와 같이 추가
     [Header("평타 크기 변경")]
     [Tooltip("아이템 효과로 파이어볼 크기를 키웁니다."), Range(1,2)] public int PlusAttackSize; // 평타 크기
     [Header("평타를 두번 발사 할 수 있는지")]
@@ -55,6 +54,14 @@ public struct ItemStat
     [Tooltip("아이템 효과로 1회 부활 할 수 있습니다.")] public bool IsResurrectionOneTime; // 부활 여부
     [Header("반칸 피격 고정 여부")]
     [Tooltip("아이템 효과로 피격시 체력이 반칸씩 답니다.")] public bool IsHitOnlyHalf; // 피격 반칸 여부
+
+    // 저주받은 장신구 관련, 
+    [Header("공격력 +2, 피격시 데미지 2배 ")]
+    [Tooltip("아이템 효과로 공격력이 2 오르지만 피격 데미지가 2배가 됩니다.")] public bool CA_AttackPenalty; // 공격력 관련 패널티
+    [Header("획득 골드량 3배, 피격시 모든 골드 소실 ")]
+    [Tooltip("아이템 효과로 획득 골드량이 3배가 되지만 피격시 모든 골드를 소실합니다.")] public bool CA_GoldPenalty; // 골드 관련 패널티
+    [Header("공격력 1, 체력 1이 증가하지만 방을 이동할 때 마다 피격당함")]
+    [Tooltip("아이템 효과로 공격력과 체력이 1씩 오르지만 방을 이동할 때마다 피격당합니다.")] public bool CA_HpPenalty; // 체력 관련 패널티
 }
 public class ItemProperty : MonoBehaviour
 {
