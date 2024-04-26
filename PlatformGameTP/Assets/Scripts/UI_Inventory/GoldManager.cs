@@ -13,15 +13,15 @@ public class GoldManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*Owngold = GetComponent<TextMeshProUGUI>();
-        Owngold.text = PlayerGold.ToString();*/
+        //Owngold = GetComponent<TextMeshProUGUI>();
+        Owngold.text = PlayerGold.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //CountGold();
-        //if()Owngold.text = PlayerGold.ToString();
+        CountUpGold();
+        if (Owngold.gameObject.activeSelf == true)Owngold.text = PlayerGold.ToString();
     }
     public void ChangeGold(int _gold)
     {
@@ -39,4 +39,13 @@ public class GoldManager : MonoBehaviour
     {
         this.PlayerGold = _gold;
     }
+
+    public void CountUpGold()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            PlayerGold++;
+        }
+    }
+
 }
