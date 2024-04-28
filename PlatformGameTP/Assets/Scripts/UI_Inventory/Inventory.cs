@@ -71,8 +71,6 @@ public class Inventory :ItemProperty
             }
         }
 
-     
-
     }
 
     public void PopUp(Transform popup)
