@@ -13,7 +13,7 @@ public class IntroController : MonoBehaviour
     public GameObject Intro5;
     public GameObject Intro6;
     public GameObject Intro7;
-
+    
     public TMP_Text text1;
     public TMP_Text text2;
     public TMP_Text text3;
@@ -21,6 +21,7 @@ public class IntroController : MonoBehaviour
     public TMP_Text text5;
     public TMP_Text text6;
     public TMP_Text text7;
+    
     string dialog1;
     string dialog2;
     string dialog3;
@@ -40,7 +41,8 @@ public class IntroController : MonoBehaviour
         Intro5.SetActive(false);
         Intro6.SetActive(false);
         Intro7.SetActive(false);
-        dialog1 = "아주 흔하디 흔한 마을이 있었다.";
+       
+        dialog1 = "여기 작은 마을이 있었다.";
         dialog2 = "어느날 마왕이 마을에 나타났고...";
         dialog3 = "마왕은 마을이 폐허가 될 때까지 공격을 가했다.";
         dialog4 = "이 때, 한 용감한 용사가 등장했다.";
@@ -56,13 +58,14 @@ public class IntroController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G) && keyCount == 0)
         {
-            Intro1.SetActive(true);
+            
             StartCoroutine(Typing1());
         }
 
         IEnumerator Typing1()
         {
             keyCount = 1;
+            
             text1.text = null;
             text2.text = null;
             text3.text = null;
@@ -70,11 +73,15 @@ public class IntroController : MonoBehaviour
             text5.text = null;
             text6.text = null;
             text7.text = null;
+            
+          
+            Intro1.SetActive(true);
             for (int i = 0; i < dialog1.Length; i++)
             {
                 text1.text += dialog1[i];
                 yield return new WaitForSeconds(0.2f);
             }
+            Debug.Log(text1);
             yield return new WaitForSeconds(1.5f);
             Intro1.SetActive(false);
             Intro2.SetActive(true);
