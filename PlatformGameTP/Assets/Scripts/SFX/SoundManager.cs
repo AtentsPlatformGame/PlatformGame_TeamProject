@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static SoundManager Instance;
+    public GameObject Op;
     public Slider volumeSlider;
     public Slider bgVolumeSlider;
     public UnityEvent<Slider> SetVolumeAct; // 효과음 변경 함수 << 사운드매니저가 하는게 아니라 각자 개체들이 함
@@ -19,6 +20,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgSound;
     public AudioClip[] bglist;
     public AudioMixer mixer;
+
     private void Awake()
     {
         if (Instance == null)
@@ -65,13 +67,12 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-           
+
     }
     public void SetBGSVolume() // 배경음
     {
