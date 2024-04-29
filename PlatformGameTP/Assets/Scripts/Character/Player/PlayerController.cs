@@ -264,8 +264,11 @@ public class PlayerController : BattleSystem
         if (isGround && Input.GetKeyDown(KeyCode.Space) && jumpCoolTime >= 0.25f)
         {
             // Á¡ÇÁ »ç¿îµå Loop, Play on Awake ²¨¾ßµÊ
-            myAudioSource.clip = jumpCilp;
-            myAudioSource.Play();
+            if (myAudioSource != null)
+            {
+                myAudioSource.clip = jumpCilp;
+                myAudioSource.Play();
+            }
             jumpCoolTime = 0.0f;
             Jump();
             myAnim.SetTrigger("Jumping");

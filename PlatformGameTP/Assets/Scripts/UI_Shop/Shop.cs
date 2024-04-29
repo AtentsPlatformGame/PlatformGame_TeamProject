@@ -46,6 +46,7 @@ namespace LGH
             if (shopItem != null) // 만약 그 스크립트가 존재한다면
             {
                 ItemStat buyItemStat = shopItem.GetItemStat();
+                
                 if (_PlayerGold >= buyItemStat.ItemsPrice)
                 {
                     //PlayerGold -= buyItemStat.ItemsPrice;
@@ -66,6 +67,7 @@ namespace LGH
             ShopItem_LNH shopItem = itemToBuy.GetComponent<ShopItem_LNH>();
             ItemStat buyItemStat = shopItem.GetItemStat();
 
+            _PlayerGold = playerGoldManager.GetPlayerGold();
             if (_PlayerGold >= buyItemStat.ItemsPrice)
             {
                 CheckBuyItems.SetActive(true);

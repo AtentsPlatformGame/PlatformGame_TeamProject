@@ -66,7 +66,7 @@ public class TombStone : MonoBehaviour
             transform.Translate(dir * delta, Space.World);
             yield return new WaitForSeconds(0.1f);
         }
-
+        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, 18f, this.gameObject.transform.position.z);
         myCollider.enabled = true;
         summonEffect.gameObject.SetActive(true);
 

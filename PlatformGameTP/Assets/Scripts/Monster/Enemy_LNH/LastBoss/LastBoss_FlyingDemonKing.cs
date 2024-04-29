@@ -69,6 +69,8 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
                 myAnim.SetTrigger("Phase2");
+                rigid.useGravity = true;
+                bossCollider.enabled = true;
                 StartCoroutine(DelayChangeState(State.Battle, 5f));
                 // 페이즈2 코루틴 시작하기, 여기선 플레이어 컨트롤 방식 바꾸고 카메라 바꾸고 페이드아웃도 해야하고 할게 많음
                 // 방식 바꿀 때 컨트롤 못하게 했다가 특정 버튼이나 뭔가를 클릭하는 걸 둬서 그걸 누르면 다시 움직일 수 있다.
