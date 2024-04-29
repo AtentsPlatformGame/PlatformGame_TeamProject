@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7667613b3392da48b5f04e608cdcd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerGold: 100
-  Owngold: {fileID: 848621389}
+  PlayerGold: 1000
+  Owngold: {fileID: 926921658}
 --- !u!114 &216358560 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7628954902519527666, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
@@ -550,7 +550,7 @@ PrefabInstance:
     - target: {fileID: 8064975306790513358, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 939426481}
+      objectReference: {fileID: 8162096687786174457}
     - target: {fileID: 8064975306790513358, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -654,17 +654,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &848621389 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4367597083355869303, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
-  m_PrefabInstance: {fileID: 525482666}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &878154822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -790,15 +779,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
---- !u!114 &939426481 stripped
+--- !u!114 &926921658 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4705136948435747916, guid: 915fb8c16ab653a47bad2f012d88ad65, type: 3}
-  m_PrefabInstance: {fileID: 3461463339450180533}
+  m_CorrespondingSourceObject: {fileID: 5392387107781801385, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
+  m_PrefabInstance: {fileID: 628118692}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6fce78212d0bf34e9d21908956939b1, type: 3}
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &989965931
@@ -1034,7 +1023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7667613b3392da48b5f04e608cdcd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerGold: 200
+  PlayerGold: 1000
   Owngold: {fileID: 1709308119}
 --- !u!4 &1164475001
 Transform:
@@ -1163,7 +1152,7 @@ PrefabInstance:
     - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: OnStatsChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 939426481}
+      objectReference: {fileID: 8162096687786174457}
     - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: OnStatsChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1483,6 +1472,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 915fb8c16ab653a47bad2f012d88ad65, type: 3}
+--- !u!114 &8162096687786174457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4705136948435747916, guid: 915fb8c16ab653a47bad2f012d88ad65, type: 3}
+  m_PrefabInstance: {fileID: 3461463339450180533}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fce78212d0bf34e9d21908956939b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

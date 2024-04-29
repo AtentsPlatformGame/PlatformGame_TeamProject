@@ -31,7 +31,7 @@ public class OrcMonsterController : EnemyState
     public LayerMask player;
     static int ClearCounts = 0;
     static int callCounts = 0;
-    public int phasecount = 0;
+    public int phasecount;
     public int PatternDamage = 5; //패턴발생 했을때 충돌 데미지
     public Vector3 PatternPos;
     protected override void ChangeState(State s)
@@ -73,6 +73,7 @@ public class OrcMonsterController : EnemyState
         WarningS.SetActive(false);
         Clear.SetActive(false);
         Orcreward.SetActive(false);
+        phasecount = 0;
     }
 
     // Update is called once per frame
@@ -94,6 +95,7 @@ public class OrcMonsterController : EnemyState
             Call.SetActive(true);
             Invoke("TurnOffCall", 2.0f);
         }
+        Debug.Log(this.curHP);
     }
 
     public new void OnAttack()
@@ -121,23 +123,27 @@ public class OrcMonsterController : EnemyState
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
 
+
+
             if (this.curHP <= (this.battleStat.MaxHp * 0.8) && phasecount == 0)
             {
+                Debug.Log("돌떨구기");
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
-                WarningP.SetActive(true);
-                yield return new WaitForSeconds(5.0f);
-                WarningP.SetActive(false);
-                PatternPillar.SetActive(true);
-                Debug.Log("기둥 무너짐");
-                // 오크의 체력이 80%일때 기둥을 쓰러트리는 패턴
+                WarningS.SetActive(true);
                 yield return new WaitForSeconds(3.0f);
-                //Destroy(PatternPillar);
-                PatternPillar.SetActive(false);
+                WarningS.SetActive(false);
+                myAnim.SetTrigger("PatternS");
+                PatternStons.SetActive(true);
+                // 오크의 체력이 20%남았을때 낙석 패턴
+                yield return new WaitForSeconds(3.0f);
+                PatternStons.SetActive(false);
                 phasecount = 1;
-            }
 
-            if (this.curHP <= (this.battleStat.MaxHp * 0.6) && phasecount == 1)
+            }
+           
+
+            if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 1)
             {
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
@@ -151,24 +157,24 @@ public class OrcMonsterController : EnemyState
                 phasecount = 2;
                 Debug.Log("공업 이속업");
             }
-
-            if (this.curHp <=(this.battleStat.MaxHp * 0.3) && phasecount == 2 )
+            if (this.curHP <= (this.battleStat.MaxHp * 0.3) && phasecount == 2)
             {
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
-                WarningS.SetActive(true);
+                WarningP.SetActive(true);
+                yield return new WaitForSeconds(5.0f);
+                WarningP.SetActive(false);
+                PatternPillar.SetActive(true);
+                Debug.Log("기둥 무너짐");
+                // 오크의 체력이 80%일때 기둥을 쓰러트리는 패턴
                 yield return new WaitForSeconds(3.0f);
-                WarningS.SetActive(false);
-                myAnim.SetTrigger("PatternS");
-                PatternStons.SetActive(true);
-                // 오크의 체력이 20%남았을때 낙석 패턴
-                yield return new WaitForSeconds(3.0f);
-                PatternStons.SetActive(false);
+                //Destroy(PatternPillar);
+                PatternPillar.SetActive(false);
                 phasecount = 3;
-
             }
 
-                if (Mathf.Approximately(dist, 0.0f))
+
+            if (Mathf.Approximately(dist, 0.0f))
             {
                 myAnim.SetBool("IsRunning", false);
                 if (battleTime >= battleStat.AttackDelay)
