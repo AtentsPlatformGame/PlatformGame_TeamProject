@@ -671,10 +671,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6229424131411123419}
+  - component: {fileID: 4316556840333279638}
   - component: {fileID: 7179731931617442946}
   m_Layer: 5
   m_Name: MusicBar
-  m_TagString: Untagged
+  m_TagString: SFXSlider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -701,6 +702,18 @@ RectTransform:
   m_AnchoredPosition: {x: 47.499992, y: -144.2}
   m_SizeDelta: {x: -214.99998, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4316556840333279638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343847971775236312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f706049e3c434948aedc9edf7cfc7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7179731931617442946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,7 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1310,6 +1323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BGMusic
       objectReference: {fileID: 0}
+    - target: {fileID: 3133716936916383859, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
+      propertyPath: m_TagString
+      value: BGSFXSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 3594930982877602947, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1487,6 +1504,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8282633165535665970, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282633165535665970, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1545,7 +1566,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8335569153448913114, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9000244323295207571}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3133716936916383859, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 8400085784178313986}
   m_SourcePrefab: {fileID: 100100000, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
 --- !u!224 &3323992622707138677 stripped
 RectTransform:
@@ -1557,3 +1581,20 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3594930982877602947, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
   m_PrefabInstance: {fileID: 6740994012842084527}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8570878567619653852 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3133716936916383859, guid: 175dad1c01cd29847bdf69254f7c34a4, type: 3}
+  m_PrefabInstance: {fileID: 6740994012842084527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8400085784178313986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570878567619653852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f706049e3c434948aedc9edf7cfc7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
