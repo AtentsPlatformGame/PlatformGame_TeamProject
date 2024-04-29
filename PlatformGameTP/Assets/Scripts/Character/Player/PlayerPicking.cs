@@ -18,6 +18,7 @@ public class PlayerPicking : MonoBehaviour
     public UnityEvent<bool> spellReadyAct; // 스펠 사용 준비 
     public UnityEvent<Vector3> useSpellAct; // 스펠 사용
     public UnityEvent useBuffSpellAct;
+    public AudioSource spellAudioSource;
     PlayerController playerController;
 
     Vector3 pos;
@@ -52,6 +53,8 @@ public class PlayerPicking : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(1))
             {
+                // 스펠 준비 사운드
+                spellAudioSource.Play();
                 if (playerController.GetCurrentSpell() == null) return;
                 Debug.Log("스펠 사용 준비");
                 spellReadyAct?.Invoke(true);
@@ -78,6 +81,7 @@ public class PlayerPicking : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) // 스펠 사용
             {
                 Debug.Log("스펠 사용");
+                spellAudioSource.Stop();
                 //SpellCanvasEnabled(false);
                 //playerController.ResetSpellTrigger();
                 //SpellObjectEnabled(spellPointImg, spellRangeImg, false);

@@ -24,7 +24,7 @@ public class PlayerController : BattleSystem
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
     public GameObject DeathIMG;
-
+    public AudioClip jumpCilp;
 
     public bool isSpellReady = false;
     public bool is3d = true;
@@ -263,6 +263,9 @@ public class PlayerController : BattleSystem
         UnityEngine.Debug.Log(isGround);*/
         if (isGround && Input.GetKeyDown(KeyCode.Space) && jumpCoolTime >= 0.25f)
         {
+            // 점프 사운드 Loop, Play on Awake 꺼야됨
+            myAudioSource.clip = jumpCilp;
+            myAudioSource.Play();
             jumpCoolTime = 0.0f;
             Jump();
             myAnim.SetTrigger("Jumping");
@@ -271,6 +274,7 @@ public class PlayerController : BattleSystem
 
     void Jump()
     {
+
         Vector3 jumpVelocity = Vector3.up * Mathf.Sqrt(jumpForce * -Physics.gravity.y);
         rigid.AddForce(jumpVelocity, ForceMode.Impulse);
     }
@@ -387,6 +391,7 @@ public class PlayerController : BattleSystem
     {
         // 애니메이션 이벤트
         // 파이어볼(?)이 생성되어 앞으로 발사되는 함수
+        // 불꽃 발사 사운드 Loop, Play on Awake 꺼야됨
         GameObject obj = Instantiate(orgFireball, rightAttackPoint);
         obj.transform.SetParent(null);
         obj.GetComponent<Fireball>().SetFireBallAP(GetAp()); // 파이어볼 공격력 설정
@@ -445,6 +450,7 @@ public class PlayerController : BattleSystem
     {
         if (spellObject != null)
         {
+            //스펠 사용 사운드 Loop, Play on Awake 꺼야됨
             myAnim.SetTrigger("UseSpell");
             if (spellObject.gameObject.tag == "AttackSpell")
             {
@@ -483,6 +489,7 @@ public class PlayerController : BattleSystem
         }
         HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
         Debug.Log("힐 스펠 사용");
+        //힐 사운드, Loop Play on Awake 꺼야됨
     }
 
     public void HealWithConsume()
@@ -498,6 +505,7 @@ public class PlayerController : BattleSystem
     public void SpeedBuff()
     {
         StartCoroutine(SpeedBuffActing());
+        // 스피드 버프 사운드 Loop Play on Awake 꺼야됨
     }
     IEnumerator SpeedBuffActing()
     {

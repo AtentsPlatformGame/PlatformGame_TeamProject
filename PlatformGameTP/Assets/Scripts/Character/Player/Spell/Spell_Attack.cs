@@ -6,6 +6,7 @@ public class Spell_Attack : Spell_Info
 {
     [SerializeField] LayerMask spellMask;
     [SerializeField] float spellDmg;
+    public AudioSource attackSpellAudioSource;
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,6 +23,10 @@ public class Spell_Attack : Spell_Info
     {
         if((1 << other.gameObject.layer & spellMask) != 0)
         {
+            if(attackSpellAudioSource != null)
+            {
+                attackSpellAudioSource.Play();
+            }
             BattleSystem bs = other.gameObject.GetComponent<BattleSystem>();
             Debug.Log($"{spellDmg} 만큼의 데미지를 입힘");
             if(bs != null)
