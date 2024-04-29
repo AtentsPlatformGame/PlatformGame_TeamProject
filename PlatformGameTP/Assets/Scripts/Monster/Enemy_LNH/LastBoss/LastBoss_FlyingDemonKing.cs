@@ -202,6 +202,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 {
                     yield return StartCoroutine(DelayChangeState(State.SpecialPattern, 0.0f));
                 }
+                pattern = Random.Range(0, 3);
             }
             else
             {

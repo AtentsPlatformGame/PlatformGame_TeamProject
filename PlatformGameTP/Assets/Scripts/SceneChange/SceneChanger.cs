@@ -38,6 +38,13 @@ public class SceneChanger : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
     }
+
+    public void GoToIntro()
+    {
+        nextSceneName = "Intro"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
+        sceneChangeAct?.Invoke();
+    }
+
     #region 튜토리얼
 
     public void GoToTutorialStage()
@@ -141,6 +148,12 @@ public class SceneChanger : MonoBehaviour
         sceneChangeAct?.Invoke();
     }
     #endregion
+
+    public void GoToOuttro()
+    {
+        nextSceneName = "GoToOuttro"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
+        sceneChangeAct?.Invoke();
+    }
 
 
 }
