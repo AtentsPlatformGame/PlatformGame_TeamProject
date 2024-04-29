@@ -141,7 +141,6 @@ public class OrcMonsterController : EnemyState
                 phasecount = 1;
 
             }
-           
 
             if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 1)
             {

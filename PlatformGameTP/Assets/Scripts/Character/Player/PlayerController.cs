@@ -487,7 +487,7 @@ public class PlayerController : BattleSystem
         {
             this.curHP = this.battleStat.MaxHp;
         }
-        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
         Debug.Log("Èú ½ºÆç »ç¿ë");
         //Èú »ç¿îµå, Loop Play on Awake ²¨¾ßµÊ
     }
@@ -499,7 +499,7 @@ public class PlayerController : BattleSystem
         {
             this.curHP = this.battleStat.MaxHp;
         }
-        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
     }
 
     public void SpeedBuff()
@@ -544,7 +544,7 @@ public class PlayerController : BattleSystem
         }
 
         //Initialize();
-        HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
         Debug.Log(this.battleStat.AP + " °ø°Ý·Â º¯È­ ÀÏ¾î³²");
         
         //NotifyStatsChanged();
@@ -591,7 +591,7 @@ public class PlayerController : BattleSystem
             if (GetResurrectionOneTime())
             {
                 curHP = 3.0f;
-                HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+                PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
                 this.battleStat.ResurrectionOneTime = false;
             }
             else
