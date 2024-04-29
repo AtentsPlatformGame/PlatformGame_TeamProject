@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HPbar : MonoBehaviour
+public class PlayerUIwindows : MonoBehaviour
 {
-    public static HPbar Instance;
+    public static PlayerUIwindows Instance;
     [SerializeField] public Slider myHpSlider;
 
     public TextMeshProUGUI APstat;
@@ -58,7 +58,7 @@ public class HPbar : MonoBehaviour
 
     void UpdateHP()
     {
-        HPbar.Instance.UpdateHpbar(pc.GetCurHP(),pc.GetMaxHP());
+        PlayerUIwindows.Instance.UpdateHpbar(pc.GetCurHP(),pc.GetMaxHP());
     }
 
     public void ChangeHpSlider()
