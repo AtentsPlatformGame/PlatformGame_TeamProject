@@ -83,25 +83,6 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 bossCollider.enabled = true;
                 StartCoroutine(DelayChangeState(State.Battle, 5f));
                 break;
-            case State.SpecialPattern:
-                foreach (Renderer renderer in allRenderer)
-                {
-                    Color tmpColor = new Color(0, 0, 0, 0);
-                    renderer.material.color = tmpColor;
-                }
-                if (meteorCoolTime >= meteorDelay)
-                {
-                    meteorCoolTime = 0.0f;
-                    // 메테오 발사 트리거를 건다.
-                    myAnim.SetTrigger("SpecialAttack");
-                    StartCoroutine(DelayChangeState(State.Battle, 2f));
-                }
-                else
-                {
-                    StartCoroutine(DelayChangeState(State.Battle, 0f));
-                }
-                
-                break;
             case State.Create:
                 break;
             default:
@@ -197,17 +178,16 @@ public class LastBoss_FlyingDemonKing : EnemyState
             int pattern = 0;
             if (isPhaseChanged)
             {
-                pattern = Random.Range(0, 4);
-                if(pattern == 3)
+                if (meteorCoolTime >= meteorDelay)
                 {
-                    yield return StartCoroutine(DelayChangeState(State.SpecialPattern, 0.0f));
+                    meteorCoolTime = 0.0f;
+                    // 메테오 발사 트리거를 건다.
+                    myAnim.SetTrigger("SpecialAttack");
                 }
-                pattern = Random.Range(0, 3);
+
             }
-            else
-            {
-                pattern = Random.Range(0,3);
-            }
+            pattern = Random.Range(0,3);
+            
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
             if (dist < 0.00001f) dist = 0.0f;
