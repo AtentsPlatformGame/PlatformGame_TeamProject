@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class IntroController : MonoBehaviour
+public class OutTroController : MonoBehaviour
 {
     public int keyCount;
     public GameObject Intro1;
@@ -11,24 +11,21 @@ public class IntroController : MonoBehaviour
     public GameObject Intro3;
     public GameObject Intro4;
     public GameObject Intro5;
-    public GameObject Intro6;
-    public GameObject Intro7;
     
+
     public TMP_Text text1;
     public TMP_Text text2;
     public TMP_Text text3;
     public TMP_Text text4;
     public TMP_Text text5;
-    public TMP_Text text6;
-    public TMP_Text text7;
-    
+  
+
     string dialog1;
     string dialog2;
     string dialog3;
     string dialog4;
     string dialog5;
-    string dialog6;
-    string dialog7;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -39,16 +36,14 @@ public class IntroController : MonoBehaviour
         Intro3.SetActive(false);
         Intro4.SetActive(false);
         Intro5.SetActive(false);
-        Intro6.SetActive(false);
-        Intro7.SetActive(false);
+     
+
+        dialog1 = "결국엔 마왕을 쓰러트리고";
+        dialog2 = "용사의 무덤에 찾아간다.";
+        dialog3 = "용사의 무덤 앞에 마왕에게서 얻은 전리품을 놓고";
+        dialog4 = "페허가 되버린 마을을 한참 바라보다";
+        dialog5 = "다시 모험을 떠난다.";
        
-        dialog1 = "멀지않은 과거에 작지만 평화로운 마을이 있었다.";
-        dialog2 = "그러던 어느날 마왕이 마을을 나타났고";
-        dialog3 = "마을을 폐허로 만들기 시작했다.";
-        dialog4 = "이 때, 마을을 위해 한 용감한 용사가 나타났다.";
-        dialog5 = "그는 홀로 용감하게 마왕에게 맞섰으나.";
-        dialog6 = "결국 마왕을 물리치지 못한채, 죽음을 맞이한다.";
-        dialog7 = "용사는 영혼으로 세상에 남아 대적자를 기다린다.";
         keyCount = 0;
 
     }
@@ -58,9 +53,9 @@ public class IntroController : MonoBehaviour
     {
         if (keyCount == 0)
         {
-            
+
             StartCoroutine(Typing1());
-        }   
+        }
     }
     IEnumerator Typing1()
     {
@@ -71,8 +66,7 @@ public class IntroController : MonoBehaviour
         text3.text = null;
         text4.text = null;
         text5.text = null;
-        text6.text = null;
-        text7.text = null;
+      
 
 
         Intro1.SetActive(true);
@@ -115,20 +109,7 @@ public class IntroController : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         yield return new WaitForSeconds(1.5f);
-        Intro5.SetActive(false);
-        Intro6.SetActive(true);
-        for (int i = 0; i < dialog6.Length; i++)
-        {
-            text6.text += dialog6[i];
-            yield return new WaitForSeconds(0.2f);
-        }
-        yield return new WaitForSeconds(1.5f);
-        Intro6.SetActive(false);
-        Intro7.SetActive(true);
-        for (int i = 0; i < dialog7.Length; i++)
-        {
-            text7.text += dialog7[i];
-            yield return new WaitForSeconds(0.2f);
-        }
+       
+       
     }
 }
