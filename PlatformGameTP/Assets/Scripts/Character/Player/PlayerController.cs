@@ -24,7 +24,9 @@ public class PlayerController : BattleSystem
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
     public GameObject DeathIMG;
-    public AudioClip jumpCilp;
+    public AudioClip jumpClip;
+    public AudioClip healbuffClip;
+    public AudioClip spellClip;
 
     public bool isSpellReady = false;
     public bool is3d = true;
@@ -266,12 +268,13 @@ public class PlayerController : BattleSystem
             // Á¡ÇÁ »ç¿îµå Loop, Play on Awake ²¨¾ßµÊ
             if (myAudioSource != null)
             {
-                myAudioSource.clip = jumpCilp;
+                myAudioSource.clip = jumpClip;
                 myAudioSource.Play();
             }
             jumpCoolTime = 0.0f;
             Jump();
             myAnim.SetTrigger("Jumping");
+            if (myAudioSource.isPlaying) Debug.Log("Á¡ÇÁ È¿°úÀ½ Àç»ý");
         }
     }
 
@@ -454,6 +457,12 @@ public class PlayerController : BattleSystem
         if (spellObject != null)
         {
             //½ºÆç »ç¿ë »ç¿îµå Loop, Play on Awake ²¨¾ßµÊ
+            if (myAudioSource != null)
+            {
+                myAudioSource.clip = spellClip;
+                myAudioSource.Play();
+                if (myAudioSource.isPlaying) Debug.Log("½ºÆç È¿°úÀ½ Àç»ý");
+            }
             myAnim.SetTrigger("UseSpell");
             if (spellObject.gameObject.tag == "AttackSpell")
             {
@@ -493,7 +502,15 @@ public class PlayerController : BattleSystem
         PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
         Debug.Log("Èú ½ºÆç »ç¿ë");
         //Èú »ç¿îµå, Loop Play on Awake ²¨¾ßµÊ
+        if (myAudioSource != null)
+        {
+            myAudioSource.clip = healbuffClip;
+            myAudioSource.Play();
+        }
     }
+
+
+
 
     public void HealWithConsume()
     {

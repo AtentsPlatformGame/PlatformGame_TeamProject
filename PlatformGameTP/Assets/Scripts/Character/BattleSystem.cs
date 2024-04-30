@@ -53,6 +53,7 @@ public class BattleSystem : CharacterProperty, IDamage
     public LayerMask enemyMask;
     public AudioClip attackSound;
     public AudioClip damageSound;
+    //public AudioSource jumpSound;
 
     protected float curHp; // 수정부분 protected float curHp = 0.0f
     protected float battleTime = 0.0f;

@@ -43,12 +43,21 @@ public class IntroController : MonoBehaviour
         Intro7.SetActive(false);
        
         dialog1 = "멀지않은 과거에 작지만 평화로운 마을이 있었다.";
+<<<<<<< Updated upstream
         dialog2 = "그러던 어느날 마왕이 마을을 나타났고";
         dialog3 = "마을을 폐허로 만들기 시작했다.";
         dialog4 = "이 때, 마을을 위해 한 용감한 용사가 나타났다.";
         dialog5 = "그는 홀로 용감하게 마왕에게 맞섰으나.";
         dialog6 = "결국 마왕을 물리치지 못한채, 죽음을 맞이한다.";
         dialog7 = "용사는 영혼으로 세상에 남아 대적자를 기다린다.";
+=======
+        dialog2 = "어느날 평화롭던 마을에 사악한 마왕이 나타났고...";
+        dialog3 = "마을이 폐허가 될 때까지 학살과 파괴를 반복했다.";
+        dialog4 = "이 때, 고통받던 마을을 구하기 위해 용사가 등장했다.";
+        dialog5 = "용사는 마을을 구하기 위해 마왕에게 대적했지만...";
+        dialog6 = "결국 마을을 구하지 못한 채, 죽음을 맞이한다.";
+        dialog7 = "나는... 죽어서도... 마왕에게 대적하리...";
+>>>>>>> Stashed changes
         keyCount = 0;
 
     }
