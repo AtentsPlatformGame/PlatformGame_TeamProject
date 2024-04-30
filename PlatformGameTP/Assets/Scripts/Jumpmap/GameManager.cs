@@ -29,9 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject card1;
     public GameObject card2;
     public GameObject card3;
-    public GameObject card4;
-    public GameObject card5;
-    public GameObject card6;
+    
     public int cardCount;
 
     // Start is called before the first frame update
@@ -44,9 +42,7 @@ public class GameManager : MonoBehaviour
         card1.SetActive(false);
         card2.SetActive(false);
         card3.SetActive(false);
-        card4.SetActive(false);
-        card5.SetActive(false);
-        card6.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -205,7 +201,7 @@ public class GameManager : MonoBehaviour
     public void RandomCard()
     {
         
-        int RndcardNum = Random.Range(1, 7);
+        int RndcardNum = Random.Range(1, 4);
         if (RndcardNum == 1 && cardCount == 0)
         {
             card1.SetActive(true);
@@ -221,21 +217,7 @@ public class GameManager : MonoBehaviour
             card3.SetActive(true);
             cardCount++;
         }
-        if (RndcardNum == 4 && cardCount == 0)
-        {
-            card4.SetActive(true);
-            cardCount++;
-        }
-        if (RndcardNum == 5 && cardCount == 0)
-        {
-            card5.SetActive(true);
-            cardCount++;
-        }
-        if (RndcardNum == 6 && cardCount == 0)
-        {
-            card6.SetActive(true);
-            cardCount++;
-        }
+        
     }
 
 }

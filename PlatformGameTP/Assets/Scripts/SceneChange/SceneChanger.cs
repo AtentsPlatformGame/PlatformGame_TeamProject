@@ -39,10 +39,30 @@ public class SceneChanger : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public void GoToMain()
+    {
+        if (File.Exists(filepath_playerProfile))
+        {
+            File.Delete(filepath_playerProfile);
+        }
+        if (File.Exists(filepath_stage1))
+        {
+            File.Delete(filepath_stage1);
+        }
+        if (File.Exists(filepath_stage2))
+        {
+            File.Delete(filepath_stage2);
+        }
+
+        nextSceneName = "GameMain";
+        //sceneChangeAct?.Invoke();
+        SceneManager.LoadScene(nextSceneName);
+    }
     public void GoToIntro()
     {
         nextSceneName = "Intro"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
-        sceneChangeAct?.Invoke();
+        //sceneChangeAct?.Invoke();
+        SceneManager.LoadScene(nextSceneName);
     }
 
     #region 튜토리얼
@@ -75,32 +95,11 @@ public class SceneChanger : MonoBehaviour
         nextSceneName = "Stage1"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();
     }
-    public void GoToStage1Village()
-    {
-        savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage1Village"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
-        sceneChangeAct?.Invoke();
-    }
-
-    public void GoToStage1GimicRoom()
-    {
-        Debug.Log("인스턴스의 기믹룸 점프");
-        savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage1GimicRoom"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
-        sceneChangeAct?.Invoke();
-    }
-
-    public void GoToStage1ItemRoom()
-    {
-        savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage1ItemRoom"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
-        sceneChangeAct?.Invoke();
-    }
-
+    
     public void GoToStage1Boss()
     {
         savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage1Boss"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
+        nextSceneName = "Stage1_Boss"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();
     }
     #endregion
@@ -113,33 +112,19 @@ public class SceneChanger : MonoBehaviour
         sceneChangeAct?.Invoke();
     }
 
-    /*public void GoToStage2Village()
+    public void GoToStage2Boss()
     {
         savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage2Village"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
-        sceneChangeAct?.Invoke();
-    }
-    public void GoToStage2GimicRoom()
-    {
-        savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage2GimicRoom"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
+        nextSceneName = "Stage2_Boss"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();
     }
 
-    public void GoToStage2ItemRoom()
+    public void GoToStage2_5()
     {
         savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage2ItemRoom"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
+        nextSceneName = "Stage2.5"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();
     }
-
-    public void GoToStage2MiddleBoss()
-    {
-        savePlayerProfileAct?.Invoke();
-        nextSceneName = "Stage2MiddleBoss"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
-        sceneChangeAct?.Invoke();
-    }
-*/
 
     public void GoToLastBoss()
     {

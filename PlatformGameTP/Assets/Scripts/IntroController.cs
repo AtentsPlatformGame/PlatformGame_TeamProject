@@ -131,5 +131,7 @@ public class IntroController : MonoBehaviour
             text7.text += dialog7[i];
             yield return new WaitForSeconds(0.2f);
         }
+        yield return new WaitForSeconds(1.5f);
+        if(SceneChanger.instance != null) SceneChanger.instance.GoToTutorialStage();
     }
 }
