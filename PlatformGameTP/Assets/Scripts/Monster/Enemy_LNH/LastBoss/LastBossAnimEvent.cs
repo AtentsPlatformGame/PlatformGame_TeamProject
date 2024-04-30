@@ -17,6 +17,7 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public UnityEvent fadeOutAct;
     public UnityEvent patternOnAct;
     public UnityEvent patternOffAct;
+    public UnityEvent playerMoveFalseAct;
     public void OnClawAttack()
     {
         clawOnAttackAct?.Invoke();
@@ -69,6 +70,12 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public void OnPatternOn()
     {
         patternOnAct?.Invoke();
+    }
+
+    public void OnClearAct()
+    {
+        playerMoveFalseAct?.Invoke();
+        if (SceneChanger.instance != null) SceneChanger.instance.GoToOuttro();
     }
     
 }
