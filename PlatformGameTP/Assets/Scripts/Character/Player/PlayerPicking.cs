@@ -18,7 +18,11 @@ public class PlayerPicking : MonoBehaviour
     public UnityEvent<bool> spellReadyAct; // 스펠 사용 준비 
     public UnityEvent<Vector3> useSpellAct; // 스펠 사용
     public UnityEvent useBuffSpellAct;
+    public AudioSource spellAudioSource;
     PlayerController playerController;
+    public AudioClip attackspellClip;
+    public AudioClip buffspellClip;
+    public AudioClip canclespellClip;
 
     Vector3 pos;
     Ray ray;
@@ -59,10 +63,22 @@ public class PlayerPicking : MonoBehaviour
                 if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때
                 {
                     SpellObjectEnabled(attackSpellPointImg, spellRangeImg, true);
+                    if (spellAudioSource != null)
+                    {
+                        spellAudioSource.clip = attackspellClip;
+                        spellAudioSource.PlayOneShot(attackspellClip);
+                    }
+                    if (spellAudioSource.isPlaying) Debug.Log("공격주문 시전 효과음 재생");
                 }
                 else // 사용하고자하는 스펠이 Buff일 때
                 {
                     SpellObjectEnabled(buffSpellPoinImg, spellRangeImg, true);
+                    if (spellAudioSource != null)
+                    {
+                        spellAudioSource.clip = buffspellClip;
+                        spellAudioSource.PlayOneShot(buffspellClip);
+                    }
+                    if (spellAudioSource.isPlaying) Debug.Log("버프시전 효과음 재생");
                 }
                 
             }
@@ -77,6 +93,7 @@ public class PlayerPicking : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0)) // 스펠 사용
             {
+
                 Debug.Log("스펠 사용");
                 //SpellCanvasEnabled(false);
                 //playerController.ResetSpellTrigger();
@@ -98,6 +115,12 @@ public class PlayerPicking : MonoBehaviour
             {
                 Debug.Log("스펠 사용 취소");
                 spellReadyAct?.Invoke(false);
+                if (spellAudioSource != null)
+                {
+                    spellAudioSource.clip = canclespellClip;
+                    spellAudioSource.PlayOneShot(canclespellClip);
+                }
+                if (spellAudioSource.isPlaying) Debug.Log("주문취소 효과음 재생");
                 //SpellCanvasEnabled(false);
                 //SpellObjectEnabled(spellPointImg, spellRangeImg, false);
                 if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때

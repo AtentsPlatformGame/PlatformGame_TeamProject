@@ -15,6 +15,11 @@ public class Inventory :ItemProperty
     public bool checkInventory;
     public bool checkOptions;
     public bool CheckItemBox;
+    public AudioSource myInventory;
+    public AudioClip startInventory;
+    public AudioClip closeInventory;
+    public AudioClip startOption;
+    public AudioClip closeOption;
 
     // Start is called before the first frame update
     void Start()
@@ -48,12 +53,24 @@ public class Inventory :ItemProperty
             {
                 PopUp(MyInventory);
                 checkInventory= true;
+                if (myInventory != null)
+                {
+                    myInventory.clip = startInventory;
+                    myInventory.PlayOneShot(startInventory);
+                }
+                if (myInventory.isPlaying) Debug.Log("인벤토리 열기");
             }
             else
             {
                 PopDown(MyInventory);
                 checkInventory= false;
                 MyExplanation.gameObject.SetActive(false);
+                if (myInventory != null)
+                {
+                    myInventory.clip = closeInventory;
+                    myInventory.PlayOneShot(closeInventory);
+                }
+                if (myInventory.isPlaying) Debug.Log("인벤토리 닫기");
             }
         }
 
@@ -63,11 +80,23 @@ public class Inventory :ItemProperty
             {
                 PopUp(MyOptions);
                 checkOptions= true;
+                if (myInventory != null)
+                {
+                    myInventory.clip = startOption;
+                    myInventory.PlayOneShot(startOption);
+                }
+                if (myInventory.isPlaying) Debug.Log("옵션 열기");
             }
             else
             {
                 PopDown(MyOptions);
                 checkOptions= false;
+                if (myInventory != null)
+                {
+                    myInventory.clip = closeOption;
+                    myInventory.PlayOneShot(closeOption);
+                }
+                if (myInventory.isPlaying) Debug.Log("인벤토리 닫기");
             }
         }
 

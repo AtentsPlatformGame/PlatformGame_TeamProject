@@ -1,3 +1,4 @@
+using InventorySystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,9 +25,6 @@ public class PlayerController : BattleSystem
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
     public GameObject DeathIMG;
-    public AudioClip jumpClip;
-    public AudioClip healbuffClip;
-    public AudioClip spellClip;
 
     public bool isSpellReady = false;
     public bool is3d = true;
@@ -269,12 +267,12 @@ public class PlayerController : BattleSystem
             if (myAudioSource != null)
             {
                 myAudioSource.clip = jumpClip;
-                myAudioSource.Play();
+                myAudioSource.PlayOneShot(jumpClip);
             }
             jumpCoolTime = 0.0f;
             Jump();
             myAnim.SetTrigger("Jumping");
-            if (myAudioSource.isPlaying) Debug.Log("점프 효과음 재생");
+            if (myAudioSource.isPlaying) Debug.Log("점프 효과음");
         }
     }
 
@@ -398,6 +396,12 @@ public class PlayerController : BattleSystem
         // 애니메이션 이벤트
         // 파이어볼(?)이 생성되어 앞으로 발사되는 함수
         // 불꽃 발사 사운드 Loop, Play on Awake 꺼야됨
+        if (myAudioSource != null)
+        {
+            myAudioSource.clip = fireballClip;
+            myAudioSource.PlayOneShot(fireballClip);
+            if (myAudioSource.isPlaying) Debug.Log("파이어볼 효과음");
+        }
         GameObject obj = Instantiate(orgFireball, rightAttackPoint);
         obj.transform.SetParent(null);
         obj.GetComponent<Fireball>().SetFireBallAP(GetAp()); // 파이어볼 공격력 설정
@@ -460,8 +464,8 @@ public class PlayerController : BattleSystem
             if (myAudioSource != null)
             {
                 myAudioSource.clip = spellClip;
-                myAudioSource.Play();
-                if (myAudioSource.isPlaying) Debug.Log("스펠 효과음 재생");
+                myAudioSource.PlayOneShot(spellClip);
+                if (myAudioSource.isPlaying) Debug.Log("공격주문 효과음");
             }
             myAnim.SetTrigger("UseSpell");
             if (spellObject.gameObject.tag == "AttackSpell")
@@ -500,12 +504,12 @@ public class PlayerController : BattleSystem
             this.curHP = this.battleStat.MaxHp;
         }
         PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
-        Debug.Log("힐 스펠 사용");
+        Debug.Log("치료 주문");
         //힐 사운드, Loop Play on Awake 꺼야됨
         if (myAudioSource != null)
         {
             myAudioSource.clip = healbuffClip;
-            myAudioSource.Play();
+            myAudioSource.PlayOneShot(healbuffClip);
         }
     }
 
@@ -525,6 +529,12 @@ public class PlayerController : BattleSystem
     public void SpeedBuff()
     {
         StartCoroutine(SpeedBuffActing());
+        if (myAudioSource != null)
+        {
+            myAudioSource.clip = speedbuffClip;
+            myAudioSource.PlayOneShot(speedbuffClip);
+        }
+        if (myAudioSource.isPlaying) Debug.Log("스피드 버프 효과음");
         // 스피드 버프 사운드 Loop Play on Awake 꺼야됨
     }
     IEnumerator SpeedBuffActing()
@@ -619,11 +629,23 @@ public class PlayerController : BattleSystem
                 // 체력이 다 해 쓰러짐
                 OnDead();
                 myAnim.SetTrigger("Dead");
+                if (myAudioSource != null)
+                {
+                    myAudioSource.clip = deadClip;
+                    myAudioSource.PlayOneShot(deadClip);
+                }
+                if (myAudioSource.isPlaying) Debug.Log("으앙주금");
             }
         }
         else
         {
             myAnim.SetTrigger("Damage");
+            if (myAudioSource != null)
+            {
+                myAudioSource.clip = hitClip;
+                myAudioSource.PlayOneShot(hitClip);
+            }
+            if (myAudioSource.isPlaying) Debug.Log("아야");
         }
         Debug.Log($"플레이어 맞음, 현재 체력 {this.curHP}");
     }

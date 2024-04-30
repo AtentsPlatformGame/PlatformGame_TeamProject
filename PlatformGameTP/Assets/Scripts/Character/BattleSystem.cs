@@ -1,3 +1,4 @@
+using InventorySystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,8 +52,13 @@ public class BattleSystem : CharacterProperty, IDamage
     
     public Transform attackPoint;
     public LayerMask enemyMask;
-    public AudioClip attackSound;
-    public AudioClip damageSound;
+    public AudioClip fireballClip;
+    public AudioClip jumpClip;
+    public AudioClip healbuffClip;
+    public AudioClip spellClip;
+    public AudioClip speedbuffClip;
+    public AudioClip deadClip;
+    public AudioClip hitClip;
     //public AudioSource jumpSound;
 
     protected float curHp; // 수정부분 protected float curHp = 0.0f
@@ -208,9 +214,6 @@ public class BattleSystem : CharacterProperty, IDamage
 
     public void OnAttack()
     {
-        myAudioSource.clip = attackSound;
-        myAudioSource.Play();
-        //AudioSource.PlayClipAtPoint(attackSound, transform.position);
         if (myTarget == null) return;
         BattleSystem bs = myTarget.GetComponent<BattleSystem>();
         if (bs != null)

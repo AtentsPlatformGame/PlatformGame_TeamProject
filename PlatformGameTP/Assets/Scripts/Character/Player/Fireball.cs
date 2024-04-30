@@ -83,9 +83,9 @@ public class Fireball : MonoBehaviour
             var collisionPoint = other.ClosestPoint(transform.position);
             Debug.Log("파이어볼 collision 엔터");
             isHit = true;
-
             Instantiate(explosionVFX, collisionPoint, Quaternion.identity);
             Destroy(gameObject);
+
             BattleSystem bs = other.transform.GetComponent<BattleSystem>();
             if (bs != null)
             {
