@@ -19,6 +19,8 @@ public class Fireball : MonoBehaviour
     PlayerController player;
     Vector3 oldPos;
     Vector3 spawnPos;
+    public AudioSource explosion;
+    public AudioClip explosionClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -84,9 +86,10 @@ public class Fireball : MonoBehaviour
             Debug.Log("파이어볼 collision 엔터");
             isHit = true;
             Instantiate(explosionVFX, collisionPoint, Quaternion.identity);
+
             Destroy(gameObject);
 
-            BattleSystem bs = other.transform.GetComponent<BattleSystem>();
+        BattleSystem bs = other.transform.GetComponent<BattleSystem>();
             if (bs != null)
             {
                 //float dmg = getApAct?.Invoke();
@@ -100,6 +103,7 @@ public class Fireball : MonoBehaviour
                         {
                             player.HealWithConsume();
                         }
+
                     }
                 }
             }
