@@ -50,8 +50,11 @@ public class SoundManager : MonoBehaviour
         GameObject go = new GameObject(sfxName + "Sound");
         AudioSource audiosource = go.AddComponent<AudioSource>();
         audiosource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        audiosource.clip = clip;
-        audiosource.Play();
+        if(audiosource != null)
+        {
+            audiosource.clip = clip;
+            audiosource.Play();
+        }
 
         Destroy(go, clip.length);
     }
@@ -59,9 +62,12 @@ public class SoundManager : MonoBehaviour
     public void BgSoundPlay(AudioClip clip)
     {
         bgSound.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        bgSound.clip = clip;
-        bgSound.loop = true;
-        bgSound.Play();
+        if (bgSound != null)
+        {
+            bgSound.clip = clip;
+            bgSound.loop = true;
+            bgSound.Play();
+        }
     }
 
 
