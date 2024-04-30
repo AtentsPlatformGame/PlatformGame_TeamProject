@@ -43,6 +43,10 @@ public class LightsIntensityController : MonoBehaviour
 
 
             }
+            else if(this.gameObject.tag == "UnderGround")
+            {
+                StartDecreaseLights();
+            }
         }
     }
 
