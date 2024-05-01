@@ -79,7 +79,12 @@ public class OpenItemBox : Inventory
         RandomShow();
         ItemPopup.SetActive(false) ;
         Destroy(ItemPopup);
-      
+        if (myInventory != null)
+        {
+            myInventory.clip = startInventory;
+            myInventory.PlayOneShot(startInventory);
+        }
+        if (myInventory.isPlaying) Debug.Log("상자 열기");
     }
 
     public void RandomShow()
