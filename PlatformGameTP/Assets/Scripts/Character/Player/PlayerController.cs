@@ -574,7 +574,7 @@ public class PlayerController : BattleSystem
         }
 
         //Initialize();
-        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+       PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
         Debug.Log(this.battleStat.AP + " 공격력 변화 일어남");
         
         //NotifyStatsChanged();
@@ -614,7 +614,7 @@ public class PlayerController : BattleSystem
         {
             curHP -= _dmg;
         }
-        //HPbar.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
 
         if (curHP <= 0.0f)
         {
@@ -644,6 +644,7 @@ public class PlayerController : BattleSystem
             {
                 myAudioSource.clip = hitClip;
                 myAudioSource.PlayOneShot(hitClip);
+                
             }
             if (myAudioSource.isPlaying) Debug.Log("아야");
         }

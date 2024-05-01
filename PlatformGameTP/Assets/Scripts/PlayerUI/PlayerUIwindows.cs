@@ -11,6 +11,7 @@ public class PlayerUIwindows : MonoBehaviour
 
     public TextMeshProUGUI APstat;
     public TextMeshProUGUI MoveSpdstat;
+    public TextMeshProUGUI HpStat;
 
     public Transform player;
     PlayerController pc;
@@ -50,9 +51,12 @@ public class PlayerUIwindows : MonoBehaviour
         {
             float ap = pc.GetAp();
             float spd = pc.GetMoveSpeed();
+            float hp = pc.GetCurHP();
 
             APstat.text = ap.ToString();
             MoveSpdstat.text = spd.ToString();
+            HpStat.text = hp.ToString();
+            
         }
     }
 
