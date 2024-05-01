@@ -43,10 +43,22 @@ public class ShopNPC : Inventory
             if(isShop)
             {
                 CloseShop();
+                if (myInventory != null)
+                {
+                    myInventory.clip = closeInventory;
+                    myInventory.PlayOneShot(closeInventory);
+                }
+                if (myInventory.isPlaying) Debug.Log("상점 닫기");
             }
             else
             {
                 OpenShop();
+                if (myInventory != null)
+                {
+                    myInventory.clip = startInventory;
+                    myInventory.PlayOneShot(startInventory);
+                }
+                if (myInventory.isPlaying) Debug.Log("상점 열기");
             }
         }
     }
@@ -58,6 +70,7 @@ public class ShopNPC : Inventory
         //MyInventory.transform.Translate(new Vector3(250,0,0));
         GKeyPopup.SetActive(false);
         isShop = true;
+
     }
     void CloseShop()
     {

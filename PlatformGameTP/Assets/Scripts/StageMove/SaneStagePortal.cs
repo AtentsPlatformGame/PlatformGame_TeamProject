@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using InventorySystem;
 
 public class SaneStagePortal : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class SaneStagePortal : MonoBehaviour
     float F_time = 1;
     GameObject obj;
     PlayerController player;
+    [Header("Æ÷Å»ÀÌµ¿ »ç¿îµå")]
+    public AudioSource teleportSource;
+    public AudioClip teleportClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +57,12 @@ public class SaneStagePortal : MonoBehaviour
 
                 Debug.Log("È°¼ºÈ­");
                 Fade();
-
+                if (teleportSource != null)
+                {
+                    teleportSource.clip = teleportClip ;
+                    teleportSource.PlayOneShot(teleportClip);
+                }
+                if (teleportSource.isPlaying) Debug.Log("Æ÷Å» ½´½µ");
             }
         }
    

@@ -24,7 +24,10 @@ public class Fireball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        explosion = GetComponent<AudioSource>();
 
+        // 사운드 클립 지정
+        explosion.clip = explosionClip;
     }
 
     private void OnEnable()
@@ -86,10 +89,16 @@ public class Fireball : MonoBehaviour
             Debug.Log("파이어볼 collision 엔터");
             isHit = true;
             Instantiate(explosionVFX, collisionPoint, Quaternion.identity);
-
+            if (explosion != null)
+            {
+                explosion.clip = explosionClip;
+                explosion.PlayOneShot(explosionClip);
+            }
+            if (explosion.isPlaying) Debug.Log("파어어볼 착탄");
             Destroy(gameObject);
+            
 
-        BattleSystem bs = other.transform.GetComponent<BattleSystem>();
+            BattleSystem bs = other.transform.GetComponent<BattleSystem>();
             if (bs != null)
             {
                 //float dmg = getApAct?.Invoke();

@@ -68,7 +68,7 @@ public class PlayerPicking : MonoBehaviour
                         spellAudioSource.clip = attackspellClip;
                         spellAudioSource.PlayOneShot(attackspellClip);
                     }
-                    if (spellAudioSource.isPlaying) Debug.Log("공격주문 시전 효과음 재생");
+                    if (spellAudioSource.isPlaying) Debug.Log("공격주문 시전 효과음 ");
                 }
                 else // 사용하고자하는 스펠이 Buff일 때
                 {
@@ -78,7 +78,7 @@ public class PlayerPicking : MonoBehaviour
                         spellAudioSource.clip = buffspellClip;
                         spellAudioSource.PlayOneShot(buffspellClip);
                     }
-                    if (spellAudioSource.isPlaying) Debug.Log("버프시전 효과음 재생");
+                    if (spellAudioSource.isPlaying) Debug.Log("버프시전 효과음");
                 }
                 
             }
@@ -120,7 +120,7 @@ public class PlayerPicking : MonoBehaviour
                     spellAudioSource.clip = canclespellClip;
                     spellAudioSource.PlayOneShot(canclespellClip);
                 }
-                if (spellAudioSource.isPlaying) Debug.Log("주문취소 효과음 재생");
+                if (spellAudioSource.isPlaying) Debug.Log("스펠 취소");
                 //SpellCanvasEnabled(false);
                 //SpellObjectEnabled(spellPointImg, spellRangeImg, false);
                 if (playerController.GetCurrentSpell().gameObject.tag == "AttackSpell") // 사용하고자하는 스펠이 Attack일 때

@@ -52,6 +52,7 @@ public class BattleSystem : CharacterProperty, IDamage
     
     public Transform attackPoint;
     public LayerMask enemyMask;
+    [Header("플레이어 공격 사운드")]
     public AudioClip fireballClip;
     public AudioClip jumpClip;
     public AudioClip healbuffClip;

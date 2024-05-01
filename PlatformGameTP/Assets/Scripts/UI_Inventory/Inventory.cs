@@ -15,6 +15,7 @@ public class Inventory :ItemProperty
     public bool checkInventory;
     public bool checkOptions;
     public bool CheckItemBox;
+    [Header("플레이어 창 사운드")]
     public AudioSource myInventory;
     public AudioClip startInventory;
     public AudioClip closeInventory;
@@ -96,7 +97,7 @@ public class Inventory :ItemProperty
                     myInventory.clip = closeOption;
                     myInventory.PlayOneShot(closeOption);
                 }
-                if (myInventory.isPlaying) Debug.Log("인벤토리 닫기");
+                if (myInventory.isPlaying) Debug.Log("옵션 닫기");
             }
         }
 
