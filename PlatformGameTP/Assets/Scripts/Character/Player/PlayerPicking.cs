@@ -161,11 +161,13 @@ public class PlayerPicking : MonoBehaviour
         // 2D¿œ∂ß
         if (playerController.GetControllType())
         {
-            _spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
+            // _spellPointImg.transform.position = new Vector3(0, newHitPoint.y + 0.1f, newHitPoint.z);
+            _spellPointImg.transform.position = new Vector3(0, playerController.gameObject.transform.position.y + 0.1f, newHitPoint.z);
         }
         else
         {
-            _spellPointImg.transform.position = new Vector3(newHitPoint.x, newHitPoint.y + 0.1f, newHitPoint.z);
+            //_spellPointImg.transform.position = new Vector3(newHitPoint.x, newHitPoint.y + 0.1f, newHitPoint.z);
+            _spellPointImg.transform.position = new Vector3(newHitPoint.x, playerController.gameObject.transform.position.y + 0.1f, newHitPoint.z);
         }
         
     }

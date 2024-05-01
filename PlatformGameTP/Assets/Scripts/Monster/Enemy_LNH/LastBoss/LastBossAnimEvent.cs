@@ -18,6 +18,7 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public UnityEvent patternOnAct;
     public UnityEvent patternOffAct;
     public UnityEvent playerMoveFalseAct;
+    public Transform bossPortal;
     public void OnClawAttack()
     {
         clawOnAttackAct?.Invoke();
@@ -50,6 +51,7 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public void ChangeToPhase2()
     {
         phase2Act?.Invoke();
+        bossPortal.gameObject.SetActive(false);
     }
 
     public void OnSpecialAttack()

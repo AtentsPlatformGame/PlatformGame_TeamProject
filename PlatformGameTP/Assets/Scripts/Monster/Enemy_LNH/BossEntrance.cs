@@ -12,6 +12,7 @@ public class BossEntrance : MonoBehaviour
     [SerializeField, Header("플레이어")] Transform player;
     [SerializeField, Header("플레이어 텔레포트 시키기")] Transform warpPoint;
     [SerializeField, Header("1관 보스")] Transform boss1;
+    [SerializeField, Header("보스 좌우 이동 포탈")] Transform bossPortal;
 
     [Header("플레이어 움직임 제한하는 함수")] public UnityEvent playerMoveFalse;
     [Header("플레이어 움직이게 하는 함수")] public UnityEvent playerMoveTrue;
@@ -61,6 +62,7 @@ public class BossEntrance : MonoBehaviour
         playerMoveTrue?.Invoke();
         player.position = warpPoint.position;
         boss1.gameObject.SetActive(true);
+        bossPortal.gameObject.SetActive(true);
         entranceObject.gameObject.SetActive(false);
     }
 
@@ -69,4 +71,6 @@ public class BossEntrance : MonoBehaviour
         playerMoveTrue?.Invoke();
         entranceCanvas.gameObject.SetActive(false);
     }
+
+    
 }

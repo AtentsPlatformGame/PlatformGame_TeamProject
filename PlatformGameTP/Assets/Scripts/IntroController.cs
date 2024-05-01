@@ -61,7 +61,13 @@ public class IntroController : MonoBehaviour
         {
             
             StartCoroutine(Typing1());
-        }   
+        }
+
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            StopAllCoroutines();
+            if (SceneChanger.instance != null) SceneChanger.instance.GoToTutorialStage();
+        }
     }
     IEnumerator Typing1()
     {
