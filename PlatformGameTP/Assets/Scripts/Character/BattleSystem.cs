@@ -67,6 +67,8 @@ public class BattleSystem : CharacterProperty, IDamage
     Transform _target = null;
 
     public AudioSource myAudioSource;
+    public AudioClip deadsound;
+    public AudioClip hitsound;
     Slider volumeSlider;
     private void Start()
     {
@@ -186,9 +188,9 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         curHP -= _dmg;
         Debug.Log(curHP);
+        PlaySound(hitsound);
         if (curHP <= 0.0f)
         {
-
             // 체력이 다 해 쓰러짐
             OnDead();
             myAnim.SetTrigger("Dead");
@@ -227,9 +229,8 @@ public class BattleSystem : CharacterProperty, IDamage
 
     protected virtual void OnDead()
     {
-
+        PlaySound(deadsound);
         deathAlarm?.Invoke();
-
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().useGravity = false;
     }
@@ -250,6 +251,15 @@ public class BattleSystem : CharacterProperty, IDamage
         volumeSlider = _slider;
         Debug.Log("효과음 슬라이더 세팅");
         volumeSlider.onValueChanged.AddListener(SetAudioSourceVolume);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        if (myAudioSource != null)
+        {
+            myAudioSource.clip = clip;
+            myAudioSource.Play();
+        }
     }
 
 }

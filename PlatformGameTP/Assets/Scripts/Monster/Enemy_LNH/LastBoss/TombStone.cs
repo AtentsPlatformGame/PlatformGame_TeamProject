@@ -27,7 +27,9 @@ public class TombStone : MonoBehaviour
     public float spawnSpeed = 20.0f;
 
     BoxCollider myCollider;
-    
+    public AudioClip Sound;
+    public AudioSource myAudioSource;
+
     float playTime = 0.0f;
     bool clearGimmic = false;
     
@@ -172,4 +174,14 @@ public class TombStone : MonoBehaviour
     {
         this.playTime = patternTime;
     }
+
+    public void zeoliteSound(AudioClip clip)
+    {
+        if (myAudioSource != null)
+        {
+            myAudioSource.clip = clip;
+            myAudioSource.Play();
+        }
+    }
+
 }

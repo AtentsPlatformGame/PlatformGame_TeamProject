@@ -69,7 +69,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4930616593686768761
 Transform:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6902083491665527557
 Transform:
   m_ObjectHideFlags: 0
@@ -550,7 +550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1546585778084996650
 RectTransform:
   m_ObjectHideFlags: 0
@@ -832,7 +832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1919637191297634487
 Transform:
   m_ObjectHideFlags: 0
@@ -1372,7 +1372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4363558891234162532
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1665,6 +1665,7 @@ GameObject:
   - component: {fileID: 8453240615433321879}
   - component: {fileID: 4657859654106508630}
   - component: {fileID: 6515931676999750025}
+  - component: {fileID: 39001288265824052}
   m_Layer: 19
   m_Name: NagaWizard
   m_TagString: Untagged
@@ -1770,13 +1771,25 @@ MonoBehaviour:
     HealAfterAttack: 0
     ResurrectionOneTime: 0
     HitOnlyHalf: 0
+    CA_AttackPenalty: 0
+    CA_GoldPenalty: 0
+    CA_HPPenalty: 0
+    StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 3168086429459389703}
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  attackSound: {fileID: 0}
-  damageSound: {fileID: 0}
+  fireballClip: {fileID: 0}
+  jumpClip: {fileID: 0}
+  healbuffClip: {fileID: 0}
+  spellClip: {fileID: 0}
+  speedbuffClip: {fileID: 0}
+  deadClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  myAudioSource: {fileID: 39001288265824052}
+  deadsound: {fileID: 8300000, guid: 0a299469bcb94184e97282f26fa13fc5, type: 3}
+  hitsound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
   moveSpeed: 2
   rotSpeed: 360
   myState: 0
@@ -1809,10 +1822,115 @@ MonoBehaviour:
   SafeArea1: {fileID: 6934042471931531891}
   NagaToken: {fileID: 7829043428619059752}
   NagaClearText: {fileID: 4618658968913075483}
+  meteorSound: {fileID: 8300000, guid: fbc18e37c16668f47add0b3ec9b8455c, type: 3}
+  gunSound: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
+  wavesSound: {fileID: 8300000, guid: 504c339d6f3184948bdd763652091f51, type: 3}
+  tsunamiSound: {fileID: 8300000, guid: 5ad69b0f2cf491c46b194abeca2cbdb8, type: 3}
+  roarSound: {fileID: 8300000, guid: 05cb93d173d90574cbf8df4aa7b02e80, type: 3}
+  warningSound: {fileID: 8300000, guid: 4c4d88be681695042bf00e8e51c57e42, type: 3}
+  hitSound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
+  deadSound: {fileID: 8300000, guid: 0a299469bcb94184e97282f26fa13fc5, type: 3}
+  bgSound: {fileID: 8300000, guid: abb8d6c6a1c4f264aa99da7b093bc3cf, type: 3}
   PhaseCount: 0
   GreetingBoss: {fileID: 4140676382403743367}
   isPhaseChanged: 0
   SpecialPatternPos: {x: 0, y: 0, z: 0}
+--- !u!82 &39001288265824052
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219059255566955894}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6416207141750731405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1994,7 +2112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2227851617659780934
 Transform:
   m_ObjectHideFlags: 0
@@ -2028,7 +2146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1709602571979584108
 Transform:
   m_ObjectHideFlags: 0
@@ -2215,7 +2333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3429482347015220443
 Transform:
   m_ObjectHideFlags: 0
@@ -2288,6 +2406,10 @@ PrefabInstance:
     - target: {fileID: 2243164680401615686, guid: 428718b3ea0f2d449a3c9cc6b9ac1165, type: 3}
       propertyPath: m_Name
       value: BeforePattern
+      objectReference: {fileID: 0}
+    - target: {fileID: 2243164680401615686, guid: 428718b3ea0f2d449a3c9cc6b9ac1165, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3732639621969572029, guid: 428718b3ea0f2d449a3c9cc6b9ac1165, type: 3}
       propertyPath: m_LocalScale.x
@@ -7220,6 +7342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reward
       objectReference: {fileID: 0}
+    - target: {fileID: 4597704493800800488, guid: 7ea03855f66225448b2ef989975a08f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6676127414771162527, guid: 7ea03855f66225448b2ef989975a08f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.26
@@ -8919,6 +9045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SubBossRewards
       objectReference: {fileID: 0}
+    - target: {fileID: 6401413456162211299, guid: 25f4d7a790a68fd45b811b891984e2b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9317,6 +9447,10 @@ PrefabInstance:
     - target: {fileID: 8756113763523672161, guid: e08861a89d455d940b0d5f6b43778387, type: 3}
       propertyPath: m_Name
       value: PatternFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756113763523672161, guid: e08861a89d455d940b0d5f6b43778387, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

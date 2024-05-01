@@ -1073,6 +1073,7 @@ GameObject:
   - component: {fileID: 6191996599970172884}
   - component: {fileID: 3396027001036738346}
   - component: {fileID: 2451784566855241257}
+  - component: {fileID: 5640239503336149943}
   m_Layer: 19
   m_Name: OrcMonster
   m_TagString: Untagged
@@ -1179,11 +1180,25 @@ MonoBehaviour:
     HealAfterAttack: 0
     ResurrectionOneTime: 0
     HitOnlyHalf: 0
+    CA_AttackPenalty: 0
+    CA_GoldPenalty: 0
+    CA_HPPenalty: 0
+    StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 897503279006782169}
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
+  fireballClip: {fileID: 0}
+  jumpClip: {fileID: 0}
+  healbuffClip: {fileID: 0}
+  spellClip: {fileID: 0}
+  speedbuffClip: {fileID: 0}
+  deadClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  myAudioSource: {fileID: 5640239503336149943}
+  deadsound: {fileID: 8300000, guid: 8bd7767237f96574fa6349314dd7f63a, type: 3}
+  hitsound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
   moveSpeed: 1
   rotSpeed: 360
   myState: 0
@@ -1226,6 +1241,110 @@ MonoBehaviour:
   phasecount: 0
   PatternDamage: 10
   PatternPos: {x: 0, y: 0, z: 0}
+  attack1Sound: {fileID: 8300000, guid: 8fb5f80858e2f7f488f0770020886147, type: 3}
+  attack3Sound: {fileID: 8300000, guid: c0d72c0cb1e59df4c83a611ea171f57e, type: 3}
+  stoneSound: {fileID: 8300000, guid: 013f966fb54b8784e856a380fd28a1e2, type: 3}
+  roarSound: {fileID: 8300000, guid: 855762a61e9a90048bb98512cbb62abc, type: 3}
+  knockdownSound: {fileID: 8300000, guid: 853841d1facb24a44b3d26fe451f5a69, type: 3}
+  hitSound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
+  deadSound: {fileID: 8300000, guid: 8bd7767237f96574fa6349314dd7f63a, type: 3}
+  bgSound: {fileID: 8300000, guid: 3ac17a27964e1ef44999252719ea34d3, type: 3}
+--- !u!82 &5640239503336149943
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8039980611728321347}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8432596408573746336
 GameObject:
   m_ObjectHideFlags: 0

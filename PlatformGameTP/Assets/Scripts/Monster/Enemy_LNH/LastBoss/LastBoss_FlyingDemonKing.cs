@@ -64,16 +64,19 @@ public class LastBoss_FlyingDemonKing : EnemyState
         {
             case State.Phase:
                 StopAllCoroutines();
+                
                 foreach (Renderer renderer in allRenderer)
                 {
                     Color tmpColor = new Color(0, 0, 0, 0);
                     renderer.material.color = tmpColor;
                 }
+                
                 rigid.useGravity = false;
                 bossCollider.enabled = false;
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
                 myAnim.SetTrigger("Spawn");
+                
                 // 비석을 소환함
                 // 비석을 소환하고 자기는 하늘 위로 올라간다.
                 // 시간 내로 비석 기믹을 클리어하지 못하면 피를 일정이상 회복하고 성공하면 다시 아래로 내려와 기절함
@@ -153,28 +156,32 @@ public class LastBoss_FlyingDemonKing : EnemyState
     #region 공격 판정
     public void OnClawAttack()
     {
+        PlaySound(clawSound);
         Collider[] list = Physics.OverlapSphere(clawAttackPoint.position, 4.5f, enemyMask);
-
+       
         foreach (Collider col in list)
         {
             IDamage act = col.GetComponent<IDamage>();
             if (act != null)
             {
                 act.TakeDamage(this.battleStat.AP);
+                
             }
         }
     }
 
     public void OnBiteAttack()
     {
+        
         Collider[] list = Physics.OverlapSphere(biteAttackPoint.position, 3.0f, enemyMask);
-
+       
         foreach (Collider col in list)
         {
             IDamage act = col.GetComponent<IDamage>();
             if (act != null)
             {
                 act.TakeDamage(this.battleStat.AP);
+                
             }
         }
     }
@@ -201,9 +208,9 @@ public class LastBoss_FlyingDemonKing : EnemyState
                 {
                     meteorCoolTime = 0.0f;
                     // 메테오 발사 트리거를 건다.
+                    PlaySound(roarSound);
                     myAnim.SetTrigger("SpecialAttack");
                 }
-
             }
             pattern = Random.Range(0,3);
             
@@ -280,9 +287,11 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         curHP -= _dmg;
         Debug.Log(curHP);
+        PlaySound(hitSound);
         if (curHP <= 0.0f)
         {
             // 체력이 다 해 쓰러짐
+            //PlaySound(deadSound);
             OnDead();
             myAnim.SetTrigger("Dead");
             clearPortal.gameObject.SetActive(true);
@@ -332,6 +341,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     #region 기본공격 이펙트 생성
     public void ClawAttackEffect()
     {
+        PlaySound(clawSound);
         Transform obj;
         obj = Instantiate(clawAttackEffect, clawAttackPoint.transform.position, Quaternion.Euler(-60.0f, transform.rotation.eulerAngles.y, -90.0f), null);
         obj.localScale = new Vector3(2, 2, 2);
@@ -339,6 +349,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
 
     public void BiteAttackEffect()
     {
+        PlaySound(biteSound);
         Transform obj;
         obj = Instantiate(biteAttackEffect, biteAttackPoint.transform.position, Quaternion.identity, null);
         obj.localScale = new Vector3(2, 2, 2);
@@ -346,6 +357,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
 
     public void FireBallAttackEffect()
     {
+        PlaySound(fireBallSound);
         Debug.Log(myTarget.transform.position);
         if (myTarget != null)
         {
@@ -366,6 +378,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         StartCoroutine(SpawningTombStone());
         Debug.Log("비석 소환 패턴 시작");
+        //포효를 하고, 비석 소환
     }
 
     IEnumerator SpawningTombStone()

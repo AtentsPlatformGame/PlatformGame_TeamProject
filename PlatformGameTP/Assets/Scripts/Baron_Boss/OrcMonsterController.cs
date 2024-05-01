@@ -119,6 +119,7 @@ public class OrcMonsterController : EnemyState
 
     public new void OnAttack()
     {
+        PlaySound(attack1Sound);
         Collider[] list = Physics.OverlapSphere(attackPoint.position, 3.0f, enemyMask);
         
         foreach (Collider col in list)
@@ -146,6 +147,7 @@ public class OrcMonsterController : EnemyState
 
             if (this.curHP <= (this.battleStat.MaxHp * 0.8) && phasecount == 0)
             {
+                PlaySound(stoneSound);
                 Debug.Log("µ¹¶³±¸±â");
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
@@ -177,6 +179,7 @@ public class OrcMonsterController : EnemyState
             }
             if (this.curHP <= (this.battleStat.MaxHp * 0.3) && phasecount == 2)
             {
+                PlaySound(knockdownSound);
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
                 WarningP.SetActive(true);
@@ -251,6 +254,7 @@ public class OrcMonsterController : EnemyState
 
     protected override void OnDead()
     {
+        PlaySound(deadsound);
         base.OnDead();
         dropGoldAct?.Invoke(dropGold);
         Orcreward.SetActive(true);

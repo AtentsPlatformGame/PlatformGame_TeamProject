@@ -40,6 +40,7 @@ public class DemonWarriorController : EnemyState
                 myAnim.SetBool("IsRoaming", false);
                 myAnim.SetBool("IsRunning", false);
                 myAnim.SetTrigger("Spawn");
+                PlaySound(roarSound);
                 StartCoroutine(SpawnSkeleton(spawnPoint));
                 break;
             default:
@@ -89,6 +90,7 @@ public class DemonWarriorController : EnemyState
     #region 공격판정, 이펙트
     public new void OnAttack()
     {
+        PlaySound(swingSound);
         Collider[] list = Physics.OverlapSphere(attackPoint.position, 5.0f, enemyMask);
 
         foreach (Collider col in list)
@@ -155,6 +157,7 @@ public class DemonWarriorController : EnemyState
         Transform vtEff;
         vtEff = Instantiate(virticalAttackEffect, slashPoint.transform.position, Quaternion.Euler(-60.0f, transform.rotation.eulerAngles.y, -90.0f), null);
         vtEff.localScale = new Vector3(2f, 2f, 2f);
+        //칼로베기
     }
 
     public void HorizontalAttackEffect()
@@ -170,6 +173,7 @@ public class DemonWarriorController : EnemyState
 
     public override void TakeDamage(float _dmg)
     {
+        PlaySound(hitSound);
         base.TakeDamage(_dmg);
         bossHpSlider.value = this.curHP / this.battleStat.MaxHp;
 

@@ -161,20 +161,23 @@ public class NagaWizard : EnemyState
                     Debug.Log("특수패턴 발동");
 
                     this.transform.position = SpecialPatternPos;
-
+                    
                     myAnim.SetTrigger("SpecialPattern");
+                    PlaySound(warningSound);
+                    PlaySound(roarSound);
                     WarningSign.SetActive(true);
                     BeforeTsunami.SetActive(true);
-
                     yield return new WaitForSeconds(5.0f);
                     BeforeTsunami.SetActive(false);
                     WarningSign.SetActive(false);
+                    PlaySound(tsunamiSound);
                     TsunamiLeft.SetActive(true);
                     TsunamiRight.SetActive(true);
                     yield return new WaitForSeconds(2.0f);
 
                     TsunamiLeft.SetActive(false);
                     TsunamiRight.SetActive(false);
+                    
                     PhaseCount = 1;
                 }
                 if (this.curHP < this.battleStat.MaxHp * 0.5 && PhaseCount == 1)
@@ -182,16 +185,20 @@ public class NagaWizard : EnemyState
                     this.transform.position = SpecialPatternPos;
                     myAnim.SetTrigger("SpecialPattern");
                     Debug.Log("특수패턴 발동");
+                    PlaySound(warningSound);
+                    PlaySound(roarSound);
                     TidalWaveWarning.SetActive(true);
                     SafeArea1.SetActive(true);
 
                     yield return new WaitForSeconds(3.0f);
                     TidalWaveWarning.SetActive(false);
+                    PlaySound(wavesSound);
                     TidalWave.SetActive(true);
                     yield return new WaitForSeconds(5.0f);
 
                     SafeArea1.SetActive(false);
                     TidalWave.SetActive(false);
+                    myAudioSource.Stop();
                     PhaseCount = 2;
                 }
                 if (this.curHP < this.battleStat.MaxHp * 0.3 && PhaseCount == 2)
@@ -201,12 +208,15 @@ public class NagaWizard : EnemyState
                     this.transform.position = SpecialPatternPos;
 
                     myAnim.SetTrigger("SpecialPattern");
+                    PlaySound(warningSound);
+                    PlaySound(roarSound);
                     WarningSign.SetActive(true);
                     BeforeTsunami.SetActive(true);
 
                     yield return new WaitForSeconds(5.0f);
                     BeforeTsunami.SetActive(false);
                     WarningSign.SetActive(false);
+                    PlaySound(tsunamiSound);
                     TsunamiLeft.SetActive(true);
                     TsunamiRight.SetActive(true);
                     yield return new WaitForSeconds(2.0f);
@@ -229,7 +239,7 @@ public class NagaWizard : EnemyState
                     {
                         Debug.Log("일반1번");
                         myAnim.SetTrigger("Attack1");
-
+                        PlaySound(meteorSound);
                     }
                     else if(pattern == 3)
                     {
@@ -239,6 +249,7 @@ public class NagaWizard : EnemyState
                     {
                         Debug.Log("일반2번");
                         myAnim.SetTrigger("Attack2");
+                        PlaySound(gunSound);
                     }
 
                 }

@@ -1743,6 +1743,7 @@ GameObject:
   - component: {fileID: 5798969003851382007}
   - component: {fileID: 3926119959046698767}
   - component: {fileID: 2371970045532133022}
+  - component: {fileID: 531485845423857762}
   m_Layer: 0
   m_Name: OutlinePerception
   m_TagString: Untagged
@@ -1782,9 +1783,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 6
+  m_Radius: 9
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2371970045532133022
 MonoBehaviour:
@@ -1820,6 +1821,27 @@ MonoBehaviour:
   lostEnemyAct:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &531485845423857762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204044312215289387}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 14, y: 10, z: 28}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &4242323651362466069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2466,10 +2488,38 @@ MonoBehaviour:
         m_CallState: 2
   patternOnAct:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PatternCanvas, Assembly-CSharp
+        m_MethodName: TurnOnBoss2Pattern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   patternOffAct:
     m_PersistentCalls:
       m_Calls: []
+  playerMoveFalseAct:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: MoveFalse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  bossPortal: {fileID: 0}
 --- !u!1 &5355912946347102339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2683,6 +2733,7 @@ GameObject:
   - component: {fileID: 6495971699412623047}
   - component: {fileID: 1855387807969951256}
   - component: {fileID: 7382522325650344479}
+  - component: {fileID: 43543968721071101}
   m_Layer: 0
   m_Name: InlinePerception
   m_TagString: Untagged
@@ -2722,9 +2773,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 7
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7382522325650344479
 MonoBehaviour:
@@ -2772,6 +2823,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &43543968721071101
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564004588449761089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 14, y: 5, z: 24}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &5609169329698556832
 GameObject:
   m_ObjectHideFlags: 0
@@ -3512,15 +3584,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418176755422317696}
+  - component: {fileID: 4037025311336793047}
   - component: {fileID: 1874383207167482772}
   - component: {fileID: 3476560796981930923}
+  - component: {fileID: 110534793195614265}
   m_Layer: 19
   m_Name: FylingDemonKing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &418176755422317696
 Transform:
   m_ObjectHideFlags: 0
@@ -3531,7 +3605,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: -15.5}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2899682528373358138}
@@ -3542,6 +3616,27 @@ Transform:
   - {fileID: 8491129120046416783}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4037025311336793047
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845668504784936927}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!54 &1874383207167482772
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3587,17 +3682,36 @@ MonoBehaviour:
   battleStat:
     AP: 1
     MaxHp: 10
-    AttackRange: 10
+    AttackRange: 12
     AttackDelay: 3
     ProjectileSpeed: 0
-    MoveSpeed: 5
+    MoveSpeed: 15
+    AttackSize: 0
+    AttackTwice: 0
+    HealAfterAttack: 0
+    ResurrectionOneTime: 0
+    HitOnlyHalf: 0
+    CA_AttackPenalty: 0
+    CA_GoldPenalty: 0
+    CA_HPPenalty: 0
+    StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
+  fireballClip: {fileID: 0}
+  jumpClip: {fileID: 0}
+  healbuffClip: {fileID: 0}
+  spellClip: {fileID: 0}
+  speedbuffClip: {fileID: 0}
+  deadClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  myAudioSource: {fileID: 110534793195614265}
+  deadsound: {fileID: 8300000, guid: 0a8e9d5e8ce79e040bec0f8c8226fd65, type: 3}
+  hitsound: {fileID: 0}
   moveSpeed: 2
-  rotSpeed: 360
+  rotSpeed: 720
   myState: 0
   groundMask:
     serializedVersion: 2
@@ -3633,11 +3747,20 @@ MonoBehaviour:
   clawAttackEffect: {fileID: 3071203166238714258, guid: 3407e378c048bb5438424b28c7740b48, type: 3}
   biteAttackEffect: {fileID: 2452082064152055796, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
   fireBallEffect: {fileID: 47358877754946562, guid: e32892e5fa841e249ba7df2bb9345e80, type: 3}
+  clawSound: {fileID: 8300000, guid: 0215f0eac00fccb458867665a83b2203, type: 3}
+  biteSound: {fileID: 8300000, guid: bb0b20a889f0db64bac6d8b757427acb, type: 3}
+  fireBallSound: {fileID: 8300000, guid: 2c84803ccb418b9449f17d65ef7db2b3, type: 3}
+  roarSound: {fileID: 8300000, guid: 5f7dcca032e928f40a020778e2f855eb, type: 3}
+  meteorSound: {fileID: 8300000, guid: d14825e10d7826242ae8722f98b861b1, type: 3}
+  zeoliteSound: {fileID: 8300000, guid: f4b6111dea80ce242b360bca7ce03918, type: 3}
+  hitSound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
+  deadSound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
+  bgSound: {fileID: 8300000, guid: c582dc2866ff277438ace28689ceeb7b, type: 3}
   clawAttackPoint: {fileID: 2071550338693976144}
   biteAttackPoint: {fileID: 344015269135389181}
   fireBallPoint: {fileID: 2899682528373358138}
   spawnTombStone: {fileID: 0}
-  bossCollider: {fileID: 0}
+  bossCollider: {fileID: 4037025311336793047}
   isPhaseChanged: 0
   isSpawnStart: 0
   outLinePerception: {fileID: 5798969003851382007}
@@ -3646,6 +3769,102 @@ MonoBehaviour:
   clearPortal: {fileID: 0}
   bossHpBar: {fileID: 0}
   bossHpSlider: {fileID: 0}
+--- !u!82 &110534793195614265
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845668504784936927}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c582dc2866ff277438ace28689ceeb7b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7847130564312867419
 GameObject:
   m_ObjectHideFlags: 0
