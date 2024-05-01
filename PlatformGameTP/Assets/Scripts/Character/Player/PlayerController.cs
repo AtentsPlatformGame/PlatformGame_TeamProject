@@ -115,6 +115,7 @@ public class PlayerController : BattleSystem
     public void Initialize(float _hp)
     {
         curHP = _hp;
+        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
     }
 
     public void Initialize(PlayerStatData basicStat)

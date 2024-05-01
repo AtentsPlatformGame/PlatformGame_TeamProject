@@ -108,6 +108,14 @@ public class PlayerProfileManager : MonoBehaviour
             Debug.LogWarning("No saved at " + savePath);
             if (player != null && playerStatData != null)
                 player.Initialize(playerStatData);
+            for (int i = 0; i < 7; i++)
+            {
+                if (playerItems[i].GetItemStat().ItemType != ITEMTYPE.NONE)
+                {
+                    updatePlayerInvenAct?.Invoke(playerItems[i].GetItemStat());
+                }
+            }
+            player.Initialize(player.GetMaxHP());
             goldManager.SetPlayerGold(0);
             inventory.gameObject.SetActive(false);
             yield return null;
