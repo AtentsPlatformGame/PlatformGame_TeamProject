@@ -18,6 +18,18 @@ public class DemonWarriorController : EnemyState
     [SerializeField, Header("보스 피통 UI")] GameObject bossHpBar;
     [SerializeField, Header("보스 피통 슬라이더")] Slider bossHpSlider;
 
+    [Header("칼로베기 사운드")]
+    public AudioClip swingSound; // 칼로베기 사운드
+    [Header("소리지르기 사운드")]
+    public AudioClip roarSound; // 소리지르기 사운드
+    [Header("피격 사운드")]
+    public AudioClip hitSound; // 피격 사운드
+    [Header("사망 사운드")]
+    public AudioClip deadSound; // 사망 사운드
+    [Header("배경음")]
+    public AudioClip bgSound; // 배경음
+
+
     protected override void ChangeState(State s)
     {
         base.ChangeState(s);

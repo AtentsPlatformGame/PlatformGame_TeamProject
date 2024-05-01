@@ -34,6 +34,25 @@ public class OrcMonsterController : EnemyState
     public int phasecount;
     public int PatternDamage = 5; //패턴발생 했을때 충돌 데미지
     public Vector3 PatternPos;
+
+    [Header("평타1대 사운드")]
+    public AudioClip attack1Sound; // 평타1대 사운드
+    [Header("평타3대 사운드")]
+    public AudioClip attack3Sound; // 평타3대 사운드
+    [Header("낙석 사운드")]
+    public AudioClip stoneSound; // 낙석 사운드
+    [Header("분노 사운드")]
+    public AudioClip roarSound; // 분노(포효) 사운드
+    [Header("기둥쓰러트리기 사운드")]
+    public AudioClip knockdownSound; // 기둥쓰러트리기 사운드
+    [Header("피격 사운드")]
+    public AudioClip hitSound; // 피격 사운드
+    [Header("사망 사운드")]
+    public AudioClip deadSound; // 사망 사운드
+    [Header("배경음")]
+    public AudioClip bgSound; // 배경음
+
+
     protected override void ChangeState(State s)
     {
         base.ChangeState(s);
@@ -101,7 +120,7 @@ public class OrcMonsterController : EnemyState
     public new void OnAttack()
     {
         Collider[] list = Physics.OverlapSphere(attackPoint.position, 3.0f, enemyMask);
-
+        
         foreach (Collider col in list)
         {
             IDamage act = col.GetComponent<IDamage>();
