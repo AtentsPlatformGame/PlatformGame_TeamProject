@@ -20,7 +20,7 @@ public class OptionManager : MonoBehaviour
 
     public void GoMain()
     {
-
+        SceneChanger.instance.GoToMain();
     }
 
     public void GoGame()
