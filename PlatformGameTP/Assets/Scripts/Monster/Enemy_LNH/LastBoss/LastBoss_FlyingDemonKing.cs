@@ -14,7 +14,26 @@ public class LastBoss_FlyingDemonKing : EnemyState
     public Transform biteAttackEffect; // 깨물기 공격 vfx
     [Header("원거리 공격 vfx"), Space(5)]
     public Transform fireBallEffect; // 원거리 공격 vfx
-    
+
+    [Header("할퀴기 사운드")]
+    public AudioClip clawSound; // 할퀴기 사운드
+    [Header("깨물기 사운드")]
+    public AudioClip biteSound; // 깨물기 사운드
+    [Header("불쏘기 사운드")]
+    public AudioClip fireBallSound; // 불쏘기 사운드
+    [Header("포효 사운드")]
+    public AudioClip roarSound; // 포효 사운드
+    [Header("메테오 사운드")]
+    public AudioClip meteorSound; // 메테오 사운드
+    [Header("비석 소환 사운드")]
+    public AudioClip zeoliteSound; // 비석소환 사운드
+    [Header("피격 사운드")]
+    public AudioClip hitSound; // 피격 사운드
+    [Header("사망 사운드")]
+    public AudioClip deadSound; // 사망 사운드
+    [Header("배경음")]
+    public AudioClip bgSound; // 배경음 사운드
+
 
     [Header("할퀴기 공격 포인트"), Space(5)]
     public Transform clawAttackPoint; // 할퀴기 공격 포인트

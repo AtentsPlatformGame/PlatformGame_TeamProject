@@ -22,8 +22,25 @@ public class NagaWizard : EnemyState
     public GameObject NagaToken;
     public GameObject NagaClearText;
 
-    
-    
+    [Header("메테오 사운드")]
+    public AudioClip meteorSound; // 메테오 사운드
+    [Header("따발총 사운드")]
+    public AudioClip gunSound; // 따발총 사운드
+    [Header("파도 사운드")]
+    public AudioClip wavesSound; // 파도 사운드
+    [Header("해일 사운드")]
+    public AudioClip tsunamiSound; // 해일 사운드
+    [Header("포효 사운드")]
+    public AudioClip roarSound; // 포효 사운드
+    [Header("전조 사운드")]
+    public AudioClip warningSound; // 전조(경고) 사운드
+    [Header("피격 사운드")]
+    public AudioClip hitSound; // 피격 사운드
+    [Header("사망 사운드")]
+    public AudioClip deadSound; // 사망 사운드
+    [Header("배경음")]
+    public AudioClip bgSound; // 배경음
+
     public int PhaseCount = 0;
     public GameObject GreetingBoss;
     static int greetingCounts = 0;
