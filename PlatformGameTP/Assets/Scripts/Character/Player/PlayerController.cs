@@ -462,12 +462,6 @@ public class PlayerController : BattleSystem
         if (spellObject != null)
         {
             //스펠 사용 사운드 Loop, Play on Awake 꺼야됨
-            if (myAudioSource != null)
-            {
-                myAudioSource.clip = spellClip;
-                myAudioSource.PlayOneShot(spellClip);
-                if (myAudioSource.isPlaying) Debug.Log("공격주문 효과음");
-            }
             myAnim.SetTrigger("UseSpell");
             if (spellObject.gameObject.tag == "AttackSpell")
             {

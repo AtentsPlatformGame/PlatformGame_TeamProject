@@ -56,7 +56,6 @@ public class BattleSystem : CharacterProperty, IDamage
     public AudioClip fireballClip;
     public AudioClip jumpClip;
     public AudioClip healbuffClip;
-    public AudioClip spellClip;
     public AudioClip speedbuffClip;
     public AudioClip deadClip;
     public AudioClip hitClip;
