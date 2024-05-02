@@ -18,10 +18,10 @@ public class SaneStagePortal : MonoBehaviour
     float F_time = 1;
     GameObject obj;
     PlayerController player;
+    public GameObject InventoryCheck;
     [Header("포탈이동 사운드")]
     public AudioSource teleportSource;
     public AudioClip teleportClip;
-    public GameObject InventoryCheck;
 
     // Start is called before the first frame update
     void Start()
