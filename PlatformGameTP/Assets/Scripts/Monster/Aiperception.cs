@@ -33,6 +33,18 @@ public class Aiperception : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider collision)
+    {
+        if ((1 << collision.gameObject.layer & enemyMask) != 0)
+        {
+            if (myTarget == null)
+            {
+                myTarget = collision.transform;
+                findEnemyAct?.Invoke(myTarget);
+            }
+        }
+    }
+
     private void OnTriggerExit(Collider collision)
     {
         if ((1 << collision.gameObject.layer & enemyMask) != 0)

@@ -230,6 +230,7 @@ public class EnemyState : EnemyMovement
     {
         if (myState == State.Death) return;
         myTarget = target;
+        Debug.Log("FindTarget " + target.gameObject.name);
         ChangeState(State.Battle);
     }
 

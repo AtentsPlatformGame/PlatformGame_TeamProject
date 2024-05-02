@@ -3301,7 +3301,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5622405645614709998}
-  - component: {fileID: 3422477714597195960}
   - component: {fileID: 6259500668403270664}
   - component: {fileID: 4935205097456722596}
   - component: {fileID: 7134594571036179453}
@@ -3335,29 +3334,6 @@ Transform:
   - {fileID: 972803458991847311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &3422477714597195960
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9030010943169566609}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Height: 3
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!54 &6259500668403270664
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3431,6 +3407,8 @@ MonoBehaviour:
   myAudioSource: {fileID: 2431391476178005670}
   deadsound: {fileID: 8300000, guid: 34c7c913b546c324caea299322077fa7, type: 3}
   hitsound: {fileID: 0}
+  bgmsound1: {fileID: 0}
+  bgmsound2: {fileID: 0}
   moveSpeed: 2
   rotSpeed: 360
   myState: 0

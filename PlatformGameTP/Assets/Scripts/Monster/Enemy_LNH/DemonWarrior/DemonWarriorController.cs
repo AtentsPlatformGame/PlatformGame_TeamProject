@@ -29,6 +29,8 @@ public class DemonWarriorController : EnemyState
     [Header("배경음")]
     public AudioClip bgSound; // 배경음
 
+    
+
 
     protected override void ChangeState(State s)
     {
@@ -56,6 +58,8 @@ public class DemonWarriorController : EnemyState
     void Start()
     {
         base.Initialize();
+        bgmsound1.SetActive(true);
+        bgmsound2.SetActive(false);
         
         startPos = transform.position;
         base.ChangeState(State.Normal);
@@ -199,12 +203,13 @@ public class DemonWarriorController : EnemyState
         Debug.Log("소환해줘");
         if (myTarget != null) myTarget.position = warpPoint.position;
         Destroy(gameObject);
-        
+        ChangeBgmSound();
     }
 
     public void SpawnLastBoss()
     {
         StartCoroutine(SpawingLastBoss());
+        
     }
 
     IEnumerator SpawingLastBoss()

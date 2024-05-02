@@ -1741,7 +1741,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5798969003851382007}
-  - component: {fileID: 3926119959046698767}
   - component: {fileID: 2371970045532133022}
   - component: {fileID: 531485845423857762}
   m_Layer: 0
@@ -1766,27 +1765,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 418176755422317696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3926119959046698767
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4204044312215289387}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 9
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2371970045532133022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1805,19 +1783,7 @@ MonoBehaviour:
   myTarget: {fileID: 0}
   findEnemyAct:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3476560796981930923}
-        m_TargetAssemblyTypeName: EnemyState, Assembly-CSharp
-        m_MethodName: DetectTarget
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   lostEnemyAct:
     m_PersistentCalls:
       m_Calls: []
@@ -1840,8 +1806,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 14, y: 10, z: 28}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 16, y: 6, z: 26}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &4242323651362466069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2731,7 +2697,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6495971699412623047}
-  - component: {fileID: 1855387807969951256}
   - component: {fileID: 7382522325650344479}
   - component: {fileID: 43543968721071101}
   m_Layer: 0
@@ -2756,27 +2721,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 418176755422317696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1855387807969951256
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5564004588449761089}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7382522325650344479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,7 +2786,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 14, y: 5, z: 24}
+  m_Size: {x: 12, y: 6, z: 22}
   m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &5609169329698556832
 GameObject:
@@ -3710,6 +3654,8 @@ MonoBehaviour:
   myAudioSource: {fileID: 110534793195614265}
   deadsound: {fileID: 8300000, guid: 0a8e9d5e8ce79e040bec0f8c8226fd65, type: 3}
   hitsound: {fileID: 0}
+  bgmsound1: {fileID: 0}
+  bgmsound2: {fileID: 0}
   moveSpeed: 2
   rotSpeed: 720
   myState: 0
@@ -3749,7 +3695,7 @@ MonoBehaviour:
   fireBallEffect: {fileID: 47358877754946562, guid: e32892e5fa841e249ba7df2bb9345e80, type: 3}
   clawSound: {fileID: 8300000, guid: 0215f0eac00fccb458867665a83b2203, type: 3}
   biteSound: {fileID: 8300000, guid: bb0b20a889f0db64bac6d8b757427acb, type: 3}
-  fireBallSound: {fileID: 8300000, guid: 2c84803ccb418b9449f17d65ef7db2b3, type: 3}
+  fireBallSound: {fileID: 8300000, guid: 5852e2ff6a93dfe41815ec7acd7b46d6, type: 3}
   roarSound: {fileID: 8300000, guid: 5f7dcca032e928f40a020778e2f855eb, type: 3}
   meteorSound: {fileID: 8300000, guid: d14825e10d7826242ae8722f98b861b1, type: 3}
   zeoliteSound: {fileID: 8300000, guid: f4b6111dea80ce242b360bca7ce03918, type: 3}

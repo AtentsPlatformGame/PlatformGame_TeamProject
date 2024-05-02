@@ -64,7 +64,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
         {
             case State.Phase:
                 StopAllCoroutines();
-                
+                PlaySound(roarSound);
                 foreach (Renderer renderer in allRenderer)
                 {
                     Color tmpColor = new Color(0, 0, 0, 0);
@@ -190,7 +190,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
     {
         while (target != null)
         {
-            
+            Debug.Log("Target Found" + target.gameObject.name);
             BattleSystem bs = target.gameObject.GetComponent<BattleSystem>();
             if(bs != null)
             {

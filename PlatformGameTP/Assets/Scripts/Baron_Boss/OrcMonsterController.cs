@@ -109,7 +109,7 @@ public class OrcMonsterController : EnemyState
         {
             base.IsGround();
         }
-        if(myState == State.Battle && callCounts == 0)
+        if (myState == State.Battle && callCounts == 0)
         {
             Call.SetActive(true);
             Invoke("TurnOffCall", 2.0f);
@@ -121,7 +121,7 @@ public class OrcMonsterController : EnemyState
     {
         PlaySound(attack1Sound);
         Collider[] list = Physics.OverlapSphere(attackPoint.position, 3.0f, enemyMask);
-        
+
         foreach (Collider col in list)
         {
             IDamage act = col.GetComponent<IDamage>();
@@ -147,7 +147,7 @@ public class OrcMonsterController : EnemyState
 
             if (this.curHP <= (this.battleStat.MaxHp * 0.8) && phasecount == 0)
             {
-                PlaySound(stoneSound);
+
                 Debug.Log("돌떨구기");
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
@@ -156,6 +156,7 @@ public class OrcMonsterController : EnemyState
                 WarningS.SetActive(false);
                 myAnim.SetTrigger("PatternS");
                 PatternStons.SetActive(true);
+                PlaySound(stoneSound);
                 // 오크의 체력이 20%남았을때 낙석 패턴
                 yield return new WaitForSeconds(3.0f);
                 PatternStons.SetActive(false);
@@ -170,16 +171,19 @@ public class OrcMonsterController : EnemyState
                 WarningA.SetActive(true);
                 yield return new WaitForSeconds(3.0f);
                 WarningA.SetActive(false);
+
                 myAnim.SetTrigger("Howling");
                 // 오크의 체력이 절반이 되었을때 능력치를 버프하는 패턴 
+                PlaySound(roarSound);
                 this.battleStat.AP += 2;
                 this.battleStat.MoveSpeed += 1;
                 phasecount = 2;
                 Debug.Log("공업 이속업");
+
             }
             if (this.curHP <= (this.battleStat.MaxHp * 0.3) && phasecount == 2)
             {
-                PlaySound(knockdownSound);
+
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
                 WarningP.SetActive(true);
@@ -187,11 +191,15 @@ public class OrcMonsterController : EnemyState
                 WarningP.SetActive(false);
                 PatternPillar.SetActive(true);
                 Debug.Log("기둥 무너짐");
+
                 // 오크의 체력이 80%일때 기둥을 쓰러트리는 패턴
+                PlaySound(knockdownSound);
                 yield return new WaitForSeconds(3.0f);
                 //Destroy(PatternPillar);
                 PatternPillar.SetActive(false);
+
                 phasecount = 3;
+
             }
 
 
@@ -250,7 +258,7 @@ public class OrcMonsterController : EnemyState
         }
         Destroy(gameObject);
     }
-    
+
 
     protected override void OnDead()
     {
@@ -280,7 +288,7 @@ public class OrcMonsterController : EnemyState
         Instantiate(virticalAttackEffect, hitPoint.transform.position, Quaternion.identity, null);
     }
 
-   
+
     public void BuffEffect()
     {
         Instantiate(buffEffect, transform.position, Quaternion.identity, null);

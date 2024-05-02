@@ -1,4 +1,5 @@
 using InventorySystem;
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,7 +50,7 @@ public class BattleSystem : CharacterProperty, IDamage
     [SerializeField] protected BattleStat battleStat;
     [SerializeField] float _curHP = 0.0f;
     public event UnityAction deathAlarm; // event 키워드가 붙으면 이 클래스 밖에서 초기화, 실행이 불가능함. 접근 지정 제한자와 비슷한 느낌? 실수 방지
-    
+
     public Transform attackPoint;
     public LayerMask enemyMask;
     [Header("플레이어 공격 사운드")]
@@ -66,12 +67,15 @@ public class BattleSystem : CharacterProperty, IDamage
     Transform _target = null;
 
     public AudioSource myAudioSource;
-    public AudioClip deadsound;
-    public AudioClip hitsound;
+
+    [Header("보스 사망 사운드")] public AudioClip deadsound; //보스가 죽을때 나는 사운드
+    [Header("보스 피격 사운드")] public AudioClip hitsound; //보스가 맞을때 나는 사운드
+    [Header("보스 배경음1")] public GameObject bgmsound1; //보스 배경음1
+    [Header("보스 배경음2")] public GameObject bgmsound2; //보스 배경음2
     Slider volumeSlider;
     private void Start()
     {
-        
+
     }
     protected float curHP
     {
@@ -181,7 +185,7 @@ public class BattleSystem : CharacterProperty, IDamage
         curHP = battleStat.MaxHp;
     }
 
-    
+
 
     public virtual void TakeDamage(float _dmg)
     {
@@ -222,7 +226,7 @@ public class BattleSystem : CharacterProperty, IDamage
         {
             bs.TakeDamage(battleStat.AP);
         }
-        
+
     }
 
 
@@ -261,5 +265,10 @@ public class BattleSystem : CharacterProperty, IDamage
         }
     }
 
-}
+    public void ChangeBgmSound()
+    {
+        bgmsound1.SetActive(false);
+        bgmsound2.SetActive(true);
+    }
 
+}
