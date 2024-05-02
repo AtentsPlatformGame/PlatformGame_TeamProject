@@ -68,6 +68,7 @@ namespace LGH
             ItemStat buyItemStat = shopItem.GetItemStat();
 
             _PlayerGold = playerGoldManager.GetPlayerGold();
+            Debug.Log("ÇöÀç °ñµå : " + _PlayerGold);
             if (_PlayerGold >= buyItemStat.ItemsPrice)
             {
                 CheckBuyItems.SetActive(true);
