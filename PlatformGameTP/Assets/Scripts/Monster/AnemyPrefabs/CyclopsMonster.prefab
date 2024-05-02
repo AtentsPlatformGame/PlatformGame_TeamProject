@@ -201,14 +201,26 @@ MonoBehaviour:
     HealAfterAttack: 0
     ResurrectionOneTime: 0
     HitOnlyHalf: 0
+    CA_AttackPenalty: 0
+    CA_GoldPenalty: 0
+    CA_HPPenalty: 0
     StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  attackSound: {fileID: 0}
-  damageSound: {fileID: 0}
+  fireballClip: {fileID: 0}
+  jumpClip: {fileID: 0}
+  healbuffClip: {fileID: 0}
+  speedbuffClip: {fileID: 0}
+  deadClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  myAudioSource: {fileID: 0}
+  deadsound: {fileID: 0}
+  hitsound: {fileID: 0}
+  bgmsound1: {fileID: 0}
+  bgmsound2: {fileID: 0}
   moveSpeed: 2
   rotSpeed: 360
   myState: 0
@@ -640,8 +652,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4334316595471373201}
-  - component: {fileID: 5937233435254398445}
   - component: {fileID: 5253687899859001752}
+  - component: {fileID: 8350636879098761848}
   m_Layer: 0
   m_Name: OutlinePerception
   m_TagString: Untagged
@@ -664,27 +676,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6012729978830381473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5937233435254398445
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4349050389803504552}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5253687899859001752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,6 +710,27 @@ MonoBehaviour:
   lostEnemyAct:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &8350636879098761848
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349050389803504552}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 13}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &4544840812656910553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,8 +1087,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6304404026209142795}
-  - component: {fileID: 5507406718285675887}
   - component: {fileID: 3401119343992409275}
+  - component: {fileID: 6134196957203721552}
   m_Layer: 0
   m_Name: InlinePerception
   m_TagString: Untagged
@@ -1099,27 +1111,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6012729978830381473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5507406718285675887
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7042922297751138867}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 3
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &3401119343992409275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1166,6 +1157,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!65 &6134196957203721552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7042922297751138867}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 6}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &7211733059204537167
 GameObject:
   m_ObjectHideFlags: 0

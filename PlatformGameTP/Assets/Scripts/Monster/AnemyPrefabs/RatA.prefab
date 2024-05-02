@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5101058531718804405}
-  - component: {fileID: 7293506610069398954}
   - component: {fileID: 1635725490551903314}
   - component: {fileID: 3182615538230158128}
   m_Layer: 0
@@ -118,27 +117,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2098346061205204236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7293506610069398954
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573222277929337894}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 3
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1635725490551903314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +324,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3276595899620349989}
-  - component: {fileID: 7622165279700133569}
   - component: {fileID: 8120138604222179146}
   - component: {fileID: 4921553434859004784}
   m_Layer: 0
@@ -371,27 +348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2098346061205204236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7622165279700133569
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650106700308051726}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 7
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &8120138604222179146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,14 +628,26 @@ MonoBehaviour:
     HealAfterAttack: 0
     ResurrectionOneTime: 0
     HitOnlyHalf: 0
+    CA_AttackPenalty: 0
+    CA_GoldPenalty: 0
+    CA_HPPenalty: 0
     StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  attackSound: {fileID: 0}
-  damageSound: {fileID: 0}
+  fireballClip: {fileID: 0}
+  jumpClip: {fileID: 0}
+  healbuffClip: {fileID: 0}
+  speedbuffClip: {fileID: 0}
+  deadClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  myAudioSource: {fileID: 0}
+  deadsound: {fileID: 0}
+  hitsound: {fileID: 0}
+  bgmsound1: {fileID: 0}
+  bgmsound2: {fileID: 0}
   moveSpeed: 2
   rotSpeed: 360
   myState: 0
