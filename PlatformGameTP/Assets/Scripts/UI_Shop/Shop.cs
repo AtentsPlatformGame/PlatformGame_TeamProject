@@ -21,7 +21,7 @@ namespace LGH
         public int NowGold = 0;
         public int checkItemCount = 0;
 
-        GoldManager playerGoldManager;
+        public GoldManager playerGoldManager;
         int _PlayerGold;
         private void Start()
         {
@@ -30,8 +30,8 @@ namespace LGH
             CheckBuyItems.SetActive(false);
             NoMoney.SetActive(false);
             FinishBuy.SetActive(false);
-            playerGoldManager = FindObjectOfType<GoldManager>();
-            _PlayerGold = playerGoldManager.GetPlayerGold();
+            //playerGoldManager = FindObjectOfType<GoldManager>();
+            //_PlayerGold = playerGoldManager.GetPlayerGold();
             
         }
         public void Update()

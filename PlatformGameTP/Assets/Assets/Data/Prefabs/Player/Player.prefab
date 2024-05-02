@@ -291,22 +291,37 @@ MonoBehaviour:
     HealAfterAttack: 0
     ResurrectionOneTime: 0
     HitOnlyHalf: 0
+    CA_AttackPenalty: 0
+    CA_GoldPenalty: 0
+    CA_HPPenalty: 0
+    StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 0
-  attackSound: {fileID: 0}
-  damageSound: {fileID: 0}
+  fireballClip: {fileID: 0}
+  jumpClip: {fileID: 0}
+  healbuffClip: {fileID: 0}
+  spellClip: {fileID: 0}
+  speedbuffClip: {fileID: 0}
+  deadClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  myAudioSource: {fileID: 0}
+  deadsound: {fileID: 0}
+  hitsound: {fileID: 0}
   rotSpeed: 720
   jumpForce: 8
-  spellObject: {fileID: 419305800515105285, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
+  spellObject: {fileID: 0}
   controll2D: 1
   rotYRange: {x: 0, y: 180}
   canMove: 1
   teleportVFX: {fileID: 0}
   teleportFogVFX: {fileID: 0}
   playerStatData: {fileID: 11400000, guid: 5f1774ee4d3b60340b5ba491316125f0, type: 2}
+  OnStatsChanged:
+    m_PersistentCalls:
+      m_Calls: []
   orgFireball: {fileID: 2856997113365272791, guid: 4d2243e06e00da345b22d936d75f5eec, type: 3}
   groundMask:
     serializedVersion: 2
@@ -437,6 +452,10 @@ MonoBehaviour:
   useBuffSpellAct:
     m_PersistentCalls:
       m_Calls: []
+  spellAudioSource: {fileID: 0}
+  attackspellClip: {fileID: 0}
+  buffspellClip: {fileID: 0}
+  canclespellClip: {fileID: 0}
 --- !u!1 &4728296680003517134
 GameObject:
   m_ObjectHideFlags: 0
