@@ -21,6 +21,7 @@ public class SaneStagePortal : MonoBehaviour
     [Header("포탈이동 사운드")]
     public AudioSource teleportSource;
     public AudioClip teleportClip;
+    public GameObject InventoryCheck;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +40,13 @@ public class SaneStagePortal : MonoBehaviour
     {
         if ((1 << other.gameObject.layer & playerMask) != 0)
         {
-
-            if (Input.GetKeyDown(KeyCode.G))
+            if (InventoryCheck.activeSelf == false)
             {
-                Debug.Log("활성화");
-                Fade();
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    Debug.Log("활성화");
+                    Fade();
+                }
             }
         }
     }
@@ -52,7 +55,7 @@ public class SaneStagePortal : MonoBehaviour
     {
         if ((1 << other.gameObject.layer & playerMask) != 0)
         {
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.G)&& InventoryCheck.activeSelf == false)
             {
 
                 Debug.Log("활성화");
