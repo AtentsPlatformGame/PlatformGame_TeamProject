@@ -245,7 +245,7 @@ public class PlayerController : BattleSystem
         if (isGround)
         {
             jumpCoolTime += Time.deltaTime;
-            Debug.Log("hit");
+            //Debug.Log("hit");
         }
     }
 
