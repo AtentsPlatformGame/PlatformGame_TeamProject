@@ -13,17 +13,18 @@ public class PlayerUIwindows : MonoBehaviour
     public TextMeshProUGUI MoveSpdstat;
     public TextMeshProUGUI HpStat;
 
-    public Transform player;
-    PlayerController pc;
+    //public Transform player;
+    public PlayerController pc;
 
     public void Awake()
     {
         Instance = this;
+       // pc = player.GetComponent<PlayerController>();
     }
 
     void Start()
     {
-        pc = player.GetComponent<PlayerController>();
+        //pc = player.GetComponent<PlayerController>();
         
     }
 
