@@ -41,7 +41,7 @@ public class PlayerUIwindows : MonoBehaviour
 
     public void UpdateHpbar(float curHp, float maxHp)
     {
-        myHpSlider.value = (float)curHp / (float)maxHp;
+        myHpSlider.value = (float)curHp /maxHp;
     }
 
 
