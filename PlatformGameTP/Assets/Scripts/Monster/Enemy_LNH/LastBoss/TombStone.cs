@@ -77,6 +77,7 @@ public class TombStone : MonoBehaviour
 
     IEnumerator DestroyTombStone() // ºñ¼® ÆÄ±«
     {
+        zeoliteSound(Sound);
         spawnEffect.GetComponent<ParticleSystem>().Play();
         myCollider.enabled = false;
         summonEffect.gameObject.SetActive(false);
@@ -183,5 +184,7 @@ public class TombStone : MonoBehaviour
             myAudioSource.Play();
         }
     }
+
+
 
 }

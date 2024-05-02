@@ -136,7 +136,7 @@ public class SceneChanger : MonoBehaviour
 
     public void GoToOuttro()
     {
-        nextSceneName = "GoToOuttro"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
+        nextSceneName = "Outtro"; // 일단 적었는데 추후 정확한 이름으로 바꿔야함
         sceneChangeAct?.Invoke();
     }
 

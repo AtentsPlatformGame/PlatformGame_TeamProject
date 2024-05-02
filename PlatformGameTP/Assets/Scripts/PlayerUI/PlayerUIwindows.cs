@@ -39,9 +39,11 @@ public class PlayerUIwindows : MonoBehaviour
         UpdateUI();
     }
 
-    public void UpdateHpbar(float curHp, float maxHp)
+    public void UpdateHpbar()
     {
-        myHpSlider.value = (float)curHp /maxHp;
+        float curHp = pc.GetCurHP();
+        float maxHp = pc.GetMaxHP();
+        myHpSlider.value = curHp / maxHp;
     }
 
 
@@ -63,7 +65,7 @@ public class PlayerUIwindows : MonoBehaviour
 
     void UpdateHP()
     {
-        PlayerUIwindows.Instance.UpdateHpbar(pc.GetCurHP(),pc.GetMaxHP());
+        PlayerUIwindows.Instance.UpdateHpbar();
     }
 
     public void ChangeHpSlider()

@@ -115,7 +115,7 @@ public class PlayerController : BattleSystem
     public void Initialize(float _hp)
     {
         curHP = _hp;
-        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar();
     }
 
     public void Initialize(PlayerStatData basicStat)
@@ -498,7 +498,7 @@ public class PlayerController : BattleSystem
         {
             this.curHP = this.battleStat.MaxHp;
         }
-        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar();
         Debug.Log("치료 주문");
         //힐 사운드, Loop Play on Awake 꺼야됨
         if (myAudioSource != null)
@@ -518,7 +518,7 @@ public class PlayerController : BattleSystem
         {
             this.curHP = this.battleStat.MaxHp;
         }
-        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar();
     }
 
     public void SpeedBuff()
@@ -569,7 +569,7 @@ public class PlayerController : BattleSystem
         }
 
         //Initialize();
-       PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+       PlayerUIwindows.Instance.UpdateHpbar();
         Debug.Log(this.battleStat.AP + " 공격력 변화 일어남");
         
         //NotifyStatsChanged();
@@ -609,14 +609,14 @@ public class PlayerController : BattleSystem
         {
             curHP -= _dmg;
         }
-        PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+        PlayerUIwindows.Instance.UpdateHpbar();
 
         if (curHP <= 0.0f)
         {
             if (GetResurrectionOneTime())
             {
                 curHP = 3.0f;
-                PlayerUIwindows.Instance.UpdateHpbar(this.curHP, this.battleStat.MaxHp);
+                PlayerUIwindows.Instance.UpdateHpbar();
                 this.battleStat.ResurrectionOneTime = false;
             }
             else
