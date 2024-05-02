@@ -77,6 +77,7 @@ public class ShopNPC : Inventory
         shopUI.SetActive(false);
         shopOpenMyInventory.SetActive(false);
         MyInventory.gameObject.SetActive(false);
+        MyExplanation.gameObject.SetActive(false);
         //MyInventory.transform.Translate(new Vector3(200, 0, 0));
         isShop = false;
     }
