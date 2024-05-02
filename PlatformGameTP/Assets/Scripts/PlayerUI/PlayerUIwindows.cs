@@ -41,7 +41,7 @@ public class PlayerUIwindows : MonoBehaviour
 
     public void UpdateHpbar(float curHp, float maxHp)
     {
-        myHpSlider.value = (float)curHp / maxHp;//체력 비율로 설정
+        myHpSlider.value = (float)curHp / (float)maxHp;
     }
 
 
@@ -52,11 +52,12 @@ public class PlayerUIwindows : MonoBehaviour
             float ap = pc.GetAp();
             float spd = pc.GetMoveSpeed();
             float hp = pc.GetCurHP();
+            float Mhp = pc.GetMaxHP();
 
             APstat.text = ap.ToString();
             MoveSpdstat.text = spd.ToString();
             HpStat.text = hp.ToString();
-            
+            HpStat.text = Mhp.ToString();
         }
     }
 
@@ -75,6 +76,5 @@ public class PlayerUIwindows : MonoBehaviour
         myHpSlider.value = Mathf.Lerp(myHpSlider.value,ratio,Time.deltaTime*3);
     }
 
-   
 
 }
