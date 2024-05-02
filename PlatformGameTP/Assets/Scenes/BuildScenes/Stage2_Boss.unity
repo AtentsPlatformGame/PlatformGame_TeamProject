@@ -1703,6 +1703,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4348376965865377231, guid: bce5e38fceab056499b2113224028f12, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 4657859654106508630, guid: bce5e38fceab056499b2113224028f12, type: 3}
       propertyPath: m_Height
       value: 8
@@ -1710,6 +1714,10 @@ PrefabInstance:
     - target: {fileID: 4657859654106508630, guid: bce5e38fceab056499b2113224028f12, type: 3}
       propertyPath: m_Center.y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6846294756139167026, guid: bce5e38fceab056499b2113224028f12, type: 3}
+      propertyPath: findEnemyAct.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7237337848501736036, guid: bce5e38fceab056499b2113224028f12, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1858,7 +1866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002324305891714575, guid: 85c774a27784afe4dbe39cfee5ce3ed2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
