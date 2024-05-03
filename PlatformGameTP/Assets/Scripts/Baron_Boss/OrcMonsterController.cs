@@ -54,6 +54,8 @@ public class OrcMonsterController : EnemyState
     public AudioClip deadSound; // 사망 사운드
     [Header("배경음")]
     public AudioClip bgSound; // 배경음
+    [Header("다음 맵으로 넘어가기")]
+    public GameObject nextStagePortal;
 
 
     protected override void ChangeState(State s)
@@ -268,6 +270,7 @@ public class OrcMonsterController : EnemyState
         dropGoldAct?.Invoke(dropGold);
         Orcreward.SetActive(true);
         ChangeState(State.Death);
+        nextStagePortal.gameObject.SetActive(true);
     }
     public void OnClear()
     {
