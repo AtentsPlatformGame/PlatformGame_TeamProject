@@ -26,7 +26,8 @@ public class FadeBeforeSceneChange : MonoBehaviour
     IEnumerator FadeInBeforeSceneChange()
     {
         curTime = 0.0f;
-        float volume = bgSFX.volume;
+        float volume;
+        if (bgSFX != null) volume = bgSFX.volume;
         while (curTime <= fadeTime)
         {
             cg.alpha = Mathf.Lerp(0.0f, 1.0f, curTime / fadeTime);
