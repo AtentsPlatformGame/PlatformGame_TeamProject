@@ -18,6 +18,7 @@ public class PlayerController : BattleSystem
     [SerializeField, Header("텔레포트 잔상 이펙트"), Space(5)] Transform teleportFogVFX;
     [SerializeField, Header("플레이어 최초 스텟")] PlayerStatData playerStatData;
 
+    [SerializeField, Header("스펠 초기화를 위한 인벤토리 업데이트 함수")] UnityEvent<ItemStat> invenUpdate;
     public UnityEvent OnStatsChanged;
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -477,7 +478,9 @@ public class PlayerController : BattleSystem
             else Instantiate(spellObject, this.transform);
             spellObject = null;
 
-
+            ItemStat trashItem = new ItemStat();
+            trashItem.ItemType = ITEMTYPE.SPELL;
+            invenUpdate?.Invoke(trashItem);
         }
 
     }
@@ -656,7 +659,9 @@ public class PlayerController : BattleSystem
     {
         yield return new WaitForSeconds(2.0f);
         DeathIMG.GetComponent<CanvasGroup>().alpha = 1.0f;
-        
+        DeathIMG.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+
     }
 
 

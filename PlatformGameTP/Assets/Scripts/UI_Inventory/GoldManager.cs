@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GoldManager : MonoBehaviour
 {
     [SerializeField] int PlayerGold;
-    
+
     public TextMeshProUGUI OwngoldMyInventory;
     public TextMeshProUGUI OwngoldShopInventory;
     PlayerController player;
@@ -17,8 +17,8 @@ public class GoldManager : MonoBehaviour
     {
 
         //Owngold = GetComponent<TextMeshProUGUI>();
-        OwngoldMyInventory.text = PlayerGold.ToString();
-        OwngoldShopInventory.text = PlayerGold.ToString();
+        if (OwngoldMyInventory != null) OwngoldMyInventory.text = PlayerGold.ToString();
+        if (OwngoldShopInventory != null) OwngoldShopInventory.text = PlayerGold.ToString();
         /*Owngold = GetComponent<TextMeshProUGUI>();
         Owngold.text = PlayerGold.ToString();*/
         player = FindObjectOfType<PlayerController>();
@@ -28,12 +28,12 @@ public class GoldManager : MonoBehaviour
     void Update()
     {
         CountUpGold();
-        if (OwngoldMyInventory.gameObject.activeSelf == true)OwngoldMyInventory.text = PlayerGold.ToString();
-        if (OwngoldShopInventory.gameObject.activeSelf == true) OwngoldShopInventory.text = PlayerGold.ToString();
+        if (OwngoldMyInventory.gameObject.activeSelf == true && OwngoldMyInventory != null) OwngoldMyInventory.text = PlayerGold.ToString();
+        if (OwngoldShopInventory.gameObject.activeSelf == true && OwngoldShopInventory != null) OwngoldShopInventory.text = PlayerGold.ToString();
     }
     public void ChangeGold(int _gold)
     {
-        if(player != null)
+        if (player != null)
         {
             if (player.GetCA_GoldPenalty())
             {
@@ -44,8 +44,8 @@ public class GoldManager : MonoBehaviour
                 this.PlayerGold += _gold;
             }
         }
-        
-        if(this.PlayerGold <= 0) this.PlayerGold = 0;
+
+        if (this.PlayerGold <= 0) this.PlayerGold = 0;
     }
     //CountGold => ÇÊµå °ñµå È¹µæ·®°ú »óÁ¡ÀÇ °ñµå·® °è»êÇÏ¿© ¹Ý¿µ
 
