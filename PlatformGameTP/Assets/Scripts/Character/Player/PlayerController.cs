@@ -477,6 +477,7 @@ public class PlayerController : BattleSystem
             else Instantiate(spellObject, this.transform);
             spellObject = null;
 
+
         }
 
     }
@@ -565,7 +566,7 @@ public class PlayerController : BattleSystem
         if (this.battleStat.CA_HPPenalty)
         {
             this.battleStat.AP += 1;
-            this.battleStat.MaxHp += 1;
+            this.battleStat.MaxHp += 20;
         }
 
         //Initialize();
