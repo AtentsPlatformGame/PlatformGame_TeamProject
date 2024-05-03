@@ -233,7 +233,7 @@ public class BattleSystem : CharacterProperty, IDamage
     protected virtual void OnDead()
     {
         PlaySound(deadsound);
-        deathAlarm?.Invoke();
+        //deathAlarm?.Invoke();
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().useGravity = false;
     }
