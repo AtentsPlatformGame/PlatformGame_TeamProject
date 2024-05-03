@@ -10,4 +10,9 @@ public class DeathCanvas : MonoBehaviour
     {
         goToMainBT.onClick.AddListener(SceneChanger.instance.GoToMain);
     }
+
+    public void goMainButton()
+    {
+        SceneChanger.instance.GoToMain();
+    }
 }
