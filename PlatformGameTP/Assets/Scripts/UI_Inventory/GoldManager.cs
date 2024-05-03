@@ -9,14 +9,16 @@ public class GoldManager : MonoBehaviour
 {
     [SerializeField] int PlayerGold;
     
-    public TextMeshProUGUI Owngold;
+    public TextMeshProUGUI OwngoldMyInventory;
+    public TextMeshProUGUI OwngoldShopInventory;
     PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
 
         //Owngold = GetComponent<TextMeshProUGUI>();
-        Owngold.text = PlayerGold.ToString();
+        OwngoldMyInventory.text = PlayerGold.ToString();
+        OwngoldShopInventory.text = PlayerGold.ToString();
         /*Owngold = GetComponent<TextMeshProUGUI>();
         Owngold.text = PlayerGold.ToString();*/
         player = FindObjectOfType<PlayerController>();
@@ -26,7 +28,8 @@ public class GoldManager : MonoBehaviour
     void Update()
     {
         CountUpGold();
-        if (Owngold.gameObject.activeSelf == true)Owngold.text = PlayerGold.ToString();
+        if (OwngoldMyInventory.gameObject.activeSelf == true)OwngoldMyInventory.text = PlayerGold.ToString();
+        if (OwngoldShopInventory.gameObject.activeSelf == true) OwngoldShopInventory.text = PlayerGold.ToString();
     }
     public void ChangeGold(int _gold)
     {

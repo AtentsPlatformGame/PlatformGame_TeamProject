@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -828,7 +828,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerGold: 0
-  Owngold: {fileID: 1842934097}
+  OwngoldMyInventory: {fileID: 1842934097}
+  OwngoldShopInventory: {fileID: 654425346}
 --- !u!4 &136497206
 Transform:
   m_ObjectHideFlags: 0
@@ -3620,6 +3621,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3182876756217266961, guid: 8b3ec5a6f90fa0d4396bf4a46cedd005, type: 3}
   m_PrefabInstance: {fileID: 2782854036326630439}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &654425346 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7787281797548225020, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
+  m_PrefabInstance: {fileID: 1793390540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &670548309 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2560595619707535064, guid: 7ea03855f66225448b2ef989975a08f3, type: 3}
