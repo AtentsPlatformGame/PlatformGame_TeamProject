@@ -26,6 +26,9 @@ public class OrcMonsterController : EnemyState
     public Transform hitPoint;
     public Transform spawnPoint;
 
+    public Collider InlineCollider;
+    public Collider OutlineCollider;
+
     [SerializeField] bool isPhaseChanged = false;
 
     public LayerMask player;
@@ -68,16 +71,12 @@ public class OrcMonsterController : EnemyState
                 break;
         }
     }
-    // Start is called before the first frame update
     void Start()
     {
         base.Initialize();
-        //GameObject.Find("HpBars");
-        /*GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/UI/HpStatus"),
-         SceneData.Instance.hpBarsTransform);
-        myHpBar = obj.GetComponent<HpBar>();
-        myHpBar.myTarget = hpViewPos;
-        base.changeHpAct.AddListener(myHpBar.ChangeHpSlider);*/
+
+        InlineCollider = GetComponent<Collider>();
+        OutlineCollider = GetComponent<Collider>();
 
         startPos = transform.position;
         base.ChangeState(State.Normal);
@@ -95,7 +94,6 @@ public class OrcMonsterController : EnemyState
         phasecount = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         base.StateProcess();
@@ -171,15 +169,18 @@ public class OrcMonsterController : EnemyState
                 WarningA.SetActive(true);
                 yield return new WaitForSeconds(3.0f);
                 WarningA.SetActive(false);
-
                 myAnim.SetTrigger("Howling");
+                InlineCollider.enabled = false;
+                OutlineCollider.enabled = false;
                 // 오크의 체력이 절반이 되었을때 능력치를 버프하는 패턴 
                 PlaySound(roarSound);
                 this.battleStat.AP += 2;
-                this.battleStat.MoveSpeed += 1;
+                this.battleStat.MoveSpeed += 2;
                 phasecount = 2;
                 Debug.Log("공업 이속업");
-
+                yield return new WaitForSeconds(3.0f);
+                InlineCollider.enabled = true;
+                OutlineCollider.enabled = true;
             }
             if (this.curHP <= (this.battleStat.MaxHp * 0.3) && phasecount == 2)
             {
@@ -222,7 +223,7 @@ public class OrcMonsterController : EnemyState
             else
             {
                 dir.Normalize();
-                delta = moveSpeed * Time.deltaTime;
+                delta = battleStat.MoveSpeed * Time.deltaTime;
                 if (delta > dist) delta = dist;
                 transform.Translate(dir * delta, Space.World);
                 if (Mathf.Approximately(dist, 0.0f))
@@ -272,8 +273,6 @@ public class OrcMonsterController : EnemyState
     {
         if (myState == State.Death && ClearCounts == 0)
         {
-            /*Clear.SetActive(true);
-            Invoke("TurnOffClear", 3.0f);*/
             StartCoroutine(ClearCanvasOn());
         }
     }

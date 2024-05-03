@@ -743,6 +743,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3891765266597473588, guid: e1c93f26665c2924b886242320f75dda, type: 3}
   m_PrefabInstance: {fileID: 537624240}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &578468473 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3762269813008703368, guid: 26384700ce9d18144ae19aa89eb671d4, type: 3}
+  m_PrefabInstance: {fileID: 3177249495688086709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &594188131 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3934518789845374963, guid: 26384700ce9d18144ae19aa89eb671d4, type: 3}
@@ -1301,6 +1306,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6700046178465974880, guid: e1c93f26665c2924b886242320f75dda, type: 3}
   m_PrefabInstance: {fileID: 537624240}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1192134903 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 220848541540325368, guid: 26384700ce9d18144ae19aa89eb671d4, type: 3}
+  m_PrefabInstance: {fileID: 3177249495688086709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1459337522 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2789393995220440572, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
@@ -1800,6 +1810,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 6374079066289584061, guid: 26384700ce9d18144ae19aa89eb671d4, type: 3}
+      propertyPath: InlineCollider
+      value: 
+      objectReference: {fileID: 578468473}
+    - target: {fileID: 6374079066289584061, guid: 26384700ce9d18144ae19aa89eb671d4, type: 3}
+      propertyPath: OutlineCollider
+      value: 
+      objectReference: {fileID: 1192134903}
     - target: {fileID: 8193437799817776849, guid: 26384700ce9d18144ae19aa89eb671d4, type: 3}
       propertyPath: findEnemyAct.m_PersistentCalls.m_Calls.Array.size
       value: 0
