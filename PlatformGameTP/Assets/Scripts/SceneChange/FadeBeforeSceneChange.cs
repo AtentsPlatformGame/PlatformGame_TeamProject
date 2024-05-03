@@ -25,6 +25,7 @@ public class FadeBeforeSceneChange : MonoBehaviour
 
     IEnumerator FadeInBeforeSceneChange()
     {
+        Debug.Log("");
         curTime = 0.0f;
         float volume = 1.0f;
         if (bgSFX != null) volume = bgSFX.volume;

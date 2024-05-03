@@ -38,8 +38,8 @@ public class NagaWizard : EnemyState
     public AudioClip hitSound; // 피격 사운드
     [Header("사망 사운드")]
     public AudioClip deadSound; // 사망 사운드
-    [Header("배경음")]
-    public AudioClip bgSound; // 배경음
+    [Header("다음 맵 넘어가기")]
+    public GameObject nextStage;
 
     public int PhaseCount = 0;
     public GameObject GreetingBoss;
@@ -306,6 +306,7 @@ public class NagaWizard : EnemyState
         dropGoldAct?.Invoke(dropGold);
         Debug.Log("보상");
         Rewards.SetActive(true);
+        nextStage.SetActive(true);
 
         // 플레이어한테 골드를 주고 플레이어가 인벤토리를 킬 때 인벤토리가 그 정보를 가져와서 골드를 갱신한다. 그리고 다시 플레이어 골드도 갱신한다.
         ChangeState(State.Death);
