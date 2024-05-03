@@ -19,6 +19,7 @@ public class PlayerController : BattleSystem
     [SerializeField, Header("플레이어 최초 스텟")] PlayerStatData playerStatData;
 
     [SerializeField, Header("스펠 초기화를 위한 인벤토리 업데이트 함수")] UnityEvent<ItemStat> invenUpdate;
+    [SerializeField, Header("스펠 초기화를 위한 empty spell")] OriginSpellData spellData; 
     public UnityEvent OnStatsChanged;
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -239,7 +240,7 @@ public class PlayerController : BattleSystem
     void IsGround()
     {
 
-        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.1f, groundMask);
+        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.3f, groundMask);
         //Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
 
         myAnim.SetBool("IsGround", isGround);
@@ -478,9 +479,8 @@ public class PlayerController : BattleSystem
             else Instantiate(spellObject, this.transform);
             spellObject = null;
 
-            ItemStat trashItem = new ItemStat();
-            trashItem.ItemType = ITEMTYPE.SPELL;
-            invenUpdate?.Invoke(trashItem);
+            ItemStat tmpStat = spellData.GetSpellDataInfo();
+            invenUpdate?.Invoke(tmpStat);
         }
 
     }
@@ -661,7 +661,6 @@ public class PlayerController : BattleSystem
         DeathIMG.GetComponent<CanvasGroup>().alpha = 1.0f;
         DeathIMG.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-
     }
 
 
@@ -676,4 +675,6 @@ public class PlayerController : BattleSystem
         Debug.Log($"투사체 속도 : {this.battleStat.ProjectileSpeed}");
         Debug.Log($"이동속도 : {this.battleStat.MoveSpeed}");
     }
+
+    
 }
