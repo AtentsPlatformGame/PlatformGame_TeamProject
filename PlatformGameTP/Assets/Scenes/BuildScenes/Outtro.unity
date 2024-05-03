@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 153050614}
   - component: {fileID: 153050613}
   m_Layer: 5
-  m_Name: Intro
+  m_Name: Outtro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -934,6 +934,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6729790106142686075, guid: de102e1b48f4ce84cb99e68b92688c9b, type: 3}
+      propertyPath: bgSFX
+      value: 
+      objectReference: {fileID: 1758530802}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1243,6 +1247,80 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 125}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1758530801
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572805905847994260, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614027156792892192, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_Name
+      value: BackGroundSFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 8981849935940991114, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dbdd6714adaf8004b9c030c10f02b54f, type: 3}
+    - target: {fileID: 9137678160536083126, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9137678160536083126, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f48b21a6192a0d40856c7e6c6b142c4, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+--- !u!82 &1758530802 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9137678160536083126, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+  m_PrefabInstance: {fileID: 1758530801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1875960723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,3 +1674,4 @@ SceneRoots:
   - {fileID: 1622890280}
   - {fileID: 153050617}
   - {fileID: 1552123477}
+  - {fileID: 1758530801}

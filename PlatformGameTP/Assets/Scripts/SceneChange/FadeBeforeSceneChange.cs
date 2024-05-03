@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class FadeBeforeSceneChange : MonoBehaviour
 {
     public CanvasGroup cg;
+    public AudioSource bgSFX;
     public float fadeTime;
     float curTime = 0.0f;
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class FadeBeforeSceneChange : MonoBehaviour
         while (curTime <= fadeTime)
         {
             cg.alpha = Mathf.Lerp(0.0f, 1.0f, curTime / fadeTime);
+            if(bgSFX != null)bgSFX.volume = Mathf.Lerp(1.0f, 0.0f, curTime / fadeTime);
             curTime += Time.deltaTime;
             yield return null;
         }

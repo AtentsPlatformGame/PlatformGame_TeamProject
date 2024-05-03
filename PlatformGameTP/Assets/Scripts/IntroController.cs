@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class IntroController : MonoBehaviour
 {
+    public AudioSource bgSFX;
     public int keyCount;
     public GameObject Intro1;
     public GameObject Intro2;
@@ -83,6 +84,7 @@ public class IntroController : MonoBehaviour
 
 
         Intro1.SetActive(true);
+        bgSFX.time = 3f;
         for (int i = 0; i < dialog1.Length; i++)
         {
             text1.text += dialog1[i];
@@ -139,5 +141,6 @@ public class IntroController : MonoBehaviour
         }
         yield return new WaitForSeconds(1.5f);
         if(SceneChanger.instance != null) SceneChanger.instance.GoToTutorialStage();
+        
     }
 }
