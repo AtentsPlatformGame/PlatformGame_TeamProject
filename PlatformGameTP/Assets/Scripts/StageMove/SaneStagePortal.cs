@@ -22,6 +22,7 @@ public class SaneStagePortal : MonoBehaviour
     [Header("포탈이동 사운드")]
     public AudioSource teleportSource;
     public AudioClip teleportClip;
+    public int GetGKeyCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -55,9 +56,9 @@ public class SaneStagePortal : MonoBehaviour
     {
         if ((1 << other.gameObject.layer & playerMask) != 0)
         {
-            if (Input.GetKeyDown(KeyCode.G)&& InventoryCheck.activeSelf == false)
+            if (Input.GetKeyDown(KeyCode.G)&& InventoryCheck.activeSelf == false && GetGKeyCount == 0)
             {
-
+                GetGKeyCount = 1;
                 Debug.Log("활성화");
                 Fade();
                 if (teleportSource != null)
@@ -74,6 +75,7 @@ public class SaneStagePortal : MonoBehaviour
     public void Fade()
     {
         StartCoroutine(FadeInFlow());
+        
     }
     
     IEnumerator FadeInFlow()
@@ -106,6 +108,7 @@ public class SaneStagePortal : MonoBehaviour
         }
         DoMoving();
         Panel.gameObject.SetActive(false);
+        
         if (player != null)
         {
             if (player.GetCA_HpPenalty())
@@ -114,8 +117,10 @@ public class SaneStagePortal : MonoBehaviour
             }
         }
 
-        yield return null;
 
+        yield return new WaitForSeconds(3.0f);
+        GetGKeyCount = 0;
+        yield return null;
     }
         
     void Stopmoving()
