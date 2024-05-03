@@ -27,6 +27,7 @@ public class Rewards : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G) && rewardsCount == 0)
         {
             BossRewards.SetActive(true);
+            rewardsCount = 1;
         }
     }
     private void OnTriggerStay(Collider other)
@@ -34,6 +35,7 @@ public class Rewards : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G) && rewardsCount == 0)
         {
             BossRewards.SetActive(true);
+            rewardsCount = 1;
         }
     }
 
