@@ -22,6 +22,11 @@ public class SaneStagePortal : MonoBehaviour
     [Header("포탈이동 사운드")]
     public AudioSource teleportSource;
     public AudioClip teleportClip;
+
+    [Header("배경음 플레이어")]
+    public AudioSource bgmAudioSource;
+    [Header("교체 할 배경음")]
+    public AudioClip bgmClip;
     public int GetGKeyCount = 0;
 
     // Start is called before the first frame update
@@ -84,28 +89,38 @@ public class SaneStagePortal : MonoBehaviour
 
         Panel.gameObject.SetActive(true);
         Stopmoving();
+        float volume = 1.0f;
+        if (bgmAudioSource != null) volume = bgmAudioSource.volume;
         time = 0f;
         Color alpha = Panel.color;
         while(alpha.a < 1f)
         {
             time += Time.deltaTime / F_time;
             alpha.a = Mathf.Lerp(0, 1, time);
+            if (bgmAudioSource != null) bgmAudioSource.volume = Mathf.Lerp(volume, 0.0f, time);
             Panel.color = alpha;
             yield return null;
         }
         time = 0f;
-
+        
         PlayerTeleport.gameObject.transform.position = ExternalPortal.gameObject.transform.position;
         LightChangeAct?.Invoke();
+        if (bgmAudioSource != null && bgmClip != null)
+        {
+            bgmAudioSource.clip = bgmClip;
+            bgmAudioSource.Play();
+        }
         yield return new WaitForSeconds(2.0f);
 
         while (alpha.a > 0f)
         {
             time += Time.deltaTime / F_time;
             alpha.a = Mathf.Lerp(1, 0, time);
+            if (bgmAudioSource != null) bgmAudioSource.volume = Mathf.Lerp(0.0f, volume, time);
             Panel.color = alpha;
             yield return null;
         }
+        
         DoMoving();
         Panel.gameObject.SetActive(false);
         
