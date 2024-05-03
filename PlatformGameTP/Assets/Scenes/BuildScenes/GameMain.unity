@@ -638,6 +638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1148122896}
+  - component: {fileID: 1148122898}
   - component: {fileID: 1148122895}
   - component: {fileID: 1148122894}
   - component: {fileID: 1148122893}
@@ -749,6 +750,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title1: {fileID: 1470429379}
   Title2: {fileID: 1977254410}
+--- !u!114 &1148122898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148122892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f03fdcd662916f544b20658a2e8efa9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgSFX: {fileID: 1256637880}
+  bgSFXStartTime: 1
 --- !u!1 &1182934532
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +896,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182934532}
   m_CullTransparentMesh: 1
+--- !u!82 &1256637880 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9137678160536083126, guid: 9cb6ecab382fd9b489e2e922caf3b986, type: 3}
+  m_PrefabInstance: {fileID: 167291050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1470429379
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class MoveToNextStage : MonoBehaviour
 {
     public Button acceptBt;
+
+    
     private void OnEnable()
     {
         if (SceneChanger.instance != null)
@@ -21,8 +24,5 @@ public class MoveToNextStage : MonoBehaviour
 
         }
     }
-    public void CloseWindow()
-    {
-        this.gameObject.SetActive(false);
-    }
+    
 }
