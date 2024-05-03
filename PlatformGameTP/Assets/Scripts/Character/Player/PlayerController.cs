@@ -77,6 +77,13 @@ public class PlayerController : BattleSystem
         rigid = this.GetComponent<Rigidbody>();
         DeathIMG.GetComponent<CanvasGroup>().alpha = 0.0f;
         goldManager = FindObjectOfType<GoldManager>();
+        if (SoundManager.Instance != null && myAudioSource != null)
+        {
+            myAudioSource.volume = SoundManager.Instance.soundValue;
+            SoundManager.Instance.SetVolumeAct.AddListener(SetVolumeSlider);
+            Debug.Log("EnemyState Start, Sound check");
+
+        }
     }
 
     // Update is called once per frame
