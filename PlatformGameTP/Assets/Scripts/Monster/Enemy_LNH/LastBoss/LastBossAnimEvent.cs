@@ -19,6 +19,8 @@ public class LastBossAnimEvent : AnimEvent_LNH
     public UnityEvent patternOffAct;
     public UnityEvent playerMoveFalseAct;
     public Transform bossPortal;
+    public AudioSource lastBossBGM;
+    public AudioClip phase2Clip;
     public void OnClawAttack()
     {
         clawOnAttackAct?.Invoke();
@@ -52,6 +54,11 @@ public class LastBossAnimEvent : AnimEvent_LNH
     {
         phase2Act?.Invoke();
         bossPortal.gameObject.SetActive(false);
+        if (lastBossBGM != null)
+        {
+            lastBossBGM.clip = phase2Clip;
+            lastBossBGM.Play();
+        }
     }
 
     public void OnSpecialAttack()
@@ -79,5 +86,5 @@ public class LastBossAnimEvent : AnimEvent_LNH
         playerMoveFalseAct?.Invoke();
         if (SceneChanger.instance != null) SceneChanger.instance.GoToOuttro();
     }
-    
+
 }

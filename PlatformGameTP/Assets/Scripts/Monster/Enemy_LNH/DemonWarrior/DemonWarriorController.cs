@@ -203,7 +203,7 @@ public class DemonWarriorController : EnemyState
         Debug.Log("º“»Ø«ÿ¡‡");
         if (myTarget != null) myTarget.position = warpPoint.position;
         Destroy(gameObject);
-        ChangeBgmSound();
+        //ChangeBgmSound();
     }
 
     public void SpawnLastBoss()
