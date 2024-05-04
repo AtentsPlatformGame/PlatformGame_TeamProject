@@ -296,7 +296,7 @@ public class EnemyState : EnemyMovement
 
         while (!Mathf.Approximately(dist, 0.0f))
         {
-            float delta = moveSpeed * Time.deltaTime;
+            float delta = battleStat.MoveSpeed * Time.deltaTime;
             if (delta > dist) delta = dist;
             dist -= delta;
             transform.Translate(dir * delta, Space.World);

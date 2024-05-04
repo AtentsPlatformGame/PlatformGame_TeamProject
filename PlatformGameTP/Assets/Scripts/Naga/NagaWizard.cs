@@ -258,7 +258,7 @@ public class NagaWizard : EnemyState
             else
             {
                 dir.Normalize();
-                delta = moveSpeed * Time.deltaTime;
+                delta = battleStat.MoveSpeed * Time.deltaTime;
                 if (delta > dist) delta = dist;
                 transform.Translate(dir * delta, Space.World);
                 if (Mathf.Approximately(dist, 0.0f))

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class EnemyMovement : BattleSystem
 {
-    public float moveSpeed = 2.0f;
     public float rotSpeed = 360.0f;
     protected Vector3 dir;
 
@@ -64,7 +63,7 @@ public class EnemyMovement : BattleSystem
             else
             {
                 dir.Normalize();
-                delta = moveSpeed * Time.deltaTime;
+                delta = battleStat.MoveSpeed * Time.deltaTime;
                 if (delta > dist) delta = dist;
                 transform.Translate(dir * delta, Space.World);
                 if (Mathf.Approximately(dist, 0.0f))
@@ -127,7 +126,7 @@ public class EnemyMovement : BattleSystem
 
         while (!Mathf.Approximately(dist, 0.0f))
         {
-            float delta = moveSpeed * Time.deltaTime;
+            float delta = battleStat.MoveSpeed * Time.deltaTime;
             if (delta > dist) delta = dist;
             dist -= delta;
             transform.Translate(dir * delta, Space.World);

@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 1534761592030040419}
   - component: {fileID: 9156897443290321834}
   - component: {fileID: 4433721155396448155}
+  - component: {fileID: 790945636941756892}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -278,14 +279,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeHpAct:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerUIwindows, Assembly-CSharp
+        m_MethodName: UpdateUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   battleStat:
-    AP: 1
-    MaxHp: 5
+    AP: 3
+    MaxHp: 1000
     AttackRange: 10
     AttackDelay: 2
     ProjectileSpeed: 5
-    MoveSpeed: 0
+    MoveSpeed: 4
     AttackSize: 0
     AttackTwice: 0
     HealAfterAttack: 0
@@ -295,18 +308,18 @@ MonoBehaviour:
     CA_GoldPenalty: 0
     CA_HPPenalty: 0
     StatWindows: {fileID: 0}
-  _curHP: 0
+  _curHP: 1000
   attackPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
-    m_Bits: 0
-  fireballClip: {fileID: 0}
-  jumpClip: {fileID: 0}
-  healbuffClip: {fileID: 0}
-  speedbuffClip: {fileID: 0}
-  deadClip: {fileID: 0}
-  hitClip: {fileID: 0}
-  myAudioSource: {fileID: 0}
+    m_Bits: 524288
+  fireballClip: {fileID: 8300000, guid: 4515d034fabf8f34fa30596d1eac89c7, type: 3}
+  jumpClip: {fileID: 8300000, guid: 175c50876a0dda843b19312d120aacaa, type: 3}
+  healbuffClip: {fileID: 8300000, guid: 01b1e99f2a38b6447a02bdb3ee72e7d7, type: 3}
+  speedbuffClip: {fileID: 8300000, guid: 3c027de4a6f7795428c1dde59da1f354, type: 3}
+  deadClip: {fileID: 8300000, guid: 830197fcb0e0e9242ad52bd4cd6bf5bd, type: 3}
+  hitClip: {fileID: 8300000, guid: d249a67458fcaf1429ba53b3aee3df0f, type: 3}
+  myAudioSource: {fileID: 790945636941756892}
   deadsound: {fileID: 0}
   hitsound: {fileID: 0}
   bgmsound1: {fileID: 0}
@@ -322,7 +335,19 @@ MonoBehaviour:
   playerStatData: {fileID: 11400000, guid: 5f1774ee4d3b60340b5ba491316125f0, type: 2}
   invenUpdate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Inventory_LNH, Assembly-CSharp
+        m_MethodName: UpdateInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   spellData: {fileID: 11400000, guid: e30ba39f1037cf94cbc96f5ae45ccb7a, type: 2}
   OnStatsChanged:
     m_PersistentCalls:
@@ -336,7 +361,7 @@ MonoBehaviour:
   switchTrackedOffset:
     m_PersistentCalls:
       m_Calls: []
-  DeathIMG: {fileID: 6002324305891714575, guid: 85c774a27784afe4dbe39cfee5ce3ed2, type: 3}
+  DeathIMG: {fileID: 0}
   isSpellReady: 0
   is3d: 0
   jumpCoolTime: 0.5
@@ -457,10 +482,106 @@ MonoBehaviour:
   useBuffSpellAct:
     m_PersistentCalls:
       m_Calls: []
-  spellAudioSource: {fileID: 0}
-  attackspellClip: {fileID: 0}
-  buffspellClip: {fileID: 0}
-  canclespellClip: {fileID: 0}
+  spellAudioSource: {fileID: 790945636941756892}
+  attackspellClip: {fileID: 8300000, guid: 735440d4b997e044399188bddf556e8b, type: 3}
+  buffspellClip: {fileID: 8300000, guid: beb80de1361513d42abf3c3905da7b12, type: 3}
+  canclespellClip: {fileID: 8300000, guid: 35cf4a91fd829b240a00c154e57aa7a2, type: 3}
+--- !u!82 &790945636941756892
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3891765266597473588}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4515d034fabf8f34fa30596d1eac89c7, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4728296680003517134
 GameObject:
   m_ObjectHideFlags: 0
