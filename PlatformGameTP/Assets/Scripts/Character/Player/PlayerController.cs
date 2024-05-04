@@ -531,7 +531,16 @@ public class PlayerController : BattleSystem
         }
     }
 
-
+    public void HealWithFullHealth()
+    {
+        this.curHP = this.battleStat.MaxHp;
+        PlayerUIwindows.Instance.UpdateHpbar();
+        if (myAudioSource != null)
+        {
+            myAudioSource.clip = healbuffClip;
+            myAudioSource.PlayOneShot(healbuffClip);
+        }
+    }
 
 
     public void HealWithConsume()

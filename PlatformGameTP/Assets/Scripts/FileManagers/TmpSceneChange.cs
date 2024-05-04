@@ -21,5 +21,10 @@ public class TmpSceneChange : MonoBehaviour
             tmpCanvas.SetActive(true);
             tmpButton.GetComponent<Button>().onClick.Invoke();
         }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+
+        }
     }
 }

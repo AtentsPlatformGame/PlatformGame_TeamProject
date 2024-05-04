@@ -43,7 +43,7 @@ public class Heal : MonoBehaviour
     {
         
         int healthItemPrice = 0; // 체력 회복 아이템의 가격 (예시)
-        playerGoldManager.ChangeGold(100);
+        playerGoldManager.ChangeGold(-100);
         Debug.Log("현재 소지 금액 : ");
         Debug.Log(playerGold);
         if (playerGoldManager.GetPlayerGold() > healthItemPrice)
@@ -80,23 +80,13 @@ public class Heal : MonoBehaviour
     // 플레이어의 체력을 회복합니다.
     public void RestoreHealth()
     {
-        if (player != null) player.HealBuff();
+        if (player != null) player.HealWithFullHealth();
         CheckBuyItems.SetActive(true);
         Debug.Log("플레이어 체력 회복 : " + player.GetCurHP());
     }
 
     private void Update()
     {
-        // 골드 관련 업데이트가 필요한 경우 여기서 처리합니다.
-        // 나중에 지우기
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            BattleSystem bs = player.GetComponent<BattleSystem>();
-            if(bs != null)
-            {
-                bs.TakeDamage(1.0f);
-                Debug.Log("플레이어 현재 체력 : " + player.GetCurHP());
-            }
-        }
+        
     }
 }
