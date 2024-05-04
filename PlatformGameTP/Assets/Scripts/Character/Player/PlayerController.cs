@@ -437,7 +437,8 @@ public class PlayerController : BattleSystem
     IEnumerator CoolingAttack()
     {
 
-        while (!Mathf.Approximately(battleStat.AttackDelay, attackDeltaTime))
+       // while (!Mathf.Approximately(battleStat.AttackDelay, attackDeltaTime))
+        while (battleStat.AttackDelay >= attackDeltaTime)
         {
             attackDeltaTime += 1f;
             yield return new WaitForSeconds(1f);
