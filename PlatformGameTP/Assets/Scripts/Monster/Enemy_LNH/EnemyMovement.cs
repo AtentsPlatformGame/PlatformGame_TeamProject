@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class EnemyMovement : BattleSystem
 {
+    [Header("몬스터 공격 사운드")] public AudioClip monsterAttackClip;
     public float rotSpeed = 360.0f;
     protected Vector3 dir;
 
@@ -58,6 +59,11 @@ public class EnemyMovement : BattleSystem
                 {
                     battleTime = 0.0f;
                     myAnim.SetTrigger("Attack");
+                    if(myAudioSource != null)
+                    {
+                        myAudioSource.clip = monsterAttackClip;
+                        myAudioSource.Play();
+                    }
                 }
             }
             else

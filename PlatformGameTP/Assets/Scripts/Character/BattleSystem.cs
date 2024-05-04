@@ -68,10 +68,10 @@ public class BattleSystem : CharacterProperty, IDamage
 
     public AudioSource myAudioSource;
 
-    [Header("보스 사망 사운드")] public AudioClip deadsound; //보스가 죽을때 나는 사운드
-    [Header("보스 피격 사운드")] public AudioClip hitsound; //보스가 맞을때 나는 사운드
-    [Header("보스 배경음1")] public GameObject bgmsound1; //보스 배경음1
-    [Header("보스 배경음2")] public GameObject bgmsound2; //보스 배경음2
+    [Header("몬스터 사망 사운드")] public AudioClip deadsound; //몬스터가 죽을때 나는 사운드
+    [Header("몬스터 피격 사운드")] public AudioClip hitsound; //몬스터가 맞을때 나는 사운드
+    /*[Header("보스 배경음1")] public GameObject bgmsound1; //보스 배경음1
+    [Header("보스 배경음2")] public GameObject bgmsound2; //보스 배경음2*/
     Slider volumeSlider;
     private void Start()
     {
@@ -265,10 +265,5 @@ public class BattleSystem : CharacterProperty, IDamage
         }
     }
 
-    public void ChangeBgmSound()
-    {
-        bgmsound1.SetActive(false);
-        bgmsound2.SetActive(true);
-    }
 
 }

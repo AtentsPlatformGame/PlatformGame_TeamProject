@@ -58,8 +58,6 @@ public class DemonWarriorController : EnemyState
     void Start()
     {
         base.Initialize();
-        bgmsound1.SetActive(true);
-        bgmsound2.SetActive(false);
         
         startPos = transform.position;
         base.ChangeState(State.Normal);
