@@ -45,7 +45,11 @@ public class EnemyMovement : BattleSystem
     {
         while (target != null)
         {
-            
+            if (!target.GetComponent<PlayerController>().isAlive())
+            {
+                target = null;
+                break;
+            }
             myAnim.SetBool("IsRunning", true);
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;

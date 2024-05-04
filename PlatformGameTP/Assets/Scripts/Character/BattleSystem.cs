@@ -258,7 +258,7 @@ public class BattleSystem : CharacterProperty, IDamage
 
     public void PlaySound(AudioClip clip)
     {
-        if (myAudioSource != null)
+        if (myAudioSource != null && clip != null)
         {
             myAudioSource.clip = clip;
             myAudioSource.Play();
