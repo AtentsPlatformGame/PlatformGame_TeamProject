@@ -389,7 +389,19 @@ MonoBehaviour:
         m_CallState: 2
   lostEnemyAct:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4222716299513822657}
+        m_TargetAssemblyTypeName: EnemyState, Assembly-CSharp
+        m_MethodName: LostTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1089547493025012834
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -699,19 +711,7 @@ MonoBehaviour:
         m_CallState: 2
   lostEnemyAct:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4222716299513822657}
-        m_TargetAssemblyTypeName: EnemyState, Assembly-CSharp
-        m_MethodName: LostTarget
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!65 &6677544123142599506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -731,7 +731,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 3, z: 6}
+  m_Size: {x: 3, y: 3, z: 5}
   m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &5058186188048319840
 GameObject:
