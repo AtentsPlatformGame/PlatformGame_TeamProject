@@ -193,10 +193,11 @@ public class OrcMonsterController : EnemyState
                 yield return new WaitForSeconds(5.0f);
                 WarningP.SetActive(false);
                 PatternPillar.SetActive(true);
-                Debug.Log("기둥 무너짐");
+                Debug.Log("기둥 무너짐"); 
+                yield return new WaitForSeconds(1.0f);
+                PlaySound(knockdownSound);
 
                 // 오크의 체력이 80%일때 기둥을 쓰러트리는 패턴
-                PlaySound(knockdownSound);
                 yield return new WaitForSeconds(3.0f);
                 //Destroy(PatternPillar);
                 PatternPillar.SetActive(false);

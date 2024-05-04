@@ -181,7 +181,6 @@ public class LastBoss_FlyingDemonKing : EnemyState
             if (act != null)
             {
                 act.TakeDamage(this.battleStat.AP);
-                
             }
         }
     }
@@ -349,6 +348,7 @@ public class LastBoss_FlyingDemonKing : EnemyState
 
     public void BiteAttackEffect()
     {
+        new WaitForSeconds(-5.0f);
         PlaySound(biteSound);
         Transform obj;
         obj = Instantiate(biteAttackEffect, biteAttackPoint.transform.position, Quaternion.identity, null);
