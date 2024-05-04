@@ -81,7 +81,7 @@ public class PlayerController : BattleSystem
         {
             myAudioSource.volume = SoundManager.Instance.soundValue;
             SoundManager.Instance.SetVolumeAct.AddListener(SetVolumeSlider);
-            Debug.Log("EnemyState Start, Sound check");
+            Debug.Log("Player Start, Sound check");
 
         }
     }

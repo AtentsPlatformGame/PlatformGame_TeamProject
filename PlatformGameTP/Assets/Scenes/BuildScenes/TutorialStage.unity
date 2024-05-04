@@ -1068,6 +1068,7 @@ MonoBehaviour:
   - {fileID: 2000301005}
   inventory: {fileID: 1596400487}
   StartPos: {fileID: 1013249255}
+  optionWindow: {fileID: 976237485}
   playerStatData: {fileID: 11400000, guid: 5f1774ee4d3b60340b5ba491316125f0, type: 2}
 --- !u!1 &829251567
 GameObject:
@@ -1819,7 +1820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerGold: 0
-  OwngoldMyInventory: {fileID: 0}
+  OwngoldMyInventory: {fileID: 1654413863}
   OwngoldShopInventory: {fileID: 0}
 --- !u!1001 &1117124337
 PrefabInstance:
@@ -1953,6 +1954,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1930497864}
+    - target: {fileID: 6165298204086834448, guid: 915fb8c16ab653a47bad2f012d88ad65, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6165298204086834448, guid: 915fb8c16ab653a47bad2f012d88ad65, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8762668807328498878, guid: 915fb8c16ab653a47bad2f012d88ad65, type: 3}
       propertyPath: pc
       value: 
@@ -3320,6 +3329,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1654413863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4367597083355869303, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
+  m_PrefabInstance: {fileID: 2000301004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1689989608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4011,6 +4031,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b8be2032209aa8c4a8b607eae363b9a0, type: 3}
+    - target: {fileID: 6129320275154831480, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6132889228822038337, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
       propertyPath: itemStat.ItemType
       value: 0

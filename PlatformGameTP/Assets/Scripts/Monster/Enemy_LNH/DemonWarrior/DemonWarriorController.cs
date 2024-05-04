@@ -95,7 +95,7 @@ public class DemonWarriorController : EnemyState
     public new void OnAttack()
     {
         PlaySound(swingSound);
-        Collider[] list = Physics.OverlapSphere(attackPoint.position, 5.0f, enemyMask);
+        Collider[] list = Physics.OverlapSphere(attackPoint.position, 7.0f, enemyMask);
 
         foreach (Collider col in list)
         {

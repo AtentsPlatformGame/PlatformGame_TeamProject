@@ -1174,7 +1174,7 @@ MonoBehaviour:
     AttackRange: 2
     AttackDelay: 2
     ProjectileSpeed: 0
-    MoveSpeed: 0
+    MoveSpeed: 5
     AttackSize: 0
     AttackTwice: 0
     HealAfterAttack: 0
@@ -1192,14 +1192,14 @@ MonoBehaviour:
   fireballClip: {fileID: 0}
   jumpClip: {fileID: 0}
   healbuffClip: {fileID: 0}
-  spellClip: {fileID: 0}
   speedbuffClip: {fileID: 0}
   deadClip: {fileID: 0}
   hitClip: {fileID: 0}
   myAudioSource: {fileID: 5640239503336149943}
   deadsound: {fileID: 8300000, guid: 8bd7767237f96574fa6349314dd7f63a, type: 3}
   hitsound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
-  moveSpeed: 1
+  bgmsound1: {fileID: 0}
+  bgmsound2: {fileID: 0}
   rotSpeed: 360
   myState: 0
   groundMask:
@@ -1234,6 +1234,8 @@ MonoBehaviour:
   ClearImg: {fileID: 0}
   hitPoint: {fileID: 1139159558766861315}
   spawnPoint: {fileID: 7881796247306560567}
+  InlineCollider: {fileID: 0}
+  OutlineCollider: {fileID: 0}
   isPhaseChanged: 0
   player:
     serializedVersion: 2
@@ -1249,6 +1251,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: a13f001586b2d324198a882650f588ac, type: 3}
   deadSound: {fileID: 8300000, guid: 8bd7767237f96574fa6349314dd7f63a, type: 3}
   bgSound: {fileID: 8300000, guid: 3ac17a27964e1ef44999252719ea34d3, type: 3}
+  nextStagePortal: {fileID: 0}
 --- !u!82 &5640239503336149943
 AudioSource:
   m_ObjectHideFlags: 0

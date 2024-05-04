@@ -15,6 +15,6 @@ public class Sound : MonoBehaviour
     void Update()
     {
 
-        SoundManager.Instance.SFXPlay("Attack", clip);
+        
     }
 }

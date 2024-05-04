@@ -25,6 +25,7 @@ public class Spell_Attack : Spell_Info
         {
             if(attackSpellAudioSource != null)
             {
+                attackSpellAudioSource.volume = SoundManager.Instance.soundValue;
                 attackSpellAudioSource.Play();
             }
             BattleSystem bs = other.gameObject.GetComponent<BattleSystem>();

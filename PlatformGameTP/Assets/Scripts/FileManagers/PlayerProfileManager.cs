@@ -12,6 +12,7 @@ public class PlayerProfileManager : MonoBehaviour
     string savePath;
     public Transform inventory;
     public Transform StartPos;
+    public Transform optionWindow;
 
     [SerializeField, Header("플레이어 기본 스텟")] PlayerStatData playerStatData;
     PlayerController player;
@@ -68,7 +69,10 @@ public class PlayerProfileManager : MonoBehaviour
 
     IEnumerator LoadingPlayerInvenProfile()
     {
-        if(inventory != null)inventory.gameObject.SetActive(true);
+        if (optionWindow != null) optionWindow.gameObject.SetActive(true);
+        optionWindow.gameObject.SetActive(false);
+
+        if (inventory != null)inventory.gameObject.SetActive(true);
         player = FindObjectOfType<PlayerController>();
         goldManager = FindObjectOfType<GoldManager>();
         player.gameObject.transform.position = StartPos.position;
@@ -118,6 +122,7 @@ public class PlayerProfileManager : MonoBehaviour
             player.Initialize(player.GetMaxHP());
             goldManager.SetPlayerGold(0);
             inventory.gameObject.SetActive(false);
+            
             yield return null;
         }
 

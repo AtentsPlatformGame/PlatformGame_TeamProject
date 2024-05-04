@@ -27,46 +27,10 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(Instance);
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void OnSceneLoaded(Scene arg0,LoadSceneMode arg1)
-    {
-        for (int i = 0; i< bglist.Length; i++)
-        {
-            if(arg0.name == bglist[i].name)
-                BgSoundPlay(bglist[i]);
-        }
-    }
-
-
-    public void SFXPlay(string sfxName, AudioClip clip)
-    {
-        GameObject go = new GameObject(sfxName + "Sound");
-        AudioSource audiosource = go.AddComponent<AudioSource>();
-        audiosource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        if(audiosource != null)
-        {
-            audiosource.clip = clip;
-            audiosource.Play();
-        }
-
-        Destroy(go, clip.length);
-    }
-
-    public void BgSoundPlay(AudioClip clip)
-    {
-        bgSound.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        if (bgSound != null)
-        {
-            bgSound.clip = clip;
-            bgSound.loop = true;
-            bgSound.Play();
         }
     }
 
@@ -80,15 +44,24 @@ public class SoundManager : MonoBehaviour
     {
 
     }
+    
+    
     public void SetBGSVolume() // 배경음
     {
         bgSoundValue = bgVolumeSlider.value;
+    }
+    public void SetBGSVolume(float value) // 배경음
+    {
+        bgSoundValue = value;
     }
     public void SetVolume() // 효과음
     {
         soundValue = volumeSlider.value;
     }
-
+    public void SetVolume(float value) // 효과음
+    {
+        soundValue = value;
+    }
     public void SetBGVolumeSlider(Slider _slider)
     {
         bgVolumeSlider = _slider;

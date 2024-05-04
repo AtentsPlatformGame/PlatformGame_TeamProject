@@ -177,6 +177,7 @@ MonoBehaviour:
   - {fileID: 1106164102}
   inventory: {fileID: 1106164100}
   StartPos: {fileID: 154427935}
+  optionWindow: {fileID: 670143704}
   playerStatData: {fileID: 11400000, guid: 5f1774ee4d3b60340b5ba491316125f0, type: 2}
 --- !u!4 &94436249
 Transform:
@@ -1248,6 +1249,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5125795117688814891, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
   m_PrefabInstance: {fileID: 1106164099}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1106164101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4367597083355869303, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
+  m_PrefabInstance: {fileID: 1106164099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1106164102 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6132889228822038337, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
@@ -1477,7 +1489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerGold: 0
-  OwngoldMyInventory: {fileID: 0}
+  OwngoldMyInventory: {fileID: 1106164101}
   OwngoldShopInventory: {fileID: 0}
 --- !u!4 &1674990914
 Transform:

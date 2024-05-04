@@ -28,8 +28,8 @@ public class GoldManager : MonoBehaviour
     void Update()
     {
         CountUpGold();
-        if (OwngoldMyInventory.gameObject.activeSelf == true && OwngoldMyInventory != null) OwngoldMyInventory.text = PlayerGold.ToString();
-        if (OwngoldShopInventory.gameObject.activeSelf == true && OwngoldShopInventory != null) OwngoldShopInventory.text = PlayerGold.ToString();
+        if (OwngoldMyInventory != null  &&  OwngoldMyInventory.gameObject.activeSelf == true  ) OwngoldMyInventory.text = PlayerGold.ToString();
+        if (OwngoldShopInventory != null  && OwngoldShopInventory.gameObject.activeSelf == true  ) OwngoldShopInventory.text = PlayerGold.ToString();
     }
     public void ChangeGold(int _gold)
     {
