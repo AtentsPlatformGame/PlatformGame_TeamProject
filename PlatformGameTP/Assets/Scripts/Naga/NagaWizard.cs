@@ -163,9 +163,10 @@ public class NagaWizard : EnemyState
                     this.transform.position = SpecialPatternPos;
                     
                     myAnim.SetTrigger("SpecialPattern");
+                    WarningSign.SetActive(true);
                     PlaySound(warningSound);
                     PlaySound(roarSound);
-                    WarningSign.SetActive(true);
+                    
                     BeforeTsunami.SetActive(true);
                     yield return new WaitForSeconds(5.0f);
                     BeforeTsunami.SetActive(false);
