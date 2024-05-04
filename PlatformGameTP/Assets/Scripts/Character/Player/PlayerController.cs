@@ -258,14 +258,15 @@ public class PlayerController : BattleSystem
     void IsGround()
     {
 
-        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.5f, groundMask);
+        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.1f + Mathf.Epsilon, groundMask);
         //Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
 
         myAnim.SetBool("IsGround", isGround);
         if (isGround)
         {
             jumpCoolTime += Time.deltaTime;
-            //Debug.Log("hit");
+            Debug.Log("hit");
+            myAnim.ResetTrigger("Jumping");
         }
     }
 
