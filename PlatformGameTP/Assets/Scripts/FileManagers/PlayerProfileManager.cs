@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.IO;
 using InventorySystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerProfileManager : MonoBehaviour
 {
@@ -64,6 +65,8 @@ public class PlayerProfileManager : MonoBehaviour
         // JSON 파일로 저장
         savePath = SceneChanger.instance.filepath_playerProfile;
         File.WriteAllText(savePath, json);
+        Scene scene = SceneManager.GetActiveScene();
+        Debug.Log(scene.name + "에서 세이브 실행");
     }
 
     void LoadPlayerProfile()
@@ -81,7 +84,8 @@ public class PlayerProfileManager : MonoBehaviour
         goldManager = FindObjectOfType<GoldManager>();
         player.gameObject.transform.position = StartPos.position;
         if(SceneChanger.instance != null) savePath = SceneChanger.instance.filepath_playerProfile;
-        Debug.Log("로드 시작");
+        Scene scene = SceneManager.GetActiveScene();
+        Debug.Log(scene.name + "에서 로드 시작");
         // JSON 파일로부터 데이터 읽기
         if (File.Exists(savePath))
         {
