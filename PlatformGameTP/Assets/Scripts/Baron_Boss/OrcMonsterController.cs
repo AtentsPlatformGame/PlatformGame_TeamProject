@@ -44,6 +44,8 @@ public class OrcMonsterController : EnemyState
     public AudioClip attack3Sound; // 평타3대 사운드
     [Header("낙석 사운드")]
     public AudioClip stoneSound; // 낙석 사운드
+    [Header("낙석 착지 사운드")]
+    public AudioClip landingSound; // 낙석 착지 사운드
     [Header("분노 사운드")]
     public AudioClip roarSound; // 분노(포효) 사운드
     [Header("기둥쓰러트리기 사운드")]
@@ -157,6 +159,8 @@ public class OrcMonsterController : EnemyState
                 myAnim.SetTrigger("PatternS");
                 PatternStons.SetActive(true);
                 PlaySound(stoneSound);
+                yield return new WaitForSeconds(2.0f);
+                PlaySound(landingSound);
                 // 오크의 체력이 20%남았을때 낙석 패턴
                 yield return new WaitForSeconds(3.0f);
                 PatternStons.SetActive(false);
