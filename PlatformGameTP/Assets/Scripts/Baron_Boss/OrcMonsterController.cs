@@ -166,10 +166,11 @@ public class OrcMonsterController : EnemyState
                 PlaySound(landingSound);
                 // 오크의 체력이 20%남았을때 낙석 패턴
                 yield return new WaitForSeconds(3.0f);
+                WarningS.SetActive(false);
+                PatternStons.SetActive(false);
                 InlineCollider.enabled = true;
                 OutlineCollider.enabled = true;
                 OrcCollider.enabled = true;
-                PatternStons.SetActive(false);
                 phasecount = 1;
 
             }
