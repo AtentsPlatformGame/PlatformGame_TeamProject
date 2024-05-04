@@ -28,6 +28,7 @@ public class OrcMonsterController : EnemyState
 
     public Collider InlineCollider;
     public Collider OutlineCollider;
+    public Collider OrcCollider;
 
     [SerializeField] bool isPhaseChanged = false;
 
@@ -154,8 +155,10 @@ public class OrcMonsterController : EnemyState
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
                 WarningS.SetActive(true);
+                InlineCollider.enabled = false;
+                OutlineCollider.enabled = false;
+                OrcCollider.enabled = false;
                 yield return new WaitForSeconds(3.0f);
-                WarningS.SetActive(false);
                 myAnim.SetTrigger("PatternS");
                 PatternStons.SetActive(true);
                 PlaySound(stoneSound);
@@ -163,6 +166,9 @@ public class OrcMonsterController : EnemyState
                 PlaySound(landingSound);
                 // 오크의 체력이 20%남았을때 낙석 패턴
                 yield return new WaitForSeconds(3.0f);
+                InlineCollider.enabled = true;
+                OutlineCollider.enabled = true;
+                OrcCollider.enabled = true;
                 PatternStons.SetActive(false);
                 phasecount = 1;
 
@@ -170,14 +176,15 @@ public class OrcMonsterController : EnemyState
 
             if (this.curHP <= (this.battleStat.MaxHp * 0.5) && phasecount == 1)
             {
-                this.transform.position = PatternPos;
+                //this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
                 WarningA.SetActive(true);
+                InlineCollider.enabled = false;
+                OutlineCollider.enabled = false;
+                OrcCollider.enabled = false;
                 yield return new WaitForSeconds(3.0f);
                 WarningA.SetActive(false);
                 myAnim.SetTrigger("Howling");
-                InlineCollider.enabled = false;
-                OutlineCollider.enabled = false;
                 // 오크의 체력이 절반이 되었을때 능력치를 버프하는 패턴 
                 PlaySound(roarSound);
                 this.battleStat.AP += 2;
@@ -187,6 +194,7 @@ public class OrcMonsterController : EnemyState
                 yield return new WaitForSeconds(3.0f);
                 InlineCollider.enabled = true;
                 OutlineCollider.enabled = true;
+                OrcCollider.enabled = true;
             }
             if (this.curHP <= (this.battleStat.MaxHp * 0.3) && phasecount == 2)
             {
@@ -194,15 +202,20 @@ public class OrcMonsterController : EnemyState
                 this.transform.position = PatternPos;
                 myAnim.SetBool("IsRunning", false);
                 WarningP.SetActive(true);
+                InlineCollider.enabled = false;
+                OutlineCollider.enabled = false;
+                OrcCollider.enabled = false;
                 yield return new WaitForSeconds(5.0f);
                 WarningP.SetActive(false);
                 PatternPillar.SetActive(true);
                 Debug.Log("기둥 무너짐"); 
                 yield return new WaitForSeconds(1.0f);
                 PlaySound(knockdownSound);
-
                 // 오크의 체력이 80%일때 기둥을 쓰러트리는 패턴
                 yield return new WaitForSeconds(3.0f);
+                InlineCollider.enabled = true;
+                OutlineCollider.enabled = true;
+                OrcCollider.enabled = true;
                 //Destroy(PatternPillar);
                 PatternPillar.SetActive(false);
 
