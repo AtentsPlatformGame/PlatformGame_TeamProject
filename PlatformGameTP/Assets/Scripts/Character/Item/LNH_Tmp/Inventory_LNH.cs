@@ -68,6 +68,22 @@ public class Inventory_LNH : MonoBehaviour
         updatePlayerStatAct?.Invoke(calStat);
     }
 
+    public void UpdateShopInventory(ItemStat _itemStat)
+    {
+        switch (_itemStat.ItemType)
+        {
+            case ITEMTYPE.WEAPON:
+                UpdateSlot(0, _itemStat);
+                break;
+            case ITEMTYPE.ARMOR:
+                UpdateSlot(1, _itemStat);
+                break;
+            
+            default:
+                break;
+        }
+    }
+
     void UpdateSlot(int idx, ItemStat _itemStat)
     {
         updateItemStat[idx]?.Invoke(_itemStat);

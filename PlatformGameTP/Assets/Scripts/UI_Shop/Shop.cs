@@ -10,6 +10,7 @@ namespace LGH
     public class Shop : ItemProperty
     {
         public UnityEvent<ItemStat> updateStatAct;
+        public UnityEvent<ItemStat> updateTmpInvenAct;
         GameObject itemToBuy;
 
         public GameObject shopUI;
@@ -54,6 +55,7 @@ namespace LGH
                     CheckBuyItems.SetActive(false);
                     FinishBuy.SetActive(true);
                     updateStatAct?.Invoke(buyItemStat);
+                    updateTmpInvenAct?.Invoke(buyItemStat);
                     Debug.Log($"{buyItemStat.ItemType} 타입, 공격력 {buyItemStat.Ap}, 추가 체력 {buyItemStat.PlusHeart}, 이속 {buyItemStat.PlusSpeed}, 가격{buyItemStat.ItemsPrice}");
                 }
             
