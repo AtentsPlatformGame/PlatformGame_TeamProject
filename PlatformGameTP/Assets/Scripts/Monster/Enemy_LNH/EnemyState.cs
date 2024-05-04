@@ -201,7 +201,7 @@ public class EnemyState : EnemyMovement
         myAnim.SetBool("IsRunning", false);
 
         yield return new WaitForSeconds(1.5f);
-        playTime = Random.Range(2.0f, 4.0f);
+        playTime = Random.Range(1.0f, 3.0f);
         MoveToOriginPos(startPos, playTime);
     }
 
