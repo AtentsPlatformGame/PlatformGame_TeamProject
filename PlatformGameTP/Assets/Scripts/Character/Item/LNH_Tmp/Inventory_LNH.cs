@@ -8,6 +8,7 @@ public class Inventory_LNH : MonoBehaviour
     public UnityEvent<BattleStat> updatePlayerStatAct; // 플레이어 정보를 새로 입력받은 아이템 정보로 갱신하는 UnityEvent
     public UnityEvent<ItemStat> updatePlayerSpell;
     public UnityEvent<ItemStat>[] updateItemStat; // 각 인벤토리 슬롯마다 각기 달리 정보를 갱신하는 UnityEvent
+    public UnityEvent<float, bool> updatePlayerHP;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class Inventory_LNH : MonoBehaviour
                 break;
             case ITEMTYPE.ARMOR:
                 UpdateSlot(1, _itemStat);
+                updatePlayerHP?.Invoke(_itemStat.PlusHeart, true);
                 break;
             case ITEMTYPE.CURSEDACCE:
                 UpdateSlot(2, _itemStat);

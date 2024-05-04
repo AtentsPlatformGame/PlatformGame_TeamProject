@@ -127,6 +127,17 @@ public class PlayerController : BattleSystem
         PlayerUIwindows.Instance.UpdateHpbar();
     }
 
+    public void Initialize(float _plusHp, bool isArmor)
+    {
+        if (isArmor)
+        {
+            curHP = _plusHp + this.originalStat.MaxHp;
+            
+            PlayerUIwindows.Instance.UpdateHpbar();
+        }
+        
+    }
+
     public void Initialize(PlayerStatData basicStat)
     {
         this.battleStat.AP = basicStat.GetPlayerStatInfo().AP;
@@ -580,6 +591,7 @@ public class PlayerController : BattleSystem
             this.battleStat.MaxHp += 20;
         }
 
+        
         //Initialize();
        PlayerUIwindows.Instance.UpdateHpbar();
         Debug.Log(this.battleStat.AP + " 공격력 변화 일어남");
