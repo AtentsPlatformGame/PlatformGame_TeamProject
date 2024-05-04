@@ -3579,7 +3579,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 861135198}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &694998085
 PrefabInstance:
@@ -5613,7 +5613,6 @@ Transform:
   - {fileID: 1677598728}
   - {fileID: 960422483}
   - {fileID: 896132288}
-  - {fileID: 671289056}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &876565649
@@ -67981,6 +67980,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 516780012}
     - target: {fileID: 9038025140815798167, guid: 95898f7cc2a062d4497c1a6be233d8b7, type: 3}
+      propertyPath: StartPos
+      value: 
+      objectReference: {fileID: 671289056}
+    - target: {fileID: 9038025140815798167, guid: 95898f7cc2a062d4497c1a6be233d8b7, type: 3}
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 858846372}
@@ -67999,6 +68002,7 @@ SceneRoots:
   - {fileID: 1671401595}
   - {fileID: 516780011}
   - {fileID: 2044631940}
+  - {fileID: 671289056}
   - {fileID: 861135198}
   - {fileID: 1673232181}
   - {fileID: 58110552}
