@@ -16062,6 +16062,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1204988734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204988730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52b72bdafafecb428f4c9462b320be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAudioSource: {fileID: 1204988733}
 --- !u!1 &1210682933
 GameObject:
   m_ObjectHideFlags: 0
@@ -67889,6 +67902,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4150984446001766017, guid: 8b3ec5a6f90fa0d4396bf4a46cedd005, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1204988733}
+    - targetCorrespondingSourceObject: {fileID: 4150984446001766017, guid: 8b3ec5a6f90fa0d4396bf4a46cedd005, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1204988734}
   m_SourcePrefab: {fileID: 100100000, guid: 8b3ec5a6f90fa0d4396bf4a46cedd005, type: 3}
 --- !u!223 &2782854036326630440 stripped
 Canvas:
@@ -68100,7 +68116,6 @@ SceneRoots:
   - {fileID: 58110552}
   - {fileID: 5109959073343520152}
   - {fileID: 1193471593}
-  - {fileID: 1358658559}
   - {fileID: 1049108410}
   - {fileID: 2782854036326630439}
   - {fileID: 932119270}
@@ -68110,4 +68125,5 @@ SceneRoots:
   - {fileID: 2034559595}
   - {fileID: 2815136924362867056}
   - {fileID: 1220686886}
+  - {fileID: 1358658559}
   - {fileID: 1091774585}

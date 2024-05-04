@@ -258,7 +258,7 @@ public class PlayerController : BattleSystem
     void IsGround()
     {
 
-        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.3f, groundMask);
+        isGround = Physics.Raycast(transform.position + new Vector3(0.0f, 1.0f, 0.0f), Vector3.down, 1.5f, groundMask);
         //Debug.DrawRay(transform.position + new Vector3(0, 1, 0), Vector3.down, Color.blue);
 
         myAnim.SetBool("IsGround", isGround);
@@ -282,7 +282,7 @@ public class PlayerController : BattleSystem
             myAnim.SetTrigger("Jumping");
         }
         UnityEngine.Debug.Log(isGround);*/
-        if (isGround && Input.GetKeyDown(KeyCode.Space) && jumpCoolTime >= 0.25f)
+        if (isGround && Input.GetKeyDown(KeyCode.Space) && jumpCoolTime >= 0.15f)
         {
             // Á¡ÇÁ »ç¿îµå Loop, Play on Awake ²¨¾ßµÊ
             if (myAudioSource != null)
