@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -526,6 +526,10 @@ PrefabInstance:
       propertyPath: updateItemStat.Array.size
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7628954902519527666, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
+      propertyPath: updatePlayerSpell.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1245957650}
     - target: {fileID: 7628954902519527666, guid: 757d0ba968630a642ab39f220628f24c, type: 3}
       propertyPath: updatePlayerStatAct.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1104,6 +1108,10 @@ PrefabInstance:
       propertyPath: healbuffClip
       value: 
       objectReference: {fileID: 8300000, guid: 01b1e99f2a38b6447a02bdb3ee72e7d7, type: 3}
+    - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
+      propertyPath: battleStat.AP
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2145442409262005568, guid: e1c93f26665c2924b886242320f75dda, type: 3}
       propertyPath: myAudioSource
       value: 
@@ -1955,7 +1963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6515931676999750025, guid: bce5e38fceab056499b2113224028f12, type: 3}
       propertyPath: battleStat.MaxHp
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6846294756139167026, guid: bce5e38fceab056499b2113224028f12, type: 3}
       propertyPath: findEnemyAct.m_PersistentCalls.m_Calls.Array.size
