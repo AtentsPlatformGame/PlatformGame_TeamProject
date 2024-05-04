@@ -611,11 +611,13 @@ public class PlayerController : BattleSystem
         if (GetCA_GoldPenalty()) goldManager.ChangeGold(0);
         if (GetHitOnlyHalf())
         {
-            curHP -= _dmg*0.5f;
+            //curHP -= _dmg*0.5f;
+            _dmg *= 0.5f;
         }
+
         if (GetCA_HpPenalty())
         {
-            curHp -= _dmg * 2f;
+            curHP -= _dmg * 2f;
         }
         else
         {
