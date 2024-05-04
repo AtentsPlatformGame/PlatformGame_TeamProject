@@ -21,12 +21,12 @@ public class Inventory_LNH : MonoBehaviour
     {
         
     }
-    private void OnEnable()
+    /*private void OnEnable()
     {
         BattleStat calStat = new BattleStat();
         calStat = CalculateInven();
         updatePlayerStatAct?.Invoke(calStat);
-    }
+    }*/
 
     // 상점에서 구매했을 때, 아이템 파밍시 모두 사용하는 코드
     public void UpdateInventory(ItemStat _itemStat) // 새로 구매, 파밍한 아이템이 들어왔다면
