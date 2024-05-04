@@ -19,7 +19,7 @@ public class PlayerController : BattleSystem
     [SerializeField, Header("플레이어 최초 스텟")] PlayerStatData playerStatData;
 
     [SerializeField, Header("스펠 초기화를 위한 인벤토리 업데이트 함수")] UnityEvent<ItemStat> invenUpdate;
-    [SerializeField, Header("스펠 초기화를 위한 empty spell")] OriginSpellData spellData; 
+    [SerializeField, Header("스펠 초기화를 위한 empty spell")] OriginSpellData spellData;
     public UnityEvent OnStatsChanged;
     public GameObject orgFireball;
     public LayerMask groundMask;

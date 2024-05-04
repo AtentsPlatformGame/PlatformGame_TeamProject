@@ -9,7 +9,5 @@ public class VolumeControll : MonoBehaviour
     private void OnEnable()
     {
         myAudioSource.volume = SoundManager.Instance.soundValue;
-        Debug.Log(myAudioSource.volume);
-        Debug.Log(SoundManager.Instance.soundValue);
     }
 }
