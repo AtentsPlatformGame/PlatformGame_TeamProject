@@ -21,6 +21,7 @@ public class Inventory :ItemProperty
     public AudioClip closeInventory;
     public AudioClip startOption;
     public AudioClip closeOption;
+    Slider volumeSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,14 @@ public class Inventory :ItemProperty
         {
            
             MyExplanation.gameObject.SetActive(false);
+        }
+
+        if (SoundManager.Instance != null && myInventory != null)
+        {
+            myInventory.volume = SoundManager.Instance.soundValue;
+            SoundManager.Instance.SetVolumeAct.AddListener(SetVolumeSlider);
+            Debug.Log("UI Sound check");
+
         }
     }
 
@@ -112,6 +121,16 @@ public class Inventory :ItemProperty
         popup.gameObject.SetActive(false);
     }
 
+    public void SetAudioSourceVolume(float value)
+    {
+        myInventory.volume = value;
+    }
 
+    public void SetVolumeSlider(Slider _slider)
+    {
+        volumeSlider = _slider;
+        Debug.Log("효과음 슬라이더 세팅");
+        volumeSlider.onValueChanged.AddListener(SetAudioSourceVolume);
+    }
 }
 
