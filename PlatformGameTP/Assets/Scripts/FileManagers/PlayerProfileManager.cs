@@ -24,16 +24,20 @@ public class PlayerProfileManager : MonoBehaviour
     // load, load가 할 일은 저장된 플레이어의 현재 체력과 인벤토리 정보를 읽어와 플레이어에 반영한다. 반영할 때 이전에 썼던 Calculate를 써서 스텟을 적용한다.
     private void Awake()
     {
-        if (SceneChanger.instance != null)
+        /*if (SceneChanger.instance != null)
         {
             SceneChanger.instance.savePlayerProfileAct.AddListener(SavePlayerInvenProfile);
-        }
+        }*/
 
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneChanger.instance != null)
+        {
+            SceneChanger.instance.savePlayerProfileAct.AddListener(SavePlayerInvenProfile);
+        }
         LoadPlayerProfile();
     }
 
