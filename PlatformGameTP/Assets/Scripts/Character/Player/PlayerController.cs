@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.UI;
 
 public class PlayerController : BattleSystem
 {
@@ -20,6 +20,9 @@ public class PlayerController : BattleSystem
 
     [SerializeField, Header("스펠 초기화를 위한 인벤토리 업데이트 함수")] UnityEvent<ItemStat> invenUpdate;
     [SerializeField, Header("스펠 초기화를 위한 empty spell")] OriginSpellData spellData;
+    [Header("평타 쿨타임 이미지")] public Image fireballCoolTimeImg;
+    [Header("텔레포트 쿨타임 이미지")] public Image teleportCoolTimeImg;
+
     public UnityEvent OnStatsChanged;
     public GameObject orgFireball;
     public LayerMask groundMask;
@@ -27,6 +30,7 @@ public class PlayerController : BattleSystem
     public Transform rightAttackPoint;
     public UnityEvent<int> switchTrackedOffset;
     public GameObject DeathIMG;
+    
 
     public bool isSpellReady = false;
     public bool is3d = true;
@@ -453,6 +457,7 @@ public class PlayerController : BattleSystem
         while (battleStat.AttackDelay >= attackDeltaTime)
         {
             attackDeltaTime += 1f;
+            fireballCoolTimeImg.fillAmount = attackDeltaTime / (battleStat.AttackDelay + 1f);
             yield return new WaitForSeconds(1f);
         }
         attackDeltaTime = 0f;
@@ -464,6 +469,7 @@ public class PlayerController : BattleSystem
         while (!Mathf.Approximately(3.0f, teleportDeltaTime))
         {
             teleportDeltaTime += 1f;
+            teleportCoolTimeImg.fillAmount = teleportDeltaTime / 3.0f;
             yield return new WaitForSeconds(1f);
         }
         teleportDeltaTime = 0f;
