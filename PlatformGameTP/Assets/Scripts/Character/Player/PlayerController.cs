@@ -35,12 +35,13 @@ public class PlayerController : BattleSystem
     public bool isSpellReady = false;
     public bool is3d = true;
     public float jumpCoolTime = 0.5f;
+    public float teleportCoolTime = 3.0f;
 
     float curRotY;
     float ap;
     bool isGround;
     float attackDeltaTime = 0.0f;
-    float teleportDeltaTime = 0.0f;
+    public float teleportDeltaTime = 0.0f;
     GoldManager goldManager;
 
     //스텟 정보 델리게이트
@@ -86,22 +87,19 @@ public class PlayerController : BattleSystem
             myAudioSource.volume = SoundManager.Instance.soundValue;
             SoundManager.Instance.SetVolumeAct.AddListener(SetVolumeSlider);
             Debug.Log("Player Start, Sound check");
-
         }
+        teleportDelay = null;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
             ShowStat();
             Debug.Log($"curHP = {curHP}");
         }
-        if (Input.GetKeyDown(KeyCode.F3))
-        {
-            this.curHP--;
-        }
+        
         if (isAlive())
         {
             if (canMove)
@@ -220,6 +218,11 @@ public class PlayerController : BattleSystem
 
         if (!Mathf.Approximately(x, 0.0f) && Input.GetKeyDown(KeyCode.LeftShift) && Mathf.Approximately(teleportDeltaTime, 0.0f)) // 텔레포트, 추후 쿨타임 추가 예정
         {
+            if (teleportDelay != null)
+            {
+                StopCoroutine(teleportDelay);
+                teleportDelay = null;
+            }
             teleportDelay = StartCoroutine(CoolingTelePort());
             deltaPos += deltaPos.normalized * 1.5f;
             if (Physics.Raycast(new Ray(transform.position + new Vector3(0.0f, 0.5f, 0.0f), transform.forward), out RaycastHit hit,
@@ -276,29 +279,22 @@ public class PlayerController : BattleSystem
 
     void TryJump()
     {
-        /*if (isGround && Input.GetKey(KeyCode.Space))
-        {
-          jumpCharge += Time.deltaTime;
-        }
-
-        if (isGround && Input.GetKeyUp(KeyCode.Space))
-        {
-            Jump();
-            myAnim.SetTrigger("Jumping");
-        }
-        UnityEngine.Debug.Log(isGround);*/
-        if (isGround && Input.GetKeyDown(KeyCode.Space) && jumpCoolTime >= 0.15f)
-        {
-            // 점프 사운드 Loop, Play on Awake 꺼야됨
-            if (myAudioSource != null)
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Debug.Log("점프 트라이 중");
+            if (isGround && jumpCoolTime >= 0.15f)
             {
-                myAudioSource.clip = jumpClip;
-                myAudioSource.PlayOneShot(jumpClip);
+                Debug.Log("점프");
+                // 점프 사운드 Loop, Play on Awake 꺼야됨
+                if (myAudioSource != null)
+                {
+                    myAudioSource.clip = jumpClip;
+                    myAudioSource.PlayOneShot(jumpClip);
+                }
+                jumpCoolTime = 0.0f;
+                Jump();
+                myAnim.SetTrigger("Jumping");
+                if (myAudioSource.isPlaying) Debug.Log("점프 효과음");
             }
-            jumpCoolTime = 0.0f;
-            Jump();
-            myAnim.SetTrigger("Jumping");
-            if (myAudioSource.isPlaying) Debug.Log("점프 효과음");
         }
     }
 
@@ -325,6 +321,11 @@ public class PlayerController : BattleSystem
         if ((!Mathf.Approximately(x, 0.0f) || !Mathf.Approximately(y, 0.0f)) &&
             Input.GetKeyDown(KeyCode.LeftShift) && Mathf.Approximately(teleportDeltaTime, 0.0f)) // 텔레포트, 추후 쿨타임 추가 예정
         {
+            if (teleportDelay != null)
+            {
+                StopCoroutine(teleportDelay);
+                teleportDelay = null;
+            }
             teleportDelay = StartCoroutine(CoolingTelePort());
             deltaXPos += deltaXPos.normalized * 1.5f;
             deltaYPos += deltaYPos.normalized * 1.5f;
@@ -456,9 +457,9 @@ public class PlayerController : BattleSystem
        // while (!Mathf.Approximately(battleStat.AttackDelay, attackDeltaTime))
         while (battleStat.AttackDelay >= attackDeltaTime)
         {
-            attackDeltaTime += 1f;
-            fireballCoolTimeImg.fillAmount = attackDeltaTime / (battleStat.AttackDelay + 1f);
-            yield return new WaitForSeconds(1f);
+            attackDeltaTime += Time.deltaTime;
+            fireballCoolTimeImg.fillAmount = attackDeltaTime / (battleStat.AttackDelay );
+            yield return null;
         }
         attackDeltaTime = 0f;
     }
@@ -466,11 +467,11 @@ public class PlayerController : BattleSystem
     IEnumerator CoolingTelePort()
     {
 
-        while (!Mathf.Approximately(3.0f, teleportDeltaTime))
+        while (teleportDeltaTime <= teleportCoolTime)
         {
-            teleportDeltaTime += 1f;
-            teleportCoolTimeImg.fillAmount = teleportDeltaTime / 3.0f;
-            yield return new WaitForSeconds(1f);
+            teleportDeltaTime += Time.deltaTime;
+            teleportCoolTimeImg.fillAmount = teleportDeltaTime / teleportCoolTime;
+            yield return null;
         }
         teleportDeltaTime = 0f;
     }
