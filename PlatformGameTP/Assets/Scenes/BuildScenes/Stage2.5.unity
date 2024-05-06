@@ -1157,9 +1157,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6726595821104494151, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 21878856}
+    - targetCorrespondingSourceObject: {fileID: 6726595821104494151, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 21878857}
     - targetCorrespondingSourceObject: {fileID: 4647433755570725427, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 109556261}
+    - targetCorrespondingSourceObject: {fileID: 4647433755570725427, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 109556262}
   m_SourcePrefab: {fileID: 100100000, guid: 0bca259feb416eb4eb2e6f8b2a0bb5f8, type: 3}
 --- !u!1 &21878846 stripped
 GameObject:
@@ -1295,6 +1301,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &21878857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21878848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52b72bdafafecb428f4c9462b320be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAudioSource: {fileID: 21878856}
 --- !u!1001 &21956770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4050,6 +4069,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &109556262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21878847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52b72bdafafecb428f4c9462b320be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAudioSource: {fileID: 109556261}
 --- !u!4 &109824874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4687421290288954676, guid: e5c6fafa3c0c54e47b2debc46c02d62e, type: 3}
