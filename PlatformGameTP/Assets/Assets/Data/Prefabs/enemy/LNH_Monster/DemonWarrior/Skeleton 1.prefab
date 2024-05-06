@@ -491,13 +491,31 @@ MonoBehaviour:
     AttackRange: 2
     AttackDelay: 2
     ProjectileSpeed: 0
-    MoveSpeed: 0
+    MoveSpeed: 3
+    AttackSize: 0
+    AttackTwice: 0
+    HealAfterAttack: 0
+    ResurrectionOneTime: 0
+    HitOnlyHalf: 0
+    CA_AttackPenalty: 0
+    CA_GoldPenalty: 0
+    CA_HPPenalty: 0
+    StatWindows: {fileID: 0}
   _curHP: 0
   attackPoint: {fileID: 0}
   enemyMask:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeed: 2
+  fireballClip: {fileID: 0}
+  jumpClip: {fileID: 0}
+  healbuffClip: {fileID: 0}
+  speedbuffClip: {fileID: 0}
+  deadClip: {fileID: 0}
+  hitClip: {fileID: 0}
+  myAudioSource: {fileID: 0}
+  deadsound: {fileID: 0}
+  hitsound: {fileID: 0}
+  monsterAttackClip: {fileID: 0}
   rotSpeed: 360
   myState: 0
   groundMask:
