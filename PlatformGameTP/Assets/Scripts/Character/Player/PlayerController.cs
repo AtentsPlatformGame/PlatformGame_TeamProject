@@ -690,7 +690,7 @@ public class PlayerController : BattleSystem
     }
     protected override void OnDead()
     {
-        rigid.velocity = Vector3.zero;
+        //rigid.velocity = Vector3.zero;
         base.OnDead();
         StartCoroutine(ChangeAlpha());
     }

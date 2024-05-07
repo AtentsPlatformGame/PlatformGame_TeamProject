@@ -53,7 +53,7 @@ public class EnemyMovement : BattleSystem
             myAnim.SetBool("IsRunning", true);
             Vector3 dir = target.position - transform.position;
             float dist = dir.magnitude - battleStat.AttackRange;
-            if (dist < 0.0f) dist = 0.0f;
+            if (dist < 0.0001f) dist = 0.0f;
             float delta;
             if (!myAnim.GetBool("IsAttacking")) battleTime += Time.deltaTime;
             if (Mathf.Approximately(dist, 0.0f))

@@ -188,7 +188,7 @@ public class EnemyState : EnemyMovement
         myAnim.SetTrigger("Detect");
         TurnOnDetectImg(detectUI);
 
-        playTime = Random.Range(1.0f, 2.0f);
+        playTime = Random.Range(0.5f, 1.0f);
         limitPos = target.position;
 
         yield return StartCoroutine(DelayChangeState(State.Detect, playTime));
@@ -201,7 +201,7 @@ public class EnemyState : EnemyMovement
         myAnim.SetBool("IsRunning", false);
 
         yield return new WaitForSeconds(1.5f);
-        playTime = Random.Range(1.0f, 3.0f);
+        playTime = Random.Range(0.5f, 1.0f);
         MoveToOriginPos(startPos, playTime);
     }
 

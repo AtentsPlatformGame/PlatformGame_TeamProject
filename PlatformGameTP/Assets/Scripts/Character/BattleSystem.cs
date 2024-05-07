@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -234,6 +235,7 @@ public class BattleSystem : CharacterProperty, IDamage
     {
         PlaySound(deadsound);
         //deathAlarm?.Invoke();
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Collider>().enabled = false;
         GetComponent<Rigidbody>().useGravity = false;
     }
