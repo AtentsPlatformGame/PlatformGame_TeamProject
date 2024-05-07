@@ -40,6 +40,7 @@ public class PlayerController : BattleSystem
     float curRotY;
     float ap;
     bool isGround;
+    bool canAttack = true;
     float attackDeltaTime = 0.0f;
     public float teleportDeltaTime = 0.0f;
     GoldManager goldManager;
@@ -384,6 +385,16 @@ public class PlayerController : BattleSystem
         }
     }
     #endregion
+
+    public void ControllPlayerAttack(bool _isPossible)
+    {
+        canAttack = _isPossible;
+    }
+
+    public bool CanAttack() 
+    { 
+        return canAttack; 
+    }
 
     // 이 아래부턴 나중에 스크립트 분리할 수도 있음
     protected void Attack() // 공격 함수, 정면을 정확히 바라볼때만 공격 가능

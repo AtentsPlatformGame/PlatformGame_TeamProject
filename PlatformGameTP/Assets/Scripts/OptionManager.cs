@@ -8,9 +8,10 @@ public class OptionManager : MonoBehaviour
     [Header("메인으로 버튼")][SerializeField] GameObject MainCanvas;
     [Header("게임으로 버튼")][SerializeField] GameObject GameCanvas;
     [SerializeField] Transform MyOptions;
+    PlayerController player;
     void Start()
     {
-
+        player = FindFirstObjectByType<PlayerController>();
     }
 
     void Update()
@@ -26,6 +27,7 @@ public class OptionManager : MonoBehaviour
     public void GoGame()
     {
         PopDown(MyOptions);
+        player.ControllPlayerAttack(true);
     }
 
     public void PopDown(Transform popup)

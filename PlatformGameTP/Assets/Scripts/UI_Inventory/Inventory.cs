@@ -21,6 +21,7 @@ public class Inventory :ItemProperty
     public AudioClip closeInventory;
     public AudioClip startOption;
     public AudioClip closeOption;
+    PlayerController player;
     Slider volumeSlider;
 
     // Start is called before the first frame update
@@ -52,6 +53,7 @@ public class Inventory :ItemProperty
             Debug.Log("UI Sound check");
 
         }
+        player = FindFirstObjectByType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class Inventory :ItemProperty
                     myInventory.PlayOneShot(startInventory);
                 }
                 if (myInventory.isPlaying) Debug.Log("인벤토리 열기");
+                player.ControllPlayerAttack(false);
             }
             else
             {
@@ -81,6 +84,7 @@ public class Inventory :ItemProperty
                     myInventory.PlayOneShot(closeInventory);
                 }
                 if (myInventory.isPlaying) Debug.Log("인벤토리 닫기");
+                player.ControllPlayerAttack(true);
             }
         }
 
@@ -96,6 +100,7 @@ public class Inventory :ItemProperty
                     myInventory.PlayOneShot(startOption);
                 }
                 if (myInventory.isPlaying) Debug.Log("옵션 열기");
+                player.ControllPlayerAttack(false);
             }
             else
             {
@@ -107,6 +112,7 @@ public class Inventory :ItemProperty
                     myInventory.PlayOneShot(closeOption);
                 }
                 if (myInventory.isPlaying) Debug.Log("옵션 닫기");
+                player.ControllPlayerAttack(true);
             }
         }
 

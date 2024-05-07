@@ -44,6 +44,7 @@ public class PlayerPicking : MonoBehaviour
     {
         if (playerController.isAlive() == false || playerController == null || !playerController.GetMovePossible()) return;
 
+        if (!playerController.CanAttack()) return;
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (playerController.isSpellReady == false) // 스펠 사용 준비 전
