@@ -29,6 +29,7 @@ public class SaneStagePortal : MonoBehaviour
     public AudioClip bgmClip;
     public int GetGKeyCount = 0;
 
+    public UnityEvent<bool> fireBallIMGChangePossibleAct;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +47,11 @@ public class SaneStagePortal : MonoBehaviour
     {
         if ((1 << other.gameObject.layer & playerMask) != 0)
         {
-            if (InventoryCheck.activeSelf == false)
+            if (InventoryCheck.activeSelf == false && GetGKeyCount == 0)
             {
                 if (Input.GetKeyDown(KeyCode.G))
                 {
+                    GetGKeyCount = 1;
                     Debug.Log("È°¼ºÈ­");
                     Fade();
                 }
@@ -66,12 +68,7 @@ public class SaneStagePortal : MonoBehaviour
                 GetGKeyCount = 1;
                 Debug.Log("È°¼ºÈ­");
                 Fade();
-                if (teleportSource != null)
-                {
-                    teleportSource.clip = teleportClip ;
-                    teleportSource.PlayOneShot(teleportClip);
-                }
-                if (teleportSource.isPlaying) Debug.Log("Æ÷Å» ½´½µ");
+                
             }
         }
    
@@ -79,6 +76,12 @@ public class SaneStagePortal : MonoBehaviour
 
     public void Fade()
     {
+        if (teleportSource != null)
+        {
+            teleportSource.clip = teleportClip;
+            teleportSource.PlayOneShot(teleportClip);
+        }
+        if (teleportSource.isPlaying) Debug.Log("Æ÷Å» ½´½µ");
         StartCoroutine(FadeInFlow());
         
     }
@@ -120,7 +123,9 @@ public class SaneStagePortal : MonoBehaviour
             Panel.color = alpha;
             yield return null;
         }
-        
+
+        player.ControllPlayerAttack(!player.CanAttack());
+        fireBallIMGChangePossibleAct?.Invoke(player.CanAttack());
         DoMoving();
         Panel.gameObject.SetActive(false);
         

@@ -12,10 +12,11 @@ public class HealOpen : MonoBehaviour
     public GameObject GKeyPopup;
     public bool isNPC = false;
     public bool isShop = false;
-
+    PlayerController player;
     private void Start()
     {
         GKeyPopup.SetActive(false);
+        player = FindFirstObjectByType<PlayerController>();
     }
     private void Update()
     {
@@ -35,10 +36,12 @@ public class HealOpen : MonoBehaviour
             if (isShop)
             {
                 CloseShop();
+                
             }
             else
             {
                 OpenShop();
+                
             }
         }
     }
@@ -47,10 +50,12 @@ public class HealOpen : MonoBehaviour
         shopUI.SetActive(true);
         GKeyPopup.SetActive(false);
         isShop = true;
+        player.ControllPlayerAttack(false);
     }
     void CloseShop()
     {
         shopUI.SetActive(false);
         isShop = false;
+        player.ControllPlayerAttack(true);
     }
 }

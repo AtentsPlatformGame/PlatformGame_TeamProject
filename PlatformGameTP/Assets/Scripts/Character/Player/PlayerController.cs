@@ -90,6 +90,7 @@ public class PlayerController : BattleSystem
             Debug.Log("Player Start, Sound check");
         }
         teleportDelay = null;
+        canAttack = true;
     }
 
     // Update is called once per frame
