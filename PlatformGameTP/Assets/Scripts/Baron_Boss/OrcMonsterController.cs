@@ -134,6 +134,8 @@ public class OrcMonsterController : EnemyState
             }
         }
     }
+
+
     protected override IEnumerator AttackingTarget(Transform target)
     {
         while (target != null)
@@ -188,8 +190,8 @@ public class OrcMonsterController : EnemyState
                 myAnim.SetTrigger("Howling");
                 // 오크의 체력이 절반이 되었을때 능력치를 버프하는 패턴 
                 PlaySound(roarSound);
-                this.battleStat.AP += 2;
-                this.battleStat.MoveSpeed += 2;
+                this.battleStat.AP += 1;
+                this.battleStat.MoveSpeed += 1;
                 phasecount = 2;
                 Debug.Log("공업 이속업");
                 yield return new WaitForSeconds(3.0f);
