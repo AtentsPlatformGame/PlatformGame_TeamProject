@@ -14,6 +14,6 @@ public class FireballPossibleIMG : MonoBehaviour
 
     public void SetPossibleIMGState(bool isPossible)
     {
-        fireballCanAttackImg.SetActive(isPossible);
+        fireballCanAttackImg.SetActive(!isPossible);
     }
 }
