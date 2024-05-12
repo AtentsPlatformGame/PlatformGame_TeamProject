@@ -11,7 +11,7 @@ public class OptionManager : MonoBehaviour
     PlayerController player;
     void Start()
     {
-        player = FindFirstObjectByType<PlayerController>();
+        player = FindObjectOfType<PlayerController>();
     }
 
     void Update()

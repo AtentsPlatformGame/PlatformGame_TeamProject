@@ -123,8 +123,14 @@ public class SaneStagePortal : MonoBehaviour
             Panel.color = alpha;
             yield return null;
         }
-
-        player.ControllPlayerAttack(!player.CanAttack());
+        if(ExternalPortal.gameObject.tag == "PortalInMainStage") // 스테이지 안에 있는 포탈
+        {
+            player.ControllPlayerAttack(true);
+        }
+        else // 특수 방에 있는 포탈
+        {
+            player.ControllPlayerAttack(false);
+        }
         fireBallIMGChangePossibleAct?.Invoke(player.CanAttack());
         DoMoving();
         Panel.gameObject.SetActive(false);
