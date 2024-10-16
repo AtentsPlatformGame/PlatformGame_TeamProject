@@ -29,7 +29,8 @@ public class EnemyState : EnemyMovement
     Color originColor;
     protected float playTime = 0.0f;
     protected bool isGround = true;
-
+    protected float moveBackTime = 0.0f;
+    bool warpBack = false;
     
     
     HpBar myHpBar;
@@ -292,10 +293,16 @@ public class EnemyState : EnemyMovement
         dir.Normalize();
         if (rotate != null) StopCoroutine(rotate);
         rotate = StartCoroutine(Rotating(dir));
-
+        
 
         while (!Mathf.Approximately(dist, 0.0f))
         {
+            if(moveBackTime >= 5f)
+            {
+                warpBack = true;
+                moveBackTime = 0.0f;
+                break;
+            }
             float delta = battleStat.MoveSpeed * Time.deltaTime;
             if (delta > dist) delta = dist;
             dist -= delta;
@@ -309,8 +316,16 @@ public class EnemyState : EnemyMovement
                     yield return new WaitForSeconds(0.3f);
                 }
             }
+            moveBackTime += Time.deltaTime;
             yield return null;
         }
+
+        if (warpBack)
+        {
+            this.gameObject.transform.position = originPos;
+            warpBack = false;
+        }
+
         myAnim.SetBool("IsRoaming", false);
         yield return StartCoroutine(DelayChangeState(State.Normal, playTime));
     }
